@@ -12,7 +12,10 @@ const root = path.dirname(new URL(
 
 app.register(fastifyStatic, {
     root: root,
-    prefix: "/"
+    prefix: "/",
+    setHeaders: (res) => {
+        res.setHeader('x-allow-fledge', 'true')
+    }
 })
 app.register(formBodyPlugin)
 app.register(pointOfView, {
