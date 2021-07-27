@@ -31,6 +31,7 @@ app.get("/reporting", (request, reply) => {
         body: request.body,
     }
     const log = JSON.stringify(data) + '\n'
+    console.log(log)
     fs.writeFileSync("./report.log", log, { flag: 'a' })
     reply.code(201).send("")
 })
