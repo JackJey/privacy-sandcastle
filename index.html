@@ -3,7 +3,6 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕵️‍♀️</text></svg>">
 <title>FLEDGE DEMO</title>
-
 <meta http-equiv=origin-trial content="">
 
 <style>
@@ -13,7 +12,7 @@
         font-family: 'Google Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 2rem;
     }
-    
+
     h1 {
         display: inline-block;
         width: 100%;
@@ -21,22 +20,71 @@
         font-weight: normal;
         padding-bottom: 1rem;
     }
-    
+
     pre {
         overflow: scroll;
         background-color: #eee;
         border-radius: 4px;
         padding: 1rem;
     }
+
+    img {
+        width: 80vw;
+        margin: 0 auto;
+        border: solid 1px #ccc;
+    }
+
+    @media screen and (max-width: 900px) {
+        body {
+            width: 97%;
+            margin: 0.4rem;
+            padding: 0;
+        }
+    }
 </style>
 
 <h1>FLEDGE DEMO</h1>
 
+<p>This demo shows a simple example of using FLEDGE to <a href="https://github.com/WICG/turtledove/blob/main/FLEDGE.md#11-joining-interest-groups">join an ad interest group</a> and then <a href="https://github.com/WICG/turtledove/blob/main/FLEDGE.md#2-sellers-run-on-device-auctions">initiate an on-device auction</a>.</p>
+
+<h2>Browser Setting</h2>
+
+<p>You will need to use Chrome 91 or above <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags">run with the following flag</a>:</p>
+
 <pre><code>--enable-features=FledgeInterestGroups,FledgeInterestGroupAPI</code></pre>
 
-<p>visit the advertiser page below</p>
+<h2>Starting DEMO</h2>
+
+<p>Go to the Advertiser sites below for <code>joinInterestGroup()</code> first</p>
 
 <ul>
-    <li><a href=https://shopping-fledge-demo.glitch.me/advertiser/shopping.html>shopping</a></li>
-    <li><a href=https://travel-fledge-demo.glitch.me/advertiser/travel.html>travel</a></li>
+    <li><a href=https://shopping-fledge-demo.glitch.me/advertiser/shopping.html>Shopping Site</a></li>
+    <li><a href=https://travel-fledge-demo.glitch.me/advertiser/travel.html>Travel Site</a></li>
+</ul>
+
+<p>then Go to the Publisher site to see Ads selected via <code>runAdAuction()</code>.</p>
+
+<ul>
+    <li>
+        <a href=https://publisher-fledge-demo.glitch.me/publisher/index.html>Publisher Site</a>
+    </li>
+</ul>
+
+<h2>Details of DEMO</h2>
+
+<img src=./assets/fledge.png alt="shopping & travel are joinInterestGrouped by DSP and runAdAuction choices Ads in worklet and show it in Publisher">
+
+<h2>Troubleshooting the demo</h2>
+
+<p>If the demo doesn't work as expected, make sure of the following:</p>
+
+<ul>
+    <li>You 're using Chrome 91 or above.</li>
+    <li>You're running Chrome with the flags described above using one of the methods described on <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags">chromium.org</a>.</li>
+    <li>You don 't have chrome://settings/privacySandbox disabled.</li>
+    <li>You don 't have an adblocker or a similar app/extension running.</li>
+    <li>You 're not in Incognito mode.</li>
+    <li>You don't have chrome://settings/privacySandbox disabled.</li>
+    <li>You don't have an adblocker or a similar app/extension running.</li>
+    <li>You're not in Incognito mode.</li>
 </ul>
