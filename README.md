@@ -36,9 +36,6 @@ If the demo doesn't work as expected, make sure of the following:
 
 - You 're using Chrome 91 or above.
 - You're running Chrome with the flags described above using one of the methods described on [chromium.org](https://www.chromium.org/developers/how-tos/run-chromium-with-flags)
-- You don 't have chrome://settings/privacySandbox disabled.
-- You don 't have an adblocker or a similar app/extension running.
-- You 're not in Incognito mode.
 - You don't have chrome://settings/privacySandbox disabled.
 - You don't have an adblocker or a similar app/extension running.
 - You're not in Incognito mode.
