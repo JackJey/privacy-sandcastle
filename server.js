@@ -5,6 +5,7 @@ import fastifyStatic from "fastify-static"
 import formBodyPlugin from "fastify-formbody"
 import pointOfView from "point-of-view"
 import Handlebars from "handlebars"
+import MarkdownIt from "markdown-it"
 
 const app = fastify({ logger: false })
 const root = path.dirname(new URL(
@@ -14,7 +15,7 @@ app.register(fastifyStatic, {
     root: root,
     prefix: "/",
     setHeaders: (res) => {
-        res.setHeader('x-allow-fledge', 'true')
+        res.setHeader("x-allow-fledge", "true")
     }
 })
 app.register(formBodyPlugin)
@@ -24,15 +25,24 @@ app.register(pointOfView, {
     }
 })
 
-app.get("/reporting", (request, reply) => {
+app.get("/", async (request, reply) => {
+    const md = new MarkdownIt()
+    const readme = await fs.promises.readFile("README.md", "utf-8")
+    const html = await fs.promises.readFile("index.html", "utf-8")
+    const body = md.render(readme)
+    reply.type("text/html")
+    reply.code(200).send(html + body)
+})
+
+app.get("/reporting", async (request, reply) => {
     const data = {
         date: new Date(),
         query: request.query,
         body: request.body,
     }
-    const log = JSON.stringify(data) + '\n'
+    const log = JSON.stringify(data) + "\n"
     console.log(log)
-    fs.writeFileSync("./report.log", log, { flag: 'a' })
+    await fs.promises.writeFile("./report.log", log, { flag: "a" })
     reply.code(201).send("")
 })
 

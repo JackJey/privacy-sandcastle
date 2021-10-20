@@ -43,18 +43,4 @@
     }
 </style>
 
-<script>
-  (async () => {
-    const readme = await fetch("./README.md")
-    const text = await readme.text()
-    const url = new URL("https://api.github.com/markdown")
-    const res = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({text})
-    })
-    const html = await res.text()
-    document.body.innerHTML = html
-  })()
-</script>
-
-<body><!-- rendering README.md via GitHub API --></body>
+<!-- rendering README.md here -->
