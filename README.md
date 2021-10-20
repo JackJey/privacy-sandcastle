@@ -23,6 +23,7 @@ Go to the Advertiser sites below for joinInterestGroup() first
 then Go to the Publisher site to see Ads selected via runAdAuction().
 
 - [Publisher Site](https://publisher-fledge-demo.glitch.me/publisher/index.html)
+- [Publisher Site (fencedframe)](https://publisher-fledge-demo.glitch.me/publisher/index.html?fencedframe)
 
 
 ## Details of DEMO
