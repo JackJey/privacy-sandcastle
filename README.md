@@ -5,11 +5,11 @@ This demo shows a simple example of using FLEDGE to [join an ad interest group](
 
 ## Browser Setting
 
-You will need to use Chrome 91 or above [run with the following flag](https://www.chromium.org/developers/how-tos/run-chromium-with-flags)
+You will need to use **Chrome 96** or above [run with the following flag](https://www.chromium.org/developers/how-tos/run-chromium-with-flags)
 
 
 ```
---enable-features=FledgeInterestGroups,FledgeInterestGroupAPI
+--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge --disable-features=FencedFrames
 ```
 
 
@@ -34,7 +34,7 @@ then Go to the Publisher site to see Ads selected via runAdAuction().
 
 If the demo doesn't work as expected, make sure of the following:
 
-- You 're using Chrome 91 or above.
+- You 're using Chrome 96 or above.
 - You're running Chrome with the flags described above using one of the methods described on [chromium.org](https://www.chromium.org/developers/how-tos/run-chromium-with-flags)
 - You don't have chrome://settings/privacySandbox disabled.
 - You don't have an adblocker or a similar app/extension running.
