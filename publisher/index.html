@@ -124,9 +124,19 @@
 
     <div class=ads>
         <span class=notice>ADS BY FLEDGE</span>
-        <!-- <fencedframe src=https://ssp-fledge-demo.glitch.me/ssp/ad-tag.html></fencedframe> -->
-        <iframe width=300 src=https://ssp-fledge-demo.glitch.me/ssp/ad-tag.html></iframe>
+        <!-- iframe width=300 src=https://ssp-fledge-demo.glitch.me/ssp/ad-tag.html></iframe -->
     </div>
+    <script>
+      const query = new URL(location.href).search
+      const $iframe = document.createElement('iframe')
+      $iframe.width = 300
+      if (query === "?fencedframe") {
+        $iframe.src = "https://ssp-fledge-demo.glitch.me/ssp/ad-tag.html?fencedframe"
+      } else {
+        $iframe.src = "https://ssp-fledge-demo.glitch.me/ssp/ad-tag.html"
+      }
+      document.querySelector('.ads').appendChild($iframe)
+    </script>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
         dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
