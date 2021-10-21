@@ -16,6 +16,7 @@ app.register(fastifyStatic, {
     prefix: "/",
     setHeaders: (res) => {
         res.setHeader("x-allow-fledge", "true")
+        res.setHeader("Supports-Loading-Mode", "fenced-frame")
     }
 })
 app.register(formBodyPlugin)
