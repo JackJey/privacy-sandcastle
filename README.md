@@ -7,6 +7,15 @@ This demo shows a simple example of using FLEDGE to [join an ad interest group](
 
 You will need to use **Chrome 96** or above [run with the following flag](https://www.chromium.org/developers/how-tos/run-chromium-with-flags)
 
+If you try `<fencedframe>` version.
+
+
+```
+--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
+```
+
+Or if you try `<iframe>` version.
+
 
 ```
 --enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge --disable-features=FencedFrames
@@ -22,8 +31,8 @@ Go to the Advertiser sites below for joinInterestGroup() first
 
 then Go to the Publisher site to see Ads selected via runAdAuction().
 
-- [Publisher Site](https://publisher-fledge-demo.glitch.me/publisher/index.html)
 - [Publisher Site (fencedframe)](https://publisher-fledge-demo.glitch.me/publisher/index.html?fencedframe)
+- [Publisher Site (iframe)](https://publisher-fledge-demo.glitch.me/publisher/index.html)
 
 
 ## Details of DEMO
