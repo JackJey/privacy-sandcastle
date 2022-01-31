@@ -63,3 +63,11 @@ If the demo doesn't work as expected, make sure of the following:
 ##  View source code
 
 Code for this demo at [github.com/JackJey/fledge-demo](https://github.com/JackJey/fledge-demo).
+
+
+## Find out more
+
+- [FLEDGE API developer guide](https://developer.chrome.com/blog/fledge-api/): detailed reference
+- [The FLEDGE API](https://developer.chrome.com/docs/privacy-sandbox/fledge/): a less technical overview
+- [FLEDGE proposal explainer](https://github.com/WICG/turtledove/blob/main/FLEDGE.md)
+- [Proposed First FLEDGE Origin Trial Details](https://github.com/WICG/turtledove/blob/main/Proposed_First_FLEDGE_OT_Details.md)
