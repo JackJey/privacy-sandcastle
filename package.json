@@ -12,6 +12,7 @@
     "fastify-formbody": "^5.0.0",
     "fastify-static": "^4.0.0",
     "handlebars": "^4.7.7",
+    "markdown-it": "^12.2.0",
     "point-of-view": "^4.14.0"
   },
   "engines": {
