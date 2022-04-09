@@ -58,6 +58,9 @@ If the demo doesn't work as expected, make sure of the following:
 - You don't have chrome://settings/privacySandbox disabled.
 - You don't have an ad blocker or a similar app or extension running.
 - You're not in Incognito mode.
+- You have third-party cookies enabled via Settings → Security and privacy → Cookies, and other 
+site data set to either "Allow all cookies" or "Block third-party cookies in incognito", 
+also accessible via chrome://settings/cookies.
 
 
 ##  View source code
