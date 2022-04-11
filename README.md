@@ -17,7 +17,7 @@ Using `<fencedframe>` to render ads:
 Using `<iframe>` to render ads:
 
 ```
---enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge --disable-features=FencedFrames
+--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,AllowURNsInIframes --disable-features=FencedFrames
 ```
 
 ## 2. Run the demo
