@@ -1,0 +1,52 @@
+version: '3.8'
+    
+services:
+  publisher.example:
+    build: ../servers/publisher
+    container_name: 'sandcastle_publisher'
+    environment:
+      - host=publisher.example
+      - port=5001
+
+  advertizer.example:
+    build: ../servers/advertizer
+    container_name: 'sandcastle_advertizer'
+    environment:
+      - host=advertizer.example
+      - port=5002
+
+  dsp.example:
+    build: ../servers/dsp
+    container_name: 'sandcastle_dsp'
+    environment:
+      - host=dsp.example
+      - port=5003
+
+  ssp.example:
+    build: ../servers/ssp
+    container_name: 'sandcastle_ssp'
+    environment:
+      - host=ssp.example
+      - port=5004
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: 'sandcastle_proxy'
+    volumes:
+      # using env variables in nginx config
+      - type: bind
+        source: "../nginx/nginx.conf"
+        target: "/etc/nginx/templates/default.conf.template"
+    depends_on:
+      - app
+    ports:
+      - '3000:80'
+    environment:
+      - PUBLISHER_HOST=publisher.example
+      - PUBLISHER_PORT=5001
+      - ADVERTIZER_HOST=advertizer.example
+      - ADVERTIZER_PORT=5002
+      - DSP_HOST=dsp.example
+      - DSP_PORT=5003
+      - SSP_HOST=ssp.example
+      - SSP_PORT=5004
