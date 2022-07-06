@@ -1,7 +1,7 @@
 {
-  "name": "Node Nginx",
+  "name": "Publisher",
   "dockerComposeFile": "docker-compose.yml",
-  "service": "publisher.example",
+  "service": "publisher",
   "workspaceFolder": "/usr/src/app",
   "extensions": [
     "digitalbrainstem.javascript-ejs-support",
