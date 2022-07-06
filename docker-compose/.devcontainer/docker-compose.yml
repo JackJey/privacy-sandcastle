@@ -1,5 +1,5 @@
 version: '3.8'
-    
+
 services:
   publisher.example:
     build: ../servers/publisher
@@ -37,10 +37,14 @@ services:
       - type: bind
         source: "../nginx/nginx.conf"
         target: "/etc/nginx/templates/default.conf.template"
+      - type: bind
+        source: "../nginx/cert"
+        target: "/cert"
     depends_on:
       - app
     ports:
       - '3000:80'
+      - '4000:443'
     environment:
       - PUBLISHER_HOST=publisher.example
       - PUBLISHER_PORT=5001

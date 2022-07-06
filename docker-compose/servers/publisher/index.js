@@ -4,7 +4,13 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.get('/', function (req, res) {
-  res.render("index", { message: `${process.env.host}: ${Date.now()}` });
+  const domains = [
+    "publisher.example",
+    "advertizer.example",
+    "dsp.example",
+    "ssp.example",
+  ]
+  res.render("index", { message: `${process.env.host}: ${Date.now()}`, domains });
 });
 
 app.listen(process.env.port, function () {
