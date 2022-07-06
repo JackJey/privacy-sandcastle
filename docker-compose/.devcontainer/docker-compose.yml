@@ -41,8 +41,13 @@ services:
         source: "../nginx/cert"
         target: "/cert"
     depends_on:
-      - app
+      - publisher.example
+      - advertizer.example
+      - dsp.example
+      - ssp.example
     ports:
+      - '80:80'
+      - '443:443'
       - '3000:80'
       - '4000:443'
     environment:
