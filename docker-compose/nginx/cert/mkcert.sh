@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm *.pem
 cat ../../.devcontainer/.env | \
   grep HOST | \
   cut -d'=' -f2 | \
