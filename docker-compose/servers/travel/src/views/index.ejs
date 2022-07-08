@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="icon" href="/img/spy.svg" />
-    <script src="/js/main.js"></script>
-  </head>
-  <body>
-    <h1><%= message %></h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="icon" href="/img/spy.svg" />
+  <script src="/js/main.js"></script>
+
+  <meta http-equiv="origin-trial" content="<%= ot_token %>">
+</head>
+
+<body>
+  <header>
+    <h1>Find your best ever holiday!</h1>
+    <h2>This is a demo travel site.</h2>
+  </header>
+
+  <!-- <img width=7952 height=5622 src=../assets/dino-reichmuth-A5rCN8626Ck-unsplash.jpg> -->
+
+  <p id=notice>
+    Photo by <a href="https://unsplash.com/@foxxmd?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Matt
+      Duncan</a> on <a href="https://unsplash.com/s/photos/travel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+    <!-- Photo by <a
+  href="https://unsplash.com/@dinoreichmuth?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dino
+  Reichmuth</a> on <a
+  href="https://unsplash.com/s/photos/travel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+  </p>
+
+  <hr>
+
+  <footer>
+    <p>✅ Your browser has joined the <strong>travel</strong> interest group.</p>
+    <p>👉 Now view a demo publisher site that runs a FLEDGE auction to select an ad:</p>
     <ul>
-      <% hosts.forEach((host) => { %>
-      <li>
-        <a href="https://<%= host %>"><%= host %></a>
-      </li>
-      <% }) %>
+      <li><a href=https://publisher-fledge-demo.glitch.me/publisher/index.html?fencedframe>&lt;fencedframe&gt; version</a></p>
+      <li><a href=https://publisher-fledge-demo.glitch.me/publisher/index.html>&lt;iframe&gt; version</a></p>
     </ul>
-  </body>
+  </footer>
+
+  <iframe width=1 height=1 src=https://dsp-fledge-demo.glitch.me/dsp/join-ad-interest-group.html?ads=travel></iframe>
+</body>
+
 </html>
