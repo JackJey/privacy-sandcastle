@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run build && node ./build/index.js",
+    "build": "tsc && cp -r src/views build/views",
     "fmt": "prettier --write **/*"
   },
   "dependencies": {

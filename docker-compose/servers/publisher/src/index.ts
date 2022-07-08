@@ -6,6 +6,7 @@ const host = process.env.host || "localhost"
 const app = express()
 
 app.set("view engine", "ejs")
+app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
   console.log(process.env)
