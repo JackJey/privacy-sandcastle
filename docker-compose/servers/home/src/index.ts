@@ -11,7 +11,7 @@ app.set("views", "src/views")
 app.get("/", async (req: Request, res: Response) => {
   console.log(process.env)
   const message = `${host}: ${Date.now()}`
-  const hosts = ["advertizer.example", "publisher.example", "dsp.example", "ssp.example"]
+  const hosts = ["advertizer.example", "publisher.example", "dsp.example", "ssp.example", "home.example"]
   res.render("index", { message, hosts })
 })
 

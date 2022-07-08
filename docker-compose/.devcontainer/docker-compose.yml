@@ -1,6 +1,13 @@
 version: '3.8'
 
 services:
+  home:
+    build: ../servers/home
+    container_name: 'sandcastle_home'
+    environment:
+      - host=${HOME_HOST}
+      - port=${HOME_PORT}
+
   publisher:
     build: ../servers/publisher
     container_name: 'sandcastle_publisher'
@@ -47,6 +54,8 @@ services:
       - '4000:443'
     environment:
       # for nginx template
+      - HOME_HOST=${HOME_HOST}
+      - HOME_PORT=${HOME_PORT}
       - PUBLISHER_HOST=${PUBLISHER_HOST}
       - PUBLISHER_PORT=${PUBLISHER_PORT}
       - ADVERTIZER_HOST=${ADVERTIZER_HOST}
