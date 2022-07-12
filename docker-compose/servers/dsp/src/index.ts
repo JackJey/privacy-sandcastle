@@ -23,9 +23,8 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
-  const message = `${host}: ${Date.now()}`
-  const hosts = ["advertizer.example", "publisher.example", "dsp.example", "ssp.example", "home.example"]
-  res.render("index", { message, hosts })
+  const title = `${host} | Privacy Sandcastle`
+  res.render("index", { title })
 })
 
 app.listen(port, function () {
