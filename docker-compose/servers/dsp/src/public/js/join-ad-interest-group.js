@@ -1,5 +1,7 @@
 const ads = new URL(location.href).searchParams.get("ads")
-console.log(ads)
+console.log({ ads })
+
+const renderUrl = `https://${ads}.example/ads.html`
 
 // dsp
 const interestGroup = {
@@ -17,7 +19,7 @@ const interestGroup = {
   userBiddingSignals: { user_bidding_signals: "user_bidding_signals" },
   ads: [
     {
-      renderUrl: `https://${ads}-fledge-demo.glitch.me/advertiser/${ads}-ad.html`,
+      renderUrl,
       metadata: {
         type: ads
       }

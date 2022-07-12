@@ -24,8 +24,8 @@ Using `<iframe>` to render ads:
 
 1. Visit both of the demo advertiser sites:
 
-   - [Shopping Site](https://shopping-fledge-demo.glitch.me/advertiser/shopping.html)
-   - [Travel Site](https://travel-fledge-demo.glitch.me/advertiser/travel.html)
+   - [Shopping Site](https://shop.example)
+   - [Travel Site](https://travel.example)
 
    `navigator.joinAdInterestGroup()` is called on each of these sites, to ask the browser to add an
    interest group to the groups it is a member of.
@@ -35,8 +35,8 @@ Using `<iframe>` to render ads:
 
 2. Visit the demo publisher site:
 
-   - [`<fencedframe>` version](https://publisher-fledge-demo.glitch.me/publisher/index.html?fencedframe)
-   - [`<iframe>` version](https://publisher-fledge-demo.glitch.me/publisher/index.html)
+   - [`<fencedframe>` version](https://publisher.example?fencedframe)
+   - [`<iframe>` version](https://publisher.example)
 
      `runAdAuction()` is run on the publisher site in a JavaScript [worklet](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#:~:text=worklet) to select an ad for display.
 
