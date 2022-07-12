@@ -1,3 +1,4 @@
+// DSP
 import express, { Application, Request, Response } from "express"
 
 const port = process.env.port || "3000"
@@ -5,7 +6,20 @@ const host = process.env.host || "localhost"
 
 const app: Application = express()
 
-app.use(express.static("src/public"))
+app.use(
+  express.static("src/public", {
+    setHeaders: (res: Response, path, stat) => {
+      const url = new URL(path, `https://${host}`)
+      console.log({ url })
+      if (url.pathname.endsWith("bidding_logic.js")) {
+        return res.set("X-Allow-FLEDGE", "true")
+      }
+      if (url.pathname.endsWith("bidding_signal.json")) {
+        return res.set("X-Allow-FLEDGE", "true")
+      }
+    }
+  })
+)
 app.set("view engine", "ejs")
 app.set("views", "src/views")
 

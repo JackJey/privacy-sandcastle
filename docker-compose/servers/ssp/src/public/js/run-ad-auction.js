@@ -3,7 +3,7 @@ const auctionConfig = {
   seller: "https://ssp.example", // should https & same as decisionLogicUrl's origin
 
   // x-allow-fledge: true
-  decisionLogicUrl: "https://ssp.example/decision-logic.js",
+  decisionLogicUrl: "https://ssp.example/js/decision-logic.js",
 
   interestGroupBuyers: [
     // * is not supported yet

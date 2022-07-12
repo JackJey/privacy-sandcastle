@@ -7,7 +7,7 @@ const interestGroup = {
   owner: "https://dsp.example",
 
   // x-allow-fledge: true
-  biddingLogicUrl: "https://dsp.example/js/bidding-logic.js",
+  biddingLogicUrl: "https://dsp.example/js/bidding_logic.js",
 
   // x-allow-fledge: true
   trustedBiddingSignalsUrl: "https://dsp.example/bidding_signal.json",
