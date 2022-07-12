@@ -10,7 +10,6 @@ app.use(
   express.static("src/public", {
     setHeaders: (res, path, stat) => {
       const url = new URL(path, `https://${host}`)
-      console.log({ url })
       if (url.pathname.endsWith("decision-logic.js")) {
         return res.set("X-Allow-FLEDGE", "true")
       }

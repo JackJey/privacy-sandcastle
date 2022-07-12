@@ -27,10 +27,10 @@ const auctionConfig = {
 document.addEventListener("DOMContentLoaded", async (e) => {
   const adAuctionResult = await navigator.runAdAuction(auctionConfig)
   console.log({ adAuctionResult })
-  const query = new URL(location.href).search
-  const frametype = query === "?fencedframe" ? "fencedframe" : "iframe"
+  const frametype = "iframe" // TODO: fencedframe
   console.log(`display ads in <${frametype}>`)
   const $iframe = document.createElement(frametype)
   $iframe.src = adAuctionResult
+  $iframe.setAttribute("mode", "opaque-ads")
   document.body.appendChild($iframe)
 })
