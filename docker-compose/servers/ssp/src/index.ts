@@ -14,6 +14,10 @@ app.use(
       if (url.pathname.endsWith("decision-logic.js")) {
         return res.set("X-Allow-FLEDGE", "true")
       }
+      if (url.pathname.endsWith("run-ad-auction.js")) {
+        res.set("Supports-Loading-Mode", "fenced-frame")
+        res.set("Permissions-Policy", "run-ad-auction=(*)")
+      }
     }
   })
 )
