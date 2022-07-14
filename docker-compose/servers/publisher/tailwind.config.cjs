@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/views/*.ejs"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ["Cambria", "Cochin", "Georgia", "Times", "Times New Roman", "serif"]
+      }
+    },
   },
   plugins: [],
 }
