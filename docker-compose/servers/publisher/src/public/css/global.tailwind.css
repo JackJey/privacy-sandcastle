@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+body {
+  display: grid;
+  width: 60vw;
+  margin: 2vh auto 0;
+  background-color: #f8f8f8;
+  grid-template-rows: min-content 1fr 1vh;
+  grid-template-columns: 70% 1fr;
+  grid-template-areas: "header header" "article aside" "footer footer";
+}
+
+header {
+  grid-area: header;
+  padding-top: 1rem;
+}
+
+h1 {
+  font-weight: normal;
+  text-align: center;
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-weight: normal;
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+article {
+  grid-area: article;
+  font-family: "Times New Roman", Times, serif;
+  padding: 1rem;
+  line-height: 1.6rem;
+}
+
+article p {
+  margin-top: 0;
+}
+
+aside {
+  grid-area: aside;
+  padding: 1rem;
+}
+
+aside ul {
+  line-height: 1.4rem;
+}
+
+footer {
+  grid-area: footer;
+  padding: 0 1rem;
+}
+
+.ads {
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.notice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.6rem;
+  line-height: 1rem;
+  color: #999;
+}
+
+fencedframe,
+iframe {
+  overflow: hidden;
+  border: none;
+}
+
+@media screen and (max-width: 900px) {
+  body {
+    display: grid;
+    width: 100vw;
+    margin: 0;
+    grid-template-rows: min-content min-content 1fr 10vh;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "article" "aside" "footer";
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+} */
