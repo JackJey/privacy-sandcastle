@@ -9,13 +9,13 @@ Privacy Sandbox Mixed DEMO
 
 ## Target API
 
-- Included in v0
+- Scope of v0
   - Attribution Reporting - CTC
   - Topic API
   - FLEDGE
   - FencedFrame
   - Trust Token
-- Not Included in v0
+- v1 ~ later
   - Attribution Reporting - VTC
   - IP Blindness
   - Privacy Budget
@@ -24,7 +24,7 @@ Privacy Sandbox Mixed DEMO
 
 ## Release Plan
 
-- v1: 2022/Q3 (OT with  ARA, FLEDGE, FencedFrame, Topics)
+- v0: 2022/Q3 (OT with  ARA, FLEDGE, FencedFrame, Topics)
 
 ## Use Case
 
@@ -34,13 +34,18 @@ Privacy Sandbox Mixed DEMO
 - Display Ad: Fenced Frame
 - Anti Fingerprint: IP Blindness / (UA  Reduction) / Privacy Budget
 
-## Locally Runnable
+## How to run locally
 
-- Some issue filed in demo repo about "How to run it locally".
-- It's better for developers to run a demo on localhost or on their own server.
-- How
-  - assign some domain for demo like `advertizer.example`, `news.example`
-  - adding the list to `/etc/hosts` or `--host-resolver-rules`
-    - https://chromium.googlesource.com/chromium/src/+/master/net/dns/README.md
-    - `--host-resolver-rules="MAP * 127.0.0.1"`
+### PreRequirement
 
+Install dependencies below
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [mkcert](https://github.com/FiloSottile/mkcert)
+- [Nodejs v18](https://nodejs.org/)
+
+### Build & Run
+
+```sh
+$ 
+```

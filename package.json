@@ -1,24 +1,8 @@
 {
-  "name": "fledge-demo",
+  "name": "privacy-sandcastle",
   "version": "0.0.0",
-  "description": "FLEDGE DEMO",
-  "main": "server.js",
-  "type": "module",
+  "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
-    "start": "PORT=3000 node server.js"
-  },
-  "dependencies": {
-    "fastify": "^3.14.1",
-    "fastify-formbody": "^5.0.0",
-    "fastify-static": "^4.0.0",
-    "handlebars": "^4.7.7",
-    "markdown-it": "^12.2.0",
-    "point-of-view": "^4.14.0"
-  },
-  "engines": {
-    "node": "14.x"
-  },
-  "devDependencies": {
-    "prettier": "2.6.2"
+    "start": "cd docker-compose/.devcontainer && docker-compose build && docker-compose up"
   }
 }
