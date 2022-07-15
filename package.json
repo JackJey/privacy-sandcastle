@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
-    "start": "cd docker-compose/.devcontainer && docker-compose build && docker-compose up"
+    "start": "npm run cert && npm run docker",
+    "cert": "cd docker-compose/nginx/cert && ./mkcert.sh",
+    "docker": "cd docker-compose/.devcontainer && docker-compose build && docker-compose up"
   }
 }
