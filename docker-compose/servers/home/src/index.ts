@@ -10,7 +10,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
-  const hosts = ["home.example", "shop.example", "travel.example", "publisher.example", "ssp.example", "dsp.example"]
+  const hosts = ["home.example", "shop.example", "travel.example", "news.example", "ssp.example", "dsp.example"]
   res.render("index", { hosts })
 })
 

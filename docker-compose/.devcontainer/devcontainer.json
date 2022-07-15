@@ -1,7 +1,7 @@
 {
-  "name": "Publisher",
+  "name": "News",
   "dockerComposeFile": "docker-compose.yml",
-  "service": "publisher",
+  "service": "news",
   "workspaceFolder": "/usr/src/app",
   "extensions": [
     "digitalbrainstem.javascript-ejs-support",

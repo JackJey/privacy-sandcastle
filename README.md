@@ -39,7 +39,7 @@ Privacy Sandbox Mixed DEMO
 - Some issue filed in demo repo about "How to run it locally".
 - It's better for developers to run a demo on localhost or on their own server.
 - How
-  - assign some domain for demo like `advertizer.example`, `publisher.example`
+  - assign some domain for demo like `advertizer.example`, `news.example`
   - adding the list to `/etc/hosts` or `--host-resolver-rules`
     - https://chromium.googlesource.com/chromium/src/+/master/net/dns/README.md
     - `--host-resolver-rules="MAP * 127.0.0.1"`

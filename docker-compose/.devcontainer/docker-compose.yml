@@ -8,12 +8,12 @@ services:
       - host=${HOME_HOST}
       - port=${HOME_PORT}
 
-  publisher:
-    build: ../servers/publisher
-    container_name: 'sandcastle_publisher'
+  news:
+    build: ../servers/news
+    container_name: 'sandcastle_news'
     environment:
-      - host=${PUBLISHER_HOST}
-      - port=${PUBLISHER_PORT}
+      - host=${NEWS_HOST}
+      - port=${NEWS_PORT}
 
   shop:
     build: ../servers/shop
@@ -64,9 +64,9 @@ services:
       ## home
       - HOME_HOST=${HOME_HOST}
       - HOME_PORT=${HOME_PORT}
-      ## publisher
-      - PUBLISHER_HOST=${PUBLISHER_HOST}
-      - PUBLISHER_PORT=${PUBLISHER_PORT}
+      ## news
+      - NEWS_HOST=${NEWS_HOST}
+      - NEWS_PORT=${NEWS_PORT}
       ## shop
       - SHOP_HOST=${SHOP_HOST}
       - SHOP_PORT=${SHOP_PORT}
