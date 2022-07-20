@@ -19,7 +19,6 @@ const Item = ({ id }) => {
             </Link>
           </nav>
         </header>
-
         <main className="grid lg:grid-cols-2">
           <section className="text-icon text-center">{item.icon}</section>
           <section className="">
@@ -30,7 +29,7 @@ const Item = ({ id }) => {
                 <label htmlFor="size" className=" basis-1/6 text-slate-500">
                   Size
                 </label>
-                <select id="size" className="basis-5/6">
+                <select id="size" className="basis-5/6 text-slate-800">
                   <option value="25.0">25.0cm</option>
                   <option value="25.5">25.5cm</option>
                   <option value="26.0">26.0cm</option>
@@ -45,7 +44,7 @@ const Item = ({ id }) => {
                 <label htmlFor="quantity" className=" basis-1/6 text-slate-500">
                   Quantity
                 </label>
-                <select id="quantity" className="basis-5/6">
+                <select id="quantity" className="basis-5/6 text-slate-800">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -76,9 +75,8 @@ const Item = ({ id }) => {
             </form>
           </section>
         </main>
-        <footer className="border-t-2 py-4">
-          privacy sandcastle
-        </footer>      </div>
+        <footer className="border-t-2 py-4">privacy sandcastle</footer>{" "}
+      </div>
     </div>
   )
 }
