@@ -2,17 +2,17 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
-import { items } from "../model/items"
+import { items, Item } from "../model/items"
 
-export const Item = ({ icon, name, price }: { icon: string; name: string; price: number }) => {
+export const ItemCard = (item: Item) => {
   return (
-    <li className="border shadow rounded flex flex-col text-center justify-between">
-      <Link href={`/items/${icon}`}>
+    <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
+      <Link href={`/items/${item.id}`}>
         <a className="flex flex-col pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
-          <div className="text-9xl">{icon}</div>
+          <div className="text-9xl">{item.icon}</div>
           <div>
-            <div className="font-bold text-xl text-slate-800">{name}</div>
-            <div className="font-mono text-slate-600">${price}</div>
+            <div className="font-bold text-xl text-slate-800">{item.name}</div>
+            <div className="font-mono text-slate-600">${item.price}</div>
           </div>
         </a>
       </Link>
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
         </header>
 
         <main className="">
-          <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => Item(item))}</ul>
+          <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => ItemCard(item))}</ul>
         </main>
 
         <footer className="border-t-2 py-4">
