@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
-import { items, Item } from "../model/items"
+import { items, Item } from "../lib/items"
 
 export const ItemCard = (item: Item) => {
   return (

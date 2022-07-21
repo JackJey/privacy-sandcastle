@@ -3,6 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { headers, body, query } = req
-  console.log({ headers, body, query })
+  console.log({ body, query })
   res.redirect("/cart")
 }

@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
-import { getItem } from "../../model/items"
+import { getItem } from "../../lib/items"
 
 const Item = ({ id }) => {
   const item = getItem(id)
