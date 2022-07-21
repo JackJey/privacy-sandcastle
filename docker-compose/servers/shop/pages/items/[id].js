@@ -1,9 +1,10 @@
 import Head from "next/head"
 import Link from "next/link"
+import Image from "next/image"
 import { getItem } from "../../model/items"
 
 const Item = ({ id }) => {
-  const item = getItem(Number(id))
+  const item = getItem(id)
   const title = `${item.icon} | Shopping DEMO`
   return (
     <div className="bg-neutral-50">
@@ -20,7 +21,9 @@ const Item = ({ id }) => {
           </nav>
         </header>
         <main className="grid lg:grid-cols-2">
-          <section className="text-icon text-center">{item.icon}</section>
+          <section className="">
+            <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name}></Image>
+          </section>
           <section className="">
             <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
             <div className=" text-slate-500 border-b py-4">${item.price}.00</div>
@@ -75,7 +78,11 @@ const Item = ({ id }) => {
             </form>
           </section>
         </main>
-        <footer className="border-t-2 py-4">privacy sandcastle</footer>{" "}
+        <footer className="border-t-2 py-4">
+          <Link href="/">
+            <a className="underline before:content-['<<']"> continue shopping</a>
+          </Link>
+        </footer>
       </div>
     </div>
   )

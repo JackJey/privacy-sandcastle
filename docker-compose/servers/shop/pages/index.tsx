@@ -9,7 +9,9 @@ export const ItemCard = (item: Item) => {
     <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
       <Link href={`/items/${item.id}`}>
         <a className="flex flex-col pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
-          <div className="text-9xl">{item.icon}</div>
+          <div className="">
+            <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
+          </div>
           <div>
             <div className="font-bold text-xl text-slate-800">{item.name}</div>
             <div className="font-mono text-slate-600">${item.price}</div>
