@@ -4,6 +4,7 @@ export type Item = {
   price: number,
   name: string
 }
+
 export const items: Array<Item> = [
   { id: "1f45e", icon: "👞", price: 180, name: "Man's Shoe" },
   { id: "1f45f", icon: "👟", price: 100, name: "Running Shoe" },
