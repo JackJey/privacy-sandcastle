@@ -5,9 +5,15 @@ import { Item, getItem } from "../lib/items"
 import { SessionCart } from "../lib/sessionCart"
 import { withSessionSsr } from "../lib/withSession"
 
+type Order = {
+  item: Item
+  size: string
+  quantity: number
+}
+
 export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
   const cart = new SessionCart(req.session)
-  const orders = cart.getAll().map(({ id, size, quantity }) => {
+  const orders: Array<Order> = cart.getAll().map(({ id, size, quantity }) => {
     const item = getItem(id)
     return { item, size, quantity }
   })
@@ -19,25 +25,47 @@ export const getServerSideProps = withSessionSsr(async function getServerSidePro
   }
 })
 
-const CartItem = (item: Item, size: string, quantity: number) => {
+const CartItem = (order: Order) => {
+  const { item, size, quantity } = order
   return (
-    <ul key={item.id} className="grid grid-cols-3 border">
-      <div className="flex flex-col justify-center bg-green-50">
-        <h2 className="font-bold text-xl text-center">{item.name}</h2>
+    <li key={item.id} className="grid grid-cols-3 gap-4 border">
+      <div className="flex flex-col gap-4 justify-center bg-slate-200">
         <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
+        <h2 className="font-bold text-xl text-center">{item.name}</h2>
       </div>
-      <div className="bg-blue-50 col-span-2">
+      <div className="col-span-2 flex flex-col justify-center gap-4 text-xl">
         <div className="">price: ${item.price}.00</div>
         <div>size: {size}</div>
-        <div>quantity: {quantity}</div>
+        <div>
+          quantity:
+          <select id="quantity" name="quantity" className="text-slate-800">
+            {Array(5)
+              .fill(0)
+              .map((_, i) => {
+                if (i === quantity) {
+                  return (
+                    <option key={i} value={i} selected>
+                      {i}
+                    </option>
+                  )
+                }
+                return (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                )
+              })}
+          </select>
+        </div>
       </div>
-    </ul>
+    </li>
   )
 }
 
-const Cart = ({ orders }: { orders: Array<{ item: Item; size: string; quantity: number }> }) => {
+const Cart = ({ orders }: { orders: Array<Order> }) => {
   const shipping = 20
   const subtotal = orders.reduce((total, { item, quantity }) => total + item.price * quantity, 0)
+
   return (
     <div className="bg-neutral-50">
       <Head>
@@ -53,13 +81,22 @@ const Cart = ({ orders }: { orders: Array<{ item: Item; size: string; quantity: 
           </nav>
         </header>
 
-        <ul className="flex flex-col gap-6">{orders.map(({ item, size, quantity }) => CartItem(item, size, quantity))}</ul>
+        <ul className="flex flex-col gap-6">{orders.map((order) => CartItem(order))}</ul>
 
-        <div>
-          <div>Subtotal: ${subtotal}.00</div>
-          <div>Shipping: ${shipping}.00</div>
-          <div>Total: ${subtotal + shipping}.00</div>
-        </div>
+        <dl className="flex flex-col text-2xl">
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Subtotal:</dt>
+            <dd>${subtotal}.00</dd>
+          </div>
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Shipping:</dt>
+            <dd>${shipping}.00</dd>
+          </div>
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Total:</dt>
+            <dd>${shipping + shipping}.00</dd>
+          </div>
+        </dl>
         <footer className="border-t-2 py-4">
           <Link href="/">
             <a className="underline before:content-['<<']"> continue shopping</a>
