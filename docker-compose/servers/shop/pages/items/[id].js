@@ -26,13 +26,13 @@ const Item = ({ id }) => {
           </section>
           <section className="">
             <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
-            <div className=" text-slate-500 border-b py-4">${item.price}.00</div>
-            <form method="post" className="flex flex-col gap-4">
+            <div className="text-slate-500 border-b py-4">${item.price}.00</div>
+            <form method="post" action="/api/cart" className="flex flex-col gap-4">
               <section className="flex border-b py-4">
-                <label htmlFor="size" className=" basis-1/6 text-slate-500">
+                <label htmlFor="size" className="basis-1/6 text-slate-500">
                   Size
                 </label>
-                <select id="size" className="basis-5/6 text-slate-800">
+                <select id="size" name="size" className="basis-5/6 text-slate-800">
                   <option value="25.0">25.0cm</option>
                   <option value="25.5">25.5cm</option>
                   <option value="26.0">26.0cm</option>
@@ -44,10 +44,10 @@ const Item = ({ id }) => {
                 </select>
               </section>
               <section className="flex border-b py-4">
-                <label htmlFor="quantity" className=" basis-1/6 text-slate-500">
+                <label htmlFor="quantity" className="basis-1/6 text-slate-500">
                   Quantity
                 </label>
-                <select id="quantity" className="basis-5/6 text-slate-800">
+                <select id="quantity" name="quantity" className="basis-5/6 text-slate-800">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -71,7 +71,7 @@ const Item = ({ id }) => {
                 </p>
               </section>
               <section className="flex justify-center">
-                <button type="submit" className=" w-60 border border-slate-600 text-slate-600 hover:bg-slate-400 hover:text-white">
+                <button type="submit" className="w-60 border border-slate-600 text-slate-600 hover:bg-slate-400 hover:text-white">
                   ADD TO CART
                 </button>
               </section>
