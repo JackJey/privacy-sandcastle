@@ -29,6 +29,7 @@ const Item = ({ id }) => {
             <div className="text-slate-500 border-b py-4">${item.price}.00</div>
             <form method="post" action="/api/cart" className="flex flex-col gap-4">
               <section className="flex border-b py-4">
+                <input type="hidden" name="id" value={item.id} />
                 <label htmlFor="size" className="basis-1/6 text-slate-500">
                   Size
                 </label>

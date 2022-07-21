@@ -1,8 +1,19 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next"
+import { withSessionRoute } from "../../lib/withSession"
+import { SessionCart } from "../../lib/sessionCart"
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { headers, body, query } = req
-  console.log({ body, query })
+type AddToCart = {
+  id: string
+  size: string
+  quantity: string
+}
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const cart = new SessionCart(req.session)
+  const { id, size, quantity }: AddToCart = req.body
+  cart.add(id, size, Number(quantity))
+  await cart.save()
   res.redirect("/cart")
 }
+
+export default withSessionRoute(handler)
