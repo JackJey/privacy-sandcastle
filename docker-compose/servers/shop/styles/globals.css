@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-neutral-50;
+  @apply max-w-screen-xl p-2 lg:w-10/12 lg:p-0 lg:m-auto;
+}

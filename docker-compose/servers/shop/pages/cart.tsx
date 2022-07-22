@@ -67,11 +67,11 @@ const Cart = ({ orders }: { orders: Array<Order> }) => {
   const subtotal = orders.reduce((total, { item, quantity }) => total + item.price * quantity, 0)
 
   return (
-    <div className="bg-neutral-50">
+    <div className="">
       <Head>
         <title>Shopping DEMO</title>
       </Head>
-      <div className="max-w-screen-xl p-2 lg:w-10/12 lg:p-0 lg:m-auto flex flex-col gap-6">
+      <div className="flex flex-col gap-6">
         <header className="flex flex-col">
           <nav className="flex justify-between lg:py-6 py-2 border-b-2">
             <h1 className="text-slate-800 text-4xl font-bold">Shopping DEMO</h1>
