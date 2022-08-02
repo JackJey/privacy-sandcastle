@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Item, getItem } from "../lib/items"
 import { SessionCart } from "../lib/sessionCart"
 import { withSessionSsr } from "../lib/withSession"
+import { useState, ChangeEvent } from "react"
 
 type Order = {
   item: Item
@@ -25,8 +26,14 @@ export const getServerSideProps = withSessionSsr(async function getServerSidePro
 })
 
 const CartItem = ({ order }: { order: Order }) => {
-  const { item, size, quantity } = order
+  const { item, size } = order
   const range = Array(5).fill(0)
+
+  const [quantity, setQuantity] = useState(order.quantity)
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setQuantity(Number(e.target.value))
+  }
 
   return (
     <li key={item.id} className="grid grid-cols-3 gap-8 border">
@@ -47,7 +54,7 @@ const CartItem = ({ order }: { order: Order }) => {
           <div className="flex gap-4">
             <dt className="w-16 font-bold">quantity:</dt>
             <dd>
-              <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity}>
+              <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity} onChange={onChange}>
                 {range.map((_, i) => (
                   <option key={i} value={i}>
                     {i}
@@ -91,7 +98,7 @@ const Cart = ({ orders }: { orders: Array<Order> }) => {
           ))}
         </ul>
 
-        <dl className="flex flex-col text-2xl">
+        <dl className="flex flex-col">
           <div className="flex justify-end gap-2">
             <dt className="font-bold">Subtotal:</dt>
             <dd>${subtotal}.00</dd>
