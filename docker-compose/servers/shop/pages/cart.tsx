@@ -36,23 +36,23 @@ const CartItem = ({ order }: { order: Order }) => {
   }
 
   return (
-    <li key={item.id} className="grid grid-cols-3 gap-8 border">
-      <div className="col-span-1 flex flex-col gap-4  bg-slate-200">
+    <li key={item.id} className="grid grid-cols-12 lg:gap-8 gap-4 border">
+      <div className="lg:col-span-4 col-span-6 flex py-4 flex-col gap-4 bg-slate-200">
         <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
         <h2 className="font-bold text-xl text-center text-slate-700 pb-4">{item.name}</h2>
       </div>
-      <div className="col-span-2 flex flex-col justify-center gap-2 text-lg text-slate-700">
+      <div className="lg:col-span-8 col-span-6 flex flex-col justify-center gap-2 text-lg text-slate-700">
         <dl className="flex flex-col">
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <dt className="w-16 font-bold">price:</dt>
             <dd>${item.price}.00</dd>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <dt className="w-16 font-bold">size:</dt>
             <dd>{size}</dd>
           </div>
-          <div className="flex gap-4">
-            <dt className="w-16 font-bold">quantity:</dt>
+          <div className="flex gap-2">
+            <dt className="w-16 font-bold">qty:</dt>
             <dd>
               <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity} onChange={onChange}>
                 {range.map((_, i) => (
