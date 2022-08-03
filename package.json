@@ -5,6 +5,6 @@
   "scripts": {
     "start": "npm run cert && npm run docker",
     "cert": "cd docker-compose/nginx/cert && ./mkcert.sh",
-    "docker": "cd docker-compose/.devcontainer && docker-compose build && sudo docker-compose up"
+    "docker": "cd docker-compose/.devcontainer && docker-compose build && docker-compose up"
   }
 }
