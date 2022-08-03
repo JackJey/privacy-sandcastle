@@ -1,42 +1,34 @@
 import Link from "next/link"
 import Head from "next/head"
 import Image from "next/image"
-import { Item, getItem } from "../lib/items"
+import { Item, Order, getItem } from "../lib/items"
 import { SessionCart } from "../lib/sessionCart"
 import { withSessionSsr } from "../lib/withSession"
 import { useState, ChangeEvent, MouseEvent } from "react"
+import { useCartContext } from "../context/CartContextProvider";
 
-type Order = {
-  item: Item
-  size: string
-  quantity: number
-}
 
-export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
-  const cart = new SessionCart(req.session)
-  const orders: Array<Order> = cart.getAll().map(({ id, size, quantity }) => {
-    const item = getItem(id)
-    return { item, size, quantity }
-  })
-  return {
-    props: {
-      orders
-    }
-  }
-})
+// export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
+//   const cart = new SessionCart(req.session)
+//   const orders: Array<Order> = cart.getAll().map(({ id, size, quantity }) => {
+//     const item = getItem(id)
+//     return { item, size, quantity }
+//   })
+//   return {
+//     props: {
+//       orders
+//     }
+//   }
+// })
 
-const CartItem = ({ order, onRemove }: { order: Order, onRemove: any }) => {
-  const { item, size } = order
-  const range = Array(5).fill(0)
-
-  const [quantity, setQuantity] = useState(order.quantity)
+const CartItem = ({ order, onRemove }: { order: Order; onRemove: any }) => {
+  const {item, size, quantity} = order
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQuantity(Number(e.target.value))
   }
 
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onRemove(item)
+    onRemove(order)
   }
 
   return (
@@ -59,7 +51,7 @@ const CartItem = ({ order, onRemove }: { order: Order, onRemove: any }) => {
             <dt className="w-16 font-bold">qty:</dt>
             <dd>
               <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity} onChange={onChange}>
-                {range.map((_, i) => (
+                {Array(5).fill(0).map((_, i) => (
                   <option key={i} value={i}>
                     {i}
                   </option>
@@ -78,16 +70,11 @@ const CartItem = ({ order, onRemove }: { order: Order, onRemove: any }) => {
   )
 }
 
-const Cart = ({ orders }: { orders: Array<Order> }) => {
-  const shipping = 20
-  const subtotal = orders.reduce((total, { item, quantity }) => total + item.price * quantity, 0)
+const Cart = () => {
+  const {cartState, addOrder, removeOrder} = useCartContext()
 
-  const onRemove = (item: Item) => {
-    console.log(orders, item)
-    orders = orders.filter((order) => {
-      return order.item.id !== item.id
-    })
-  }
+  const subtotal = 0 // TODO
+  const shipping = 40 // TODO
 
   return (
     <div className="">
@@ -109,8 +96,8 @@ const Cart = ({ orders }: { orders: Array<Order> }) => {
         </header>
 
         <ul className="flex flex-col gap-6">
-          {orders.map((order) => (
-            <CartItem key={order.item.id} order={order} onRemove={onRemove} />
+          {cartState.map((order) => (
+            <CartItem key={order.item.id} order={order} onRemove={removeOrder} />
           ))}
         </ul>
 

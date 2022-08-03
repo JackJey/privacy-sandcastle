@@ -1,11 +1,29 @@
 import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
-import { getItem } from "../../lib/items"
+import { getItem, Item } from "../../lib/items"
+import { GetServerSideProps } from "next"
+import { FormEvent } from "react"
+import { useCartContext } from "../../context/CartContextProvider"
+import { useRouter } from "next/router"
 
-const Item = ({ id }) => {
-  const item = getItem(id)
+const Item = ({ item }: { item: Item }) => {
   const title = `${item.icon} | Shopping DEMO`
+
+  const { addOrder } = useCartContext()
+  const router = useRouter()
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const id = data.get("id") as string
+    const size = data.get("size") as string
+    const quantity = data.get("quantity") as string
+    // console.assert(item.id !== id)
+    addOrder({ item, size, quantity: Number(quantity) })
+    router.push("/cart")
+  }
+
   return (
     <div className="">
       <Head>
@@ -27,7 +45,7 @@ const Item = ({ id }) => {
           <section className="">
             <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
             <div className="text-slate-500 border-b py-4">${item.price}.00</div>
-            <form method="post" action="/api/cart" className="flex flex-col gap-4">
+            <form method="post" action="/api/cart" onSubmit={onSubmit} className="flex flex-col gap-4">
               <section className="flex border-b py-4">
                 <input type="hidden" name="id" value={item.id} />
                 <label htmlFor="size" className="basis-1/6 text-slate-500">
@@ -89,9 +107,10 @@ const Item = ({ id }) => {
   )
 }
 
-export function getServerSideProps(ctx) {
-  const { id } = ctx.params
-  return { props: { id } }
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const id: string = ctx.params?.id as string
+  const item = await getItem(id)
+  return { props: { item } }
 }
 
 export default Item

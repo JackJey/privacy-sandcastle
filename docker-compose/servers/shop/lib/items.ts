@@ -1,3 +1,9 @@
+export type Order = {
+  item: Item
+  size: string
+  quantity: number
+}
+
 export type Item = {
   id: string,
   icon: string,
@@ -20,7 +26,7 @@ export const items: Array<Item> = [
   { id: "26f8", icon: "⛸", price: 1200, name: "Ice Skate" },
 ]
 
-export function getItem(id: string): Item {
+export const getItem = async (id: string): Promise<Item> => {
   return items
   .filter((item) => {
       return item.id === id
