@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Item, getItem } from "../lib/items"
 import { SessionCart } from "../lib/sessionCart"
 import { withSessionSsr } from "../lib/withSession"
-import { useState, ChangeEvent } from "react"
+import { useState, ChangeEvent, MouseEvent } from "react"
 
 type Order = {
   item: Item
@@ -25,7 +25,7 @@ export const getServerSideProps = withSessionSsr(async function getServerSidePro
   }
 })
 
-const CartItem = ({ order }: { order: Order }) => {
+const CartItem = ({ order, onRemove }: { order: Order, onRemove: any }) => {
   const { item, size } = order
   const range = Array(5).fill(0)
 
@@ -35,13 +35,17 @@ const CartItem = ({ order }: { order: Order }) => {
     setQuantity(Number(e.target.value))
   }
 
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+    onRemove(item)
+  }
+
   return (
     <li key={item.id} className="grid grid-cols-12 lg:gap-8 gap-4 border">
       <div className="lg:col-span-4 col-span-6 flex py-4 flex-col gap-4 bg-slate-200">
         <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
         <h2 className="font-bold text-xl text-center text-slate-700 pb-4">{item.name}</h2>
       </div>
-      <div className="lg:col-span-8 col-span-6 flex flex-col justify-center gap-2 text-lg text-slate-700">
+      <div className="lg:col-span-8 col-span-6 flex flex-col justify-center gap-2 text-lg text-slate-700 relative">
         <dl className="flex flex-col">
           <div className="flex gap-2">
             <dt className="w-16 font-bold">price:</dt>
@@ -64,6 +68,11 @@ const CartItem = ({ order }: { order: Order }) => {
             </dd>
           </div>
         </dl>
+        <div className="absolute top-0 right-0">
+          <button type="button" className="flex justify-center items-center text-xl w-8 h-8" onClick={onClick}>
+            ✖️
+          </button>
+        </div>
       </div>
     </li>
   )
@@ -72,6 +81,13 @@ const CartItem = ({ order }: { order: Order }) => {
 const Cart = ({ orders }: { orders: Array<Order> }) => {
   const shipping = 20
   const subtotal = orders.reduce((total, { item, quantity }) => total + item.price * quantity, 0)
+
+  const onRemove = (item: Item) => {
+    console.log(orders, item)
+    orders = orders.filter((order) => {
+      return order.item.id !== item.id
+    })
+  }
 
   return (
     <div className="">
@@ -94,7 +110,7 @@ const Cart = ({ orders }: { orders: Array<Order> }) => {
 
         <ul className="flex flex-col gap-6">
           {orders.map((order) => (
-            <CartItem key={order.item.id} order={order} />
+            <CartItem key={order.item.id} order={order} onRemove={onRemove} />
           ))}
         </ul>
 
