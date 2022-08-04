@@ -1,10 +1,10 @@
-import type { NextPage } from "next"
+import type { GetServerSideProps, NextPage } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { items, Item } from "../lib/items"
+import { Item } from "../lib/items"
 import Header from "../components/header"
 
-export const ItemCard = (item: Item) => {
+export const ItemCard = ({ item }: { item: Item }) => {
   return (
     <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
       <Link href={`/items/${item.id}`}>
@@ -22,13 +22,17 @@ export const ItemCard = (item: Item) => {
   )
 }
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ items }: { items: Item[] }) => {
   return (
     <div className="flex flex-col gap-6">
       <Header />
 
       <main className="">
-        <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => ItemCard(item))}</ul>
+        <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">
+          {items.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+        </ul>
       </main>
 
       <footer className="border-t-2 py-4">
@@ -39,6 +43,14 @@ const Home: NextPage = () => {
       </footer>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const host = process.env.host || "localhost"
+  const port = process.env.port || 3000
+  const res = await fetch(`http://${host}:${port}/api/items`)
+  const items: Item[] = await res.json()
+  return { props: { items } }
 }
 
 export default Home
