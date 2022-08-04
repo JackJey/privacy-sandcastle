@@ -11,15 +11,24 @@ const Item = ({ item }: { item: Item }) => {
   const { addOrder } = useCartContext()
   const router = useRouter()
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     const data = new FormData(event.currentTarget)
     const id = data.get("id") as string
     const size = data.get("size") as string
     const quantity = data.get("quantity") as string
+
     console.assert(item.id === id, item.id, id)
+    console.log({ id, size, quantity })
+
+    const res = await fetch("/api/cart", {
+      method: "post",
+      body: new URLSearchParams(data as URLSearchParams)
+    })
+    console.assert(res.redirected)
     addOrder({ item, size, quantity: Number(quantity) })
-    router.push("/cart")
+    router.push(res.url)
   }
 
   return (
