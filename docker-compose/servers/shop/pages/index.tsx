@@ -22,7 +22,11 @@ export const ItemCard = ({ item }: { item: Item }) => {
   )
 }
 
-const Home: NextPage = ({ items }: { items: Item[] }) => {
+type Props = {
+  items: Item[]
+}
+
+const Home: NextPage<Props> = ({ items }: Props) => {
   return (
     <div className="flex flex-col gap-6">
       <Header />
