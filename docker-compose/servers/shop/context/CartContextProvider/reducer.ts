@@ -33,8 +33,8 @@ const addOrder = (order: Order, state: Order[]) => {
 }
 
 const removeOrder = (order: Order, state: Order[]) => {
-  const removedItemIndex = state.findIndex((o) => o.item.id === order.item.id)
-  return [...state.splice(removedItemIndex, 1)]
+  const index = state.findIndex((o) => o.item.id === order.item.id)
+  return [...state.slice(0, index), ...state.slice(index + 1)]
 }
 
 const updateOrder = (order: Order, state: Order[]) => {
