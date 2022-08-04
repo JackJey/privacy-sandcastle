@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Order } from "../lib/items"
 import { ChangeEvent, MouseEvent } from "react"
 import { useCartContext } from "../context/CartContextProvider"
+import Header from "../components/header"
 
 // export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
 //   const cart = new SessionCart(req.session)
@@ -86,18 +87,7 @@ const Cart = () => {
         <title>Shopping DEMO</title>
       </Head>
       <div className="flex flex-col gap-6">
-        <header className="flex flex-col">
-          <nav className="flex justify-between lg:py-6 py-2 border-b-2">
-            <h1 className="text-slate-800 text-4xl font-bold">
-              <Link href="/">
-                <a>Shopping DEMO</a>
-              </Link>
-            </h1>
-            <Link href="/cart">
-              <a className="text-4xl px-2">🛒</a>
-            </Link>
-          </nav>
-        </header>
+        <Header />
 
         <ul className="flex flex-col gap-6">
           {cartState.map((order) => (
@@ -119,6 +109,7 @@ const Cart = () => {
             <dd>${subtotal + shipping}.00</dd>
           </div>
         </dl>
+
         <footer className="border-t-2 py-4">
           <Link href="/">
             <a className="underline before:content-['<<']"> continue shopping</a>

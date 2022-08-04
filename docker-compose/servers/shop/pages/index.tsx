@@ -3,6 +3,7 @@ import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
 import { items, Item } from "../lib/items"
+import Header from "../components/header"
 
 export const ItemCard = (item: Item) => {
   return (
@@ -29,15 +30,7 @@ const Home: NextPage = () => {
         <title>Shopping DEMO</title>
       </Head>
       <div className="flex flex-col gap-6">
-        <header className="flex flex-col">
-          <nav className="flex justify-between lg:py-6 py-2 border-b-2">
-            <h1 className="text-slate-800 text-4xl font-bold">Shopping DEMO</h1>
-            <Link href="/cart">
-              <a className="text-4xl px-2">🛒</a>
-            </Link>
-          </nav>
-          <Image src="/image/shop.webp" alt="Shop Hero Image" width={500} height={300} className="object-cover object-top" />
-        </header>
+        <Header />
 
         <main className="">
           <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => ItemCard(item))}</ul>

@@ -6,6 +6,7 @@ import { GetServerSideProps } from "next"
 import { FormEvent } from "react"
 import { useCartContext } from "../../context/CartContextProvider"
 import { useRouter } from "next/router"
+import Header from "../../components/header"
 
 const Item = ({ item }: { item: Item }) => {
   const title = `${item.icon} | Shopping DEMO`
@@ -30,14 +31,8 @@ const Item = ({ item }: { item: Item }) => {
         <title>{title}</title>
       </Head>
       <div className="flex flex-col gap-6">
-        <header className="flex flex-col">
-          <nav className="flex justify-between lg:py-6 py-2 border-b-2">
-            <h1 className="text-slate-800 text-4xl font-bold">Shopping DEMO</h1>
-            <Link href="/">
-              <a className="text-4xl px-2">🛒</a>
-            </Link>
-          </nav>
-        </header>
+        <Header />
+
         <main className="grid lg:grid-cols-2">
           <section className="">
             <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name}></Image>
@@ -97,6 +92,7 @@ const Item = ({ item }: { item: Item }) => {
             </form>
           </section>
         </main>
+
         <footer className="border-t-2 py-4">
           <Link href="/">
             <a className="underline before:content-['<<']"> continue shopping</a>
