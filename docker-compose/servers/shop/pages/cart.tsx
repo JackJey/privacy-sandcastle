@@ -51,14 +51,12 @@ const CartItem = ({ order }: { order: Order }) => {
           <div className="flex gap-2">
             <dt className="w-16 font-bold">qty:</dt>
             <dd>
-              <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity} onChange={onChange}>
-                {Array(5)
-                  .fill(0)
-                  .map((_, i) => (
-                    <option key={i} value={i}>
-                      {i}
-                    </option>
-                  ))}
+              <select id="quantity" name="quantity" defaultValue={quantity} onChange={onChange} className="text-slate-800">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </select>
             </dd>
           </div>
