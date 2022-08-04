@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Order } from "../lib/items"
-import { ChangeEvent, MouseEvent } from "react"
+import { ChangeEvent, FormEvent, MouseEvent } from "react"
 import { useCartContext } from "../context/CartContextProvider"
 import Header from "../components/header"
 
@@ -32,7 +32,7 @@ const CartItem = ({ order }: { order: Order }) => {
   }
 
   return (
-    <li key={item.id} className="grid grid-cols-12 lg:gap-8 gap-4 border">
+    <li className="grid grid-cols-12 lg:gap-8 gap-4 border">
       <div className="lg:col-span-4 col-span-6 flex py-4 flex-col gap-4 bg-slate-200">
         <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
         <h2 className="font-bold text-xl text-center text-slate-700 pb-4">{item.name}</h2>
@@ -48,9 +48,17 @@ const CartItem = ({ order }: { order: Order }) => {
             <dd>{size}</dd>
           </div>
           <div className="flex gap-2">
-            <dt className="w-16 font-bold">qty:</dt>
+            <dt className="w-16 font-bold">
+              <label htmlFor={`quantity[${item.id}][${size}]`}>qty:</label>
+            </dt>
             <dd>
-              <select id="quantity" name="quantity" defaultValue={quantity} onChange={onChange} className="text-slate-800">
+              <select
+                id={`quantity[${item.id}][${size}]`}
+                name={`quantity[${item.id}][${size}]`}
+                defaultValue={quantity}
+                onChange={onChange}
+                className="text-slate-800"
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -78,30 +86,45 @@ const Cart = () => {
   }, 0)
   const shipping = 40
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const body = JSON.stringify(cartState, null, " ")
+    console.log(body)
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <Header />
 
-      <ul className="flex flex-col gap-6">
-        {cartState.map((order) => (
-          <CartItem key={order.item.id} order={order} />
-        ))}
-      </ul>
+      <form className="flex flex-col gap-6" onSubmit={onSubmit}>
+        <ul className="flex flex-col gap-6">
+          {cartState.map((order) => {
+            const key = `${order.item.id}:${order.size}`
+            return <CartItem key={key} order={order} />
+          })}
+        </ul>
 
-      <dl className="flex flex-col">
-        <div className="flex justify-end gap-2">
-          <dt className="font-bold">Subtotal:</dt>
-          <dd>${subtotal}.00</dd>
-        </div>
-        <div className="flex justify-end gap-2">
-          <dt className="font-bold">Shipping:</dt>
-          <dd>${shipping}.00</dd>
-        </div>
-        <div className="flex justify-end gap-2">
-          <dt className="font-bold">Total:</dt>
-          <dd>${subtotal + shipping}.00</dd>
-        </div>
-      </dl>
+        <dl className="flex flex-col">
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Subtotal:</dt>
+            <dd>${subtotal}.00</dd>
+          </div>
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Shipping:</dt>
+            <dd>${shipping}.00</dd>
+          </div>
+          <div className="flex justify-end gap-2">
+            <dt className="font-bold">Total:</dt>
+            <dd>${subtotal + shipping}.00</dd>
+          </div>
+        </dl>
+
+        <section className="flex justify-center">
+          <button type="submit" className="w-60 border border-slate-600 text-slate-600 hover:bg-slate-400 hover:text-white">
+            CHECKOUT
+          </button>
+        </section>
+      </form>
 
       <footer className="border-t-2 py-4">
         <Link href="/">

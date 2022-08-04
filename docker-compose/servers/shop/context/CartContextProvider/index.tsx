@@ -13,6 +13,24 @@ type Props = {
   children?: ReactNode
 }
 
+const dummy: Order[] = [
+  {
+    item: { id: "1f45e", icon: "👞", price: 180, name: "Man's Shoe" },
+    size: "26.0",
+    quantity: 1
+  },
+  {
+    item: { id: "1f45e", icon: "👞", price: 180, name: "Man's Shoe" },
+    size: "27.0",
+    quantity: 2
+  },
+  {
+    item: { id: "1f460", icon: "👠", price: 200, name: "High-Heeled Shoe" },
+    size: "26.0",
+    quantity: 1
+  }
+]
+
 const CartContext = createContext<CartContextType>({
   cartState: [],
   addOrder: () => {},
@@ -25,7 +43,7 @@ export const useCartContext = () => {
 }
 
 export const CartContextProvider = ({ children }: Props) => {
-  const state: Order[] = []
+  const state: Order[] = dummy // TODO
   const [cartState, dispatch] = useReducer(cartReducer, state)
 
   const addOrder = (order: Order) => {
