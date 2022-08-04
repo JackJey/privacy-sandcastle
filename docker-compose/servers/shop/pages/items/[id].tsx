@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getItem, Item } from "../../lib/items"
+import { Item } from "../../lib/items"
 import { GetServerSideProps } from "next"
 import { FormEvent } from "react"
 import { useCartContext } from "../../context/CartContextProvider"
@@ -106,7 +106,10 @@ const Item = ({ item }: { item: Item }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id: string = ctx.params?.id as string
-  const item = await getItem(id)
+  const host = process.env.host || "localhost"
+  const port = process.env.port || 3000
+  const res = await fetch(`http://${host}:${port}/api/items/${id}`)
+  const item = await res.json()
   return { props: { item } }
 }
 
