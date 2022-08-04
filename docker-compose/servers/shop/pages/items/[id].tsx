@@ -7,6 +7,15 @@ import { useCartContext } from "../../context/CartContextProvider"
 import { useRouter } from "next/router"
 import Header from "../../components/header"
 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const id: string = ctx.params?.id as string
+  const host = process.env.host || "localhost"
+  const port = process.env.port || 3000
+  const res = await fetch(`http://${host}:${port}/api/items/${id}`)
+  const item = await res.json()
+  return { props: { item } }
+}
+
 const Item = ({ item }: { item: Item }) => {
   const { addOrder } = useCartContext()
   const router = useRouter()
@@ -102,15 +111,6 @@ const Item = ({ item }: { item: Item }) => {
       </footer>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const id: string = ctx.params?.id as string
-  const host = process.env.host || "localhost"
-  const port = process.env.port || 3000
-  const res = await fetch(`http://${host}:${port}/api/items/${id}`)
-  const item = await res.json()
-  return { props: { item } }
 }
 
 export default Item

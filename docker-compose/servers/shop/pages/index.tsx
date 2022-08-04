@@ -4,6 +4,14 @@ import Image from "next/image"
 import { Item } from "../lib/items"
 import Header from "../components/header"
 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const host = process.env.host || "localhost"
+  const port = process.env.port || 3000
+  const res = await fetch(`http://${host}:${port}/api/items`)
+  const items: Item[] = await res.json()
+  return { props: { items } }
+}
+
 export const ItemCard = ({ item }: { item: Item }) => {
   return (
     <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
@@ -47,14 +55,6 @@ const Home: NextPage<Props> = ({ items }: Props) => {
       </footer>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const host = process.env.host || "localhost"
-  const port = process.env.port || 3000
-  const res = await fetch(`http://${host}:${port}/api/items`)
-  const items: Item[] = await res.json()
-  return { props: { items } }
 }
 
 export default Home
