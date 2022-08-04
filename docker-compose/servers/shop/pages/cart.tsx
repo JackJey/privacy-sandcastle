@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Head from "next/head"
 import Image from "next/image"
 import { Order } from "../lib/items"
 import { ChangeEvent, MouseEvent } from "react"
@@ -80,37 +79,35 @@ const Cart = () => {
   const shipping = 40
 
   return (
-    <div className="">
-      <div className="flex flex-col gap-6">
-        <Header />
+    <div className="flex flex-col gap-6">
+      <Header />
 
-        <ul className="flex flex-col gap-6">
-          {cartState.map((order) => (
-            <CartItem key={order.item.id} order={order} />
-          ))}
-        </ul>
+      <ul className="flex flex-col gap-6">
+        {cartState.map((order) => (
+          <CartItem key={order.item.id} order={order} />
+        ))}
+      </ul>
 
-        <dl className="flex flex-col">
-          <div className="flex justify-end gap-2">
-            <dt className="font-bold">Subtotal:</dt>
-            <dd>${subtotal}.00</dd>
-          </div>
-          <div className="flex justify-end gap-2">
-            <dt className="font-bold">Shipping:</dt>
-            <dd>${shipping}.00</dd>
-          </div>
-          <div className="flex justify-end gap-2">
-            <dt className="font-bold">Total:</dt>
-            <dd>${subtotal + shipping}.00</dd>
-          </div>
-        </dl>
+      <dl className="flex flex-col">
+        <div className="flex justify-end gap-2">
+          <dt className="font-bold">Subtotal:</dt>
+          <dd>${subtotal}.00</dd>
+        </div>
+        <div className="flex justify-end gap-2">
+          <dt className="font-bold">Shipping:</dt>
+          <dd>${shipping}.00</dd>
+        </div>
+        <div className="flex justify-end gap-2">
+          <dt className="font-bold">Total:</dt>
+          <dd>${subtotal + shipping}.00</dd>
+        </div>
+      </dl>
 
-        <footer className="border-t-2 py-4">
-          <Link href="/">
-            <a className="underline before:content-['<<']"> continue shopping</a>
-          </Link>
-        </footer>
-      </div>
+      <footer className="border-t-2 py-4">
+        <Link href="/">
+          <a className="underline before:content-['<<']"> continue shopping</a>
+        </Link>
+      </footer>
     </div>
   )
 }

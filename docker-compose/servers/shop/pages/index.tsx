@@ -1,5 +1,4 @@
 import type { NextPage } from "next"
-import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
 import { items, Item } from "../lib/items"
@@ -25,21 +24,19 @@ export const ItemCard = (item: Item) => {
 
 const Home: NextPage = () => {
   return (
-    <div className="">
-      <div className="flex flex-col gap-6">
-        <Header />
+    <div className="flex flex-col gap-6">
+      <Header />
 
-        <main className="">
-          <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => ItemCard(item))}</ul>
-        </main>
+      <main className="">
+        <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">{items.map((item) => ItemCard(item))}</ul>
+      </main>
 
-        <footer className="border-t-2 py-4">
-          <p className="underline text-slate-400 text-right">
-            Photo by <a href="https://unsplash.com/@bruno_kelzer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bruno Kelzer</a>{" "}
-            on <a href="https://unsplash.com/s/photos/shopping-cart?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-          </p>
-        </footer>
-      </div>
+      <footer className="border-t-2 py-4">
+        <p className="underline text-slate-400 text-right">
+          Photo by <a href="https://unsplash.com/@bruno_kelzer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bruno Kelzer</a> on{" "}
+          <a href="https://unsplash.com/s/photos/shopping-cart?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p>
+      </footer>
     </div>
   )
 }
