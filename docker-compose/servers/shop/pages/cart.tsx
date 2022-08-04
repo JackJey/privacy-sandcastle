@@ -1,12 +1,9 @@
 import Link from "next/link"
 import Head from "next/head"
 import Image from "next/image"
-import { Item, Order, getItem } from "../lib/items"
-import { SessionCart } from "../lib/sessionCart"
-import { withSessionSsr } from "../lib/withSession"
-import { useState, ChangeEvent, MouseEvent } from "react"
-import { useCartContext } from "../context/CartContextProvider";
-
+import { Order } from "../lib/items"
+import { ChangeEvent, MouseEvent } from "react"
+import { useCartContext } from "../context/CartContextProvider"
 
 // export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
 //   const cart = new SessionCart(req.session)
@@ -21,14 +18,17 @@ import { useCartContext } from "../context/CartContextProvider";
 //   }
 // })
 
-const CartItem = ({ order, onRemove }: { order: Order; onRemove: any }) => {
-  const {item, size, quantity} = order
+const CartItem = ({ order }: { order: Order }) => {
+  const { item, size, quantity } = order
+  const { removeOrder, updateOrder } = useCartContext()
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const quantity = parseInt(e.target.value)
+    updateOrder({ ...order, ...{ quantity } })
   }
 
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    onRemove(order)
+    removeOrder(order)
   }
 
   return (
@@ -51,11 +51,13 @@ const CartItem = ({ order, onRemove }: { order: Order; onRemove: any }) => {
             <dt className="w-16 font-bold">qty:</dt>
             <dd>
               <select id="quantity" name="quantity" className="text-slate-800" defaultValue={quantity} onChange={onChange}>
-                {Array(5).fill(0).map((_, i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
+                {Array(5)
+                  .fill(0)
+                  .map((_, i) => (
+                    <option key={i} value={i}>
+                      {i}
+                    </option>
+                  ))}
               </select>
             </dd>
           </div>
@@ -71,10 +73,12 @@ const CartItem = ({ order, onRemove }: { order: Order; onRemove: any }) => {
 }
 
 const Cart = () => {
-  const {cartState, addOrder, removeOrder} = useCartContext()
+  const { cartState } = useCartContext()
 
-  const subtotal = 0 // TODO
-  const shipping = 40 // TODO
+  const subtotal = cartState.reduce((sum, { item, quantity }) => {
+    return sum + item.price * quantity
+  }, 0)
+  const shipping = 40
 
   return (
     <div className="">
@@ -97,7 +101,7 @@ const Cart = () => {
 
         <ul className="flex flex-col gap-6">
           {cartState.map((order) => (
-            <CartItem key={order.item.id} order={order} onRemove={removeOrder} />
+            <CartItem key={order.item.id} order={order} />
           ))}
         </ul>
 

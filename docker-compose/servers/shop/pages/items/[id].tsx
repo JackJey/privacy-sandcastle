@@ -19,7 +19,7 @@ const Item = ({ item }: { item: Item }) => {
     const id = data.get("id") as string
     const size = data.get("size") as string
     const quantity = data.get("quantity") as string
-    // console.assert(item.id !== id)
+    console.assert(item.id === id, item.id, id)
     addOrder({ item, size, quantity: Number(quantity) })
     router.push("/cart")
   }
