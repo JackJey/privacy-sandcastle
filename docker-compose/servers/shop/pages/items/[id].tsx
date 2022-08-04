@@ -9,7 +9,6 @@ import { useRouter } from "next/router"
 import Header from "../../components/header"
 
 const Item = ({ item }: { item: Item }) => {
-  const title = `${item.icon} | Shopping DEMO`
 
   const { addOrder } = useCartContext()
   const router = useRouter()
@@ -27,9 +26,6 @@ const Item = ({ item }: { item: Item }) => {
 
   return (
     <div className="">
-      <Head>
-        <title>{title}</title>
-      </Head>
       <div className="flex flex-col gap-6">
         <Header />
 

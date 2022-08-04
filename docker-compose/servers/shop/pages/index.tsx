@@ -26,9 +26,6 @@ export const ItemCard = (item: Item) => {
 const Home: NextPage = () => {
   return (
     <div className="">
-      <Head>
-        <title>Shopping DEMO</title>
-      </Head>
       <div className="flex flex-col gap-6">
         <Header />
 
