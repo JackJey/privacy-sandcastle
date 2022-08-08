@@ -1,15 +1,44 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Order } from "../lib/items"
-import { ChangeEvent, FormEvent, MouseEvent } from "react"
-import { useCartContext } from "../context/CartContextProvider"
+import { getItem, Item, Order } from "../lib/items"
 import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
 import { withSessionSsr } from "../lib/withSession"
+import bodyParser from "body-parser"
+import { promisify } from "util"
+
+declare module "http" {
+  interface IncomingMessage {
+    body: Object
+  }
+}
+// parse request body as x-www-form-urlencoded
+const getBody = promisify(bodyParser.urlencoded())
 
 export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ req, res }) => {
-  const cart: Order[] = req.session.cart || []
-  return { props: { cart } }
+  if (req.method === "POST") {
+    await getBody(req, res)
+    const checkout = await Promise.all(
+      Object.entries(req.body).map(async ([k, quantity]) => {
+        const [id, size] = k.split(":")
+        const item: Item = await getItem(id)
+        const order: Order = {
+          item,
+          size,
+          quantity
+        }
+        return order
+      })
+    )
+    req.session.destroy()
+    return { props: { checkout, cart: [] } }
+  }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/cart"
+    }
+  }
 })
 
 const CartItem = ({ order }: { order: Order }) => {
@@ -41,10 +70,10 @@ const CartItem = ({ order }: { order: Order }) => {
   )
 }
 
-const Cart = () => {
-  const { cartState } = useCartContext()
+const Cart = ({ checkout }: { checkout: Order[] }) => {
+  console.log(checkout)
 
-  const subtotal = cartState.reduce((sum, { item, quantity }) => {
+  const subtotal = checkout.reduce((sum, { item, quantity }) => {
     return sum + item.price * quantity
   }, 0)
   const shipping = 40
@@ -55,7 +84,7 @@ const Cart = () => {
       <h1 className=" text-2xl font-bold text-center text-slate-700 py-6">Thank you for your purchase !!</h1>
       <div className="flex flex-col gap-6">
         <ul className="flex flex-col gap-6">
-          {cartState.map((order) => {
+          {checkout.map((order) => {
             const key = `${order.item.id}:${order.size}`
             return <CartItem key={key} order={order} />
           })}

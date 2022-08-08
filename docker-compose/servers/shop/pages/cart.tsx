@@ -56,16 +56,10 @@ const CartItem = ({ order }: { order: Order }) => {
           </div>
           <div className="flex gap-2">
             <dt className="w-16 font-bold">
-              <label htmlFor={`quantity[${item.id}][${size}]`}>qty:</label>
+              <label htmlFor={`${item.id}:${size}`}>qty:</label>
             </dt>
             <dd>
-              <select
-                id={`quantity[${item.id}][${size}]`}
-                name={`quantity[${item.id}][${size}]`}
-                defaultValue={quantity}
-                onChange={onChange}
-                className="text-slate-800"
-              >
+              <select id={`${item.id}:${size}`} name={`${item.id}:${size}`} defaultValue={quantity} onChange={onChange} className="text-slate-800">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -93,17 +87,11 @@ const Cart = () => {
   }, 0)
   const shipping = 40
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const body = JSON.stringify(cartState, null, " ")
-    console.log("TODO", body)
-  }
-
   return (
     <div className="flex flex-col gap-6">
       <Header />
 
-      <form className="flex flex-col gap-6" onSubmit={onSubmit}>
+      <form className="flex flex-col gap-6" method="post" action="/checkout">
         <ul className="flex flex-col gap-6">
           {cartState.map((order) => {
             const key = `${order.item.id}:${order.size}`
