@@ -21,7 +21,10 @@ const CartItem = ({ order }: { order: Order }) => {
     updateOrder({ ...order, ...{ quantity } })
   }
 
-  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const onClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    const url = new URL(`/api/cart/${order.item.id}`, location.href)
+    url.searchParams.append("size", size)
+    await fetch(url, { method: `delete` })
     removeOrder(order)
   }
 
@@ -83,7 +86,7 @@ const Cart = () => {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const body = JSON.stringify(cartState, null, " ")
-    console.log(body)
+    console.log("TODO", body)
   }
 
   return (
