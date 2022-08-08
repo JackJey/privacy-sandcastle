@@ -1,5 +1,6 @@
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next"
 import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiHandler } from "next"
+import { Order } from "./items"
 
 const sessionOptions = {
   password: "complex_password_at_least_32_characters_long", // TODO
@@ -22,6 +23,6 @@ export function withSessionSsr<P extends { [key: string]: unknown } = { [key: st
 
 declare module "iron-session" {
   interface IronSessionData {
-    cart?: Object
+    cart: Order[]
   }
 }

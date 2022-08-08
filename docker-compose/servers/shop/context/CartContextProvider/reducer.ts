@@ -18,7 +18,7 @@ export type CartAction =
       order: Order
     }
 
-const addOrder = (order: Order, state: Order[]) => {
+export const addOrder = (order: Order, state: Order[]) => {
   const index = state.findIndex(({ item, size }) => {
     return order.item.id === item.id && order.size === size
   })
@@ -32,12 +32,12 @@ const addOrder = (order: Order, state: Order[]) => {
   return [order, ...state]
 }
 
-const removeOrder = (order: Order, state: Order[]) => {
+export const removeOrder = (order: Order, state: Order[]) => {
   const index = state.findIndex((o) => o.item.id === order.item.id)
   return [...state.slice(0, index), ...state.slice(index + 1)]
 }
 
-const updateOrder = (order: Order, state: Order[]) => {
+export const updateOrder = (order: Order, state: Order[]) => {
   const index = state.findIndex(({ item, size }) => {
     return order.item.id === item.id && order.size === size
   })

@@ -4,19 +4,13 @@ import { Order } from "../lib/items"
 import { ChangeEvent, FormEvent, MouseEvent } from "react"
 import { useCartContext } from "../context/CartContextProvider"
 import Header from "../components/header"
+import { GetServerSideProps } from "next/types"
+import { withSessionSsr } from "../lib/withSession"
 
-// export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
-//   const cart = new SessionCart(req.session)
-//   const orders: Array<Order> = cart.getAll().map(({ id, size, quantity }) => {
-//     const item = getItem(id)
-//     return { item, size, quantity }
-//   })
-//   return {
-//     props: {
-//       orders
-//     }
-//   }
-// })
+export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const cart: Order[] = req.session.cart || []
+  return { props: { cart } }
+})
 
 const CartItem = ({ order }: { order: Order }) => {
   const { item, size, quantity } = order
