@@ -23,9 +23,10 @@ export const addOrder = (order: Order, state: Order[]) => {
     return order.item.id === item.id && order.size === size
   })
   if (index > -1) {
-    // update
-    state[index] = order
-    return [...state]
+    // increase quantity
+    const current = state.at(index) as Order
+    const next = { ...order, quantity: order.quantity + current.quantity }
+    return [next, ...state.slice(0, index), ...state.slice(index + 1)]
   }
   // append
   return [order, ...state]

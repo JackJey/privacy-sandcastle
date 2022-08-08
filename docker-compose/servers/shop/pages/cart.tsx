@@ -16,9 +16,19 @@ const CartItem = ({ order }: { order: Order }) => {
   const { item, size, quantity } = order
   const { removeOrder, updateOrder } = useCartContext()
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const quantity = parseInt(e.target.value)
-    updateOrder({ ...order, ...{ quantity } })
+  const onChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+    const quantity = e.target.value
+
+    const body = new URLSearchParams()
+    body.append("size", size)
+    body.append("quantity", quantity)
+
+    await fetch(`/api/cart/${item.id}`, {
+      method: "post",
+      body
+    })
+
+    updateOrder({ ...order, ...{ quantity: parseInt(quantity) } })
   }
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>) => {

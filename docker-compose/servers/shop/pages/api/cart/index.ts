@@ -1,4 +1,4 @@
-import { Order, Item } from "../../../lib/items"
+import { Order, Item, getItem } from "../../../lib/items"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { withSessionRoute } from "../../../lib/withSession"
 import { addOrder } from "../../../context/CartContextProvider/reducer"
@@ -16,12 +16,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const id = req.body.id as string
     const size = req.body.size as string
     const quantity = parseInt(req.body.quantity)
-    const item: Item = {
-      id,
-      icon: "", // TODO
-      price: 0, // TODO
-      name: "" // TODO
-    }
+    const item: Item = (await getItem(id)) as Item
     const order: Order = {
       item,
       size,

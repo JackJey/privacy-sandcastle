@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { withSessionRoute } from "../../lib/withSession"
-import items from "../../lib/items.json" assert { type: "json" }
+import { getItems } from "../../../lib/items"
+import { withSessionRoute } from "../../../lib/withSession"
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const items = await getItems()
   res.json(items)
 }
 
