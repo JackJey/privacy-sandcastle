@@ -39,6 +39,10 @@ const Home: NextPage<Props> = ({ items }: Props) => {
     <div className="flex flex-col gap-6">
       <Header />
 
+      <div className="hidden lg:block">
+        <Image src={`/image/shop.webp`} width={1280} height={300} alt="shopping site hero image" className="object-cover object-[0%_5%]"></Image>
+      </div>
+
       <main className="">
         <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">
           {items.map((item) => (
