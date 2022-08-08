@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Order } from "../lib/items"
-import { ChangeEvent, FormEvent, MouseEvent } from "react"
+import { ChangeEvent, MouseEvent } from "react"
 import { useCartContext } from "../context/CartContextProvider"
 import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
