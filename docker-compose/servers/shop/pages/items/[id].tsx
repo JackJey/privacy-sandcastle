@@ -50,7 +50,11 @@ const Item = ({ item }: { item: Item }) => {
         </section>
         <section className="">
           <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
-          <div className="text-slate-500 border-b py-4">${item.price}.00</div>
+          <div className="flex gap-4 text-slate-500 border-b py-4">
+            <span>${item.price}.00</span>
+            <span>/</span>
+            <span>{item.category}</span>
+          </div>
           <form method="post" action="/api/cart" onSubmit={onSubmit} className="flex flex-col gap-4">
             <section className="flex border-b py-4">
               <input type="hidden" name="id" value={item.id} />
