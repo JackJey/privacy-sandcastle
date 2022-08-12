@@ -1,0 +1,14 @@
+{
+  "name": "News",
+  "dockerComposeFile": "../../docker-compose.yml",
+  "service": "shop",
+  "workspaceFolder": "/usr/src/app",
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "ms-azuretools.vscode-docker"
+  ],
+  "settings": {
+    "editor.tabSize": 2
+  }
+}
