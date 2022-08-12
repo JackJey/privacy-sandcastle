@@ -28,6 +28,13 @@ app.get("/", async (req, res) => {
   res.render("index", { title })
 })
 
+app.get("/ads/:advertiser/:id", async (req, res) => {
+  const { advertiser, id } = req.params
+  console.log({ advertiser, id })
+  const title = `Your special ads from ${advertiser}`
+  res.render("ads", { title, advertiser, id })
+})
+
 app.listen(port, function () {
   console.log(`Listening on port ${port}`)
 })
