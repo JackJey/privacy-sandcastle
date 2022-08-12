@@ -1,7 +1,12 @@
 version: '3.8'
 
 volumes:
+  home_node_modules:
+  news_node_modules:
   shop_node_modules:
+  travel_node_modules:
+  dsp_node_modules:
+  ssp_node_modules:
 
 services:
   home:
@@ -10,6 +15,9 @@ services:
     environment:
       - host=${HOME_HOST}
       - port=${HOME_PORT}
+    volumes:
+      - ./servers/home:/workspace
+      - home_node_modules:/workspace/node_modules
 
   news:
     build: ./servers/news
@@ -17,6 +25,9 @@ services:
     environment:
       - host=${NEWS_HOST}
       - port=${NEWS_PORT}
+    volumes:
+      - ./servers/news:/workspace
+      - news_node_modules:/workspace/node_modules
 
   shop:
     build: ./servers/shop
@@ -34,6 +45,9 @@ services:
     environment:
       - host=${TRAVEL_HOST}
       - port=${TRAVEL_PORT}
+    volumes:
+      - ./servers/travel:/workspace
+      - travel_node_modules:/workspace/node_modules
 
   dsp:
     build: ./servers/dsp
@@ -41,6 +55,9 @@ services:
     environment:
       - host=${DSP_HOST}
       - port=${DSP_PORT}
+    volumes:
+      - ./servers/dsp:/workspace
+      - dsp_node_modules:/workspace/node_modules
 
   ssp:
     build: ./servers/ssp
@@ -48,6 +65,9 @@ services:
     environment:
       - host=${SSP_HOST}
       - port=${SSP_PORT}
+    volumes:
+      - ./servers/ssp:/workspace
+      - ssp_node_modules:/workspace/node_modules
 
   nginx:
     image: nginx:1.22.0-alpine
