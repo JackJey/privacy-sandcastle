@@ -13,3 +13,8 @@ Each site should paste line below into HTML for embed ads which SSP provides.
 ```html
 <script defer class="ssp_tag" src="https://ssp.example/ad-tag.js"></script>
 ```
+
+## CAUTION !!!
+
+THIS IS ONLY A DEMO SO SOME SECURITY PROBLEM MAY HAPPEN.
+NEVER DEPLY THIS IN PRODUCTION AS-IS.
