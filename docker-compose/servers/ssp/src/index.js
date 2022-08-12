@@ -1,10 +1,10 @@
 // SSP
-import express, { Application, Request, Response } from "express"
+import express from "express"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
 
-const app: Application = express()
+const app = express()
 
 app.use(
   express.static("src/public", {
@@ -23,8 +23,8 @@ app.use(
 app.set("view engine", "ejs")
 app.set("views", "src/views")
 
-app.get("/", async (req: Request, res: Response) => {
-  const title = `${host} | Privacy Sandcastle`
+app.get("/", async (req, res) => {
+  const title = `SSP | Privacy Sandcastle`
   res.render("index", { title })
 })
 
