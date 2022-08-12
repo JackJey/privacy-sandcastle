@@ -1,7 +1,7 @@
 // DSP
 import express, { Application, Request, Response } from "express"
 
-const port = process.env.port || "3000"
+const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
 
 const app: Application = express()
