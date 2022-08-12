@@ -1,9 +1,3 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.ads {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

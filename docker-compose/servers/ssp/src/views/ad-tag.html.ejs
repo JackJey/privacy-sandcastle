@@ -11,12 +11,29 @@
     margin: 0;
     padding: 0;
   }
-
-  iframe {
-    width: 100%;
-    border: none;
-    overflow: hidden;
-  }
 </style>
 
+<div class="creative"></div>
+
+<script>
+  async function main() {
+    const advertiser = "shop"
+    const id = "1f3bf"
+
+    const href = `https://${advertiser}.example/items/${id}`
+    const $a = document.createElement("a")
+    $a.href = href
+    $a.setAttribute("target", "_parent")
+
+    const src = `/img/${advertiser}/emoji_u${id}.svg`
+    const $img = document.createElement("img")
+    $img.src = src
+    $img.loading = "lazy"
+
+    const $div = document.querySelector("div.creative")
+    $a.appendChild($img)
+    $div.appendChild($a)
+  }
+  document.addEventListener("DOMContentLoaded", main)
+</script>
 <!-- <script src="/js/run-ad-auction.js"></script> -->

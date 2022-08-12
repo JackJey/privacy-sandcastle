@@ -35,6 +35,10 @@ app.get("/ads/:advertiser/:id", async (req, res) => {
   res.render("ads.html.ejs", { title, advertiser, id })
 })
 
+app.get("/ad-tag.html", async (req, res) => {
+  res.render("ad-tag.html.ejs")
+})
+
 app.listen(port, function () {
   console.log(`Listening on port ${port}`)
 })
