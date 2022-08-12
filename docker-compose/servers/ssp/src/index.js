@@ -25,14 +25,14 @@ app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
   const title = `SSP | Privacy Sandcastle`
-  res.render("index", { title })
+  res.render("index.html.ejs", { title })
 })
 
 app.get("/ads/:advertiser/:id", async (req, res) => {
   const { advertiser, id } = req.params
   console.log({ advertiser, id })
   const title = `Your special ads from ${advertiser}`
-  res.render("ads", { title, advertiser, id })
+  res.render("ads.html.ejs", { title, advertiser, id })
 })
 
 app.listen(port, function () {
