@@ -1,5 +1,8 @@
 version: '3.8'
 
+volumes:
+  shop_node_modules:
+
 services:
   home:
     build: ./servers/home
@@ -21,6 +24,9 @@ services:
     environment:
       - host=${SHOP_HOST}
       - port=${SHOP_PORT}
+    volumes:
+      - ./servers/shop:/workspace
+      - shop_node_modules:/workspace/node_modules
 
   travel:
     build: ./servers/travel
