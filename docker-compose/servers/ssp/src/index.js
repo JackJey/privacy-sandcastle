@@ -35,6 +35,13 @@ app.get("/ads/:advertiser/:id", async (req, res) => {
   res.render("ads.html.ejs", { title, advertiser, id })
 })
 
+app.get("/move/:advertiser/:id", async (req, res) => {
+  const { advertiser, id } = req.params
+  console.log({ advertiser, id })
+  const url = `https://${advertiser}.example/items/${id}`
+  res.redirect(302, url)
+})
+
 app.get("/ad-tag.html", async (req, res) => {
   res.render("ad-tag.html.ejs")
 })
