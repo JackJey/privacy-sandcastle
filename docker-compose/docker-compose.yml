@@ -2,42 +2,42 @@ version: '3.8'
 
 services:
   home:
-    build: ../servers/home
+    build: ./servers/home
     container_name: 'sandcastle_home'
     environment:
       - host=${HOME_HOST}
       - port=${HOME_PORT}
 
   news:
-    build: ../servers/news
+    build: ./servers/news
     container_name: 'sandcastle_news'
     environment:
       - host=${NEWS_HOST}
       - port=${NEWS_PORT}
 
   shop:
-    build: ../servers/shop
+    build: ./servers/shop
     container_name: 'sandcastle_shop'
     environment:
       - host=${SHOP_HOST}
       - port=${SHOP_PORT}
 
   travel:
-    build: ../servers/travel
+    build: ./servers/travel
     container_name: 'sandcastle_travel'
     environment:
       - host=${TRAVEL_HOST}
       - port=${TRAVEL_PORT}
 
   dsp:
-    build: ../servers/dsp
+    build: ./servers/dsp
     container_name: 'sandcastle_dsp'
     environment:
       - host=${DSP_HOST}
       - port=${DSP_PORT}
 
   ssp:
-    build: ../servers/ssp
+    build: ./servers/ssp
     container_name: 'sandcastle_ssp'
     environment:
       - host=${SSP_HOST}
@@ -49,10 +49,10 @@ services:
     volumes:
       # using env variables in nginx config
       - type: bind
-        source: "../nginx/nginx.conf"
+        source: "./nginx/nginx.conf"
         target: "/etc/nginx/templates/default.conf.template"
       - type: bind
-        source: "../nginx/cert"
+        source: "./nginx/cert"
         target: "/cert"
     ports:
       - '80:80'
