@@ -44,7 +44,7 @@ services:
       - port=${SSP_PORT}
 
   nginx:
-    image: nginx:stable-alpine
+    image: nginx:1.22.0-alpine
     container_name: 'sandcastle_proxy'
     volumes:
       # using env variables in nginx config
