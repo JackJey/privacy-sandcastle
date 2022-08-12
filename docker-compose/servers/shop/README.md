@@ -1,35 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shopping Site in Privacy Sandcastle
 
-## Getting Started
+## Intro
 
-First, run the development server:
+This app is shopping site demo one of "advertiser" party in Privacy Sandcastle world.
 
-```bash
-npm run dev
-# or
-yarn dev
+## How to Run
+
+You can run this app standalone via.
+
+```sh
+$ cd path-to-shop-dir-under-privacy-sandcatle
+$ npm install
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Default port for standalone builds are `8080` so you can access it wiht <http://localhost:8080>.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+But if app starts via docker-compose, nginx will proxy every request to the apps, so URL will be changes. See the root README.md for more details.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Architecture
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Building Stacks
 
-## Learn More
+- typescript
+- next.js
+- tailwind
+- iron-session
 
-To learn more about Next.js, take a look at the following resources:
+### Basic Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+It builds upon basic next.js manner.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Shop - Privacy Sandcastle
+- Each pages components are under `./pages` and API endpoints are `./pages/api`
+- It's fully SPA but each pages are SSRed.
+- Frontend states are managed by `useContext` and updated by `useReducer`.
+- Server states (session) are managed by `iron-session`.
+  - no session storage on server side, every session are serialized/encrypted in cookie directory.
+  - server states will be initialState for react context while SSR.
+- Every CSS are styled via tailwind.
+- Item information's are encoded in `lib/items.json`, so no databases in this app.

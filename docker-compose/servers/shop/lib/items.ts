@@ -10,6 +10,7 @@ export type Item = {
   id: string
   icon: string
   price: number
+  category: string
   name: string
 }
 

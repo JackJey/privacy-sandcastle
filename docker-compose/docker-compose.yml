@@ -1,64 +1,90 @@
 version: '3.8'
 
+volumes:
+  home_node_modules:
+  news_node_modules:
+  shop_node_modules:
+  travel_node_modules:
+  dsp_node_modules:
+  ssp_node_modules:
+
 services:
   home:
-    build: ../servers/home
+    build: ./servers/home
     container_name: 'sandcastle_home'
     environment:
       - host=${HOME_HOST}
       - port=${HOME_PORT}
+    volumes:
+      - ./servers/home:/workspace
+      - home_node_modules:/workspace/node_modules
 
   news:
-    build: ../servers/news
+    build: ./servers/news
     container_name: 'sandcastle_news'
     environment:
       - host=${NEWS_HOST}
       - port=${NEWS_PORT}
+    volumes:
+      - ./servers/news:/workspace
+      - news_node_modules:/workspace/node_modules
 
   shop:
-    build: ../servers/shop
+    build: ./servers/shop
     container_name: 'sandcastle_shop'
     environment:
       - host=${SHOP_HOST}
       - port=${SHOP_PORT}
+    volumes:
+      - ./servers/shop:/workspace
+      - shop_node_modules:/workspace/node_modules
 
   travel:
-    build: ../servers/travel
+    build: ./servers/travel
     container_name: 'sandcastle_travel'
     environment:
       - host=${TRAVEL_HOST}
       - port=${TRAVEL_PORT}
+    volumes:
+      - ./servers/travel:/workspace
+      - travel_node_modules:/workspace/node_modules
 
   dsp:
-    build: ../servers/dsp
+    build: ./servers/dsp
     container_name: 'sandcastle_dsp'
     environment:
       - host=${DSP_HOST}
       - port=${DSP_PORT}
+    volumes:
+      - ./servers/dsp:/workspace
+      - dsp_node_modules:/workspace/node_modules
 
   ssp:
-    build: ../servers/ssp
+    build: ./servers/ssp
     container_name: 'sandcastle_ssp'
     environment:
       - host=${SSP_HOST}
       - port=${SSP_PORT}
+    volumes:
+      - ./servers/ssp:/workspace
+      - ssp_node_modules:/workspace/node_modules
 
   nginx:
-    image: nginx:stable-alpine
+    image: nginx:1.22.0-alpine
     container_name: 'sandcastle_proxy'
     volumes:
       # using env variables in nginx config
       - type: bind
-        source: "../nginx/nginx.conf"
+        source: "./nginx/nginx.conf"
         target: "/etc/nginx/templates/default.conf.template"
       - type: bind
-        source: "../nginx/cert"
+        source: "./nginx/cert"
         target: "/cert"
     ports:
       - '80:80'
       - '443:443'
-      - '3000:80'
-      - '4000:443'
+      - '8080:80'
+      - '8443:443'
     environment:
       # for nginx template
       ## home

@@ -10,7 +10,7 @@ import Header from "../../components/header"
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id: string = ctx.params?.id as string
   const host = process.env.host || "localhost"
-  const port = process.env.port || 3000
+  const port = process.env.port || "8080"
   const res = await fetch(`http://${host}:${port}/api/items/${id}`)
   const item = await res.json()
   return { props: { item } }
@@ -50,7 +50,11 @@ const Item = ({ item }: { item: Item }) => {
         </section>
         <section className="">
           <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
-          <div className="text-slate-500 border-b py-4">${item.price}.00</div>
+          <div className="flex gap-4 text-slate-500 border-b py-4">
+            <span>${item.price}.00</span>
+            <span>/</span>
+            <span>{item.category}</span>
+          </div>
           <form method="post" action="/api/cart" onSubmit={onSubmit} className="flex flex-col gap-4">
             <section className="flex border-b py-4">
               <input type="hidden" name="id" value={item.id} />

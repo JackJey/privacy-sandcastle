@@ -51,6 +51,10 @@ const CartItem = ({ order }: { order: Order }) => {
             <dd>${item.price}.00</dd>
           </div>
           <div className="flex gap-2">
+            <dt className="w-16 font-bold">cat:</dt>
+            <dd>{item.category}</dd>
+          </div>
+          <div className="flex gap-2">
             <dt className="w-16 font-bold">size:</dt>
             <dd>{size}</dd>
           </div>
