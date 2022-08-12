@@ -17,6 +17,12 @@ app.use(
         res.set("Supports-Loading-Mode", "fenced-frame")
         res.set("Permissions-Policy", "run-ad-auction=(*)")
       }
+      if (res.req.headers["attribution-reporting-eligible"]) {
+        const are = res.req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
+        if (are.includes("event-source") && are.includes("trigger")) {
+          console.log({ are })
+        }
+      }
     }
   })
 )

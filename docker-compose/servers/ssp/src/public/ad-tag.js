@@ -5,6 +5,7 @@
   $iframe.src = "https://ssp.example/ad-tag.html"
   $iframe.setAttribute("scrolling", "no")
   $iframe.setAttribute("style", "border: none")
+  $iframe.setAttribute("allow", "attribution-reporting")
   const $ins = document.querySelector("ins.ads")
   $ins.appendChild($iframe)
 })()
