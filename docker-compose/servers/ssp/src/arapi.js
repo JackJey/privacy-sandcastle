@@ -1,22 +1,57 @@
 import { createHash } from "node:crypto"
 
-export function hash64(input) {
-  return createHash("sha256").update(input).digest().readBigUInt64BE()
+// advertiser: 16bit
+export const ADVERTISER = {
+  shop: 1,
+  travel: 2
 }
 
-export function sourceKeyPiece(input) {
-  const hash = hash64(input).toString(16)
-  return `0x${hash}0000000000000000`
+// publisher:  16bit
+export const PUBLISHER = {
+  news: 1
 }
 
-export function triggerKeyPiece(input) {
-  const hash = hash64(input).toString(16)
-  return `0x0000000000000000${hash}`
+// dimention: 8bit
+export const DIMENTION = {
+  quantity: 0,
+  gross: 1
+}
+
+// advertiser: 16bit
+// publisher:  16bit
+// id:         24bit
+// dimention:   8bit
+// -----------------
+//             64bit
+export function sourceKeyPiece({ advertiser, publisher, id, dimention }) {
+  console.log({ advertiser, publisher, id, dimention })
+  const buffer = new DataView(new ArrayBuffer(8))
+  const prefix = 1 << 15 // make first bit to 1
+  buffer.setUint16(0, prefix + advertiser)
+  buffer.setUint16(2, publisher)
+  buffer.setUint32(4, (id << 8) + dimention)
+  return `0x${(buffer.getBigUint64() << 64n).toString(16)}`
+}
+
+// id:         24bit
+// size:        8bit
+// category:    8bit
+// opt:        24bit
+// -----------------
+//             64bit
+export function triggerKeyPiece({ id, size, cat: category }) {
+  const buffer = new DataView(new ArrayBuffer(8))
+  const prefix = 1 << 31 // make first bit to 1
+  buffer.setUint32(0, prefix + id)
+  buffer.setUint8(4, size)
+  buffer.setUint8(5, category)
+  console.log(buffer.getBigUint64())
+  return `0x0000000000000000${buffer.getBigUint64().toString(16)}`
 }
 
 export function sourceEventId() {
   // return `${Math.floor(Math.random() * 1000000000000000)}`
-  return `999999999999999`
+  return "999999999999999"
 }
 
 export function debugKey() {
@@ -24,20 +59,11 @@ export function debugKey() {
 }
 
 function test() {
-  const COUNT = "COUNT, CampaignID=12, GeoID=7"
-  console.log(createHash("sha256").update(COUNT).digest().readBigUInt64BE().toString(16))
-  const VALUE = "VALUE, CampaignID=12, GeoID=7"
-  const key_purchaseCount = sourceKeyPiece(COUNT)
-  const key_purchaseValue = sourceKeyPiece(VALUE)
-  console.log(key_purchaseCount)
-  console.log(key_purchaseValue)
-  console.assert(key_purchaseCount === "0x3cf867903fbb73ec0000000000000000")
-  console.assert(key_purchaseValue === "0x245265f432f16e730000000000000000")
+  const source = sourceKeyPiece({ advertiser: ADVERTISER.shop, publisher: PUBLISHER.news, id: 0xff, dimention: DIMENTION.gross })
+  console.log({ source })
 
-  const CATEGORY = `ProductCategory=${25}`
-  const key_piece = triggerKeyPiece(CATEGORY)
-  console.log(key_piece)
-  console.assert(key_piece === "0x0000000000000000f9e491fe37e55a0c")
+  const triger = triggerKeyPiece({ id: 0xff, size: 26.5, category: 1 })
+  console.log({ triger })
 }
 
 test()
