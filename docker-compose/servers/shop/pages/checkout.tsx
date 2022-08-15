@@ -41,6 +41,16 @@ export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ re
   }
 })
 
+const RegisterTrigger = ({ id, quantity }: { id: string; quantity: number }) => {
+  const src = new URL("https://ssp.example/register-trigger")
+  src.searchParams.append("id", id)
+  src.searchParams.append("quantity", `${quantity}`)
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img alt="" width={1} height={1} src={src.toString()} />
+  )
+}
+
 const CartItem = ({ order }: { order: Order }) => {
   const { item, size, quantity } = order
 
@@ -69,6 +79,7 @@ const CartItem = ({ order }: { order: Order }) => {
             <dd>{quantity}</dd>
           </div>
         </dl>
+        <RegisterTrigger id={item.id} quantity={quantity} />
       </div>
     </li>
   )
