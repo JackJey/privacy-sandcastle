@@ -9,8 +9,15 @@
 </head>
 
 <body>
-  <a target="_blank" href="/move/<%= advertiser %>/<%= id %>">
-    <img loading="lazy" attributionsrc src="/img/<%= advertiser %>/emoji_u<%= id %>.svg">
+  <% 
+    const href = new URL("https://ssp.example/move")
+    href.searchParams.append("advertiser", advertiser)
+    href.searchParams.append("id", id)
+
+    const src = new URL(`https://ssp.example/img/${advertiser}/emoji_u${id}.svg`)
+  %>
+  <a target="_blank" href="<%= href %>">
+    <img loading="lazy" attributionsrc src=<%= src %>>
   </a>
 </body>
 

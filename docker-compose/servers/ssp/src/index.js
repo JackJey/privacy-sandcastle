@@ -34,15 +34,15 @@ app.get("/", async (req, res) => {
   res.render("index.html.ejs", { title })
 })
 
-app.get("/ads/:advertiser/:id", async (req, res) => {
-  const { advertiser, id } = req.params
+app.get("/ads", async (req, res) => {
+  const { advertiser, id } = req.query
   console.log({ advertiser, id })
   const title = `Your special ads from ${advertiser}`
   res.render("ads.html.ejs", { title, advertiser, id })
 })
 
-app.get("/move/:advertiser/:id", async (req, res) => {
-  const { advertiser, id } = req.params
+app.get("/move", async (req, res) => {
+  const { advertiser, id } = req.query
   console.log({ advertiser, id })
   const url = `https://${advertiser}.example/items/${id}`
   res.redirect(302, url)
