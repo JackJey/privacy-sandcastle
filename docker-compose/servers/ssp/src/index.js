@@ -2,7 +2,7 @@
 import express from "express"
 import url from "url"
 import cbor from "cbor"
-import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION } from "./arapi.js"
+import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket } from "./arapi.js"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
@@ -104,7 +104,7 @@ app.get("/creative", async (req, res) => {
 app.get("/register-trigger", async (req, res) => {
   const { query } = req
   const id = Number(`0x${query.id}`)
-  const size = Number(query.size) - 20
+  const size = (Number(query.size) - 20) * 10
   const category = ["sale", "luxury", "sports"].indexOf(query.cat)
   const quantity = Number(query.quantity)
 
@@ -144,10 +144,9 @@ app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution"
       return {
         operation,
         data: data.map(({ value, bucket }) => {
-          console.log({ bucket })
           return {
             value: value.readUInt32BE(0),
-            bucket: bucket.toString()
+            bucket: decodeBucket(bucket)
           }
         })
       }
