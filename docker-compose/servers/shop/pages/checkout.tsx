@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getItem, Item, Order } from "../lib/items"
+import { displayCategory, getItem, Item, Order } from "../lib/items"
 import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
 import { withSessionSsr } from "../lib/withSession"
@@ -41,12 +41,12 @@ export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ re
   }
 })
 
-const RegisterTrigger = ({ id, quantity, size, cat }: { id: string; quantity: number; size: string; cat: string }) => {
+const RegisterTrigger = ({ id, quantity, size, category }: { id: string; quantity: number; size: string; category: number }) => {
   const src = new URL("https://ssp.example/register-trigger")
   src.searchParams.append("id", id)
   src.searchParams.append("quantity", `${quantity}`)
   src.searchParams.append("size", `${size}`)
-  src.searchParams.append("cat", `${cat}`)
+  src.searchParams.append("category", `${category}`)
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img alt="" width={1} height={1} src={src.toString()} />
@@ -70,7 +70,7 @@ const CartItem = ({ order }: { order: Order }) => {
           </div>
           <div className="flex gap-2">
             <dt className="w-16 font-bold">cat:</dt>
-            <dd>{item.category}</dd>
+            <dd>{displayCategory(item.category)}</dd>
           </div>
           <div className="flex gap-2">
             <dt className="w-16 font-bold">size:</dt>
@@ -81,7 +81,7 @@ const CartItem = ({ order }: { order: Order }) => {
             <dd>{quantity}</dd>
           </div>
         </dl>
-        <RegisterTrigger id={item.id} quantity={quantity} size={size} cat={item.category} />
+        <RegisterTrigger id={item.id} quantity={quantity} size={size} category={item.category} />
       </div>
     </li>
   )

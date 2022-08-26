@@ -105,7 +105,7 @@ app.get("/register-trigger", async (req, res) => {
   const { query } = req
   const id = Number(`0x${query.id}`)
   const size = (Number(query.size) - 20) * 10
-  const category = ["sale", "luxury", "sports"].indexOf(query.cat)
+  const category = query.category
   const quantity = Number(query.quantity)
 
   console.log({ id, quantity, size, category })
