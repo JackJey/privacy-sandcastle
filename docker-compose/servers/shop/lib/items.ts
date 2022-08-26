@@ -13,7 +13,7 @@ const items = [
   { id: "26f8", icon: "⛸", price: 1200, category: 2, name: "Ice Skate" }
 ]
 
-const categories = ["sale", "luxury", "sports"]
+export const CATEGORIES = ["sale", "luxury", "sports"]
 
 export type Order = {
   item: Item
@@ -40,5 +40,13 @@ export async function getItem(id: string): Promise<Item> {
 }
 
 export function displayCategory(id: number): string {
-  return categories.at(id) || "N/A"
+  return CATEGORIES.at(id) || "N/A"
+}
+
+export function toSize(num: number): string {
+  return `${num / 10 + 20}`
+}
+
+export function fromSize(size: string): number {
+  return (Number(size) - 20) * 10
 }

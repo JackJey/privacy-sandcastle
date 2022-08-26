@@ -1,19 +1,11 @@
 // advertiser: 16bit
-export const ADVERTISER = {
-  shop: 1,
-  travel: 2
-}
+export const ADVERTISER = ["shop", "travel"]
 
 // publisher:  16bit
-export const PUBLISHER = {
-  news: 1
-}
+export const PUBLISHER = ["news"]
 
 // dimention: 8bit
-export const DIMENTION = {
-  quantity: 0,
-  gross: 1
-}
+export const DIMENTION = ["quantity", "gross"]
 
 export function sourceKeyPiece({ advertiser, publisher, id, dimention }) {
   console.log({ advertiser, publisher, id, dimention })
@@ -103,10 +95,10 @@ export function debugKey() {
 }
 
 function test() {
-  const advertiser = ADVERTISER.shop
-  const publisher = PUBLISHER.news
+  const advertiser = ADVERTISER.indexOf("shop")
+  const publisher = PUBLISHER.indexOf("news")
   const id = 0xff
-  const dimention = DIMENTION.gross
+  const dimention = DIMENTION.indexOf("gross")
   const size = (26.5 - 20) * 10
   const category = 1
 

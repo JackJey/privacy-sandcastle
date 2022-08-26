@@ -78,16 +78,16 @@ app.get("/creative", async (req, res) => {
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
-            advertiser: ADVERTISER.shop,
-            publisher: PUBLISHER.news,
+            advertiser: ADVERTISER.indexOf(advertiser),
+            publisher: PUBLISHER.indexOf("news"),
             id: Number(`0x${id}`),
-            dimention: DIMENTION.quantity
+            dimention: DIMENTION.indexOf("quantity")
           }),
           gross: sourceKeyPiece({
-            advertiser: ADVERTISER.shop,
-            publisher: PUBLISHER.news,
+            advertiser: ADVERTISER.indexOf(advertiser),
+            publisher: PUBLISHER.indexOf("news"),
             id: Number(`0x${id}`),
-            dimention: DIMENTION.gross
+            dimention: DIMENTION.indexOf("gross")
           })
         }
       }
@@ -102,24 +102,22 @@ app.get("/creative", async (req, res) => {
 })
 
 app.get("/register-trigger", async (req, res) => {
-  const { query } = req
-  const id = Number(`0x${query.id}`)
-  const size = (Number(query.size) - 20) * 10
-  const category = query.category
-  const quantity = Number(query.quantity)
-
-  console.log({ id, quantity, size, category })
+  const { id, quantity, size, category, gross } = req.query
 
   const AttributionReportingRegisterTrigger = {
     aggregatable_trigger_data: [
       {
-        key_piece: triggerKeyPiece({ id, size, category }),
+        key_piece: triggerKeyPiece({
+          id: parseInt(id, 16),
+          size: Number(size),
+          category: Number(category)
+        }),
         source_keys: ["quantity", "gross"]
       }
     ],
     aggregatable_values: {
-      quantity: parseInt(quantity),
-      gross: 200
+      quantity: Number(quantity),
+      gross: Number(gross)
     },
     debug_key
   }
@@ -144,9 +142,19 @@ app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution"
       return {
         operation,
         data: data.map(({ value, bucket }) => {
+          const { source, trigger } = decodeBucket(bucket)
+          source.advertiser = ADVERTISER.at(source.advertiser)
+          source.publisher = PUBLISHER.at(source.publisher)
+          source.dimention = DIMENTION.at(source.dimention)
+          source.id = source.id.toString(16)
+          console.log({ source })
+
+          trigger.id = trigger.id.toString(16)
+          console.log({ trigger })
+
           return {
             value: value.readUInt32BE(0),
-            bucket: decodeBucket(bucket)
+            bucket: { source, trigger }
           }
         })
       }

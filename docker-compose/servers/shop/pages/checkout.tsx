@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { displayCategory, getItem, Item, Order } from "../lib/items"
+import { displayCategory, fromSize, getItem, Item, Order } from "../lib/items"
 import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
 import { withSessionSsr } from "../lib/withSession"
@@ -41,12 +41,25 @@ export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ re
   }
 })
 
-const RegisterTrigger = ({ id, quantity, size, category }: { id: string; quantity: number; size: string; category: number }) => {
+const RegisterTrigger = ({
+  id,
+  quantity,
+  size,
+  category,
+  gross
+}: {
+  id: string
+  quantity: number
+  size: string
+  category: number
+  gross: number
+}) => {
   const src = new URL("https://ssp.example/register-trigger")
-  src.searchParams.append("id", id)
-  src.searchParams.append("quantity", `${quantity}`)
-  src.searchParams.append("size", `${size}`)
+  src.searchParams.append("id", `${id}`)
   src.searchParams.append("category", `${category}`)
+  src.searchParams.append("quantity", `${quantity}`)
+  src.searchParams.append("size", `${fromSize(size)}`)
+  src.searchParams.append("gross", `${gross}`)
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img alt="" width={1} height={1} src={src.toString()} />
@@ -81,7 +94,7 @@ const CartItem = ({ order }: { order: Order }) => {
             <dd>{quantity}</dd>
           </div>
         </dl>
-        <RegisterTrigger id={item.id} quantity={quantity} size={size} category={item.category} />
+        <RegisterTrigger id={item.id} quantity={quantity} size={size} category={item.category} gross={item.price} />
       </div>
     </li>
   )
