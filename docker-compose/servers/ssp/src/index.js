@@ -60,9 +60,6 @@ app.get("/move", async (req, res) => {
   res.redirect(302, url)
 })
 
-const SCALING_FACTOR_PURCHASE_COUNT = 32768
-const SCALING_FACTOR_PURCHASE_VALUE = 22
-
 const debug_key = debugKey()
 
 app.get("/creative", async (req, res) => {
@@ -119,6 +116,7 @@ app.get("/register-trigger", async (req, res) => {
       }
     ],
     aggregatable_values: {
+      // TODO: scaling
       quantity: Number(quantity),
       gross: Number(gross)
     },
