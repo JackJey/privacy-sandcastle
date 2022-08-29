@@ -18,7 +18,7 @@ export function triggerKeyPiece({ id, size, category }) {
   console.log({ id, size, category })
   const trigger = encodeTrigger({ id, size, category })
   const uint64 = new DataView(trigger).getBigUint64()
-  return `0x0000000000000000${uint64.toString(16)}`
+  return `0x${"0".repeat(16)}${uint64.toString(16)}`
 }
 
 // advertiser: 16bit
@@ -94,12 +94,13 @@ export function decodeBucket(buffer) {
 }
 
 export function sourceEventId() {
-  // return `${Math.floor(Math.random() * 1000000000000000)}`
-  return "999999999999999"
+  // 64bit dummy value
+  return ((1n << 64n) - 1n).toString()
 }
 
 export function debugKey() {
-  return "1111111111111"
+  // 64bit dummy value
+  return ((1n << 64n) - 2n).toString()
 }
 
 function test() {
@@ -126,4 +127,4 @@ function test() {
   console.log(decodeBucket(arr.buffer))
 }
 
-test()
+// test()
