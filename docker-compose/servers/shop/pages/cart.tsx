@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Order } from "../lib/items"
+import { displayCategory, Order } from "../lib/items"
 import { ChangeEvent, MouseEvent } from "react"
 import { useCartContext } from "../context/CartContextProvider"
 import Header from "../components/header"
@@ -52,7 +52,7 @@ const CartItem = ({ order }: { order: Order }) => {
           </div>
           <div className="flex gap-2">
             <dt className="w-16 font-bold">cat:</dt>
-            <dd>{item.category}</dd>
+            <dd>{displayCategory(item.category)}</dd>
           </div>
           <div className="flex gap-2">
             <dt className="w-16 font-bold">size:</dt>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Item } from "../../lib/items"
+import { displayCategory, Item } from "../../lib/items"
 import { GetServerSideProps } from "next"
 import { FormEvent } from "react"
 import { useCartContext } from "../../context/CartContextProvider"
@@ -53,7 +53,7 @@ const Item = ({ item }: { item: Item }) => {
           <div className="flex gap-4 text-slate-500 border-b py-4">
             <span>${item.price}.00</span>
             <span>/</span>
-            <span>{item.category}</span>
+            <span>{displayCategory(item.category)}</span>
           </div>
           <form method="post" action="/api/cart" onSubmit={onSubmit} className="flex flex-col gap-4">
             <section className="flex border-b py-4">

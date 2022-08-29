@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="icon" href="" />
+</head>
+
+<body>
+  <% 
+    const href = new URL("https://ssp.example/move")
+    href.searchParams.append("advertiser", advertiser)
+    href.searchParams.append("id", id)
+
+    const src = new URL(`https://ssp.example/creative/`)
+    src.searchParams.append("advertiser", advertiser)
+    src.searchParams.append("id", id)
+  %>
+  <a target="_blank" href="<%= href %>">
+    <img loading="lazy" attributionsrc src=<%= src %>>
+  </a>
+</body>
+
+</html>

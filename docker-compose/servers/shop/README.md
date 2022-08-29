@@ -38,4 +38,4 @@ It builds upon basic next.js manner.
   - no session storage on server side, every session are serialized/encrypted in cookie directory.
   - server states will be initialState for react context while SSR.
 - Every CSS are styled via tailwind.
-- Item information's are encoded in `lib/items.json`, so no databases in this app.
+- Item information's are encoded in `lib/items.ts`, so no databases in this app.

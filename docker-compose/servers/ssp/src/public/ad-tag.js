@@ -1,8 +1,11 @@
-;(() => {
+;(async () => {
   const $iframe = document.createElement("iframe")
   $iframe.width = 300
+  $iframe.height = 300
   $iframe.src = "https://ssp.example/ad-tag.html"
-
-  const $script = document.querySelector("script.ssp_tag")
-  $script.parentElement.insertBefore($iframe, $script.nextSibling)
+  $iframe.setAttribute("scrolling", "no")
+  $iframe.setAttribute("style", "border: none")
+  $iframe.setAttribute("allow", "attribution-reporting")
+  const $ins = document.querySelector("ins.ads")
+  $ins.appendChild($iframe)
 })()

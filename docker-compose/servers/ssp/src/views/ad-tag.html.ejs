@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="">
+<title></title>
+
+<meta http-equiv="origin-trial" content="">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<div class="creative"></div>
+
+<script>
+  async function main() {
+    // TODO:
+    // FIXME:
+    const advertiser = "shop"
+    const id = "1f45e"
+
+    // create Ads URL
+    const src = new URL("/ads", location.href)
+    src.searchParams.append("advertiser", advertiser)
+    src.searchParams.append("id", id)
+
+    // create iframe to be embed
+    const $iframe = document.createElement("iframe")
+    $iframe.src = src
+    $iframe.width = 300
+    $iframe.height = 300
+    $iframe.setAttribute("scrolling", "no")
+    $iframe.setAttribute("style", "border: none")
+    $iframe.setAttribute("allow", "attribution-reporting")
+
+    // embed iframe
+    const $div = document.querySelector("div.creative")
+    $div.appendChild($iframe)
+  }
+  document.addEventListener("DOMContentLoaded", main)
+</script>
+<!-- <script src="/js/run-ad-auction.js"></script> -->
