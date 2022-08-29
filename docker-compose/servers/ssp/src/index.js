@@ -7,6 +7,9 @@ import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, P
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
 
+// global memory storage
+const Reports = []
+
 const app = express()
 
 app.use(express.json())
@@ -129,6 +132,10 @@ app.get("/ad-tag.html", async (req, res) => {
   res.render("ad-tag.html.ejs")
 })
 
+app.get("/reports", async (req, res) => {
+  res.render("reports.html.ejs", { title: "Report", Reports })
+})
+
 app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution", async (req, res) => {
   const debug_report = req.body
   debug_report.shared_info = JSON.parse(debug_report.shared_info)
@@ -163,6 +170,9 @@ app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution"
   })
 
   console.log(JSON.stringify(debug_report, " ", " "))
+
+  // save to global storage
+  Reports.push(debug_report)
 
   res.sendStatus(200)
 })
