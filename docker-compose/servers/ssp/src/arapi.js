@@ -79,6 +79,14 @@ export function decodeBucket(buffer) {
   const source = decodeSource(sourceBuf.buffer)
   const triggerBuf = u8a.slice(u8a.length / 2, u8a.length)
   const trigger = decodeTrigger(triggerBuf.buffer)
+
+  source.advertiser = ADVERTISER.at(source.advertiser)
+  source.publisher = PUBLISHER.at(source.publisher)
+  source.dimention = DIMENTION.at(source.dimention)
+  source.id = source.id.toString(16)
+
+  trigger.id = trigger.id.toString(16)
+
   return {
     source,
     trigger

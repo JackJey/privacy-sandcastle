@@ -148,15 +148,8 @@ app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution"
         operation,
         data: data.map(({ value, bucket }) => {
           const { source, trigger } = decodeBucket(bucket)
-          source.advertiser = ADVERTISER.at(source.advertiser)
-          source.publisher = PUBLISHER.at(source.publisher)
-          source.dimention = DIMENTION.at(source.dimention)
-          source.id = source.id.toString(16)
-          console.log({ source })
-
-          trigger.id = trigger.id.toString(16)
-          console.log({ trigger })
-
+          console.log(source)
+          console.log(trigger)
           return {
             value: value.readUInt32BE(0),
             bucket: { source, trigger }
