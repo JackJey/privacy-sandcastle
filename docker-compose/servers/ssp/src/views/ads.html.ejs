@@ -14,11 +14,11 @@
     href.searchParams.append("advertiser", advertiser)
     href.searchParams.append("id", id)
 
-    const src = new URL(`https://ssp.example/creative/`)
+    const src = new URL("https://ssp.example/creative/")
     src.searchParams.append("advertiser", advertiser)
     src.searchParams.append("id", id)
   %>
-  <a target="_blank" href="<%= href %>">
+  <a target="_blank" attributionsrc href="<%= href %>">
     <img loading="lazy" attributionsrc src=<%= src %>>
   </a>
 </body>
