@@ -69,16 +69,16 @@ app.get("/move", async (req, res) => {
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
-            advertiser: ADVERTISER.indexOf(advertiser),
-            publisher: PUBLISHER.indexOf("news"),
+            advertiser: ADVERTISER[advertiser],
+            publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION.indexOf("quantity")
+            dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
-            advertiser: ADVERTISER.indexOf(advertiser),
-            publisher: PUBLISHER.indexOf("news"),
+            advertiser: ADVERTISER[advertiser],
+            publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION.indexOf("gross")
+            dimention: DIMENTION["gross"]
           })
         }
       }
@@ -110,16 +110,16 @@ app.get("/creative", async (req, res) => {
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
-            advertiser: ADVERTISER.indexOf(advertiser),
-            publisher: PUBLISHER.indexOf("news"),
+            advertiser: ADVERTISER[advertiser],
+            publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION.indexOf("quantity")
+            dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
-            advertiser: ADVERTISER.indexOf(advertiser),
-            publisher: PUBLISHER.indexOf("news"),
+            advertiser: ADVERTISER[advertiser],
+            publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION.indexOf("gross")
+            dimention: DIMENTION["gross"]
           })
         }
       }

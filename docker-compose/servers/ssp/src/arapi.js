@@ -1,11 +1,19 @@
 // advertiser: 16bit
-export const ADVERTISER = ["shop", "travel"]
+export const ADVERTISER = {
+  shop: 0b0,
+  travel: 0b1
+}
 
 // publisher:  16bit
-export const PUBLISHER = ["news"]
+export const PUBLISHER = {
+  news: 0b0
+}
 
 // dimention: 8bit
-export const DIMENTION = ["quantity", "gross"]
+export const DIMENTION = {
+  quantity: 0b0,
+  gross: 0b1
+}
 
 export function sourceKeyPiece({ advertiser, publisher, id, dimention }) {
   console.log({ advertiser, publisher, id, dimention })
@@ -80,9 +88,9 @@ export function decodeBucket(buffer) {
   const triggerBuf = u8a.slice(u8a.length / 2, u8a.length)
   const trigger = decodeTrigger(triggerBuf.buffer)
 
-  source.advertiser = ADVERTISER.at(source.advertiser)
-  source.publisher = PUBLISHER.at(source.publisher)
-  source.dimention = DIMENTION.at(source.dimention)
+  source.advertiser = ADVERTISER[source.advertiser]
+  source.publisher = PUBLISHER[source.publisher]
+  source.dimention = DIMENTION[source.dimention]
   source.id = source.id.toString(16)
 
   trigger.id = trigger.id.toString(16)
@@ -104,10 +112,10 @@ export function debugKey() {
 }
 
 function test() {
-  const advertiser = ADVERTISER.indexOf("shop")
-  const publisher = PUBLISHER.indexOf("news")
+  const advertiser = ADVERTISER["shop"]
+  const publisher = PUBLISHER["news"]
   const id = 0xff
-  const dimention = DIMENTION.indexOf("gross")
+  const dimention = DIMENTION["gross"]
   const size = (26.5 - 20) * 10
   const category = 1
 
@@ -127,4 +135,4 @@ function test() {
   console.log(decodeBucket(arr.buffer))
 }
 
-// test()
+test()
