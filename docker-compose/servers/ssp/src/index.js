@@ -59,9 +59,6 @@ app.get("/move", async (req, res) => {
   const url = `https://${advertiser}.example/items/${id}`
   if (req.headers["attribution-reporting-eligible"]) {
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    console.log({ are })
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     if (are.includes("navigation-source")) {
       const destination = `https://${advertiser}.example`
       const source_event_id = sourceEventId()
@@ -91,7 +88,6 @@ app.get("/move", async (req, res) => {
       console.log({ AttributionReportingRegisterSource })
       res.setHeader("Attribution-Reporting-Register-Source", JSON.stringify(AttributionReportingRegisterSource))
     }
-    console.log({ are })
   }
 
   res.redirect(302, url)
@@ -103,9 +99,6 @@ app.get("/creative", async (req, res) => {
   if (req.headers["attribution-reporting-eligible"]) {
     // TODO: better to add attributionsrc to <a> or other not <img> ?
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    console.log({ are })
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     if (are.includes("event-source") && are.includes("trigger")) {
       const destination = `https://${advertiser}.example`
       const source_event_id = sourceEventId()
@@ -187,12 +180,9 @@ app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution"
       return {
         operation,
         data: data.map(({ value, bucket }) => {
-          const { source, trigger } = decodeBucket(bucket)
-          console.log(source)
-          console.log(trigger)
           return {
             value: value.readUInt32BE(0),
-            bucket: { source, trigger }
+            bucket: decodeBucket(bucket)
           }
         })
       }
