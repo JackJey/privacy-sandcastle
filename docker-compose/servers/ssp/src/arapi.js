@@ -1,3 +1,9 @@
+// type: 2bit
+export const TYPE = {
+  click: 0b10,
+  view: 0b11
+}
+
 // advertiser: 16bit
 export const ADVERTISER = {
   shop: 0b0,
@@ -15,9 +21,9 @@ export const DIMENTION = {
   gross: 0b1
 }
 
-export function sourceKeyPiece({ advertiser, publisher, id, dimention }) {
-  console.log({ advertiser, publisher, id, dimention })
-  const source = encodeSource({ advertiser, publisher, id, dimention })
+export function sourceKeyPiece({ type, dimention, id, advertiser, publisher }) {
+  console.log({ type, dimention, id, advertiser, publisher })
+  const source = encodeSource({ type, dimention, id, advertiser, publisher })
   const uint64 = new DataView(source).getBigUint64()
   return `0x${(uint64 << 64n).toString(16)}`
 }
@@ -29,56 +35,60 @@ export function triggerKeyPiece({ id, size, category }) {
   return `0x${"0".repeat(16)}${uint64.toString(16)}`
 }
 
+// type:        2bit
+// dimention:   6bit
+// id:         24bit
 // advertiser: 16bit
 // publisher:  16bit
-// id:         24bit
-// dimention:   8bit
 // -----------------
 //             64bit
-export function encodeSource({ advertiser, publisher, id, dimention }) {
+function encodeSource({ type, dimention, id, advertiser, publisher }) {
   const buffer = new ArrayBuffer(8)
   const view = new DataView(buffer)
-  const prefix = 1 << 15 // make first bit to 1
-  view.setUint16(0, prefix + advertiser)
-  view.setUint16(2, publisher)
-  view.setUint32(4, (id << 8) + dimention)
+  const first32 = (((type << 6) + dimention) << 24) + id
+  view.setUint32(0, first32)
+  view.setUint16(4, advertiser)
+  view.setUint16(6, publisher)
   return buffer
 }
 
-export function decodeSource(buffer) {
+function decodeSource(buffer) {
   const view = new DataView(buffer)
-  const prefix = 1 << 15
-  const advertiser = view.getUint16(0) - prefix
-  const publisher = view.getUint16(2)
-  const id_dimention = view.getUint32(4)
-  const id = id_dimention >> 8
-  const dimention = id_dimention & 0xff
-  return { advertiser, publisher, id, dimention }
+  const first32 = view.getUint32(0)
+  const id = first32 & (2 ** 24 - 1)
+  const first8 = first32 >>> 24
+  const dimention = first8 & 0b111111
+  const type = first8 >>> 6
+  const advertiser = view.getUint16(4)
+  const publisher = view.getUint16(6)
+  return { type, dimention, id, advertiser, publisher }
 }
 
 // id:         24bit
 // size:        8bit
 // category:    8bit
-// opt:        24bit
+// option:     24bit
 // -----------------
 //             64bit
-export function encodeTrigger({ id, size, category }) {
+function encodeTrigger({ id, size, category, option }) {
   const buffer = new ArrayBuffer(8)
   const view = new DataView(buffer)
   const prefix = 1 << 31 // make first bit to 1
   view.setUint32(0, prefix + (id << 8) + size)
-  view.setUint8(4, category)
+  view.setUint32(4, (category << 24) + option)
   return buffer
 }
 
-export function decodeTrigger(buffer) {
+function decodeTrigger(buffer) {
   const view = new DataView(buffer)
   const prefix = 1 << 31 // make first bit to 1
-  const uint32 = view.getUint32(0) - prefix
-  const id = uint32 >> 8
-  const size = uint32 & 0xff
-  const category = view.getUint8(4)
-  return { id, size, category }
+  const first32 = view.getUint32(0) - prefix
+  const id = first32 >> 8
+  const size = first32 & 0xff
+  const last32 = view.getUint32(4)
+  const category = last32 >> 24
+  const option = last32 & 0xffffff
+  return { id, size, category, option }
 }
 
 export function decodeBucket(buffer) {
@@ -88,11 +98,12 @@ export function decodeBucket(buffer) {
   const triggerBuf = u8a.slice(u8a.length / 2, u8a.length)
   const trigger = decodeTrigger(triggerBuf.buffer)
 
-  source.advertiser = ADVERTISER[source.advertiser]
-  source.publisher = PUBLISHER[source.publisher]
-  source.dimention = DIMENTION[source.dimention]
-  source.id = source.id.toString(16)
+  source.type = key_from_value(TYPE, source.type)
+  source.advertiser = key_from_value(ADVERTISER, source.advertiser)
+  source.publisher = key_from_value(PUBLISHER, source.publisher)
+  source.dimention = key_from_value(DIMENTION, source.dimention)
 
+  source.id = source.id.toString(16)
   trigger.id = trigger.id.toString(16)
 
   return {
@@ -111,6 +122,13 @@ export function debugKey() {
   return ((1n << 64n) - 2n).toString()
 }
 
+function key_from_value(obj, value) {
+  return Object.entries(obj)
+    .filter(([k, v]) => v === value)
+    .at(0)
+    .at(0)
+}
+
 function test() {
   const advertiser = ADVERTISER["shop"]
   const publisher = PUBLISHER["news"]
@@ -118,21 +136,20 @@ function test() {
   const dimention = DIMENTION["gross"]
   const size = (26.5 - 20) * 10
   const category = 1
+  const type = TYPE.click
+  const option = 2
 
-  const source_key = sourceKeyPiece({ advertiser, publisher, id, dimention })
+  const source_key = sourceKeyPiece({ type, dimention, id, advertiser, publisher })
   console.log({ source_key })
 
   const triger_key = triggerKeyPiece({ id, size, category })
   console.log({ triger_key })
 
-  const source = encodeSource({ advertiser, publisher, id, dimention })
+  const source = encodeSource({ type, dimention, id, advertiser, publisher })
   console.log(decodeSource(source))
 
-  const trigger = encodeTrigger({ id, size, category })
+  const trigger = encodeTrigger({ id, size, category, option })
   console.log(decodeTrigger(trigger))
-
-  const arr = new Uint8Array("80 01 00 01 01 f4 5e 01 81 f4 5e 32 01 00 00 00".split(" ").map((e) => Number(`0x${e}`)))
-  console.log(decodeBucket(arr.buffer))
 }
 
 test()

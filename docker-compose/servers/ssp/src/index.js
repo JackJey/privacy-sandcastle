@@ -2,7 +2,7 @@
 import express from "express"
 import url from "url"
 import cbor from "cbor"
-import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket } from "./arapi.js"
+import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket, TYPE } from "./arapi.js"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
@@ -57,24 +57,29 @@ app.get("/move", async (req, res) => {
   const { advertiser, id } = req.query
   console.log({ advertiser, id })
   const url = `https://${advertiser}.example/items/${id}`
-
   if (req.headers["attribution-reporting-eligible"]) {
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log({ are })
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     if (are.includes("navigation-source")) {
       const destination = `https://${advertiser}.example`
       const source_event_id = sourceEventId()
+      const debug_key = debugKey()
       const AttributionReportingRegisterSource = {
         destination,
         source_event_id,
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
+            type: TYPE["click"], // click attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
             dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
+            type: TYPE["click"], // click attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
@@ -92,30 +97,33 @@ app.get("/move", async (req, res) => {
   res.redirect(302, url)
 })
 
-const debug_key = debugKey()
-
 app.get("/creative", async (req, res) => {
   const { advertiser, id } = req.query
 
   if (req.headers["attribution-reporting-eligible"]) {
     // TODO: better to add attributionsrc to <a> or other not <img> ?
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     console.log({ are })
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     if (are.includes("event-source") && are.includes("trigger")) {
       const destination = `https://${advertiser}.example`
       const source_event_id = sourceEventId()
+      const debug_key = debugKey()
       const AttributionReportingRegisterSource = {
         destination,
         source_event_id,
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
+            type: TYPE["view"], // view attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
             dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
+            type: TYPE["view"], // view attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
@@ -152,7 +160,7 @@ app.get("/register-trigger", async (req, res) => {
       quantity: Number(quantity),
       gross: Number(gross)
     },
-    debug_key
+    debug_key: debugKey()
   }
   res.setHeader("Attribution-Reporting-Register-Trigger", JSON.stringify(AttributionReportingRegisterTrigger))
   res.sendStatus(200)
