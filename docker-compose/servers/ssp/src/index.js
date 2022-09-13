@@ -2,7 +2,7 @@
 import express from "express"
 import url from "url"
 import cbor from "cbor"
-import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket, TYPE } from "./arapi.js"
+import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket, SOURCE_TYPE, TRIGGER_TYPE } from "./arapi.js"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
@@ -69,14 +69,14 @@ app.get("/move", async (req, res) => {
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
-            type: TYPE["click"], // click attribution
+            type: SOURCE_TYPE["click"], // click attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
             dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
-            type: TYPE["click"], // click attribution
+            type: SOURCE_TYPE["click"], // click attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
@@ -109,14 +109,14 @@ app.get("/creative", async (req, res) => {
         debug_key,
         aggregation_keys: {
           quantity: sourceKeyPiece({
-            type: TYPE["view"], // view attribution
+            type: SOURCE_TYPE["view"], // view attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
             dimention: DIMENTION["quantity"]
           }),
           gross: sourceKeyPiece({
-            type: TYPE["view"], // view attribution
+            type: SOURCE_TYPE["view"], // view attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
@@ -141,12 +141,24 @@ app.get("/register-trigger", async (req, res) => {
     aggregatable_trigger_data: [
       {
         key_piece: triggerKeyPiece({
+          type: TRIGGER_TYPE["quantity"],
           id: parseInt(id, 16),
           size: Number(size),
-          category: Number(category)
+          category: Number(category),
+          option: 0
         }),
-        source_keys: ["quantity", "gross"]
-      }
+        source_keys: ["quantity"]
+      },
+      {
+        key_piece: triggerKeyPiece({
+          type: TRIGGER_TYPE["gross"],
+          id: parseInt(id, 16),
+          size: Number(size),
+          category: Number(category),
+          option: 0
+        }),
+        source_keys: ["gross"]
+      },
     ],
     aggregatable_values: {
       // TODO: scaling

@@ -1,5 +1,5 @@
 // type: 2bit
-export const TYPE = {
+export const SOURCE_TYPE = {
   click: 0b10,
   view: 0b11
 }
@@ -21,6 +21,12 @@ export const DIMENTION = {
   gross: 0b1
 }
 
+// type 8bit
+export const TRIGGER_TYPE = {
+  quantity: 0b1000_0000,
+  gross: 0b1100_0000
+}
+
 export function sourceKeyPiece({ type, dimention, id, advertiser, publisher }) {
   console.log({ type, dimention, id, advertiser, publisher })
   const source = encodeSource({ type, dimention, id, advertiser, publisher })
@@ -28,9 +34,9 @@ export function sourceKeyPiece({ type, dimention, id, advertiser, publisher }) {
   return `0x${(uint64 << 64n).toString(16)}`
 }
 
-export function triggerKeyPiece({ id, size, category }) {
-  console.log({ id, size, category })
-  const trigger = encodeTrigger({ id, size, category })
+export function triggerKeyPiece({ type, id, size, category, option }) {
+  console.log({ type, id, size, category, option })
+  const trigger = encodeTrigger({ type, id, size, category, option })
   const uint64 = new DataView(trigger).getBigUint64()
   return `0x${"0".repeat(16)}${uint64.toString(16)}`
 }
@@ -64,31 +70,32 @@ function decodeSource(buffer) {
   return { type, dimention, id, advertiser, publisher }
 }
 
-// id:         24bit
-// size:        8bit
-// category:    8bit
-// option:     24bit
+// type:      8bit
+// id:       24bit
+// size:      8bit
+// category:  8bit
+// option:   16bit
 // -----------------
 //             64bit
-function encodeTrigger({ id, size, category, option }) {
+function encodeTrigger({ type, id, size, category, option }) {
   const buffer = new ArrayBuffer(8)
   const view = new DataView(buffer)
-  const prefix = 1 << 31 // make first bit to 1
-  view.setUint32(0, prefix + (id << 8) + size)
-  view.setUint32(4, (category << 24) + option)
+  view.setUint32(0, (type << 24) + id)
+  view.setUint8(4, size)
+  view.setUint8(5, category)
+  view.setUint16(6, option)
   return buffer
 }
 
 function decodeTrigger(buffer) {
   const view = new DataView(buffer)
-  const prefix = 1 << 31 // make first bit to 1
-  const first32 = view.getUint32(0) - prefix
-  const id = first32 >> 8
-  const size = first32 & 0xff
-  const last32 = view.getUint32(4)
-  const category = last32 >> 24
-  const option = last32 & 0xffffff
-  return { id, size, category, option }
+  const first32 = view.getUint32(0)
+  const type = first32 >>> 24
+  const id = first32 & 0xffffff
+  const size = view.getUint8(4)
+  const category = view.getUint8(5)
+  const option = view.getUint16(6)
+  return { type, id, size, category, option }
 }
 
 export function decodeBucket(buffer) {
@@ -98,12 +105,13 @@ export function decodeBucket(buffer) {
   const triggerBuf = u8a.slice(u8a.length / 2, u8a.length)
   const trigger = decodeTrigger(triggerBuf.buffer)
 
-  source.type = key_from_value(TYPE, source.type)
+  source.type = key_from_value(SOURCE_TYPE, source.type)
+  source.dimention = key_from_value(DIMENTION, source.dimention)
+  source.id = source.id.toString(16)
   source.advertiser = key_from_value(ADVERTISER, source.advertiser)
   source.publisher = key_from_value(PUBLISHER, source.publisher)
-  source.dimention = key_from_value(DIMENTION, source.dimention)
 
-  source.id = source.id.toString(16)
+  trigger.type = key_from_value(TRIGGER_TYPE, trigger.type)
   trigger.id = trigger.id.toString(16)
 
   return {
@@ -136,19 +144,20 @@ function test() {
   const dimention = DIMENTION["gross"]
   const size = (26.5 - 20) * 10
   const category = 1
-  const type = TYPE.click
+  const source_type = SOURCE_TYPE.click
+  const trigger_type = TRIGGER_TYPE.gross
   const option = 2
 
-  const source_key = sourceKeyPiece({ type, dimention, id, advertiser, publisher })
+  const source_key = sourceKeyPiece({ type: source_type, dimention, id, advertiser, publisher })
   console.log({ source_key })
 
-  const triger_key = triggerKeyPiece({ id, size, category })
+  const triger_key = triggerKeyPiece({ type: trigger_type, id, size, category, option })
   console.log({ triger_key })
 
-  const source = encodeSource({ type, dimention, id, advertiser, publisher })
+  const source = encodeSource({ type: source_type, dimention, id, advertiser, publisher })
   console.log(decodeSource(source))
 
-  const trigger = encodeTrigger({ id, size, category, option })
+  const trigger = encodeTrigger({ type: trigger_type, id, size, category, option })
   console.log(decodeTrigger(trigger))
 }
 
