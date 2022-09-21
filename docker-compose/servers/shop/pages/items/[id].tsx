@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { displayCategory, Item } from "../../lib/items"
 import { GetServerSideProps } from "next"
-import { FormEvent } from "react"
+import { FormEvent, useEffect } from "react"
 import { useCartContext } from "../../context/CartContextProvider"
 import { useRouter } from "next/router"
 import Header from "../../components/header"
@@ -39,6 +39,18 @@ const Item = ({ item }: { item: Item }) => {
     addOrder({ item, size, quantity: Number(quantity) })
     router.push(res.url)
   }
+
+  useEffect(() => {
+    // append 3rd party script tag
+    const script = document.createElement("script")
+    script.src = "https://dsp.example/dsp-tag.js"
+    script.defer = true
+    script.classList.add("dsp_tag")
+    script.dataset.advertiser = "shop.example"
+    if (document.querySelector(".dsp_tag") === null) {
+      document.querySelector("footer")?.appendChild(script)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col gap-6">
@@ -112,6 +124,7 @@ const Item = ({ item }: { item: Item }) => {
         <Link href="/">
           <a className="underline before:content-['<<']"> continue shopping</a>
         </Link>
+        {/* NOTICE: 3rd party script tag by DSP will be here */}
       </footer>
     </div>
   )
