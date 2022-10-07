@@ -1,5 +1,5 @@
 function log(label, o) {
-  console.log(label, JSON.stringify(o, " ", " "))
+  // console.log(label, JSON.stringify(o, " ", " "))
 }
 
 function scoreAd(adMetadata, bid, auctionConfig, trustedScoringSignals, browserSignals) {
