@@ -7,13 +7,25 @@
 <meta http-equiv="origin-trial" content="">
 
 <style>
-  * {
+  body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  fencedframe {
+    border: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: aliceblue;
   }
 </style>
-
-<div class="creative"></div>
 
 <script>
   // ssp
@@ -53,17 +65,15 @@
     })
 
     const $fencedframe = document.createElement("fencedframe")
-    console.log(`display ads in ${$fencedframe}`)
     $fencedframe.src = adAuctionResult
     $fencedframe.setAttribute("mode", "opaque-ads")
     $fencedframe.setAttribute("scrolling", "no")
-    $fencedframe.setAttribute("style", "border: none")
     $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
     $fencedframe.width = 300
-    $fencedframe.height = 300
+    $fencedframe.height = 250
 
-    // embed iframe
-    const $div = document.querySelector("div.creative")
-    $div.appendChild($fencedframe)
+    console.log(`display ads in ${$fencedframe}`)
+
+    document.body.appendChild($fencedframe)
   })
 </script>
