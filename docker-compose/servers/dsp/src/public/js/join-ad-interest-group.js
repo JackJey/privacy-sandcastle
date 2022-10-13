@@ -1,6 +1,7 @@
 const advertiser = new URL(location.href).searchParams.get("advertiser")
-const renderUrl = new URL(`https://ssp.example/ads`)
-console.log({ renderUrl })
+const renderUrl = new URL("https://ssp.example/ads")
+
+// TODO: ads query
 renderUrl.searchParams.append("advertiser", "shop")
 renderUrl.searchParams.append("id", "1f45e")
 
