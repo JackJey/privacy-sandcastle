@@ -7,39 +7,73 @@
 <meta http-equiv="origin-trial" content="">
 
 <style>
-  * {
+  body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  fencedframe {
+    border: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: aliceblue;
   }
 </style>
 
-<div class="creative"></div>
-
 <script>
-  async function main() {
-    // TODO: Select ads by FLEDGE
-    // FIXME:
-    const advertiser = "shop"
-    const id = "1f45e"
+  // ssp
+  const auctionConfig = {
+    seller: "https://ssp.example", // should https & same as decisionLogicUrl's origin
 
-    // create Ads URL
-    const src = new URL("/ads", location.href)
-    src.searchParams.append("advertiser", advertiser)
-    src.searchParams.append("id", id)
+    // x-allow-fledge: true
+    decisionLogicUrl: "https://ssp.example/js/decision-logic.js",
 
-    // create iframe to be embed
-    const $iframe = document.createElement("iframe")
-    $iframe.src = src
-    $iframe.width = 300
-    $iframe.height = 300
-    $iframe.setAttribute("scrolling", "no")
-    $iframe.setAttribute("style", "border: none")
-    $iframe.setAttribute("allow", "attribution-reporting")
+    interestGroupBuyers: [
+      // * is not supported yet
+      "https://dsp.example"
+    ],
+    // public for everyone
+    auctionSignals: {
+      auction_signals: "auction_signals"
+    },
 
-    // embed iframe
-    const $div = document.querySelector("div.creative")
-    $div.appendChild($iframe)
+    // only for single party
+    sellerSignals: {
+      seller_signals: "seller_signals"
+    },
+
+    // only for single party
+    perBuyerSignals: {
+      // listed on interestGroupByers
+      "https://dsp.example": {
+        per_buyer_signals: "per_buyer_signals"
+      }
+    }
   }
-  document.addEventListener("DOMContentLoaded", main)
+
+  document.addEventListener("DOMContentLoaded", async (e) => {
+    const adAuctionResult = await navigator.runAdAuction(auctionConfig)
+    console.log({
+      adAuctionResult
+    })
+
+    const $fencedframe = document.createElement("fencedframe")
+    $fencedframe.src = adAuctionResult
+    $fencedframe.setAttribute("mode", "opaque-ads")
+    $fencedframe.setAttribute("scrolling", "no")
+    $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
+    $fencedframe.width = 300
+    $fencedframe.height = 250
+
+    console.log(`display ads in ${$fencedframe}`)
+
+    document.body.appendChild($fencedframe)
+  })
 </script>
-<!-- <script src="/js/run-ad-auction.js"></script> -->

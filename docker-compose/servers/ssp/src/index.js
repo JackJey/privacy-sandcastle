@@ -2,7 +2,18 @@
 import express from "express"
 import url from "url"
 import cbor from "cbor"
-import { debugKey, sourceEventId, sourceKeyPiece, triggerKeyPiece, ADVERTISER, PUBLISHER, DIMENTION, decodeBucket, SOURCE_TYPE, TRIGGER_TYPE } from "./arapi.js"
+import {
+  debugKey,
+  sourceEventId,
+  sourceKeyPiece,
+  triggerKeyPiece,
+  ADVERTISER,
+  PUBLISHER,
+  DIMENTION,
+  decodeBucket,
+  SOURCE_TYPE,
+  TRIGGER_TYPE
+} from "./arapi.js"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
@@ -21,6 +32,14 @@ app.use((req, res, next) => {
     secure: true,
     httpOnly: true
   })
+  next()
+})
+
+app.use((req, res, next) => {
+  // opt-in fencedframe
+  if (req.get("sec-fetch-dest") === "fencedframe") {
+    res.setHeader("Supports-Loading-Mode", "fenced-frame")
+  }
   next()
 })
 
@@ -158,7 +177,7 @@ app.get("/register-trigger", async (req, res) => {
           option: 0
         }),
         source_keys: ["gross"]
-      },
+      }
     ],
     aggregatable_values: {
       // TODO: scaling

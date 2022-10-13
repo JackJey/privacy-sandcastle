@@ -1,11 +1,13 @@
-const ads = new URL(location.href).searchParams.get("ads")
-console.log({ ads })
+const advertiser = new URL(location.href).searchParams.get("advertiser")
+const renderUrl = new URL("https://ssp.example/ads")
 
-const renderUrl = `https://${ads}.example/ads.html`
+// TODO: ads query
+renderUrl.searchParams.append("advertiser", "shop")
+renderUrl.searchParams.append("id", "1f45e")
 
 // dsp
 const interestGroup = {
-  name: ads,
+  name: advertiser,
   owner: "https://dsp.example",
 
   // x-allow-fledge: true
@@ -13,15 +15,17 @@ const interestGroup = {
 
   // x-allow-fledge: true
   trustedBiddingSignalsUrl: "https://dsp.example/bidding_signal.json",
-  trustedBiddingSignalsKeys: ["key1", "key2"],
+  trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
 
   dailyUpdateUrl: "https://dsp.example/daily_update_url", // not implemented yets
-  userBiddingSignals: { user_bidding_signals: "user_bidding_signals" },
+  userBiddingSignals: {
+    user_bidding_signals: "user_bidding_signals"
+  },
   ads: [
     {
-      renderUrl,
+      renderUrl: renderUrl.toString(),
       metadata: {
-        type: ads
+        type: advertiser
       }
     }
   ]

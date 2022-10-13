@@ -6,6 +6,7 @@ import { FormEvent } from "react"
 import { useCartContext } from "../../context/CartContextProvider"
 import { useRouter } from "next/router"
 import Header from "../../components/header"
+import Script from "next/script"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const id: string = ctx.params?.id as string
@@ -112,6 +113,7 @@ const Item = ({ item }: { item: Item }) => {
         <Link href="/">
           <a className="underline before:content-['<<']"> continue shopping</a>
         </Link>
+        <Script className="dsp_tag" data-advertiser="shop.example" src="https://dsp.example/dsp-tag.js"></Script>
       </footer>
     </div>
   )
