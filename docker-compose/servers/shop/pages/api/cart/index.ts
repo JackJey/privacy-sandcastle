@@ -24,7 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
     req.session.cart = addOrder(order, cart)
     await req.session.save()
-    res.redirect("/cart")
+    res.redirect(302, "/cart")
   }
 }
 
