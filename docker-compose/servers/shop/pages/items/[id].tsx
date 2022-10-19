@@ -3,7 +3,6 @@ import Image from "next/image"
 import { displayCategory, Item } from "../../lib/items"
 import { GetServerSideProps } from "next"
 import { FormEvent } from "react"
-import { useCartContext } from "../../context/CartContextProvider"
 import { useRouter } from "next/router"
 import Header from "../../components/header"
 import Script from "next/script"
@@ -18,7 +17,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 const Item = ({ item }: { item: Item }) => {
-  const { addOrder } = useCartContext()
   const router = useRouter()
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -37,7 +35,6 @@ const Item = ({ item }: { item: Item }) => {
       body: new URLSearchParams(data as URLSearchParams)
     })
     console.assert(res.redirected)
-    addOrder({ item, size, quantity: Number(quantity) })
     router.push(res.url)
   }
 

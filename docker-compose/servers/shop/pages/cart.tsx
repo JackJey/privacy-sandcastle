@@ -2,40 +2,37 @@ import Link from "next/link"
 import Image from "next/image"
 import { displayCategory, Order } from "../lib/items"
 import { ChangeEvent, MouseEvent } from "react"
-import { useCartContext } from "../context/CartContextProvider"
 import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
 import { withSessionSsr } from "../lib/withSession"
+import useSWR, { KeyedMutator } from "swr"
 
 export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({ req, res }) => {
   const cart: Order[] = req.session.cart || []
   return { props: { cart } }
 })
 
-const CartItem = ({ order }: { order: Order }) => {
+const CartItem = ({ order, mutate }: { order: Order; mutate: KeyedMutator<Order[]> }) => {
   const { item, size, quantity } = order
-  const { removeOrder, updateOrder } = useCartContext()
 
   const onChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const quantity = e.target.value
-
     const body = new URLSearchParams()
     body.append("size", size)
     body.append("quantity", quantity)
-
     await fetch(`/api/cart/${item.id}`, {
       method: "post",
       body
     })
-
-    updateOrder({ ...order, ...{ quantity: parseInt(quantity) } })
+    mutate()
   }
 
   const onClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     const url = new URL(`/api/cart/${order.item.id}`, location.href)
     url.searchParams.append("size", size)
     await fetch(url, { method: `delete` })
-    removeOrder(order)
+    mutate()
   }
 
   return (
@@ -83,13 +80,27 @@ const CartItem = ({ order }: { order: Order }) => {
   )
 }
 
-const Cart = () => {
-  const { cartState } = useCartContext()
+const fetcher = (url: URL) => fetch(url).then((res) => res.json())
 
-  const subtotal = cartState.reduce((sum, { item, quantity }) => {
+const useCart = (fallbackData: Order[]) => {
+  const { data, mutate } = useSWR<Order[], Error>("/api/cart", fetcher, {
+    fallbackData
+  })
+  return {
+    cart: data || [],
+    mutate
+  }
+}
+
+const Cart = ({ cart: initialState }: { cart: Order[] }) => {
+  const { cart, mutate } = useCart(initialState)
+
+  const subtotal = cart.reduce((sum, { item, quantity }) => {
     return sum + item.price * quantity
   }, 0)
   const shipping = 40
+
+  const disableCheckout = cart.length === 0
 
   return (
     <div className="flex flex-col gap-6">
@@ -97,9 +108,9 @@ const Cart = () => {
 
       <form className="flex flex-col gap-6" method="post" action="/checkout">
         <ul className="flex flex-col gap-6">
-          {cartState.map((order) => {
+          {cart.map((order) => {
             const key = `${order.item.id}:${order.size}`
-            return <CartItem key={key} order={order} />
+            return <CartItem key={key} order={order} mutate={mutate} />
           })}
         </ul>
 
@@ -119,7 +130,11 @@ const Cart = () => {
         </dl>
 
         <section className="flex justify-center">
-          <button type="submit" className="w-60 border border-slate-600 text-slate-600 hover:bg-slate-400 hover:text-white">
+          <button
+            type="submit"
+            disabled={disableCheckout}
+            className="w-60 border border-slate-600 text-slate-600 enabled:hover:bg-slate-400 enalbed:hover:text-white disabled:opacity-40"
+          >
             CHECKOUT
           </button>
         </section>
