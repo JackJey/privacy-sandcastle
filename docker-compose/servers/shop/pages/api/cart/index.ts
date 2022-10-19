@@ -1,7 +1,6 @@
-import { Order, Item, getItem } from "../../../lib/items"
+import { Order, Item, getItem, addOrder } from "../../../lib/items"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { withSessionRoute } from "../../../lib/withSession"
-import { addOrder } from "../../../context/CartContextProvider/reducer"
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const cart: Order[] = req.session.cart || []
