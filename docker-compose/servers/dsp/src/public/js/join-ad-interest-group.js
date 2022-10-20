@@ -8,7 +8,7 @@ adsURL.searchParams.append("id", id)
 
 const renderUrl = adsURL.toString()
 
-// dsp
+// Fledge
 const interestGroup = {
   name: advertiser,
   owner: "https://dsp.example",
@@ -36,7 +36,11 @@ const interestGroup = {
 console.log(interestGroup)
 
 document.addEventListener("DOMContentLoaded", async (e) => {
-  console.log(e)
+  // Fledge
   const kSecsPerDay = 3600 * 24 * 30
   console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay))
+
+  // Call Topics API for opt-in
+  const topics = await document.browsingTopics()
+  console.log({ topics })
 })

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href="" />
 <title></title>
 
-<meta http-equiv="origin-trial" content="">
+<meta http-equiv="origin-trial" content="" />
 
 <style>
   body {
@@ -59,10 +59,12 @@
   }
 
   document.addEventListener("DOMContentLoaded", async (e) => {
+    // TODO: Call Topics API for select ads
+    const topics = await document.browsingTopics()
+    console.log({ topics })
+
     const adAuctionResult = await navigator.runAdAuction(auctionConfig)
-    console.log({
-      adAuctionResult
-    })
+    console.log({ adAuctionResult })
 
     const $fencedframe = document.createElement("fencedframe")
     $fencedframe.src = adAuctionResult

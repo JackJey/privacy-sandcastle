@@ -1,4 +1,4 @@
-;(() => {
+;(async () => {
   const $script = document.querySelector("script.dsp_tag")
   const advertiser = $script.dataset.advertiser
   const id = $script.dataset.id
@@ -13,4 +13,7 @@
   $iframe.src = src
   $iframe.allow = "join-ad-interest-group"
   $script.parentElement.insertBefore($iframe, $script.nextSibling)
+
+  const topics = await document.browsingTopics()
+  console.log({ topics })
 })()
