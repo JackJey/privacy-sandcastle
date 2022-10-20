@@ -1,9 +1,12 @@
-const advertiser = new URL(location.href).searchParams.get("advertiser")
-const renderUrl = new URL("https://ssp.example/ads")
+const url = new URL(location.href)
+const advertiser = url.searchParams.get("advertiser")
+const id = url.searchParams.get("id")
 
-// TODO: ads query
-renderUrl.searchParams.append("advertiser", "shop")
-renderUrl.searchParams.append("id", "1f45e")
+const adsURL = new URL("https://ssp.example/ads")
+adsURL.searchParams.append("advertiser", advertiser)
+adsURL.searchParams.append("id", id)
+
+const renderUrl = adsURL.toString()
 
 // dsp
 const interestGroup = {
@@ -23,7 +26,7 @@ const interestGroup = {
   },
   ads: [
     {
-      renderUrl: renderUrl.toString(),
+      renderUrl,
       metadata: {
         type: advertiser
       }

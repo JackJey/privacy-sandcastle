@@ -110,7 +110,7 @@ const Item = ({ item }: { item: Item }) => {
         <Link href="/">
           <a className="underline before:content-['<<']"> continue shopping</a>
         </Link>
-        <Script className="dsp_tag" data-advertiser="shop.example" src="https://dsp.example/dsp-tag.js"></Script>
+        <Script className="dsp_tag" data-advertiser="shop" data-id={item.id} src="https://dsp.example/dsp-tag.js"></Script>
       </footer>
     </div>
   )
