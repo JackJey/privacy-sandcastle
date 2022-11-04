@@ -10,6 +10,7 @@ volumes:
 
 services:
   home:
+    image: gcr.io/privacy-sandcastle/sandcastle_home:latest
     build: ./servers/home
     container_name: 'sandcastle_home'
     environment:
@@ -20,6 +21,7 @@ services:
       - home_node_modules:/workspace/node_modules
 
   news:
+    image: gcr.io/privacy-sandcastle/sandcastle_news:latest
     build: ./servers/news
     container_name: 'sandcastle_news'
     environment:
@@ -30,6 +32,7 @@ services:
       - news_node_modules:/workspace/node_modules
 
   shop:
+    image: gcr.io/privacy-sandcastle/sandcastle_shop:latest
     build: ./servers/shop
     container_name: 'sandcastle_shop'
     environment:
@@ -40,6 +43,7 @@ services:
       - shop_node_modules:/workspace/node_modules
 
   travel:
+    image: gcr.io/privacy-sandcastle/sandcastle_travel:latest
     build: ./servers/travel
     container_name: 'sandcastle_travel'
     environment:
@@ -50,6 +54,7 @@ services:
       - travel_node_modules:/workspace/node_modules
 
   dsp:
+    image: gcr.io/privacy-sandcastle/sandcastle_dsp:latest
     build: ./servers/dsp
     container_name: 'sandcastle_dsp'
     environment:
@@ -60,6 +65,7 @@ services:
       - dsp_node_modules:/workspace/node_modules
 
   ssp:
+    image: gcr.io/privacy-sandcastle/sandcastle_ssp:latest
     build: ./servers/ssp
     container_name: 'sandcastle_ssp'
     environment:
