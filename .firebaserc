@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "home": "privacy-sandcastle-home",
+    "news": "privacy-sandcastle-news",
+    "shop": "privacy-sandcastle-shop",
+    "travel": "privacy-sandcastle-travel",
+    "dsp": "privacy-sandcastle-dsp",
+    "ssp": "privacy-sandcastle-ssp"
+  }
+}
