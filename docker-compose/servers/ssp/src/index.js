@@ -75,11 +75,11 @@ app.get("/ads", async (req, res) => {
 app.get("/move", async (req, res) => {
   const { advertiser, id } = req.query
   console.log({ advertiser, id })
-  const url = `https://${advertiser}.example/items/${id}`
+  const url = `https://${advertiser}.web.app/items/${id}`
   if (req.headers["attribution-reporting-eligible"]) {
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
     if (are.includes("navigation-source")) {
-      const destination = `https://${advertiser}.example`
+      const destination = `https://${advertiser}.web.app`
       const source_event_id = sourceEventId()
       const debug_key = debugKey()
       const AttributionReportingRegisterSource = {
@@ -119,7 +119,7 @@ app.get("/creative", async (req, res) => {
     // TODO: better to add attributionsrc to <a> or other not <img> ?
     const are = req.headers["attribution-reporting-eligible"].split(",").map((e) => e.trim())
     if (are.includes("event-source") && are.includes("trigger")) {
-      const destination = `https://${advertiser}.example`
+      const destination = `https://${advertiser}.web.app`
       const source_event_id = sourceEventId()
       const debug_key = debugKey()
       const AttributionReportingRegisterSource = {
