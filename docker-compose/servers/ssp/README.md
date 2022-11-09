@@ -11,7 +11,7 @@ Privoides 3rd Party Tag for publisher who intends to display ads in their own si
 Each site should paste a line below into HTML to embed ads which SSP provides.
 
 ```html
-<script defer class="ssp_tag" src="https://ssp.example/ad-tag.js"></script>
+<script defer class="ssp_tag" src="https://privacy-sandcastle-ssp.web.app/ad-tag.js"></script>
 ```
 
 ## Inside ad-tag.js
@@ -21,7 +21,7 @@ Each site should paste a line below into HTML to embed ads which SSP provides.
 Simply embeding `ad-tag.html` into the caller site.
 
 ```html
-<iframe allow="attribution-reporting" src="https://ssp.example/ad-tag.html"> </iframe>
+<iframe allow="attribution-reporting" src="https://privacy-sandcastle-ssp.web.app/ad-tag.html"> </iframe>
 ```
 
 ## ad-tag.html
@@ -31,7 +31,7 @@ Decision logic, running auction can be here.
 Embeding `/ads` with some parameters in iframe.
 
 ```html
-<iframe allow="attribution-reporting" src="https://ssp.example/ad-tag.html">
+<iframe allow="attribution-reporting" src="https://privacy-sandcastle-ssp.web.app/ad-tag.html">
   <iframe allow="attribution-reporting" src="/ads?advertiser=foo&id=bar"> </iframe>
 </iframe>
 ```
@@ -43,7 +43,7 @@ It inclueds ads creative (Image, Video etc).
 Clicking ads will guide user to SPP redirector for measurement CTC.
 
 ```html
-<iframe allow="attribution-reporting" src="https://ssp.example/ad-tag.html">
+<iframe allow="attribution-reporting" src="https://privacy-sandcastle-ssp.web.app/ad-tag.html">
   <iframe allow="attribution-reporting" src="/ads?advertiser=foo&id=bar">
     <a target="_blank" attributionsrc href="/move">
       <img loading="lazy" attributionsrc src="/creative" />

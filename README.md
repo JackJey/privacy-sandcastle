@@ -121,20 +121,20 @@ URL is so important in Privacy Sandbox APIs, so the demo could not rely on local
 
 In this project, every service should has real domain & valid certificate, so the services could access via URL like below.
 
-- https://home.example
-- https://shop.example
+- https://privacy-sandcastle-home.web.app
+- https://privacy-sandcastle-shop.web.app
 - ...
 
 For solving hostname to IP address, you should add domain list to `/etc/hosts` on your local machine.
 
 ```
 # Privacy Sandcastle
-127.0.0.1	home.example
-127.0.0.1	news.example
-127.0.0.1	shop.example
-127.0.0.1	travel.example
-127.0.0.1	dsp.example
-127.0.0.1	ssp.example
+127.0.0.1	privacy-sandcastle-home.web.app
+127.0.0.1	privacy-sandcastle-news.web.app
+127.0.0.1	privacy-sandcastle-shop.web.app
+127.0.0.1	privacy-sandcastle-travel.web.app
+127.0.0.1	privacy-sandcastle-dsp.web.app
+127.0.0.1	privacy-sandcastle-ssp.web.app
 ```
 
 If you use Google Chrome, `--host-resolver-rules` flag can be use instead.

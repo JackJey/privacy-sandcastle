@@ -54,7 +54,7 @@ const RegisterTrigger = ({
   category: number
   gross: number
 }) => {
-  const src = new URL("https://ssp.example/register-trigger")
+  const src = new URL("https://privacy-sandcastle-ssp.web.app/register-trigger")
   src.searchParams.append("id", `${id}`)
   src.searchParams.append("category", `${category}`)
   src.searchParams.append("quantity", `${quantity}`)

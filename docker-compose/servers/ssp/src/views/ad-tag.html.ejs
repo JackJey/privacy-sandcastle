@@ -30,14 +30,14 @@
 <script>
   // ssp
   const auctionConfig = {
-    seller: "https://ssp.example", // should https & same as decisionLogicUrl's origin
+    seller: "https://privacy-sandcastle-ssp.web.app", // should https & same as decisionLogicUrl's origin
 
     // x-allow-fledge: true
-    decisionLogicUrl: "https://ssp.example/js/decision-logic.js",
+    decisionLogicUrl: "https://privacy-sandcastle-ssp.web.app/js/decision-logic.js",
 
     interestGroupBuyers: [
       // * is not supported yet
-      "https://dsp.example"
+      "https://privacy-sandcastle-dsp.web.app"
     ],
     // public for everyone
     auctionSignals: {
@@ -52,7 +52,7 @@
     // only for single party
     perBuyerSignals: {
       // listed on interestGroupByers
-      "https://dsp.example": {
+      "https://privacy-sandcastle-dsp.web.app": {
         per_buyer_signals: "per_buyer_signals"
       }
     }
@@ -61,10 +61,14 @@
   document.addEventListener("DOMContentLoaded", async (e) => {
     // TODO: Call Topics API for select ads
     const topics = await document.browsingTopics()
-    console.log({ topics })
+    console.log({
+      topics
+    })
 
     const adAuctionResult = await navigator.runAdAuction(auctionConfig)
-    console.log({ adAuctionResult })
+    console.log({
+      adAuctionResult
+    })
 
     const $fencedframe = document.createElement("fencedframe")
     $fencedframe.src = adAuctionResult

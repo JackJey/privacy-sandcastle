@@ -3,7 +3,7 @@
   const advertiser = $script.dataset.advertiser
   const id = $script.dataset.id
 
-  const src = new URL("https://dsp.example/join-ad-interest-group.html")
+  const src = new URL("https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html")
   src.searchParams.append("advertiser", advertiser)
   src.searchParams.append("id", id)
 

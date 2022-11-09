@@ -2,7 +2,7 @@ const url = new URL(location.href)
 const advertiser = url.searchParams.get("advertiser")
 const id = url.searchParams.get("id")
 
-const adsURL = new URL("https://ssp.example/ads")
+const adsURL = new URL("https://privacy-sandcastle-ssp.web.app/ads")
 adsURL.searchParams.append("advertiser", advertiser)
 adsURL.searchParams.append("id", id)
 
@@ -11,16 +11,16 @@ const renderUrl = adsURL.toString()
 // Fledge
 const interestGroup = {
   name: advertiser,
-  owner: "https://dsp.example",
+  owner: "https://privacy-sandcastle-dsp.web.app",
 
   // x-allow-fledge: true
-  biddingLogicUrl: "https://dsp.example/js/bidding_logic.js",
+  biddingLogicUrl: "https://privacy-sandcastle-dsp.web.app/js/bidding_logic.js",
 
   // x-allow-fledge: true
-  trustedBiddingSignalsUrl: "https://dsp.example/bidding_signal.json",
+  trustedBiddingSignalsUrl: "https://privacy-sandcastle-dsp.web.app/bidding_signal.json",
   trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
 
-  dailyUpdateUrl: "https://dsp.example/daily_update_url", // not implemented yets
+  dailyUpdateUrl: "https://privacy-sandcastle-dsp.web.app/daily_update_url", // not implemented yets
   userBiddingSignals: {
     user_bidding_signals: "user_bidding_signals"
   },

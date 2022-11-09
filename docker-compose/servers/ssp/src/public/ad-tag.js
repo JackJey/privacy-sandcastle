@@ -2,7 +2,7 @@
   const $iframe = document.createElement("iframe")
   $iframe.width = 300
   $iframe.height = 250
-  $iframe.src = "https://ssp.example/ad-tag.html"
+  $iframe.src = "https://privacy-sandcastle-ssp.web.app/ad-tag.html"
   $iframe.setAttribute("scrolling", "no")
   $iframe.setAttribute("style", "border: none")
   $iframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
