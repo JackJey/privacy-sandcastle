@@ -6,13 +6,13 @@ export const SOURCE_TYPE = {
 
 // advertiser: 16bit
 export const ADVERTISER = {
-  shop: 0b0,
-  travel: 0b1
+  "privacy-sandcastle-shop": 0b0,
+  "privacy-sandcastle-travel": 0b1
 }
 
 // publisher:  16bit
 export const PUBLISHER = {
-  news: 0b0
+  "privacy-sandcastle-news": 0b0
 }
 
 // dimention: 8bit
