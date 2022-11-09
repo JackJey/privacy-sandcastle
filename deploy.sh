@@ -23,7 +23,7 @@ for host in $hosts; do
 
   # Firebase Hosting
   ## change project
-  firebase use ${host}
+  firebase -c docker-compose/servers/${host}/firebase.json use ${host}
   ## deploy
-  firebase deploy
+  firebase -c docker-compose/servers/${host}/firebase.json -p ./public deploy
 done
