@@ -4,7 +4,7 @@ import { Order } from "./items"
 
 const sessionOptions = {
   password: "complex_password_at_least_32_characters_long", // TODO
-  cookieName: "iron_session_id",
+  cookieName: "__session",
   secure: process.env.NODE_ENV === "production",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production"
