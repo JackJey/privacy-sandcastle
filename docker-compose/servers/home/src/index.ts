@@ -11,7 +11,7 @@ app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
   const hosts = [
-    "privacy-sandcastle-home.web.app",
+    // "privacy-sandcastle-home.web.app",
     "privacy-sandcastle-shop.web.app",
     "privacy-sandcastle-travel.web.app",
     "privacy-sandcastle-news.web.app",

@@ -11,10 +11,13 @@
 </head>
 
 <body>
-  <h1>Privacy Sandcastle</h1>
+  <h1>Privacy Sandcastle Home</h1>
   <ul>
     <% hosts.map((host) => { %>
-    <li><a href="https://<%= host %>">https://<%= host %></a></li>
+    <li>
+      <iframe src="https://<%= host %>"></iframe>
+      <a href="https://<%= host %>">https://<%= host %></a>
+    </li>
     <% }) %>
   </ul>
 </body>
