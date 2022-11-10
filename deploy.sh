@@ -25,5 +25,5 @@ for host in $hosts; do
   ## change project
   firebase -c docker-compose/servers/${host}/firebase.json use ${host}
   ## deploy
-  firebase -c docker-compose/servers/${host}/firebase.json -p ./public deploy
+  firebase -c docker-compose/servers/${host}/firebase.json deploy
 done
