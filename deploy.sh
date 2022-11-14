@@ -22,6 +22,8 @@ for host in $hosts; do
   gcloud run deploy sandcastle-${host} --image gcr.io/privacy-sandcastle-${host}/sandcastle_${host}:latest --platform managed --region asia-northeast1
 
   # Firebase Hosting
+  ## cleanup cache
+  curl -X PURGE https://privacy-sandcastle-${host}.web.app/
   ## change project
   firebase -c docker-compose/servers/${host}/firebase.json use ${host}
   ## deploy

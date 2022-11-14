@@ -6,6 +6,6 @@
     "start": "npm run cert && npm run docker",
     "cert": "cd docker-compose/nginx/cert && ./mkcert.sh",
     "build": "cd docker-compose && docker-compose build",
-    "docker": "npm run build && docker-compose up"
+    "docker": "cd docker-compose && docker-compose build && docker-compose up"
   }
 }
