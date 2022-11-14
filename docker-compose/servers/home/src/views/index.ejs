@@ -15,7 +15,7 @@
   <ul>
     <% hosts.map((host) => { %>
     <li>
-      <iframe src="https://<%= host %>"></iframe>
+      <iframe title="<%= host %>" src="https://<%= host %>"></iframe>
       <a target="_blank" href="https://<%= host %>">https://<%= host %></a>
     </li>
     <% }) %>

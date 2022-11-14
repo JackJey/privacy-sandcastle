@@ -12,6 +12,10 @@ body {
 }
 
 h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-size: 3em;
+  color: #333;
   margin-bottom: 2vw;
 }
 
@@ -35,6 +39,10 @@ li a {
 iframe {
   width: 30vw;
   height: 20vw;
+  opacity: 0.8;
+  box-shadow: 0px 0px 10px 0px rgb(30 30 30 / 30%);
+  border: solid 2px #666;
+  border-radius: 6px;
 }
 
 @media (max-width: 768px) {
