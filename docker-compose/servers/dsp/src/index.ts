@@ -23,7 +23,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
-  const title = `${host} | Privacy Sandcastle`
+  const title = `DSP - Privacy Sandcastle`
   res.render("index", { title })
 })
 

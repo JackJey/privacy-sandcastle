@@ -1,3 +1,8 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #555;
+}
+
+h1 {
+  color: rgb(67 188 207);
 }
