@@ -61,7 +61,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
-  const title = "SSP | Privacy Sandcastle"
+  const title = "SSP - Privacy Sandcastle"
   res.render("index.html.ejs", { title })
 })
 

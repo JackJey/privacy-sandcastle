@@ -1,3 +1,18 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #555;
+}
+
+h1 {
+  color: rgb(67 207 139);
+}
+
+pre {
+  background-color: #eee;
+  padding: 1em;
+}
+
+iframe,
+fencedframe {
+  background-color: #eee;
 }
