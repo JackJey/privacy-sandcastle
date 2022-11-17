@@ -5,17 +5,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= title %></title>
-  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/index.css" />
   <link rel="icon" href="/img/spy.svg" />
-  <script src="/js/main.js"></script>
 </head>
 
 <body>
   <h1><%= title %></h1>
   <section>
     <h2>Demand Side Platform</h2>
-    <p>DSP running Ads auction on the users browser and selects ads creative to be shown</p>
-  </section>
+    <p>DSP privides 3rd party tag which join user into interest group via Fledge API</p>
+    <script
+      src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+      class="dsp_tag"
+      data-advertiser="privacy-sandcastle-shop"
+      data-id="1f45e"
+      data-nscript="afterInteractive">
+    </script>
+    <h2>inside iframe</h2>
+    <ul>
+      <li><a target="_blank" href="https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e">https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e</a>
+      <li><a target="_blank" href="https://privacy-sandcastle-dsp.web.app/js/join-ad-interest-group.js">https://privacy-sandcastle-dsp.web.app/js/join-ad-interest-group.js</a>
+    </ul>
+    <h2>embed script</h2>
+    <p>3rd party script provided by ssp should embed as below</p>
+    <pre>&lt;script
+  src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+  class="dsp_tag"
+  data-advertiser="privacy-sandcastle-shop"
+  data-id="1f45e"
+  data-nscript="afterInteractive"&gt;
+&lt;/script&gt;</pre>
+
+</section>
 </body>
 
 </html>
