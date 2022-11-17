@@ -9,5 +9,5 @@ async function fetchData() {
 
 export default async function Page() {
   const users = await fetchData()
-  return <div>{users.total}</div>
+  return <article>{users.total}</article>
 }
