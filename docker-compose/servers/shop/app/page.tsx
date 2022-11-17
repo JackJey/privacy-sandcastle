@@ -1,0 +1,52 @@
+import Link from "next/link"
+import Image from "next/image"
+import { Item } from "../lib/items"
+
+async function fetchItems() {
+  const host = process.env.host || "localhost"
+  const port = process.env.port || "8080"
+  const url = `http://${host}:${port}/api/items`
+  const res = await fetch(url, { cache: "no-store" })
+  const items: Item[] = await res.json()
+  return items
+}
+
+export const ItemCard = ({ item }: { item: Item }) => {
+  return (
+    <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
+      <Link href={`/items/${item.id}`} className="flex flex-col items-center pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
+        <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
+        <div>
+          <div className="font-bold text-xl text-slate-800">{item.name}</div>
+          <div className="font-mono text-slate-600">${item.price}</div>
+        </div>
+      </Link>
+    </li>
+  )
+}
+
+export default async function Page() {
+  const items = await fetchItems()
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="hidden lg:block">
+        <Image src={`/image/shop.webp`} width={1280} height={300} alt="shopping site hero image" className="object-cover object-[0%_5%]"></Image>
+      </div>
+
+      <main className="">
+        <ul className="grid lg:grid-cols-4 grid-cols-2 gap-4">
+          {items.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+        </ul>
+      </main>
+
+      <footer className="border-t-2 py-4">
+        <p className="underline text-slate-400 text-right">
+          Photo by <a href="https://unsplash.com/@bruno_kelzer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Bruno Kelzer</a> on{" "}
+          <a href="https://unsplash.com/s/photos/shopping-cart?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p>
+      </footer>
+    </div>
+  )
+}
