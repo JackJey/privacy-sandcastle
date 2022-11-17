@@ -107,10 +107,15 @@ const Item = ({ item }: { item: Item }) => {
       </main>
 
       <footer className="border-t-2 py-4">
-        <Link href="/">
-          <a className="underline before:content-['<<']"> continue shopping</a>
+        <Link href="/" className="underline before:content-['<<']">
+          continue shopping
         </Link>
-        <Script className="dsp_tag" data-advertiser="privacy-sandcastle-shop" data-id={item.id} src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"></Script>
+        <Script
+          className="dsp_tag"
+          data-advertiser="privacy-sandcastle-shop"
+          data-id={item.id}
+          src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+        ></Script>
       </footer>
     </div>
   )

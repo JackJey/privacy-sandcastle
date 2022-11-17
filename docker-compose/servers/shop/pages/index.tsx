@@ -15,16 +15,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 export const ItemCard = ({ item }: { item: Item }) => {
   return (
     <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
-      <Link href={`/items/${item.id}`}>
-        <a className="flex flex-col pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
-          <div className="">
-            <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
-          </div>
-          <div>
-            <div className="font-bold text-xl text-slate-800">{item.name}</div>
-            <div className="font-mono text-slate-600">${item.price}</div>
-          </div>
-        </a>
+      <Link href={`/items/${item.id}`} className="flex flex-col items-center pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
+        <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
+        <div>
+          <div className="font-bold text-xl text-slate-800">{item.name}</div>
+          <div className="font-mono text-slate-600">${item.price}</div>
+        </div>
       </Link>
     </li>
   )

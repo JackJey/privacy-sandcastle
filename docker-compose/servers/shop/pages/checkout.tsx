@@ -137,8 +137,8 @@ const Cart = ({ checkout }: { checkout: Order[] }) => {
       </div>
 
       <footer className="border-t-2 py-4">
-        <Link href="/">
-          <a className="underline before:content-['<<']"> continue shopping</a>
+        <Link href="/" className="underline before:content-['<<']">
+          continue shopping
         </Link>
       </footer>
     </div>
