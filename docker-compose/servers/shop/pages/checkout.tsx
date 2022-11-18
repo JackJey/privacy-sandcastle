@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { displayCategory, fromSize, getItem, Item, Order } from "../lib/items"
-import Header from "../components/header"
 import { GetServerSideProps } from "next/types"
 import { withSessionSsr } from "../lib/withSession"
 import bodyParser from "body-parser"
@@ -110,7 +109,6 @@ const Cart = ({ checkout }: { checkout: Order[] }) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Header />
       <h1 className=" text-2xl font-bold text-center text-slate-700 py-6">Thank you for your purchase !!</h1>
       <div className="flex flex-col gap-6">
         <ul className="flex flex-col gap-6">
