@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { useEffect } from "react"
 import { Order } from "../../lib/items"
 import { CartItem } from "./CartItem"
 
@@ -7,6 +10,15 @@ export const Cart = ({ checkout }: { checkout: Order[] }) => {
     return sum + item.price * quantity
   }, 0)
   const shipping = 40
+
+  useEffect(() => {
+    ;(async () => {
+      // TODO: move destroy session to SSR
+      const res = await fetch("/api/cart", { method: "DELETE" })
+      console.log(res)
+      console.log(res.ok)
+    })()
+  }, [])
 
   return (
     <div className="flex flex-col gap-6">

@@ -25,6 +25,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     await req.session.save()
     res.redirect(302, "/cart")
   }
+
+  if (method === "DELETE") {
+    req.session.destroy()
+    res.status(204)
+    res.send("")
+  }
 }
 
 export default withSessionRoute(handler)
