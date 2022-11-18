@@ -11,7 +11,7 @@ async function fetchItems() {
   return items
 }
 
-export const ItemCard = ({ item }: { item: Item }) => {
+const ItemCard = ({ item }: { item: Item }) => {
   return (
     <li key={item.id} className="border shadow rounded flex flex-col text-center justify-between">
       <Link href={`/items/${item.id}`} className="flex flex-col items-center pt-8 pb-4 px-4 gap-6 bg-gray-100 hover:bg-gray-200">
