@@ -67,7 +67,6 @@ const RegisterTrigger = ({
 
 const CartItem = ({ order }: { order: Order }) => {
   const { item, size, quantity } = order
-
   return (
     <li className="grid grid-cols-12 lg:gap-8 gap-4 border">
       <div className="lg:col-span-4 col-span-6 flex flex-col items-center py-4 gap-4 bg-slate-200">

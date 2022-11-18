@@ -1,4 +1,5 @@
 import { cookies } from "next/headers"
+import { Order } from "./items"
 
 export async function getCart() {
   const host = process.env.host || "localhost"
@@ -12,6 +13,6 @@ export async function getCart() {
       Cookie
     }
   })
-  const cart = await res.json()
+  const cart: Order[] = await res.json()
   return cart
 }
