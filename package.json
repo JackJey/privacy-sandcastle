@@ -1,6 +1,7 @@
 {
   "name": "privacy-sandcastle",
   "version": "0.0.0",
+  "license": "apache-2.0",
   "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
     "start": "npm run cert && npm run docker",
