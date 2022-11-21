@@ -9,5 +9,8 @@
     "build": "cd docker-compose && docker-compose build",
     "docker": "cd docker-compose && docker-compose build && docker-compose up",
     "deploy": "./deploy.sh"
+  },
+  "devDependencies": {
+    "firebase-tools": "^11.16.1"
   }
 }
