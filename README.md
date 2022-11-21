@@ -2,7 +2,7 @@
 
 Privacy Sandbox Mixed DEMO
 
-See more details in [go/privacy-sandcastle](go/privacy-sandcastle) (internal only).
+See more details in [go/privacy-sandcastle](go/privacy-sandcastle) (Google internal only).
 
 ## Motivation
 
@@ -13,12 +13,12 @@ See more details in [go/privacy-sandcastle](go/privacy-sandcastle) (internal onl
 
 - Scope of v0
   - Attribution Reporting - CTC
-  - Topic API
+  - Attribution Reporting - VTC
   - FLEDGE
   - FencedFrame
-  - Trust Token
+  - Topic API
 - v1 ~ later
-  - Attribution Reporting - VTC
+  - Trust Token
   - IP Blindness
   - Privacy Budget
   - Attribution: app-to-web (could be in v1 though!)
@@ -26,7 +26,7 @@ See more details in [go/privacy-sandcastle](go/privacy-sandcastle) (internal onl
 
 ## Release Plan
 
-- v0: 2022/Q3 (OT with ARA, FLEDGE, FencedFrame, Topics)
+- v0: 2022/Q4 (OT with ARA, FLEDGE, FencedFrame, Topics)
 
 ## Use Case
 
