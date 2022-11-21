@@ -2,7 +2,9 @@
 
 Privacy Sandbox Mixed DEMO
 
-See more details in [go/privacy-sandcastle](go/privacy-sandcastle) (Google internal only).
+It's been deployed on https://privacy-sandcastle-home.web.app.
+
+(Google Internal Only: See design docs at [go/privacy-sandcastle](go/privacy-sandcastle)).
 
 ## Motivation
 
@@ -59,6 +61,7 @@ Clone and just exec npm script.
 ```sh
 $ git clone https://github.com/JackJey/privacy-sandcastle
 $ cd privacy-sandcastle
+$ npm install
 $ npm start
 ```
 
