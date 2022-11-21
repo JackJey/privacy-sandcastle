@@ -5,7 +5,6 @@ import { withSessionRoute } from "../../../lib/withSession"
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const cart: Order[] = req.session.cart || []
   const { url, method, body } = req
-  console.log(url, method, body, cart)
 
   if (method === "GET") {
     res.json(cart)

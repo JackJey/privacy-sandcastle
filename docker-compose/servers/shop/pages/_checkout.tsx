@@ -99,8 +99,6 @@ const CartItem = ({ order }: { order: Order }) => {
 }
 
 const Cart = ({ checkout }: { checkout: Order[] }) => {
-  console.log(checkout)
-
   const subtotal = checkout.reduce((sum, { item, quantity }) => {
     return sum + item.price * quantity
   }, 0)

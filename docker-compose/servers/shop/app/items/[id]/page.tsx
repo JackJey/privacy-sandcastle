@@ -11,7 +11,6 @@ async function fetchItem(id: string) {
   const url = `http://${host}:${port}/api/items/${id}`
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()
-  console.log({ item })
   return item
 }
 
