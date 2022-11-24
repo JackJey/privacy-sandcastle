@@ -46,7 +46,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden lg:block">
-        <Image src={`/image/shop.webp`} width={1280} height={300} alt="shopping site hero image" className="object-cover object-[0%_5%]"></Image>
+        <Image src={`/image/shop.webp`} width={1280} height={300} alt="shopping site hero image" className="object-cover object-[0%_5%] h-[300px]"></Image>
       </div>
 
       <main className="">
