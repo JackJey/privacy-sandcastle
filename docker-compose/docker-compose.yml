@@ -16,6 +16,7 @@ services:
     environment:
       - host=${HOME_HOST}
       - port=${HOME_PORT}
+      - token=${HOME_TOKEN}
     volumes:
       - ./servers/home:/workspace
       - home_node_modules:/workspace/node_modules
@@ -27,6 +28,7 @@ services:
     environment:
       - host=${NEWS_HOST}
       - port=${NEWS_PORT}
+      - token=${NEWS_TOKEN}
     volumes:
       - ./servers/news:/workspace
       - news_node_modules:/workspace/node_modules
@@ -38,6 +40,7 @@ services:
     environment:
       - host=${SHOP_HOST}
       - port=${SHOP_PORT}
+      - token=${SHOP_TOKEN}
     volumes:
       - ./servers/shop:/workspace
       - shop_node_modules:/workspace/node_modules
@@ -49,6 +52,7 @@ services:
     environment:
       - host=${TRAVEL_HOST}
       - port=${TRAVEL_PORT}
+      - token=${TRAVEL_TOKEN}
     volumes:
       - ./servers/travel:/workspace
       - travel_node_modules:/workspace/node_modules
@@ -60,6 +64,7 @@ services:
     environment:
       - host=${DSP_HOST}
       - port=${DSP_PORT}
+      - token=${DSP_TOKEN}
     volumes:
       - ./servers/dsp:/workspace
       - dsp_node_modules:/workspace/node_modules
@@ -71,6 +76,7 @@ services:
     environment:
       - host=${SSP_HOST}
       - port=${SSP_PORT}
+      - token=${SSP_TOKEN}
     volumes:
       - ./servers/ssp:/workspace
       - ssp_node_modules:/workspace/node_modules
