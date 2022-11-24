@@ -20,7 +20,7 @@ It's been deployed on https://privacy-sandcastle-home.web.app.
   - FencedFrame
   - Topic API
 - v1 ~ later
-  - Trust Token
+  - Private State Token
   - IP Blindness
   - Privacy Budget
   - Attribution: app-to-web (could be in v1 though!)
@@ -34,7 +34,7 @@ It's been deployed on https://privacy-sandcastle-home.web.app.
 
 - Online Shopping Advertising: FLEDGE / FLoC
 - VTC / CTC measurement: Attribution
-- Anti Fraud: Trust Token
+- Anti Fraud: Private State Token
 - Display Ad: Fenced Frame
 - Anti Fingerprint: IP Blindness / (UA Reduction) / Privacy Budget
 
@@ -151,3 +151,13 @@ $ google_chrome `--host-resolver-rules="MAP * 127.0.0.1"`
 `mkcert -install` installs develop CA cert into your local machine, so every https cert which nginx uses are valid on your browser.
 
 Lastly, you should use `80` for `http://` and `443` for `https://`. It is done by use `sudo` when starting `docker-compose`. Or adding permission to your user (ex. adding user to `admin` role) will omit it.
+
+## Deploy
+
+For register `.web.app` to each services, empty project created on Firebase Hosting and forward every request to Firebase Hosting will forwarded to Cloud Run.
+
+Following command will register each container image to GCR and deploy it on Cloud Run.
+
+```
+$ npm run deploy
+```
