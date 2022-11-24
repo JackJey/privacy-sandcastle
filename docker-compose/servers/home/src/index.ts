@@ -18,21 +18,38 @@ import express, { Application, Request, Response } from "express"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
+const token = process.env.token || ""
 
 const app: Application = express()
 
+app.use((req, res, next) => {
+  // res.setHeader("Origin-Trial", token)
+  next()
+})
 app.use(express.static("src/public"))
 app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
   const hosts = [
+    {
+      host: "privacy-sandcastle-shop.web.app",
+      detail: "Advertiser: EC shopping site"
+    },
+    {
+      host: "privacy-sandcastle-news.web.app",
+      detail: "Publisher: News media site"
+    },
+    {
+      host: "privacy-sandcastle-ssp.web.app",
+      detail: "SSP: Ad-Network for publisher"
+    },
+    {
+      host: "privacy-sandcastle-dsp.web.app",
+      detail: "DSP: Ad-Network for advertiser"
+    }
     // "privacy-sandcastle-home.web.app",
-    "privacy-sandcastle-shop.web.app",
     // "privacy-sandcastle-travel.web.app",
-    "privacy-sandcastle-news.web.app",
-    "privacy-sandcastle-ssp.web.app",
-    "privacy-sandcastle-dsp.web.app"
   ]
   res.render("index", { hosts })
 })

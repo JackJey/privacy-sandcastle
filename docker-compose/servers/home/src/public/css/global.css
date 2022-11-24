@@ -24,6 +24,8 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 2vh;
   padding: 2vw;
 }
 
@@ -33,6 +35,10 @@ h1 {
   font-size: 3em;
   color: #333;
   margin-bottom: 2vw;
+}
+
+h2 {
+  color: #333;
 }
 
 ul {

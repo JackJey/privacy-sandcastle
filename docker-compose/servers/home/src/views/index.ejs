@@ -13,8 +13,9 @@
 <body>
   <h1>Privacy Sandcastle Home</h1>
   <ul>
-    <% hosts.map((host) => { %>
+    <% hosts.map(({ host, detail }) => { %>
     <li>
+      <h2><%= detail %></h2>
       <iframe title="<%= host %>" src="https://<%= host %>"></iframe>
       <a target="_blank" href="https://<%= host %>">https://<%= host %></a>
     </li>

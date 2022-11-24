@@ -18,9 +18,14 @@ import express, { Application, Request, Response } from "express"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
+const token = process.env.token || ""
 
 const app: Application = express()
 
+app.use((req, res, next) => {
+  // res.setHeader("Origin-Trial", ot)
+  next()
+})
 app.use(express.static("src/public"))
 app.set("view engine", "ejs")
 app.set("views", "src/views")

@@ -33,11 +33,17 @@ import {
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
+const token = process.env.token || ""
 
 // global memory storage
 const Reports = []
 
 const app = express()
+
+app.use((req, res, next) => {
+  res.setHeader("Origin-Trial", token)
+  next()
+})
 
 app.use(express.json())
 
