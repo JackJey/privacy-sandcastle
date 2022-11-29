@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-const items = [
+const items: Item[] = [
   { id: "1f45e", icon: "👞", price: 180, category: 1, name: "Man's Shoe" },
   { id: "1f45f", icon: "👟", price: 100, category: 0, name: "Running Shoe" },
   { id: "1f460", icon: "👠", price: 200, category: 1, name: "High-Heeled Shoe" },
@@ -46,7 +46,7 @@ export type Item = {
 }
 
 export async function getItems(): Promise<Item[]> {
-  return items as Item[]
+  return items
 }
 
 export async function getItem(id: string): Promise<Item> {
