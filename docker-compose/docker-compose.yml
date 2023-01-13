@@ -82,7 +82,7 @@ services:
       - ssp_node_modules:/workspace/node_modules
 
   nginx:
-    image: nginx:1.22.0-alpine
+    image: nginx:1.22.1-alpine
     container_name: 'sandcastle_proxy'
     volumes:
       # using env variables in nginx config
