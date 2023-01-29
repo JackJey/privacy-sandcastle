@@ -46,7 +46,7 @@ const auctionConfig = {
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   // TODO: Call Topics API for select ads
-  const topics = await document.browsingTopics()
+  const topics = await document?.browsingTopics?.()
   console.log({
     topics
   })
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   $fencedframe.src = adAuctionResult
   $fencedframe.setAttribute("mode", "opaque-ads")
   $fencedframe.setAttribute("scrolling", "no")
-  $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
+  // $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
   $fencedframe.width = 300
   $fencedframe.height = 250
 

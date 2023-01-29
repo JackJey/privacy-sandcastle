@@ -18,12 +18,14 @@ import express, { Application, Request, Response } from "express"
 
 const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
-const token = process.env.token || ""
+const token = process.env.token || "NO TOKEN FOR THIS ORIGIN"
+
+console.log(process.env)
 
 const app: Application = express()
 
 app.use((req, res, next) => {
-  // res.setHeader("Origin-Trial", ot)
+  res.setHeader("Origin-Trial", token)
   next()
 })
 app.use(express.static("src/public"))
@@ -33,7 +35,7 @@ app.set("views", "src/views")
 app.get("/", async (req: Request, res: Response) => {
   const params = {
     title: "FLEDGE Daily News",
-    ot_token: ""
+    token
   }
   res.render("index", params)
 })

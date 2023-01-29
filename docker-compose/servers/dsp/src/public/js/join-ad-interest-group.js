@@ -57,6 +57,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay))
 
   // Call Topics API for opt-in
-  const topics = await document.browsingTopics()
+  const topics = await document?.browsingTopics?.()
   console.log({ topics })
 })

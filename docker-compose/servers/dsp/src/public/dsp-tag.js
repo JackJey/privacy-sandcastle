@@ -30,6 +30,6 @@
   $iframe.allow = "join-ad-interest-group"
   $script.parentElement.insertBefore($iframe, $script.nextSibling)
 
-  const topics = await document.browsingTopics()
+  const topics = await document?.browsingTopics?.()
   console.log({ topics })
 })()
