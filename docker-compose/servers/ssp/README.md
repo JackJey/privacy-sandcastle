@@ -4,7 +4,7 @@
 
 This app is a demo of "SSP" party in Privacy Sandcastle world.
 
-Privoides 3rd Party Tag for publisher who intends to display ads in their own site (`news` in Privacy Sandcastle).
+Provides 3rd Party Tag for publisher who intends to display ads in their own site (`news` in Privacy Sandcastle).
 
 ## How to use 3rd Party Tag
 
@@ -18,7 +18,7 @@ Each site should paste a line below into HTML to embed ads which SSP provides.
 
 ### ad-tag.js
 
-Simply embeding `ad-tag.html` into the caller site.
+Simply embedding `ad-tag.html` into the caller site.
 
 ```html
 <iframe allow="attribution-reporting" src="https://privacy-sandcastle-ssp.web.app/ad-tag.html"> </iframe>
@@ -28,7 +28,7 @@ Simply embeding `ad-tag.html` into the caller site.
 
 It's add page by SSP choosing ads to be shown.
 Decision logic, running auction can be here.
-Embeding `/ads` with some parameters in iframe.
+Embedding `/ads` with some parameters in iframe.
 
 ```html
 <iframe allow="attribution-reporting" src="https://privacy-sandcastle-ssp.web.app/ad-tag.html">
@@ -39,7 +39,7 @@ Embeding `/ads` with some parameters in iframe.
 ## /ads
 
 Serving requested Ads.
-It inclueds ads creative (Image, Video etc).
+It includes ads creative (Image, Video etc).
 Clicking ads will guide user to SPP redirector for measurement CTC.
 
 ```html
@@ -55,4 +55,4 @@ Clicking ads will guide user to SPP redirector for measurement CTC.
 ## CAUTION !!!
 
 THIS IS ONLY A DEMO SO SOME SECURITY PROBLEM MAY HAPPEN.
-NEVER DEPLY THIS IN PRODUCTION AS-IS.
+NEVER DEPLOY THIS IN PRODUCTION AS-IS.

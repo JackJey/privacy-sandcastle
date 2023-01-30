@@ -20,8 +20,6 @@ const port = process.env.port || "8080"
 const host = process.env.host || "localhost"
 const token = process.env.token || "NO TOKEN FOR THIS ORIGIN"
 
-console.log(process.env)
-
 const app: Application = express()
 
 app.use((req, res, next) => {

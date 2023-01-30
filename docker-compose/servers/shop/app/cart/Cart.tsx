@@ -69,7 +69,7 @@ export default function Cart({ cart: initialState }: { cart: Order[] }) {
           <button
             type="submit"
             disabled={disableCheckout}
-            className="w-60 border border-slate-600 text-slate-600 enabled:hover:bg-slate-400 enalbed:hover:text-white disabled:opacity-40"
+            className="w-60 border border-slate-600 text-slate-600 enabled:hover:bg-slate-400 enabled:hover:text-white disabled:opacity-40"
           >
             CHECKOUT
           </button>

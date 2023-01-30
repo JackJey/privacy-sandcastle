@@ -36,7 +36,7 @@ const interestGroup = {
   trustedBiddingSignalsUrl: "https://privacy-sandcastle-dsp.web.app/bidding_signal.json",
   trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
 
-  dailyUpdateUrl: "https://privacy-sandcastle-dsp.web.app/daily_update_url", // not implemented yets
+  dailyUpdateUrl: "https://privacy-sandcastle-dsp.web.app/daily_update_url", // not implemented yet
   userBiddingSignals: {
     user_bidding_signals: "user_bidding_signals"
   },

@@ -9,12 +9,12 @@ This app is shopping site demo one of "advertiser" party in Privacy Sandcastle w
 You can run this app standalone via.
 
 ```sh
-$ cd path-to-shop-dir-under-privacy-sandcatle
+$ cd path-to-shop-dir-under-privacy-sandcastle
 $ npm install
 $ npm run dev
 ```
 
-Default port for standalone builds are `8080` so you can access it wiht <http://localhost:8080>.
+Default port for standalone builds are `8080` so you can access it with <http://localhost:8080>.
 
 But if app starts via docker-compose, nginx will proxy every request to the apps, so URL will be changes. See the root README.md for more details.
 
