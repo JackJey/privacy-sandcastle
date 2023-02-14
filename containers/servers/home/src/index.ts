@@ -17,8 +17,8 @@
 import express, { Application, Request, Response } from "express"
 
 const port = "3000"
-const host = process.env.host || "localhost"
-const token = process.env.token || ""
+const host = process.env.HOME_HOST || "home.localhost"
+const token = process.env.HOME_TOKEN || ""
 
 const app: Application = express()
 
@@ -31,26 +31,27 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
-  const hosts = [
-    {
-      host: "privacy-sandcastle-shop.web.app",
-      detail: "Advertiser: EC shopping site"
-    },
-    {
-      host: "privacy-sandcastle-news.web.app",
-      detail: "Publisher: News media site"
-    },
-    {
-      host: "privacy-sandcastle-ssp.web.app",
-      detail: "SSP: Ad-Network for publisher"
-    },
-    {
-      host: "privacy-sandcastle-dsp.web.app",
-      detail: "DSP: Ad-Network for advertiser"
-    }
-    // "privacy-sandcastle-home.web.app",
-    // "privacy-sandcastle-travel.web.app",
-  ]
+  const hosts = Object.entries(process.env)
+    .filter(([k, v]) => {
+      if (k.startsWith("HOME_")) {
+        return false
+      }
+      if (k.endsWith("_HOST") || k.endsWith("_DETAIL")) {
+        return true
+      }
+      return false
+    })
+    .reduce((acc, [k, v]) => {
+      const [host, tag] = k.split("_")
+      if (acc.has(host) === false) {
+        acc.set(host, {})
+      }
+      acc.get(host)[tag] = v
+      return acc
+    }, new Map())
+    .values()
+
+  console.log({ hosts })
   res.render("index", { hosts })
 })
 

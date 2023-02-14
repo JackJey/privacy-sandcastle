@@ -13,9 +13,8 @@ services:
     image: gcr.io/privacy-sandcastle-home/sandcastle_home:latest
     build: ./servers/home
     container_name: 'sandcastle_home'
-    environment:
-      - host=${HOME_HOST}
-      - token=${HOME_TOKEN}
+    env_file:
+      - .env
     volumes:
       - ./servers/home:/workspace
       - home_node_modules:/workspace/node_modules
