@@ -28,7 +28,7 @@ It's been deployed on https://privacy-sandcastle-home.web.app.
 
 ## Release Plan
 
-- v0: 2022/Q4 (OT with ARA, FLEDGE, FencedFrame, Topics)
+- v0: 2023/Q1 (OT with ARA, FLEDGE, FencedFrame)
 
 ## Use Case
 
