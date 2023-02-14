@@ -5,9 +5,9 @@
   "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
     "start": "npm run cert && npm run docker",
-    "cert": "cd docker-compose/nginx/cert && ./mkcert.sh",
-    "build": "cd docker-compose && docker-compose build",
-    "docker": "cd docker-compose && docker-compose build && docker-compose up",
+    "cert": "cd containers/nginx/cert && ./mkcert.sh",
+    "build": "cd containers && docker-compose build",
+    "docker": "cd containers && docker-compose build && docker-compose up",
     "deploy": "./deploy.sh"
   },
   "devDependencies": {
