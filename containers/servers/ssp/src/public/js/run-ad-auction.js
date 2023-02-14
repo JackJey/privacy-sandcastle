@@ -46,10 +46,12 @@ const auctionConfig = {
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   // TODO: Call Topics API for select ads
-  const topics = await document?.browsingTopics?.()
+  const topics = await document.browsingTopics?.()
   console.log({
     topics
   })
+
+  // TODO: ここで auctionConfig を fetch する
 
   const adAuctionResult = await navigator.runAdAuction(auctionConfig)
   console.log({
