@@ -87,8 +87,7 @@ services:
         source: "./nginx/cert"
         target: "/cert"
     ports:
-      - '443:443'
-      - '8443:443'
+      - '${PORT}:443'
     environment:
       # for nginx template
       - HOME_HOST=${HOME_HOST}
