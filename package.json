@@ -4,7 +4,7 @@
   "license": "apache-2.0",
   "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
-    "start": "npm run cert && npm run docker",
+    "start": "npm run docker",
     "cert": "cd containers/nginx/cert && ./mkcert.sh",
     "build": "cd containers && docker-compose build",
     "docker": "cd containers && docker-compose build && docker-compose up",
