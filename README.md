@@ -90,12 +90,12 @@ Each services are developed under servers, and composed by docker-compose.
 
 If you wanna add new services, follow instructions below.
 
-- add service dir uder servers.
+- add service dir under servers.
 - decide domain and append in `containers/.env`
-- develop it and encapsulate in Dokcer
+- develop it and encapsulate in Docker
 - update `docker-compose.yml` && `nginx.conf`
 
-You can implement new service in any technology stack basically. But from point of view for maintainance. Recommended stacks are listed below.
+You can implement new service in any technology stack basically. But from point of view for maintenance. Recommended stacks are listed below.
 
 - Simple static site, JSON API
   - Express + Ejs + TypeScript + Tailwind
@@ -107,9 +107,9 @@ You can implement new service in any technology stack basically. But from point 
 
 ## Container
 
-Every servers has Dockerfile and `./containers/docker-comopse.yml` merge every servers in container.
+Every servers has Dockerfile and `./containers/docker-compose.yml` merge every servers in container.
 
-`.env` defines hostname/port for each services and Nginx will proxy every request based on hsotname.
+`.env` defines hostname/port for each services and Nginx will proxy every request based on hostname.
 
 ```
 Client ->req-> Nginx
@@ -146,7 +146,7 @@ If you use Google Chrome, `--host-resolver-rules` flag can be use instead.
 $ google_chrome `--host-resolver-rules="MAP * 127.0.0.1"`
 ```
 
-`https://` requires valid certificate too, this is done by `mkcert` as mentiones above.
+`https://` requires valid certificate too, this is done by `mkcert` as mentioned above.
 
 `mkcert -install` installs develop CA cert into your local machine, so every https cert which nginx uses are valid on your browser.
 
