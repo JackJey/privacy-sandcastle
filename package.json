@@ -11,6 +11,6 @@
     "deploy": "./deploy.sh"
   },
   "devDependencies": {
-    "firebase-tools": "^11.20.0"
+    "firebase-tools": "^11.23.0"
   }
 }
