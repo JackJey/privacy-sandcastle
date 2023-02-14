@@ -23,7 +23,7 @@ import SubmitForm from "./SubmitForm"
 
 async function fetchItem(id: string) {
   const host = process.env.host || "localhost"
-  const port = process.env.port || "8080"
+  const port = "3000"
   const url = `http://${host}:${port}/api/items/${id}`
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()

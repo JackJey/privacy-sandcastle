@@ -19,7 +19,7 @@ import { Order } from "./items"
 
 export async function getCart() {
   const host = process.env.host || "localhost"
-  const port = process.env.port || "8080"
+  const port = "3000"
   const url = `http://${host}:${port}/api/cart`
   const cookie = cookies().get("__session")
   const Cookie = `__session=${cookie?.value}`

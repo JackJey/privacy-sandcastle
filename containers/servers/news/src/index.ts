@@ -16,7 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = process.env.port || "8080"
+const port = "3000"
 const host = process.env.host || "localhost"
 const token = process.env.token || "NO TOKEN FOR THIS ORIGIN"
 

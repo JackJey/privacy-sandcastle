@@ -15,7 +15,6 @@ services:
     container_name: 'sandcastle_home'
     environment:
       - host=${HOME_HOST}
-      - port=${HOME_PORT}
       - token=${HOME_TOKEN}
     volumes:
       - ./servers/home:/workspace
@@ -27,7 +26,6 @@ services:
     container_name: 'sandcastle_news'
     environment:
       - host=${NEWS_HOST}
-      - port=${NEWS_PORT}
       - token=${NEWS_TOKEN}
     volumes:
       - ./servers/news:/workspace
@@ -39,7 +37,6 @@ services:
     container_name: 'sandcastle_shop'
     environment:
       - host=${SHOP_HOST}
-      - port=${SHOP_PORT}
       - token=${SHOP_TOKEN}
     volumes:
       - ./servers/shop:/workspace
@@ -51,7 +48,6 @@ services:
     container_name: 'sandcastle_travel'
     environment:
       - host=${TRAVEL_HOST}
-      - port=${TRAVEL_PORT}
       - token=${TRAVEL_TOKEN}
     volumes:
       - ./servers/travel:/workspace
@@ -63,7 +59,6 @@ services:
     container_name: 'sandcastle_dsp'
     environment:
       - host=${DSP_HOST}
-      - port=${DSP_PORT}
       - token=${DSP_TOKEN}
     volumes:
       - ./servers/dsp:/workspace
@@ -75,7 +70,6 @@ services:
     container_name: 'sandcastle_ssp'
     environment:
       - host=${SSP_HOST}
-      - port=${SSP_PORT}
       - token=${SSP_TOKEN}
     volumes:
       - ./servers/ssp:/workspace
@@ -99,21 +93,10 @@ services:
       - '8443:443'
     environment:
       # for nginx template
-      ## home
       - HOME_HOST=${HOME_HOST}
-      - HOME_PORT=${HOME_PORT}
-      ## news
       - NEWS_HOST=${NEWS_HOST}
-      - NEWS_PORT=${NEWS_PORT}
-      ## shop
       - SHOP_HOST=${SHOP_HOST}
-      - SHOP_PORT=${SHOP_PORT}
-      ## travel
       - TRAVEL_HOST=${TRAVEL_HOST}
-      - TRAVEL_PORT=${TRAVEL_PORT}
-      ## dsp
       - DSP_HOST=${DSP_HOST}
-      - DSP_PORT=${DSP_PORT}
-      ## ssp
       - SSP_HOST=${SSP_HOST}
-      - SSP_PORT=${SSP_PORT}
+
