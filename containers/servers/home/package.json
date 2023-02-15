@@ -7,7 +7,6 @@
   "scripts": {
     "start": "npm run build && node ./src/index.js",
     "build": "tsc",
-    "fmt": "prettier --write **/*",
     "clean": "git clean -fxn"
   },
   "dependencies": {

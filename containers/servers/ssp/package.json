@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",
-    "fmt": "prettier --write **/*"
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "cbor": "^8.1.0",
