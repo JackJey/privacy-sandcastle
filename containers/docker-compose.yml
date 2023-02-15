@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 volumes:
   home_node_modules:
@@ -12,7 +12,7 @@ services:
   home:
     image: gcr.io/privacy-sandcastle-home/sandcastle_home:latest
     build: ./servers/home
-    container_name: 'sandcastle_home'
+    container_name: "sandcastle_home"
     env_file:
       - .env
     volumes:
@@ -22,7 +22,7 @@ services:
   news:
     image: gcr.io/privacy-sandcastle-news/sandcastle_news:latest
     build: ./servers/news
-    container_name: 'sandcastle_news'
+    container_name: "sandcastle_news"
     environment:
       - host=${NEWS_HOST}
       - token=${NEWS_TOKEN}
@@ -33,7 +33,7 @@ services:
   shop:
     image: gcr.io/privacy-sandcastle-shop/sandcastle_shop:latest
     build: ./servers/shop
-    container_name: 'sandcastle_shop'
+    container_name: "sandcastle_shop"
     environment:
       - host=${SHOP_HOST}
       - token=${SHOP_TOKEN}
@@ -44,7 +44,7 @@ services:
   travel:
     image: gcr.io/privacy-sandcastle-travel/sandcastle_travel:latest
     build: ./servers/travel
-    container_name: 'sandcastle_travel'
+    container_name: "sandcastle_travel"
     environment:
       - host=${TRAVEL_HOST}
       - token=${TRAVEL_TOKEN}
@@ -55,7 +55,7 @@ services:
   dsp:
     image: gcr.io/privacy-sandcastle-dsp/sandcastle_dsp:latest
     build: ./servers/dsp
-    container_name: 'sandcastle_dsp'
+    container_name: "sandcastle_dsp"
     environment:
       - host=${DSP_HOST}
       - token=${DSP_TOKEN}
@@ -66,7 +66,7 @@ services:
   ssp:
     image: gcr.io/privacy-sandcastle-ssp/sandcastle_ssp:latest
     build: ./servers/ssp
-    container_name: 'sandcastle_ssp'
+    container_name: "sandcastle_ssp"
     environment:
       - host=${SSP_HOST}
       - token=${SSP_TOKEN}
@@ -76,7 +76,7 @@ services:
 
   nginx:
     image: nginx:1.22.1-alpine
-    container_name: 'sandcastle_proxy'
+    container_name: "sandcastle_proxy"
     volumes:
       # using env variables in nginx config
       - type: bind
@@ -86,7 +86,7 @@ services:
         source: "./nginx/cert"
         target: "/cert"
     ports:
-      - '${PORT}:443'
+      - "${PORT}:443"
     environment:
       # for nginx template
       - HOME_HOST=${HOME_HOST}
@@ -95,4 +95,3 @@ services:
       - TRAVEL_HOST=${TRAVEL_HOST}
       - DSP_HOST=${DSP_HOST}
       - SSP_HOST=${SSP_HOST}
-

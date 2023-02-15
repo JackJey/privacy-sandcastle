@@ -22,7 +22,7 @@ module.exports = {
       fontFamily: {
         serif: ["Cambria", "Cochin", "Georgia", "Times", "Times New Roman", "serif"]
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
