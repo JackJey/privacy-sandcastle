@@ -9,7 +9,7 @@
     "build": "cd containers && docker-compose build",
     "docker": "cd containers && docker-compose build && docker-compose up",
     "deploy": "./deploy.sh",
-    "fmt": "prettier -w **/*"
+    "fmt": "prettier --write ."
   },
   "devDependencies": {
     "firebase-tools": "^11.23.0",

@@ -6,10 +6,19 @@
   "arrowParens": "always",
   "overrides": [
     {
-      "files": ["**/*.js", "**/*.ts", "**/*.html", "**/*.css"]
+      "files": [
+        "**/*.js",
+        "**/*.ts",
+        "**/*.html",
+        "**/*.css"
+      ]
     },
     {
-      "files": ["**/*.json", "**/*.yaml", "**/tailwind.config.js"],
+      "files": [
+        "**/*.json",
+        "**/*.yaml",
+        "**/tailwind.config.js"
+      ],
       "options": {
         "printWidth": 40
       }
