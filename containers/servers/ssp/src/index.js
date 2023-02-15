@@ -31,9 +31,9 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const port = "3000"
-const host = process.env.host || "localhost"
-const token = process.env.token || ""
+const port = "3000" // "fixed for internal port"
+const host = process.env.SSP_HOST || "ssp.localhost"
+const token = process.env.SSP_TOKEN || ""
 
 // global memory storage
 const Reports = []
@@ -68,11 +68,10 @@ app.use((req, res, next) => {
 app.use(
   express.static("src/public", {
     setHeaders: (res, path, stat) => {
-      const url = new URL(path, `https://${host}`)
-      if (url.pathname.endsWith("decision-logic.js")) {
+      if (path.endsWith("/decision-logic.js")) {
         return res.set("X-Allow-FLEDGE", "true")
       }
-      if (url.pathname.endsWith("run-ad-auction.js")) {
+      if (path.endsWith("/run-ad-auction.js")) {
         res.set("Supports-Loading-Mode", "fenced-frame")
         res.set("Permissions-Policy", "run-ad-auction=(*)")
       }
@@ -83,7 +82,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
-  const title = "SSP - Privacy Sandcastle"
+  const title = process.env.SSP_DETAIL || host
   res.render("index.html.ejs", { title })
 })
 
