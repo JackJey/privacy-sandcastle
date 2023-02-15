@@ -33,6 +33,8 @@ services:
     image: gcr.io/privacy-sandcastle-shop/sandcastle_shop:latest
     build: ./servers/shop
     container_name: "sandcastle_shop"
+    env_file:
+      - .env
     environment:
       - host=${SHOP_HOST}
       - token=${SHOP_TOKEN}
@@ -44,6 +46,8 @@ services:
     image: gcr.io/privacy-sandcastle-travel/sandcastle_travel:latest
     build: ./servers/travel
     container_name: "sandcastle_travel"
+    env_file:
+      - .env
     environment:
       - host=${TRAVEL_HOST}
       - token=${TRAVEL_TOKEN}
@@ -55,6 +59,8 @@ services:
     image: gcr.io/privacy-sandcastle-dsp/sandcastle_dsp:latest
     build: ./servers/dsp
     container_name: "sandcastle_dsp"
+    env_file:
+      - .env
     environment:
       - host=${DSP_HOST}
       - token=${DSP_TOKEN}
@@ -85,11 +91,5 @@ services:
         target: "/cert"
     ports:
       - "${PORT}:443"
-    environment:
-      # for nginx template
-      - HOME_HOST=${HOME_HOST}
-      - NEWS_HOST=${NEWS_HOST}
-      - SHOP_HOST=${SHOP_HOST}
-      - TRAVEL_HOST=${TRAVEL_HOST}
-      - DSP_HOST=${DSP_HOST}
-      - SSP_HOST=${SSP_HOST}
+    env_file:
+      - .env
