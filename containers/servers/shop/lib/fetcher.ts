@@ -15,7 +15,7 @@
  */
 
 import { cookies } from "next/headers"
-import { Order } from "./items"
+import { Item, Order } from "./items"
 
 export async function fetchCart() {
   const host = process.env.host || "localhost"
@@ -31,4 +31,22 @@ export async function fetchCart() {
   })
   const cart: Order[] = await res.json()
   return cart
+}
+
+export async function fetchItems() {
+  const host = process.env.host || "localhost"
+  const port = "3000"
+  const url = `http://${host}:${port}/api/items`
+  const res = await fetch(url, { cache: "no-store" })
+  const items: Item[] = await res.json()
+  return items
+}
+
+export async function fetchItem(id: string) {
+  const host = process.env.host || "localhost"
+  const port = "3000"
+  const url = `http://${host}:${port}/api/items/${id}`
+  const res = await fetch(url, { cache: "no-store" })
+  const item: Item = await res.json()
+  return item
 }

@@ -20,15 +20,7 @@ import { displayCategory, Item } from "../../../lib/items"
 
 import Script from "next/script"
 import SubmitForm from "./SubmitForm"
-
-async function fetchItem(id: string) {
-  const host = process.env.host || "localhost"
-  const port = "3000"
-  const url = `http://${host}:${port}/api/items/${id}`
-  const res = await fetch(url, { cache: "no-store" })
-  const item: Item = await res.json()
-  return item
-}
+import { fetchItem } from "../../../lib/fetcher"
 
 type Params = {
   id: string

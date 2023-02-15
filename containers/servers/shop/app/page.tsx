@@ -17,15 +17,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Item } from "../lib/items"
-
-async function fetchItems() {
-  const host = process.env.host || "localhost"
-  const port = "3000"
-  const url = `http://${host}:${port}/api/items`
-  const res = await fetch(url, { cache: "no-store" })
-  const items: Item[] = await res.json()
-  return items
-}
+import { fetchItems } from "../lib/fetcher"
 
 const ItemCard = ({ item }: { item: Item }) => {
   return (
