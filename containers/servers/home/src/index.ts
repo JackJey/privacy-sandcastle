@@ -31,6 +31,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
+  // extract environment value
   const hosts = Object.entries(process.env)
     .filter(([k, v]) => {
       if (k.startsWith("HOME_")) {
@@ -51,10 +52,9 @@ app.get("/", async (req: Request, res: Response) => {
     }, new Map())
     .values()
 
-  console.log({ hosts })
   res.render("index", { hosts })
 })
 
-app.listen(port, function () {
+app.listen(port, async () => {
   console.log(`Listening on port ${port}`)
 })
