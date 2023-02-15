@@ -8,9 +8,11 @@
     "cert": "cd containers/nginx/cert && ./mkcert.sh",
     "build": "cd containers && docker-compose build",
     "docker": "cd containers && docker-compose build && docker-compose up",
-    "deploy": "./deploy.sh"
+    "deploy": "./deploy.sh",
+    "fmt": "prettier -w **/*"
   },
   "devDependencies": {
-    "firebase-tools": "^11.23.0"
+    "firebase-tools": "^11.23.0",
+    "prettier": "^2.8.4"
   }
 }
