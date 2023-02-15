@@ -23,9 +23,8 @@ services:
     image: gcr.io/privacy-sandcastle-news/sandcastle_news:latest
     build: ./servers/news
     container_name: "sandcastle_news"
-    environment:
-      - host=${NEWS_HOST}
-      - token=${NEWS_TOKEN}
+    env_file:
+      - .env
     volumes:
       - ./servers/news:/workspace
       - news_node_modules:/workspace/node_modules
@@ -67,9 +66,8 @@ services:
     image: gcr.io/privacy-sandcastle-ssp/sandcastle_ssp:latest
     build: ./servers/ssp
     container_name: "sandcastle_ssp"
-    environment:
-      - host=${SSP_HOST}
-      - token=${SSP_TOKEN}
+    env_file:
+      - .env
     volumes:
       - ./servers/ssp:/workspace
       - ssp_node_modules:/workspace/node_modules

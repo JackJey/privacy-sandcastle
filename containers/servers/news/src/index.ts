@@ -16,10 +16,9 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = "3000"
-const host = process.env.host || "localhost"
-const token = process.env.token || "NO TOKEN FOR THIS ORIGIN"
-
+const port = "3000" // fixed for internal port
+const host = process.env.NEWS_HOST || "news.localhost"
+const token = process.env.NEWS_TOKEN || ""
 const app: Application = express()
 
 app.use((req, res, next) => {
@@ -31,13 +30,24 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
+  const home = new URL(`https://${process.env.HOME_HOST}:${process.env.PORT}`)
+  const ssp = new URL(`https://${process.env.SSP_HOST}:${process.env.PORT}`)
+  const title = process.env.NEWS_DETAIL
+  const lorem =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+  console.log(home)
+  console.log(ssp)
   const params = {
-    title: "FLEDGE Daily News",
-    token
+    title,
+    token,
+    lorem,
+    home,
+    ssp
   }
   res.render("index", params)
 })
 
-app.listen(port, function () {
+app.listen(port, async () => {
   console.log(`Listening on port ${port}`)
 })

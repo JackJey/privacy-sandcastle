@@ -33,7 +33,7 @@ app.set("views", "src/views")
 app.get("/", async (req: Request, res: Response) => {
   // extract environment value
   const hosts_map = Object.entries(process.env)
-  .filter(([k, v]) => {
+    .filter(([k, v]) => {
       if (k.startsWith("HOME_")) {
         return false
       }
@@ -52,15 +52,13 @@ app.get("/", async (req: Request, res: Response) => {
     }, new Map())
 
   const port = process.env.PORT
-  const hosts = Array
-    .from(hosts_map.values())
-    .map(({HOST, DETAILS}) => {
-      const host: URL = new URL(`https://${HOST}:${port}`)
-      return {
-        host,
-        details: DETAILS
-      }
-    })
+  const hosts = Array.from(hosts_map.values()).map(({ HOST, DETAILS }) => {
+    const host: URL = new URL(`https://${HOST}:${port}`)
+    return {
+      host,
+      details: DETAILS
+    }
+  })
 
   res.render("index", { hosts })
 })
