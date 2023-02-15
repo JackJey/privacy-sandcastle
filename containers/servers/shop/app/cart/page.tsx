@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-import { fetchCart } from "../../lib/getCart"
+import { fetchCart } from "../../lib/fetcher"
 import { Order } from "../../lib/items"
 import Cart from "./Cart"
 
