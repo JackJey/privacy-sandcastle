@@ -17,7 +17,7 @@
 import { cookies } from "next/headers"
 import { Order } from "./items"
 
-export async function getCart() {
+export async function fetchCart() {
   const host = process.env.host || "localhost"
   const port = "3000"
   const url = `http://${host}:${port}/api/cart`

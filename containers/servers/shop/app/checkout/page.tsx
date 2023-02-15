@@ -14,10 +14,10 @@
  limitations under the License.
  */
 
-import { getCart } from "../../lib/getCart"
+import { fetchCart } from "../../lib/getCart"
 import { Cart } from "./Cart"
 
 export default async function Page() {
-  const cart = await getCart()
+  const cart = await fetchCart()
   return <Cart checkout={cart}></Cart>
 }
