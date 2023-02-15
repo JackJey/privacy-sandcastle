@@ -17,9 +17,10 @@
 import { cookies } from "next/headers"
 import { Item, Order } from "./items"
 
+const host = process.env.SHOP_HOST || "shop.localhost"
+const port = "3000" // fixed internal port
+
 export async function fetchCart() {
-  const host = process.env.host || "localhost"
-  const port = "3000"
   const url = `http://${host}:${port}/api/cart`
   const cookie = cookies().get("__session")
   const Cookie = `__session=${cookie?.value}`
@@ -34,8 +35,6 @@ export async function fetchCart() {
 }
 
 export async function fetchItems() {
-  const host = process.env.host || "localhost"
-  const port = "3000"
   const url = `http://${host}:${port}/api/items`
   const res = await fetch(url, { cache: "no-store" })
   const items: Item[] = await res.json()
@@ -43,8 +42,6 @@ export async function fetchItems() {
 }
 
 export async function fetchItem(id: string) {
-  const host = process.env.host || "localhost"
-  const port = "3000"
   const url = `http://${host}:${port}/api/items/${id}`
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()
