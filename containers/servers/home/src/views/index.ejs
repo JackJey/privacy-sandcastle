@@ -13,11 +13,11 @@
 <body>
   <h1>Privacy Sandcastle Home</h1>
   <ul>
-    <% for (const { HOST, DETAIL } of hosts ) { %>
+    <% for (const { host, detail } of hosts ) { %>
     <li>
-      <h2><%= DETAIL %></h2>
-      <iframe title="<%= HOST %>" src="https://<%= HOST %>"></iframe>
-      <a target="_blank" href="https://<%= HOST %>">https://<%= HOST %></a>
+      <h2><%= detail %></h2>
+      <iframe title="<%= host %>" src="<%= host %>"></iframe>
+      <a target="_blank" href="<%= host %>"><%= host %></a>
     </li>
     <% } %>
   </ul>

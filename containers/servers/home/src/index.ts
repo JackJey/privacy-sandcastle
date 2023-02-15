@@ -16,7 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = "3000"
+const port = "3000" // fixed for internal port
 const host = process.env.HOME_HOST || "home.localhost"
 const token = process.env.HOME_TOKEN || ""
 
@@ -32,8 +32,8 @@ app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
   // extract environment value
-  const hosts = Object.entries(process.env)
-    .filter(([k, v]) => {
+  const hosts_map = Object.entries(process.env)
+  .filter(([k, v]) => {
       if (k.startsWith("HOME_")) {
         return false
       }
@@ -50,7 +50,17 @@ app.get("/", async (req: Request, res: Response) => {
       acc.get(host)[tag] = v
       return acc
     }, new Map())
-    .values()
+
+  const port = process.env.PORT
+  const hosts = Array
+    .from(hosts_map.values())
+    .map(({HOST, DETAILS}) => {
+      const host: URL = new URL(`https://${HOST}:${port}`)
+      return {
+        host,
+        details: DETAILS
+      }
+    })
 
   res.render("index", { hosts })
 })
