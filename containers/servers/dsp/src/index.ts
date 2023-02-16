@@ -44,13 +44,37 @@ app.use(
 app.set("view engine", "ejs")
 app.set("views", "src/views")
 
+app.get("/join-ad-interest-group.html", async (req: Request, res: Response) => {
+  const title = "Join Ad Interest Group"
+  const host = process.env.DSP_HOST
+  const port = process.env.PORT
+  const url = new URL(`https://${host}:${port}`)
+  url.pathname = "/js/join-ad-interest-group.js"
+  const join = url.toString()
+  const token = process.env.DSP_TOKEN
+  const dsp = { title, token, join }
+  res.render("join-ad-interest-group", { title, dsp })
+})
+
 app.get("/", async (req: Request, res: Response) => {
   const title = process.env.DSP_DETAIL
   const host = process.env.DSP_HOST
   const port = process.env.PORT
   const url = new URL(`https://${host}:${port}`)
-  const dsp = { title, url }
-  res.render("index", { dsp })
+
+  url.pathname = "/dsp-tag.js"
+  const tag = url.toString()
+
+  url.pathname = "/js/join-ad-interest-group.js"
+  const join = url.toString()
+
+  url.pathname = "/join-ad-interest-group.html"
+  url.searchParams.append("advertiser", "privacy-sandcastle-shop")
+  url.searchParams.append("id", "1f45e")
+  const api = url.toString()
+
+  const dsp = { tag, join, api }
+  res.render("index", { title, dsp })
 })
 
 app.listen(port, function () {
