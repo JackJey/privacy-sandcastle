@@ -45,8 +45,12 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
-  const title = `DSP - Privacy Sandcastle`
-  res.render("index", { title })
+  const title = process.env.DSP_DETAIL
+  const host = process.env.DSP_HOST
+  const port = process.env.PORT
+  const url = new URL(`https://${host}:${port}`)
+  const dsp = { title, url }
+  res.render("index", { dsp })
 })
 
 app.listen(port, function () {

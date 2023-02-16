@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= title %></title>
+  <title><%= dsp.title %></title>
   <link rel="stylesheet" href="/css/index.css" />
   <link rel="icon" href="/img/spy.svg" />
 </head>
 
 <body>
-  <h1><%= title %></h1>
+  <h1><%= dsp.title %></h1>
   <section>
     <h2>Demand Side Platform</h2>
     <p>DSP provides 3rd party tag which join user into interest group via Fledge API</p>
     <script
-      src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+      src="<%= dsp.url %>/dsp-tag.js"
       class="dsp_tag"
       data-advertiser="privacy-sandcastle-shop"
       data-id="1f45e"
@@ -23,13 +23,25 @@
     </script>
     <h2>inside iframe</h2>
     <ul>
-      <li><a target="_blank" href="https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e">https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e</a>
-      <li><a target="_blank" href="https://privacy-sandcastle-dsp.web.app/js/join-ad-interest-group.js">https://privacy-sandcastle-dsp.web.app/js/join-ad-interest-group.js</a>
+      <li>
+        <a
+          target="_blank"
+          href="<%= dsp.url %>/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e">
+            <%= dsp.url %>/join-ad-interest-group.html?advertiser=privacy-sandcastle-shop&id=1f45e
+        </a>
+      </li>
+      <li>
+        <a
+          target="_blank"
+          href="<%= dsp.url %>/js/join-ad-interest-group.js">
+            <%= dsp.url %>/js/join-ad-interest-group.js
+        </a>
+      </li>
     </ul>
     <h2>embed script</h2>
     <p>3rd party script provided by ssp should embed as below</p>
     <pre>&lt;script
-  src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+  src="<%= dsp.url %>/dsp-tag.js"
   class="dsp_tag"
   data-advertiser="privacy-sandcastle-shop"
   data-id="1f45e"
