@@ -3,6 +3,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title><%= title %></title>
 
-<meta http-equiv="origin-trial" content="<%= dsp.token %>" />
+<meta http-equiv="origin-trial" content="<%= DSP_TOKEN %>" />
 
-<script src="<%= dsp.join %>"></script>
+<script src="<%= `https://${DSP_HOST}:${PORT}/js/join-ad-interest-group.js` %>"></script>

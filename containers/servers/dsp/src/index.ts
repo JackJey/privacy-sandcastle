@@ -17,21 +17,19 @@
 // DSP
 import express, { Application, Request, Response } from "express"
 
-const port = process.env.INTERNAL_PORT
-const host = process.env.DSP_HOST as string
-const token = process.env.DSP_TOKEN as string
+const { PORT, INTERNAL_PORT, DSP_HOST, DSP_TOKEN, DSP_DETAIL, SSP_HOST } = process.env
 
 const app: Application = express()
 
 app.use((req, res, next) => {
-  res.setHeader("Origin-Trial", token)
+  res.setHeader("Origin-Trial", DSP_TOKEN as string)
   next()
 })
 
 app.use(
   express.static("src/public", {
     setHeaders: (res: Response, path, stat) => {
-      const url = new URL(path, `https://${host}`)
+      const url = new URL(path, `https://${DSP_HOST}`)
       if (url.pathname.endsWith("bidding_logic.js")) {
         return res.set("X-Allow-FLEDGE", "true")
       }
@@ -46,14 +44,7 @@ app.set("views", "src/views")
 
 app.get("/join-ad-interest-group.html", async (req: Request, res: Response) => {
   const title = "Join Ad Interest Group"
-  const host = process.env.DSP_HOST
-  const port = process.env.PORT
-  const url = new URL(`https://${host}:${port}`)
-  url.pathname = "/js/join-ad-interest-group.js"
-  const join = url.toString()
-  const token = process.env.DSP_TOKEN
-  const dsp = { title, token, join }
-  res.render("join-ad-interest-group", { title, dsp })
+  res.render("join-ad-interest-group", { title, DSP_TOKEN, DSP_HOST, PORT })
 })
 
 app.get("/interest-group.json", async (req: Request, res: Response) => {
@@ -62,26 +53,19 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
     return res.sendStatus(400)
   }
 
-  const dsp = new URL(`https://${process.env.DSP_HOST}:${process.env.PORT}`)
-  const ssp = new URL(`https://${process.env.SSP_HOST}:${process.env.PORT}`)
-
-  ssp.pathname = "/ads"
+  const ssp = new URL(`https://${SSP_HOST}:${PORT}/ads`)
   ssp.searchParams.append("advertiser", advertiser as string)
   ssp.searchParams.append("id", id as string)
   const renderUrl = ssp.toString()
 
-  dsp.pathname = "/js/bidding_logic.js"
-  const biddingLogicUrl = dsp.toString()
-
-  dsp.pathname = "/bidding_signal.json"
-  const trustedBiddingSignalsUrl = dsp.toString()
-
-  dsp.pathname = "/daily_update_url"
-  const dailyUpdateUrl = dsp.toString()
+  const owner = `https://${DSP_HOST}:${PORT}`
+  const biddingLogicUrl = `https://${DSP_HOST}:${PORT}/js/bidding_logic.js`
+  const trustedBiddingSignalsUrl = `https://${DSP_HOST}:${PORT}/bidding_signal.json`
+  const dailyUpdateUrl = `https://${DSP_HOST}:${PORT}/daily_update_url`
 
   res.json({
     name: advertiser,
-    owner: dsp,
+    owner,
 
     // x-allow-fledge: true
     biddingLogicUrl,
@@ -114,26 +98,10 @@ app.get("/bidding_signal.json", async (req: Request, res: Response) => {
 })
 
 app.get("/", async (req: Request, res: Response) => {
-  const title = process.env.DSP_DETAIL
-  const host = process.env.DSP_HOST
-  const port = process.env.PORT
-  const url = new URL(`https://${host}:${port}`)
-
-  url.pathname = "/dsp-tag.js"
-  const tag = url.toString()
-
-  url.pathname = "/js/join-ad-interest-group.js"
-  const join = url.toString()
-
-  url.pathname = "/join-ad-interest-group.html"
-  url.searchParams.append("advertiser", "privacy-sandcastle-shop")
-  url.searchParams.append("id", "1f45e")
-  const api = url.toString()
-
-  const dsp = { tag, join, api }
-  res.render("index", { title, dsp })
+  const title = DSP_DETAIL
+  res.render("index", { title, DSP_HOST, PORT })
 })
 
-app.listen(port, function () {
-  console.log(`Listening on port ${port}`)
+app.listen(INTERNAL_PORT, function () {
+  console.log(`Listening on port ${INTERNAL_PORT}`)
 })
