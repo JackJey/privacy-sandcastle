@@ -31,9 +31,7 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const port = process.env.INTERNAL_PORT
-const host = process.env.SSP_HOST
-const token = process.env.SSP_TOKEN
+const { PORT, INTERNAL_PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN } = process.env
 
 // global memory storage
 const Reports = []
@@ -41,7 +39,7 @@ const Reports = []
 const app = express()
 
 app.use((req, res, next) => {
-  res.setHeader("Origin-Trial", token)
+  res.setHeader("Origin-Trial", SSP_TOKEN)
   next()
 })
 
@@ -82,7 +80,7 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
-  const title = process.env.SSP_DETAIL || host
+  const title = SSP_DETAIL || SSP_HOST
   res.render("index.html.ejs", { title })
 })
 
@@ -91,18 +89,16 @@ app.get("/ads", async (req, res) => {
   console.log({ advertiser, id })
 
   const title = `Your special ads from ${advertiser}`
-  const host = process.env.SSP_HOST
-  const port = process.env.PORT
 
-  const href = new URL(`https://${host}:${port}/move`)
-  href.searchParams.append("advertiser", advertiser)
-  href.searchParams.append("id", id)
+  const move = new URL(`https://${SSP_HOST}:${PORT}/move`)
+  move.searchParams.append("advertiser", advertiser)
+  move.searchParams.append("id", id)
 
-  const src = new URL(`https://${host}:${port}/creative`)
-  src.searchParams.append("advertiser", advertiser)
-  src.searchParams.append("id", id)
+  const creative = new URL(`https://${SSP_HOST}:${PORT}/creative`)
+  creative.searchParams.append("advertiser", advertiser)
+  creative.searchParams.append("id", id)
 
-  res.render("ads.html.ejs", { title, href, src })
+  res.render("ads.html.ejs", { title, href: move, src: creative })
 })
 
 app.get("/move", async (req, res) => {
@@ -269,6 +265,6 @@ app.post("/.well-known/attribution-reporting/report-aggregate-attribution", asyn
   res.sendStatus(200)
 })
 
-app.listen(port, function () {
-  console.log(`Listening on port ${port}`)
+app.listen(INTERNAL_PORT, function () {
+  console.log(`Listening on port ${INTERNAL_PORT}`)
 })
