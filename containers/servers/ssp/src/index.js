@@ -25,7 +25,7 @@ import {
   triggerKeyPiece,
   ADVERTISER,
   PUBLISHER,
-  DIMENTION,
+  DIMENSION,
   decodeBucket,
   SOURCE_TYPE,
   TRIGGER_TYPE
@@ -113,14 +113,14 @@ app.get("/move", async (req, res) => {
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION["quantity"]
+            dimension: DIMENSION["quantity"]
           }),
           gross: sourceKeyPiece({
             type: SOURCE_TYPE["click"], // click attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION["gross"]
+            dimension: DIMENSION["gross"]
           })
         }
       }
@@ -153,14 +153,14 @@ app.get("/creative", async (req, res) => {
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION["quantity"]
+            dimension: DIMENSION["quantity"]
           }),
           gross: sourceKeyPiece({
             type: SOURCE_TYPE["view"], // view attribution
             advertiser: ADVERTISER[advertiser],
             publisher: PUBLISHER["news"],
             id: Number(`0x${id}`),
-            dimention: DIMENTION["gross"]
+            dimension: DIMENSION["gross"]
           })
         }
       }
