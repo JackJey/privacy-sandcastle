@@ -21,7 +21,7 @@ const port = process.env.INTERNAL_PORT
 const host = process.env.SHOP_HOST as string
 
 export async function fetchCart() {
-  const url = `http://${host}:${port}/api/cart`
+  const url = new URL(`http://${host}:${port}/api/cart`)
   const cookie = cookies().get("__session")
   const Cookie = `__session=${cookie?.value}`
   const res = await fetch(url, {
@@ -35,14 +35,14 @@ export async function fetchCart() {
 }
 
 export async function fetchItems() {
-  const url = `http://${host}:${port}/api/items`
+  const url = new URL(`http://${host}:${port}/api/items`)
   const res = await fetch(url, { cache: "no-store" })
   const items: Item[] = await res.json()
   return items
 }
 
 export async function fetchItem(id: string) {
-  const url = `http://${host}:${port}/api/items/${id}`
+  const url = new URL(`http://${host}:${port}/api/items/${id}`)
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()
   return item
