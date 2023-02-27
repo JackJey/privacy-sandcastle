@@ -35,9 +35,6 @@ services:
     container_name: "sandcastle_shop"
     env_file:
       - .env
-    environment:
-      - host=${SHOP_HOST}
-      - token=${SHOP_TOKEN}
     volumes:
       - ./servers/shop:/workspace
       - shop_node_modules:/workspace/node_modules
@@ -48,9 +45,6 @@ services:
     container_name: "sandcastle_travel"
     env_file:
       - .env
-    environment:
-      - host=${TRAVEL_HOST}
-      - token=${TRAVEL_TOKEN}
     volumes:
       - ./servers/travel:/workspace
       - travel_node_modules:/workspace/node_modules
@@ -61,9 +55,6 @@ services:
     container_name: "sandcastle_dsp"
     env_file:
       - .env
-    environment:
-      - host=${DSP_HOST}
-      - token=${DSP_TOKEN}
     volumes:
       - ./servers/dsp:/workspace
       - dsp_node_modules:/workspace/node_modules

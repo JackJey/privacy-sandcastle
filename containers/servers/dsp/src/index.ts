@@ -18,8 +18,8 @@
 import express, { Application, Request, Response } from "express"
 
 const port = process.env.INTERNAL_PORT
-const host = process.env.host as string
-const token = process.env.token as string
+const host = process.env.DSP_HOST as string
+const token = process.env.DSP_TOKEN as string
 
 const app: Application = express()
 

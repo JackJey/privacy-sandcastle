@@ -19,7 +19,7 @@ type Props = {
 }
 
 export default function Head({ title = "Shopping DEMO" }: Props) {
-  const token = process.env.token || ""
+  const token = process.env.SHOP_TOKEN || ""
   return (
     <>
       <meta charSet="utf-8"></meta>
