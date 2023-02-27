@@ -9,7 +9,7 @@
   <link rel="icon" href="/img/spy.svg" />
   <script src="/js/main.js"></script>
 
-  <meta http-equiv="origin-trial" content="<%= ot_token %>">
+  <meta http-equiv="origin-trial" content="<%= TRAVEL_TOKEN %>">
 </head>
 
 <body>
@@ -36,11 +36,12 @@
     <p>✅ Your browser has joined the <strong>travel</strong> interest group.</p>
     <p>👉 Now view a demo news site that runs a FLEDGE auction to select an ad:</p>
     <ul>
-      <li><a href=https://privacy-sandcastle-news.web.app>news</a></p>
+      <li><a href=<%= `https://${NEWS_HOST}:${PORT}` %>>>news</a></p>
     </ul>
   </footer>
-
-  <script class="dsp_tag" data-advertiser="privacy-sandcastle-travel" src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"></script>
+  <!--
+    FIXME:  <script class="dsp_tag" data-advertiser="privacy-sandcastle-travel" src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"></script>
+  -->
 </body>
 
 </html>

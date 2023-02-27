@@ -16,14 +16,12 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = process.env.INTERNAL_PORT
-const host = process.env.TRAVEL_HOST
-const token = process.env.TRAVEL_TOKEN
+const { PORT, INTERNAL_PORT, TRAVEL_TOKEN, TRAVEL_DETAIL, NEWS_HOST } = process.env
 
 const app: Application = express()
 
 app.use((req, res, next) => {
-  // res.setHeader("Origin-Trial", token)
+  res.setHeader("Origin-Trial", TRAVEL_TOKEN as string)
   next()
 })
 app.use(express.static("src/public"))
@@ -31,13 +29,16 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req: Request, res: Response) => {
+  const title = TRAVEL_DETAIL
   const params = {
-    title: "travel",
-    ot_token: ""
+    title,
+    TRAVEL_TOKEN,
+    NEWS_HOST,
+    PORT
   }
   res.render("index", params)
 })
 
-app.listen(port, function () {
-  console.log(`Listening on port ${port}`)
+app.listen(INTERNAL_PORT, function () {
+  console.log(`Listening on port ${INTERNAL_PORT}`)
 })
