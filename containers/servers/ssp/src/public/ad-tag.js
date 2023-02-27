@@ -16,11 +16,15 @@
 
 ;(async () => {
   const $ins = document.querySelector("ins.ads")
+  const $script = document.querySelector(".ssp_tag")
+
+  const src = new URL($script.src)
+  src.pathname = "/ad-tag.html"
 
   const $iframe = document.createElement("iframe")
   $iframe.width = 300
   $iframe.height = 250
-  $iframe.src = "https://privacy-sandcastle-ssp.web.app/ad-tag.html"
+  $iframe.src = src
   $iframe.setAttribute("scrolling", "no")
   $iframe.setAttribute("style", "border: none")
   $iframe.setAttribute("allow", "attribution-reporting; run-ad-auction")

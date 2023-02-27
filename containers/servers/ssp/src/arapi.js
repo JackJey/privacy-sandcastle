@@ -167,8 +167,8 @@ function test() {
   const source_key = sourceKeyPiece({ type: source_type, dimension, id, advertiser, publisher })
   console.log({ source_key })
 
-  const triger_key = triggerKeyPiece({ type: trigger_type, id, size, category, option })
-  console.log({ triger_key })
+  const trigger_key = triggerKeyPiece({ type: trigger_type, id, size, category, option })
+  console.log({ trigger_key })
 
   const source = encodeSource({ type: source_type, dimension, id, advertiser, publisher })
   console.log(decodeSource(source))
