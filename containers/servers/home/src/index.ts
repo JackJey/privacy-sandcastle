@@ -16,9 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = process.env.INTERNAL_PORT
-const host = process.env.HOME_HOST as string
-const token = process.env.HOME_TOKEN as string
+const { PORT, INTERNAL_PORT } = process.env
 
 const app: Application = express()
 
@@ -51,9 +49,8 @@ app.get("/", async (req: Request, res: Response) => {
       return acc
     }, new Map())
 
-  const port = process.env.PORT
   const hosts = Array.from(hosts_map.values()).map(({ HOST, DETAILS }) => {
-    const host: URL = new URL(`https://${HOST}:${port}`)
+    const host: URL = new URL(`https://${HOST}:${PORT}`)
     return {
       host,
       details: DETAILS
@@ -63,6 +60,6 @@ app.get("/", async (req: Request, res: Response) => {
   res.render("index", { hosts })
 })
 
-app.listen(port, async () => {
-  console.log(`Listening on port ${port}`)
+app.listen(INTERNAL_PORT, async () => {
+  console.log(`Listening on port ${INTERNAL_PORT}`)
 })
