@@ -14,45 +14,25 @@
  limitations under the License.
  */
 
-const url = new URL(location.href)
-const advertiser = url.searchParams.get("advertiser")
-const id = url.searchParams.get("id")
-
-const adsURL = new URL("https://privacy-sandcastle-ssp.web.app/ads")
-adsURL.searchParams.append("advertiser", advertiser)
-adsURL.searchParams.append("id", id)
-
-const renderUrl = adsURL.toString()
-
 // Fledge
-const interestGroup = {
-  name: advertiser,
-  owner: "https://privacy-sandcastle-dsp.web.app",
-
-  // x-allow-fledge: true
-  biddingLogicUrl: "https://privacy-sandcastle-dsp.web.app/js/bidding_logic.js",
-
-  // x-allow-fledge: true
-  trustedBiddingSignalsUrl: "https://privacy-sandcastle-dsp.web.app/bidding_signal.json",
-  trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
-
-  dailyUpdateUrl: "https://privacy-sandcastle-dsp.web.app/daily_update_url", // not implemented yet
-  userBiddingSignals: {
-    user_bidding_signals: "user_bidding_signals"
-  },
-  ads: [
-    {
-      renderUrl,
-      metadata: {
-        type: advertiser
-      }
-    }
-  ]
+async function getInterestGroup(advertiser, id) {
+  const url = new URL(location.origin)
+  url.pathname = "/interest-group.json"
+  url.searchParams.append("id", id)
+  url.searchParams.append("advertiser", advertiser)
+  const res = await fetch(url)
+  return res.json()
 }
-console.log(interestGroup)
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   // Fledge
+  const url = new URL(location.href)
+  const advertiser = url.searchParams.get("advertiser")
+  const id = url.searchParams.get("id")
+
+  const interestGroup = await getInterestGroup(advertiser, id)
+  console.log({ interestGroup })
+
   const kSecsPerDay = 3600 * 24 * 30
   console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay))
 
