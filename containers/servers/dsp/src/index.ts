@@ -106,6 +106,7 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
 })
 
 app.get("/bidding_signal.json", async (req: Request, res: Response) => {
+  res.setHeader("X-Allow-FLEDGE", "true")
   res.json({
     key1: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     key2: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
