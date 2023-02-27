@@ -19,6 +19,7 @@
   const advertiser = $script.dataset.advertiser
   const id = $script.dataset.id
 
+  console.log("xxx", location.href)
   const src = new URL("https://privacy-sandcastle-dsp.web.app/join-ad-interest-group.html")
   src.searchParams.append("advertiser", advertiser)
   src.searchParams.append("id", id)

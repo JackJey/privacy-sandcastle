@@ -105,6 +105,13 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
   })
 })
 
+app.get("/bidding_signal.json", async (req: Request, res: Response) => {
+  res.json({
+    key1: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    key2: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+  })
+})
+
 app.get("/", async (req: Request, res: Response) => {
   const title = process.env.DSP_DETAIL
   const host = process.env.DSP_HOST
