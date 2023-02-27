@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="icon" href="/img/spy.svg" />
   <script src="/js/main.js"></script>
-  <meta http-equiv="origin-trial" content="<%= token %>">
+  <meta http-equiv="origin-trial" content="<%= NEWS_TOKEN %>">
 </head>
 
 <body class="container mx-auto flex flex-col gap-6 font-serif sm:w-full md:w-full lg:w-3/5 bg-slate-50 pt-8">
@@ -26,7 +26,7 @@
       <div class="w-full flex flex-col items-center">
         <span class="font-mono text-sm">ADS BY FLEDGE</span>
         <ins class="ads">
-          <script defer class="ssp_tag" src="<%= ad_tag %>"></script>
+          <script defer class="ssp_tag" src="<%= `https://${SSP_HOST}:${PORT}/ad-tag.js` %>"></script>
         </ins>
       </div>
 
@@ -57,7 +57,7 @@
   </main>
   <footer>
     <hr>
-    <p><a href=<%= home %>>back to top</a>
+    <p><a href=<%= `https://${HOME_HOST}:${PORT}` %>>back to top</a>
   </footer>
 </body>
 
