@@ -17,8 +17,8 @@
 import { cookies } from "next/headers"
 import { Item, Order } from "./items"
 
-const host = process.env.SHOP_HOST || "shop.localhost"
-const port = "3000" // fixed internal port
+const port = process.env.INTERNAL_PORT
+const host = process.env.SHOP_HOST as string
 
 export async function fetchCart() {
   const url = `http://${host}:${port}/api/cart`

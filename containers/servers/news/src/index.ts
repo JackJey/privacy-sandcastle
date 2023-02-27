@@ -16,9 +16,9 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = "3000" // fixed for internal port
-const host = process.env.NEWS_HOST || "news.localhost"
-const token = process.env.NEWS_TOKEN || ""
+const port = process.env.INTERNAL_PORT as string
+const host = process.env.NEWS_HOST as string
+const token = process.env.NEWS_TOKEN as string
 const app: Application = express()
 
 app.use((req, res, next) => {

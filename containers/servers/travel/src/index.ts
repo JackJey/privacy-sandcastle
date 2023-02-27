@@ -16,9 +16,9 @@
 
 import express, { Application, Request, Response } from "express"
 
-const port = "3000"
-const host = process.env.host || "localhost"
-const token = process.env.token || ""
+const port = process.env.INTERNAL_PORT
+const host = process.env.TRAVEL_HOST
+const token = process.env.TRAVEL_TOKEN
 
 const app: Application = express()
 

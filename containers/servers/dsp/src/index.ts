@@ -17,9 +17,9 @@
 // DSP
 import express, { Application, Request, Response } from "express"
 
-const port = "3000"
-const host = process.env.host || "localhost"
-const token = process.env.token || ""
+const port = process.env.INTERNAL_PORT
+const host = process.env.host as string
+const token = process.env.token as string
 
 const app: Application = express()
 

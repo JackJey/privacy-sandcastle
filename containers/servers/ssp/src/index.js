@@ -31,9 +31,9 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const port = "3000" // "fixed for internal port"
-const host = process.env.SSP_HOST || "ssp.localhost"
-const token = process.env.SSP_TOKEN || ""
+const port = process.env.INTERNAL_PORT
+const host = process.env.SSP_HOST
+const token = process.env.SSP_TOKEN
 
 // global memory storage
 const Reports = []
