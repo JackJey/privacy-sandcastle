@@ -98,7 +98,7 @@ app.get("/ads", async (req, res) => {
   creative.searchParams.append("advertiser", advertiser)
   creative.searchParams.append("id", id)
 
-  res.render("ads.html.ejs", { title, href: move, src: creative })
+  res.render("ads.html.ejs", { title, move, creative })
 })
 
 app.get("/move", async (req, res) => {
