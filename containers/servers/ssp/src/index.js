@@ -89,8 +89,20 @@ app.get("/", async (req, res) => {
 app.get("/ads", async (req, res) => {
   const { advertiser, id } = req.query
   console.log({ advertiser, id })
+
   const title = `Your special ads from ${advertiser}`
-  res.render("ads.html.ejs", { title, advertiser, id })
+  const host = process.env.SSP_HOST
+  const port = process.env.PORT
+
+  const href = new URL(`https://${host}:${port}/move`)
+  href.searchParams.append("advertiser", advertiser)
+  href.searchParams.append("id", id)
+
+  const src = new URL(`https://${host}:${port}/creative`)
+  src.searchParams.append("advertiser", advertiser)
+  src.searchParams.append("id", id)
+
+  res.render("ads.html.ejs", { title, href, src })
 })
 
 app.get("/move", async (req, res) => {
