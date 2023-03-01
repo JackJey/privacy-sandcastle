@@ -31,7 +31,7 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const { PORT, INTERNAL_PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN } = process.env
+const { PORT, INTERNAL_PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN, DSP_HOST } = process.env
 
 // global memory storage
 const Reports = []
@@ -225,6 +225,42 @@ app.get("/ad-tag.html", async (req, res) => {
 
 app.get("/reports", async (req, res) => {
   res.render("reports.html.ejs", { title: "Report", Reports })
+})
+
+app.get("/auction-config.json", async (req, res) => {
+  const DSP = new URL(`https://${DSP_HOST}:${PORT}`)
+  const SSP = new URL(`https://${SSP_HOST}:${PORT}`)
+  const auctionConfig = {
+    // should https & same as decisionLogicUrl's origin
+    seller: SSP,
+
+    // x-allow-fledge: true
+    decisionLogicUrl: `${SSP}/js/decision-logic.js`,
+
+    interestGroupBuyers: [
+      // * is not supported yet
+      DSP
+    ],
+    // public for everyone
+    auctionSignals: {
+      auction_signals: "auction_signals"
+    },
+
+    // only for single party
+    sellerSignals: {
+      seller_signals: "seller_signals"
+    },
+
+    // only for single party
+    perBuyerSignals: {
+      // listed on interestGroupByers
+      [DSP]: {
+        per_buyer_signals: "per_buyer_signals"
+      }
+    }
+  }
+  console.log({auctionConfig})
+  res.json(auctionConfig)
 })
 
 app.post("/.well-known/attribution-reporting/debug/report-aggregate-attribution", async (req, res) => {

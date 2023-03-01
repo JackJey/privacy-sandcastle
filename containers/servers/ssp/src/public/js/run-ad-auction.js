@@ -15,33 +15,11 @@
  */
 
 // ssp
-const auctionConfig = {
-  seller: "https://privacy-sandcastle-ssp.web.app", // should https & same as decisionLogicUrl's origin
-
-  // x-allow-fledge: true
-  decisionLogicUrl: "https://privacy-sandcastle-ssp.web.app/js/decision-logic.js",
-
-  interestGroupBuyers: [
-    // * is not supported yet
-    "https://privacy-sandcastle-dsp.web.app"
-  ],
-  // public for everyone
-  auctionSignals: {
-    auction_signals: "auction_signals"
-  },
-
-  // only for single party
-  sellerSignals: {
-    seller_signals: "seller_signals"
-  },
-
-  // only for single party
-  perBuyerSignals: {
-    // listed on interestGroupByers
-    "https://privacy-sandcastle-dsp.web.app": {
-      per_buyer_signals: "per_buyer_signals"
-    }
-  }
+async function getAuctionConfig() {
+  const url = new URL(location.origin)
+  url.pathname = "/auction-config.json"
+  const res = await fetch(url)
+  return res.json()
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -51,10 +29,12 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     topics
   })
 
-  // TODO: ここで auctionConfig を fetch する
+  const auctionConfig = await getAuctionConfig()
 
   const adAuctionResult = await navigator.runAdAuction(auctionConfig)
+
   console.log({
+    auctionConfig,
     adAuctionResult
   })
 
