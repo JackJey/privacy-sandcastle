@@ -80,8 +80,8 @@ app.set("view engine", "ejs")
 app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
-  const title = SSP_DETAIL || SSP_HOST
-  res.render("index.html.ejs", { title })
+  const title = SSP_DETAIL
+  res.render("index.html.ejs", { title, SSP_HOST, PORT })
 })
 
 app.get("/ads", async (req, res) => {
@@ -235,7 +235,7 @@ app.get("/auction-config.json", async (req, res) => {
     seller: SSP,
 
     // x-allow-fledge: true
-    decisionLogicUrl: `${SSP}/js/decision-logic.js`,
+    decisionLogicUrl: `${SSP}js/decision-logic.js`,
 
     interestGroupBuyers: [
       // * is not supported yet
