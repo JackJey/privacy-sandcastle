@@ -58,10 +58,10 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
   ssp.searchParams.append("id", id as string)
   const renderUrl = ssp.toString()
 
-  const owner = `https://${DSP_HOST}:${PORT}`
-  const biddingLogicUrl = `https://${DSP_HOST}:${PORT}/js/bidding_logic.js`
-  const trustedBiddingSignalsUrl = `https://${DSP_HOST}:${PORT}/bidding_signal.json`
-  const dailyUpdateUrl = `https://${DSP_HOST}:${PORT}/daily_update_url`
+  const owner = new URL(`https://${DSP_HOST}:${PORT}`)
+  const biddingLogicUrl = new URL(`https://${DSP_HOST}:${PORT}/js/bidding_logic.js`)
+  const trustedBiddingSignalsUrl = new URL(`https://${DSP_HOST}:${PORT}/bidding_signal.json`)
+  const dailyUpdateUrl = new URL(`https://${DSP_HOST}:${PORT}/daily_update_url`)
 
   res.json({
     name: advertiser,
