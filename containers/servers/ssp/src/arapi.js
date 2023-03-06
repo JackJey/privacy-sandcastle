@@ -22,13 +22,13 @@ export const SOURCE_TYPE = {
 
 // advertiser: 16bit
 export const ADVERTISER = {
-  "privacy-sandcastle-shop": 0b0,
-  "privacy-sandcastle-travel": 0b1
+  "privacy-sandcastle-shop.web.app": 0b0,
+  "privacy-sandcastle-travel.web.app": 0b1
 }
 
 // publisher:  16bit
 export const PUBLISHER = {
-  "privacy-sandcastle-news": 0b0
+  "privacy-sandcastle-news.web.app": 0b0
 }
 
 // dimension: 8bit
