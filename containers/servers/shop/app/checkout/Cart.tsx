@@ -28,8 +28,7 @@ export const Cart = ({ checkout }: { checkout: Order[] }) => {
 
   fetch("/api/cart", { method: "DELETE" }).catch((res) => {
     // TODO: move destroy session to SSR
-    console.log(res)
-    console.log(res.ok)
+    console.assert(res.ok)
   })
 
   return (
