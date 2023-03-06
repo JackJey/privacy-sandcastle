@@ -17,7 +17,7 @@
 // DSP
 import express, { Application, Request, Response } from "express"
 
-const { PORT, INTERNAL_PORT, DSP_HOST, DSP_TOKEN, DSP_DETAIL, SSP_HOST } = process.env
+const { PORT, INTERNAL_PORT, DSP_HOST, DSP_TOKEN, DSP_DETAIL, SSP_HOST, SHOP_HOST } = process.env
 
 const app: Application = express()
 
@@ -99,7 +99,7 @@ app.get("/bidding_signal.json", async (req: Request, res: Response) => {
 
 app.get("/", async (req: Request, res: Response) => {
   const title = DSP_DETAIL
-  res.render("index", { title, DSP_HOST, PORT })
+  res.render("index", { title, DSP_HOST, SHOP_HOST, PORT })
 })
 
 app.listen(INTERNAL_PORT, function () {
