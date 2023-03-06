@@ -259,7 +259,7 @@ app.get("/auction-config.json", async (req, res) => {
       }
     }
   }
-  console.log({auctionConfig})
+  console.log({ auctionConfig })
   res.json(auctionConfig)
 })
 

@@ -20,7 +20,7 @@ import Link from "next/link"
 import { Order } from "../../lib/items"
 import { CartItem } from "./CartItem"
 
-export const Cart = ({ checkout, ssp }: { checkout: Order[], ssp: string }) => {
+export const Cart = ({ checkout, ssp }: { checkout: Order[]; ssp: string }) => {
   const subtotal = checkout.reduce((sum, { item, quantity }) => {
     return sum + item.price * quantity
   }, 0)
@@ -38,7 +38,7 @@ export const Cart = ({ checkout, ssp }: { checkout: Order[], ssp: string }) => {
         <ul className="flex flex-col gap-6">
           {checkout.map((order) => {
             const key = `${order.item.id}:${order.size}`
-            return <CartItem key={key} order={order} ssp={ssp}/>
+            return <CartItem key={key} order={order} ssp={ssp} />
           })}
         </ul>
 
