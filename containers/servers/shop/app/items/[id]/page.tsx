@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: Params }) {
     <div className="flex flex-col gap-6">
       <main className="grid lg:grid-cols-2">
         <section className="">
-          <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name}></Image>
+          <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name} priority={true}></Image>
         </section>
         <section className="">
           <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
