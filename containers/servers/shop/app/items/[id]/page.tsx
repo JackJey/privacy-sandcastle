@@ -53,9 +53,9 @@ export default async function Page({ params }: { params: Params }) {
         </Link>
         <Script
           className="dsp_tag"
-          data-advertiser="privacy-sandcastle-shop.web.app"
+          data-advertiser={process.env.SHOP_HOST}
           data-id={item.id}
-          src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+          src={`https://${process.env.DSP_HOST}/dsp-tag.js`}
         ></Script>
       </footer>
     </div>
