@@ -25,7 +25,7 @@ EOT
 )
 
 
-ENVs=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT" | sed '/^$/d' | tr "\n" ",")
+ENVs=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
 echo ${ENVs}
 
 for host in $hosts; do
