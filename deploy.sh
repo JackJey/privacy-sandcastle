@@ -24,6 +24,10 @@ hosts=$(cat <<EOT
 EOT
 )
 
+
+ENVs=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT" | sed '/^$/d' | tr "\n" ",")
+echo ${ENVs}
+
 for host in $hosts; do
   echo https://privacy-sandcastle-${host}.web.app/
   # GCP
@@ -33,7 +37,13 @@ for host in $hosts; do
   ## push docker image
   docker push gcr.io/privacy-sandcastle-${host}/sandcastle_${host}
   ## deploy cloud run
-  gcloud run deploy sandcastle-${host} --image gcr.io/privacy-sandcastle-${host}/sandcastle_${host}:latest --platform managed --region asia-northeast1 --min-instances 1
+  gcloud run deploy sandcastle-${host} \
+    --image gcr.io/privacy-sandcastle-${host}/sandcastle_${host}:latest \
+    --platform managed \
+    --region asia-northeast1 \
+    --min-instances 1 \
+    --memory 1G \
+    --set-env-vars "${ENVs}"
 
   # Firebase Hosting
   ## cleanup cache
