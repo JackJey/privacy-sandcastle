@@ -42,7 +42,7 @@ for host in $hosts; do
     --platform managed \
     --region asia-northeast1 \
     --min-instances 1 \
-    --memory 1G \
+    --memory 2G \
     --set-env-vars "${ENVs}"
 
   # Firebase Hosting
