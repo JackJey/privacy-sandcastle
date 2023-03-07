@@ -31,7 +31,7 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const { PORT, INTERNAL_PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN, DSP_HOST } = process.env
+const { EXTERNAL_PORT, PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN, DSP_HOST } = process.env
 
 // global memory storage
 const Reports = []
@@ -81,7 +81,7 @@ app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
   const title = SSP_DETAIL
-  res.render("index.html.ejs", { title, SSP_HOST, PORT })
+  res.render("index.html.ejs", { title, SSP_HOST, EXTERNAL_PORT })
 })
 
 app.get("/ads", async (req, res) => {
@@ -90,11 +90,11 @@ app.get("/ads", async (req, res) => {
 
   const title = `Your special ads from ${advertiser}`
 
-  const move = new URL(`https://${SSP_HOST}:${PORT}/move`)
+  const move = new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/move`)
   move.searchParams.append("advertiser", advertiser)
   move.searchParams.append("id", id)
 
-  const creative = new URL(`https://${SSP_HOST}:${PORT}/creative`)
+  const creative = new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/creative`)
   creative.searchParams.append("advertiser", advertiser)
   creative.searchParams.append("id", id)
 
@@ -228,8 +228,8 @@ app.get("/reports", async (req, res) => {
 })
 
 app.get("/auction-config.json", async (req, res) => {
-  const DSP = new URL(`https://${DSP_HOST}:${PORT}`)
-  const SSP = new URL(`https://${SSP_HOST}:${PORT}`)
+  const DSP = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}`)
+  const SSP = new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}`)
   const auctionConfig = {
     // should https & same as decisionLogicUrl's origin
     seller: SSP,
@@ -301,6 +301,6 @@ app.post("/.well-known/attribution-reporting/report-aggregate-attribution", asyn
   res.sendStatus(200)
 })
 
-app.listen(INTERNAL_PORT, function () {
-  console.log(`Listening on port ${INTERNAL_PORT}`)
+app.listen(PORT, function () {
+  console.log(`Listening on port ${PORT}`)
 })

@@ -16,19 +16,19 @@
     <p>SSP provides 3rd party tag which running auction via Fledge API and decide which Ads to display</p>
     <p>Ads will embed inside &lt;fencedframe&gt; like below.</p>
     <ins class="ads">
-      <script class="ssp_tag" src="<%= new URL(`https://${SSP_HOST}:${PORT}/ad-tag.js`) %>"></script>
+      <script class="ssp_tag" src="<%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.js`) %>"></script>
     </ins>
 
     <h2>inside iframe</h2>
     <ul>
       <li>
-        <a target="_blank" href="<%= new URL(`https://${SSP_HOST}:${PORT}/ad-tag.html`) %>">
-          <%= new URL(`https://${SSP_HOST}:${PORT}/ad-tag.html`) %>
+        <a target="_blank" href="<%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.html`) %>">
+          <%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.html`) %>
         </a>
       </li>
       <li>
-        <a target="_blank" href="<%= new URL(`https://${SSP_HOST}:${PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`) %>">
-          <%= new URL(`https://${SSP_HOST}:${PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`) %>
+        <a target="_blank" href="<%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`) %>">
+          <%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`) %>
         </a>
       </li>
     </ul>
@@ -36,7 +36,7 @@
     <p>3rd party script provided by ssp should embed as below</p>
     <pre>
 &lt;ins class="ads"&gt;
-  &lt;script class="ssp_tag" src="<%= new URL(`https://${SSP_HOST}:${PORT}/ad-tag.js`) %>"&gt;&lt;/script&gt;
+  &lt;script class="ssp_tag" src="<%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.js`) %>"&gt;&lt;/script&gt;
 &lt;/ins&gt;</pre>
   </section>
 </body>

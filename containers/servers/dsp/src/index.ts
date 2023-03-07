@@ -17,7 +17,7 @@
 // DSP
 import express, { Application, Request, Response } from "express"
 
-const { PORT, INTERNAL_PORT, DSP_HOST, DSP_TOKEN, DSP_DETAIL, SSP_HOST, SHOP_HOST } = process.env
+const { EXTERNAL_PORT, PORT, DSP_HOST, DSP_TOKEN, DSP_DETAIL, SSP_HOST, SHOP_HOST } = process.env
 
 const app: Application = express()
 
@@ -44,7 +44,7 @@ app.set("views", "src/views")
 
 app.get("/join-ad-interest-group.html", async (req: Request, res: Response) => {
   const title = "Join Ad Interest Group"
-  res.render("join-ad-interest-group", { title, DSP_TOKEN, DSP_HOST, PORT })
+  res.render("join-ad-interest-group", { title, DSP_TOKEN, DSP_HOST, EXTERNAL_PORT })
 })
 
 app.get("/interest-group.json", async (req: Request, res: Response) => {
@@ -53,15 +53,15 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
     return res.sendStatus(400)
   }
 
-  const ssp = new URL(`https://${SSP_HOST}:${PORT}/ads`)
+  const ssp = new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ads`)
   ssp.searchParams.append("advertiser", advertiser as string)
   ssp.searchParams.append("id", id as string)
   const renderUrl = ssp.toString()
 
-  const owner = new URL(`https://${DSP_HOST}:${PORT}`)
-  const biddingLogicUrl = new URL(`https://${DSP_HOST}:${PORT}/js/bidding_logic.js`)
-  const trustedBiddingSignalsUrl = new URL(`https://${DSP_HOST}:${PORT}/bidding_signal.json`)
-  const dailyUpdateUrl = new URL(`https://${DSP_HOST}:${PORT}/daily_update_url`)
+  const owner = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}`)
+  const biddingLogicUrl = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/js/bidding_logic.js`)
+  const trustedBiddingSignalsUrl = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/bidding_signal.json`)
+  const dailyUpdateUrl = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/daily_update_url`)
 
   res.json({
     name: advertiser,
@@ -99,9 +99,9 @@ app.get("/bidding_signal.json", async (req: Request, res: Response) => {
 
 app.get("/", async (req: Request, res: Response) => {
   const title = DSP_DETAIL
-  res.render("index", { title, DSP_HOST, SHOP_HOST, PORT })
+  res.render("index", { title, DSP_HOST, SHOP_HOST, EXTERNAL_PORT })
 })
 
-app.listen(INTERNAL_PORT, function () {
-  console.log(`Listening on port ${INTERNAL_PORT}`)
+app.listen(PORT, function () {
+  console.log(`Listening on port ${PORT}`)
 })

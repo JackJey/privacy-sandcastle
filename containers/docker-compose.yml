@@ -81,6 +81,6 @@ services:
         source: "./nginx/cert"
         target: "/cert"
     ports:
-      - "${PORT}:443"
+      - "${EXTERNAL_PORT}:443"
     env_file:
       - .env

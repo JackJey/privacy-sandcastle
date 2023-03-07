@@ -16,7 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const { PORT, INTERNAL_PORT } = process.env
+const { EXTERNAL_PORT, PORT } = process.env
 
 const app: Application = express()
 
@@ -50,7 +50,7 @@ app.get("/", async (req: Request, res: Response) => {
     }, new Map())
 
   const hosts = Array.from(hosts_map.values()).map(({ HOST, DETAILS }) => {
-    const host: URL = new URL(`https://${HOST}:${PORT}`)
+    const host: URL = new URL(`https://${HOST}:${EXTERNAL_PORT}`)
     return {
       host,
       details: DETAILS
@@ -60,6 +60,6 @@ app.get("/", async (req: Request, res: Response) => {
   res.render("index", { hosts })
 })
 
-app.listen(INTERNAL_PORT, async () => {
-  console.log(`Listening on port ${INTERNAL_PORT}`)
+app.listen(PORT, async () => {
+  console.log(`Listening on port ${PORT}`)
 })

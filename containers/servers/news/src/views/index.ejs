@@ -26,7 +26,7 @@
       <div class="w-full flex flex-col items-center">
         <span class="font-mono text-sm">ADS BY FLEDGE</span>
         <ins class="ads">
-          <script defer class="ssp_tag" src="<%= `https://${SSP_HOST}:${PORT}/ad-tag.js` %>"></script>
+          <script defer class="ssp_tag" src="<%= `https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.js` %>"></script>
         </ins>
       </div>
 
@@ -57,7 +57,7 @@
   </main>
   <footer>
     <hr>
-    <p><a href=<%= `https://${HOME_HOST}:${PORT}` %>>back to top</a>
+    <p><a href=<%= `https://${HOME_HOST}:${EXTERNAL_PORT}` %>>back to top</a>
   </footer>
 </body>
 

@@ -16,7 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const { PORT, INTERNAL_PORT, TRAVEL_TOKEN, TRAVEL_DETAIL, NEWS_HOST } = process.env
+const { EXTERNAL_PORT, PORT, TRAVEL_TOKEN, TRAVEL_DETAIL, NEWS_HOST } = process.env
 
 const app: Application = express()
 
@@ -34,11 +34,11 @@ app.get("/", async (req: Request, res: Response) => {
     title,
     TRAVEL_TOKEN,
     NEWS_HOST,
-    PORT
+    EXTERNAL_PORT
   }
   res.render("index", params)
 })
 
-app.listen(INTERNAL_PORT, function () {
-  console.log(`Listening on port ${INTERNAL_PORT}`)
+app.listen(PORT, function () {
+  console.log(`Listening on port ${PORT}`)
 })

@@ -16,7 +16,7 @@
 
 import express, { Application, Request, Response } from "express"
 
-const { PORT, INTERNAL_PORT, HOME_HOST, SSP_HOST, NEWS_TOKEN, NEWS_DETAIL } = process.env
+const { EXTERNAL_PORT, PORT, HOME_HOST, SSP_HOST, NEWS_TOKEN, NEWS_DETAIL } = process.env
 
 const app: Application = express()
 
@@ -36,7 +36,7 @@ app.get("/", async (req: Request, res: Response) => {
   const params = {
     title,
     lorem,
-    PORT,
+    EXTERNAL_PORT,
     HOME_HOST,
     NEWS_TOKEN,
     SSP_HOST
@@ -44,6 +44,6 @@ app.get("/", async (req: Request, res: Response) => {
   res.render("index", params)
 })
 
-app.listen(INTERNAL_PORT, async () => {
-  console.log(`Listening on port ${INTERNAL_PORT}`)
+app.listen(PORT, async () => {
+  console.log(`Listening on port ${PORT}`)
 })
