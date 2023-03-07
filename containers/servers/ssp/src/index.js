@@ -31,7 +31,7 @@ import {
   TRIGGER_TYPE
 } from "./arapi.js"
 
-const { EXTERNAL_PORT, PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN, DSP_HOST } = process.env
+const { EXTERNAL_PORT, PORT, SSP_HOST, SSP_DETAIL, SSP_TOKEN, DSP_HOST, SHOP_HOST } = process.env
 
 // global memory storage
 const Reports = []
@@ -81,7 +81,7 @@ app.set("views", "src/views")
 
 app.get("/", async (req, res) => {
   const title = SSP_DETAIL
-  res.render("index.html.ejs", { title, SSP_HOST, EXTERNAL_PORT })
+  res.render("index.html.ejs", { title, SSP_HOST, EXTERNAL_PORT, SHOP_HOST })
 })
 
 app.get("/ads", async (req, res) => {
