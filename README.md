@@ -120,7 +120,7 @@ Client ->req-> Nginx
 
 ## Host & Port
 
-URL is so important in Privacy Sandbox APIs, so the demo could not rely on local url such as `http://localhost:3000`.
+URL is so important in Privacy Sandbox APIs, so the demo could not rely on local url such as `http://localhost:8080`.
 
 In this project, every service should has real domain & valid certificate, so the services could access via URL like below.
 
