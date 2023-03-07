@@ -19,8 +19,7 @@ import { Cart } from "./Cart"
 
 export default async function Page() {
   const cart = await fetchCart()
-  const host = process.env.SSP_HOST
-  const port = process.env.PORT
-  const ssp = `https://${host}:${port}`
+  const { SSP_HOST, PORT } = process.env
+  const ssp = `https://${SSP_HOST}:${PORT}`
   return <Cart checkout={cart} ssp={ssp}></Cart>
 }

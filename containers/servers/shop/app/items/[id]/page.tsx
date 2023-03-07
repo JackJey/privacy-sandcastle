@@ -29,7 +29,7 @@ type Params = {
 export default async function Page({ params }: { params: Params }) {
   const { id } = params
   const item = await fetchItem(id)
-
+  const { SHOP_HOST, DSP_HOST, PORT } = process.env
   return (
     <div className="flex flex-col gap-6">
       <main className="grid lg:grid-cols-2">
@@ -53,9 +53,9 @@ export default async function Page({ params }: { params: Params }) {
         </Link>
         <Script
           className="dsp_tag"
-          data-advertiser={process.env.SHOP_HOST}
+          data-advertiser={SHOP_HOST}
           data-id={item.id}
-          src={`https://${process.env.DSP_HOST}/dsp-tag.js`}
+          src={new URL(`https://${DSP_HOST}:${PORT}/dsp-tag.js`).toString()}
         ></Script>
       </footer>
     </div>
