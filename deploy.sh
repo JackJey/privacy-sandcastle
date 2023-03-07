@@ -25,8 +25,8 @@ EOT
 )
 
 
-ENVs=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
-echo ${ENVs}
+ENV_VARS=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
+echo ${ENV_VARS}
 
 for host in $hosts; do
   echo https://privacy-sandcastle-${host}.web.app/
@@ -43,7 +43,7 @@ for host in $hosts; do
     --region asia-northeast1 \
     --min-instances 1 \
     --memory 2G \
-    --set-env-vars "${ENVs}"
+    --set-env-vars "${ENV_VARS}"
 
   # Firebase Hosting
   ## cleanup cache
