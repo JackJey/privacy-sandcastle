@@ -41,8 +41,11 @@ export async function fetchItems() {
 }
 
 export async function fetchItem(id: string) {
+  console.log({ id })
   const url = new URL(`http://${SHOP_HOST}:${PORT}/api/items/${id}`)
+  console.log({ url })
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()
+  console.log({ item })
   return item
 }
