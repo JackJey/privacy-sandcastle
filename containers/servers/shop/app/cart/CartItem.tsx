@@ -47,7 +47,7 @@ export default function CartItem({ order, mutate }: { order: Order; mutate: Keye
   return (
     <li className="grid grid-cols-12 lg:gap-8 gap-4 border">
       <div className="lg:col-span-4 col-span-6 flex flex-col items-center py-4 gap-4 bg-slate-200">
-        <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name}></Image>
+        <Image src={`/image/svg/emoji_u${item.id}.svg`} width={100} height={100} alt={item.name} priority={true}></Image>
         <h2 className="font-bold text-xl text-center text-slate-700 pb-4">{item.name}</h2>
       </div>
       <div className="lg:col-span-8 col-span-6 flex flex-col justify-center gap-2 text-lg text-slate-700 relative">

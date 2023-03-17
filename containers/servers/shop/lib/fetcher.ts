@@ -15,12 +15,13 @@
  */
 
 import { cookies } from "next/headers"
-import { Order } from "./items"
+import { Item, Order } from "./items"
 
-export async function getCart() {
-  const host = process.env.host || "localhost"
-  const port = process.env.port || "8080"
-  const url = `http://${host}:${port}/api/cart`
+const HOST = "localhost"
+const PORT = "8080"
+
+export async function fetchCart() {
+  const url = new URL(`http://${HOST}:${PORT}/api/cart`)
   const cookie = cookies().get("__session")
   const Cookie = `__session=${cookie?.value}`
   const res = await fetch(url, {
@@ -31,4 +32,18 @@ export async function getCart() {
   })
   const cart: Order[] = await res.json()
   return cart
+}
+
+export async function fetchItems() {
+  const url = new URL(`http://${HOST}:${PORT}/api/items`)
+  const res = await fetch(url, { cache: "no-store" })
+  const items: Item[] = await res.json()
+  return items
+}
+
+export async function fetchItem(id: string) {
+  const url = new URL(`http://${HOST}:${PORT}/api/items/${id}`)
+  const res = await fetch(url, { cache: "no-store" })
+  const item: Item = await res.json()
+  return item
 }

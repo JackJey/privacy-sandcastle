@@ -20,15 +20,7 @@ import { displayCategory, Item } from "../../../lib/items"
 
 import Script from "next/script"
 import SubmitForm from "./SubmitForm"
-
-async function fetchItem(id: string) {
-  const host = process.env.host || "localhost"
-  const port = process.env.port || "8080"
-  const url = `http://${host}:${port}/api/items/${id}`
-  const res = await fetch(url, { cache: "no-store" })
-  const item: Item = await res.json()
-  return item
-}
+import { fetchItem } from "../../../lib/fetcher"
 
 type Params = {
   id: string
@@ -37,12 +29,12 @@ type Params = {
 export default async function Page({ params }: { params: Params }) {
   const { id } = params
   const item = await fetchItem(id)
-
+  const { SHOP_HOST, DSP_HOST, EXTERNAL_PORT } = process.env
   return (
     <div className="flex flex-col gap-6">
       <main className="grid lg:grid-cols-2">
         <section className="">
-          <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name}></Image>
+          <Image src={`/image/svg/emoji_u${item.id}.svg`} width={500} height={500} alt={item.name} priority={true}></Image>
         </section>
         <section className="">
           <h2 className="text-2xl font-bold text-slate-800">{item.name}</h2>
@@ -61,9 +53,9 @@ export default async function Page({ params }: { params: Params }) {
         </Link>
         <Script
           className="dsp_tag"
-          data-advertiser="privacy-sandcastle-shop"
+          data-advertiser={SHOP_HOST}
           data-id={item.id}
-          src="https://privacy-sandcastle-dsp.web.app/dsp-tag.js"
+          src={new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/dsp-tag.js`).toString()}
         ></Script>
       </footer>
     </div>

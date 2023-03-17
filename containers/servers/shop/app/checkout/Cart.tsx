@@ -17,24 +17,19 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect } from "react"
 import { Order } from "../../lib/items"
 import { CartItem } from "./CartItem"
 
-export const Cart = ({ checkout }: { checkout: Order[] }) => {
+export const Cart = ({ checkout, ssp }: { checkout: Order[]; ssp: string }) => {
   const subtotal = checkout.reduce((sum, { item, quantity }) => {
     return sum + item.price * quantity
   }, 0)
   const shipping = 40
 
-  useEffect(() => {
-    ;(async () => {
-      // TODO: move destroy session to SSR
-      const res = await fetch("/api/cart", { method: "DELETE" })
-      console.log(res)
-      console.log(res.ok)
-    })()
-  }, [])
+  fetch("/api/cart", { method: "DELETE" }).catch((res) => {
+    // TODO: move destroy session to SSR
+    console.assert(res.ok)
+  })
 
   return (
     <div className="flex flex-col gap-6">
@@ -43,7 +38,7 @@ export const Cart = ({ checkout }: { checkout: Order[] }) => {
         <ul className="flex flex-col gap-6">
           {checkout.map((order) => {
             const key = `${order.item.id}:${order.size}`
-            return <CartItem key={key} order={order} />
+            return <CartItem key={key} order={order} ssp={ssp} />
           })}
         </ul>
 
