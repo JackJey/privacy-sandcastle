@@ -50,7 +50,15 @@ export default function SubmitForm({ item }: { item: Item }) {
           Size
         </label>
         <select id="size" name="size" className="basis-5/6 text-slate-800">
-          <option value="25.0">25.0cm</option>
+          <option value="22.0">22.0cm</option>
+          <option value="22.5">22.5cm</option>
+          <option value="23.0">23.0cm</option>
+          <option value="23.5">23.5cm</option>
+          <option value="24.0">24.0cm</option>
+          <option value="24.5">24.5cm</option>
+          <option value="25.0" selected={true}>
+            25.0cm
+          </option>
           <option value="25.5">25.5cm</option>
           <option value="26.0">26.0cm</option>
           <option value="26.5">26.5cm</option>

@@ -32,6 +32,7 @@ const useCart = (fallbackData: Order[]) => {
     mutate
   }
 }
+
 export default function Cart({ cart: initialState }: { cart: Order[] }) {
   const { cart, mutate } = useCart(initialState)
 
