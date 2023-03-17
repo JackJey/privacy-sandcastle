@@ -17,10 +17,11 @@
 import { cookies } from "next/headers"
 import { Item, Order } from "./items"
 
-const { SHOP_HOST, PORT } = process.env
+const HOST = "localhost"
+const PORT = "8080"
 
 export async function fetchCart() {
-  const url = new URL(`http://${SHOP_HOST}:${PORT}/api/cart`)
+  const url = new URL(`http://${HOST}:${PORT}/api/cart`)
   const cookie = cookies().get("__session")
   const Cookie = `__session=${cookie?.value}`
   const res = await fetch(url, {
@@ -34,18 +35,15 @@ export async function fetchCart() {
 }
 
 export async function fetchItems() {
-  const url = new URL(`http://${SHOP_HOST}:${PORT}/api/items`)
+  const url = new URL(`http://${HOST}:${PORT}/api/items`)
   const res = await fetch(url, { cache: "no-store" })
   const items: Item[] = await res.json()
   return items
 }
 
 export async function fetchItem(id: string) {
-  console.log({ id })
-  const url = new URL(`http://${SHOP_HOST}:${PORT}/api/items/${id}`)
-  console.log({ url })
+  const url = new URL(`http://${HOST}:${PORT}/api/items/${id}`)
   const res = await fetch(url, { cache: "no-store" })
   const item: Item = await res.json()
-  console.log({ item })
   return item
 }

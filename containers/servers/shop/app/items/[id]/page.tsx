@@ -28,7 +28,7 @@ type Params = {
 
 export default async function Page({ params }: { params: Params }) {
   const { id } = params
-  const item = await fetchItem(id)
+  const item: Item = await fetchItem(id)
   const { SHOP_HOST, DSP_HOST, EXTERNAL_PORT } = process.env
   return (
     <div className="flex flex-col gap-6">
