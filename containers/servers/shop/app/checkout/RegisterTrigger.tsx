@@ -21,18 +21,15 @@ export const RegisterTrigger = ({
   quantity,
   size,
   category,
-  gross,
-  ssp
+  gross
 }: {
   id: string
   quantity: number
   size: string
   category: number
   gross: number
-  ssp: string
 }) => {
-  const src = new URL(ssp)
-  src.pathname = "/register-trigger"
+  const src = new URL("https://privacy-sandcastle-ssp.web.app/register-trigger")
   src.searchParams.append("id", `${id}`)
   src.searchParams.append("category", `${category}`)
   src.searchParams.append("quantity", `${quantity}`)

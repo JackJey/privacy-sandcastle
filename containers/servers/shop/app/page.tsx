@@ -17,7 +17,15 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Item } from "../lib/items"
-import { fetchItems } from "../lib/fetcher"
+
+async function fetchItems() {
+  const host = process.env.host || "localhost"
+  const port = process.env.port || "8080"
+  const url = `http://${host}:${port}/api/items`
+  const res = await fetch(url, { cache: "no-store" })
+  const items: Item[] = await res.json()
+  return items
+}
 
 const ItemCard = ({ item }: { item: Item }) => {
   return (
@@ -38,13 +46,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden lg:block">
-        <Image
-          src={`/image/shop.webp`}
-          width={1280}
-          height={300}
-          alt="shopping site hero image"
-          className="object-cover object-[0%_5%] h-[300px]"
-        ></Image>
+        <Image src={`/image/shop.webp`} width={1280} height={300} alt="shopping site hero image" className="object-cover object-[0%_5%] h-[300px]"></Image>
       </div>
 
       <main className="">

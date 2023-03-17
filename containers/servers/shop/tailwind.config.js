@@ -3,14 +3,14 @@ module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       fontSize: {
-        icon: "20rem"
+        'icon': '20rem'
       }
-    }
+    },
   },
-  plugins: []
+  plugins: [],
 }
