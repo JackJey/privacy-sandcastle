@@ -24,7 +24,7 @@ hosts=$(cat <<EOT
 EOT
 )
 
-
+# TODO: CloudRun doesn't support .env file, so grab values here and merge into single variable
 ENV_VARS=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
 echo ${ENV_VARS}
 
@@ -43,7 +43,7 @@ for host in $hosts; do
     --region asia-northeast1 \
     --min-instances 1 \
     --memory 2G \
-    --set-env-vars "${ENV_VARS}"
+    --set-env-vars "${ENV_VARS}" # contents of .env file
 
   # Firebase Hosting
   ## cleanup cache
