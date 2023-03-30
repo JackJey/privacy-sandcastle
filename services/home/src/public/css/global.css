@@ -1,0 +1,97 @@
+/*
+ Copyright 2022 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+  padding: 2vw;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-size: 3em;
+  color: #333;
+  margin-bottom: 2vw;
+}
+
+h2 {
+  color: #333;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4vw;
+  justify-content: space-evenly;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+li a {
+  font-size: 1.5em;
+}
+
+iframe {
+  width: 30vw;
+  height: 20vw;
+  opacity: 0.8;
+  box-shadow: 0px 0px 10px 0px rgb(30 30 30 / 30%);
+  border: solid 2px #666;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  body {
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 8vw;
+  }
+
+  ul {
+    gap: 6vw;
+    justify-content: center;
+  }
+
+  li {
+    width: 80vw;
+  }
+
+  iframe {
+    height: 60vw;
+    width: 100%;
+  }
+
+  li a {
+    font-size: 1em;
+  }
+}

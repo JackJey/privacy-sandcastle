@@ -28,7 +28,7 @@ EOT
 )
 
 # TODO: CloudRun doesn't support .env file, so grab values here and merge into single variable
-ENV_VARS=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
+ENV_VARS=$(cat .env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
 echo ${ENV_VARS}
 
 # setup Google Cloud SDK project
@@ -55,7 +55,7 @@ for service in $services; do
   # docker push gcr.io/${project_name}/${service}
 
   # Containerize app  with Cloud Build and upload it to Container Registry
-  #gcloud builds submit containers/servers/${service} --tag gcr.io/${project_name}/${service}
+  gcloud builds submit services/${service} --tag gcr.io/${project_name}/${service}
 done
 
   ## deploy cloud run 1 by 1 because of different cpu/memory or min-instance requirements
@@ -64,7 +64,7 @@ done
   #gcloud run deploy ${service} --image gcr.io/${project_name}/${service}:latest --platform managed --region us-central1 --min-instances 1
   gcloud run deploy home --image gcr.io/${project_name}/home:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
   gcloud run deploy news --image gcr.io/${project_name}/news:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy shop --image gcr.io/${project_name}/shop:latest --platform managed --region us-central1 --memory 1024Mi --set-env-vars "${ENV_VARS}"
+  gcloud run deploy shop --image gcr.io/${project_name}/shop:latest --platform managed --region us-central1 --memory 2Gi --set-env-vars "${ENV_VARS}"
   gcloud run deploy travel --image gcr.io/${project_name}/travel:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
   gcloud run deploy ssp --image gcr.io/${project_name}/ssp:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
   gcloud run deploy dsp --image gcr.io/${project_name}/dsp:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"

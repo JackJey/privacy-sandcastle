@@ -2,10 +2,11 @@
   "hosting": [
     {
       "target": "dsp",
-      "public": "dsp/dist",
+      "public": "services/dsp/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -20,10 +21,11 @@
     },
     {
       "target": "shop",
-      "public": "shop/dist",
+      "public": "services/shop/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -38,10 +40,11 @@
     },
     {
       "target": "travel",
-      "public": "travel/dist",
+      "public": "services/travel/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -56,10 +59,11 @@
     },
     {
       "target": "ssp",
-      "public": "ssp/dist",
+      "public": "services/ssp/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -74,10 +78,11 @@
     },
     {
       "target": "news",
-      "public": "news/dist",
+      "public": "services/news/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -92,10 +97,11 @@
     },
     {
       "target": "home",
-      "public": "home/dist",
+      "public": "services/home/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
@@ -110,10 +116,11 @@
     },
     {
       "target": "demo",
-      "public": "demo/dist",
+      "public": "services/demo/public",
       "ignore": [
         "firebase.json",
         "**/.*",
+        "**/**",
         "**/node_modules/**"
       ],
       "rewrites": [
