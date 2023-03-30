@@ -1,0 +1,6 @@
+{
+  "/cart/page": "/cart",
+  "/checkout/page": "/checkout",
+  "/items/[id]/page": "/items/[id]",
+  "/page": "/"
+}

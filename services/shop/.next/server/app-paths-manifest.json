@@ -1,0 +1,6 @@
+{
+  "/cart/page": "app/cart/page.js",
+  "/checkout/page": "app/checkout/page.js",
+  "/items/[id]/page": "app/items/[id]/page.js",
+  "/page": "app/page.js"
+}

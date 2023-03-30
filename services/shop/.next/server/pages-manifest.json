@@ -1,0 +1,11 @@
+{
+  "/_error": "pages/_error.js",
+  "/_app": "pages/_app.js",
+  "/api/cart/[id]": "pages/api/cart/[id].js",
+  "/api/cart": "pages/api/cart.js",
+  "/api/items/[id]": "pages/api/items/[id].js",
+  "/api/items": "pages/api/items.js",
+  "/_document": "pages/_document.js",
+  "/en/404": "pages/en/404.html",
+  "/en/500": "pages/en/500.html"
+}

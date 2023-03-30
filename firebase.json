@@ -1,0 +1,130 @@
+{
+  "hosting": [
+    {
+      "target": "dsp",
+      "public": "dsp/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "dsp",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "shop",
+      "public": "shop/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "shop",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "travel",
+      "public": "travel/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "travel",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "ssp",
+      "public": "ssp/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "ssp",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "news",
+      "public": "news/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "news",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "home",
+      "public": "home/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "home",
+            "region": "us-central1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "demo",
+      "public": "demo/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "demo",
+            "region": "us-central1"
+          }
+        }
+      ]
+    }
+  ]
+}

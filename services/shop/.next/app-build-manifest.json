@@ -1,0 +1,49 @@
+{
+  "pages": {
+    "/cart/page": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/90-4d0e0e727a70642e.js",
+      "static/chunks/30-36369e737b1c4f08.js",
+      "static/chunks/app/cart/page-6e51e14b19e4db49.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/90-4d0e0e727a70642e.js",
+      "static/chunks/app/layout-7291db55f56ecbac.js"
+    ],
+    "/head": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/app/head-fbf0b755a1944d43.js"
+    ],
+    "/checkout/page": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/90-4d0e0e727a70642e.js",
+      "static/chunks/30-36369e737b1c4f08.js",
+      "static/chunks/app/checkout/page-af4abb118669e9ee.js"
+    ],
+    "/items/[id]/page": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/90-4d0e0e727a70642e.js",
+      "static/chunks/30-36369e737b1c4f08.js",
+      "static/chunks/app/items/[id]/page-976466cdd4f67ea4.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-bf0cdee633f832cf.js",
+      "static/chunks/17-c624f77eb910b996.js",
+      "static/chunks/main-app-bc56aca6e8ac0a10.js",
+      "static/chunks/90-4d0e0e727a70642e.js",
+      "static/chunks/30-36369e737b1c4f08.js",
+      "static/chunks/app/page-42132d534f9914d4.js"
+    ]
+  }
+}
