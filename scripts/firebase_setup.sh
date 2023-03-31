@@ -15,7 +15,7 @@
 #/usr/bin/env zsh
 
 # parameters
-firebase_hosting_domain="privacy-sandcastle-dev";
+firebase_hosting_domain="privacy-sandcastle"; # replace with your hosting site domain
 
 services=$(cat <<EOT
   home

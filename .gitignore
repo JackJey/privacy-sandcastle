@@ -2,5 +2,5 @@ node_modules
 build
 *pem
 .vscode
-build
-*pem
+.firebase
+.env

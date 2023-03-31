@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "gtech-privacy-sandcastle-dev",
-    "dev": "gtech-privacy-sandcastle-dev",
-    "stage": "gtech-privacy-sandcastle-stage",
-    "prod": "gtech-privacy-sandcastle-prod"
+    "default": "privacy-sandcastle",
+    "dev": "privacy-sandcastle-dev",
+    "stage": "privacy-sandcastle-stage",
+    "prod": "privacy-sandcastle"
   },
   "targets": {
-    "gtech-privacy-sandcastle-dev": {
+    "privacy-sandcastle-dev": {
       "hosting": {
         "home": [
           "privacy-sandcastle-dev-home"
@@ -25,13 +25,10 @@
         ],
         "travel": [
           "privacy-sandcastle-dev-travel"
-        ],
-        "demo": [
-          "privacy-sandcastle-dev"
         ]
       }
     },
-    "gtech-privacy-sandcastle-stage": {
+    "privacy-sandcastle-stage": {
       "hosting": {
         "home": [
           "privacy-sandcastle-stage-home"
@@ -50,6 +47,28 @@
         ],
         "news": [
           "privacy-sandcastle-stage-news"
+        ]
+      }
+    },
+    "privacy-sandcastle": {
+      "hosting": {
+        "home": [
+          "privacy-sandcastle-home"
+        ],
+        "dsp": [
+          "privacy-sandcastle-dsp"
+        ],
+        "shop": [
+          "privacy-sandcastle-shop"
+        ],
+        "travel": [
+          "privacy-sandcastle-travel"
+        ],
+        "ssp": [
+          "privacy-sandcastle-ssp"
+        ],
+        "news": [
+          "privacy-sandcastle-news"
         ]
       }
     }

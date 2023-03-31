@@ -113,25 +113,6 @@
           }
         }
       ]
-    },
-    {
-      "target": "demo",
-      "public": "services/demo/public",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/**",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "run": {
-            "serviceId": "demo",
-            "region": "us-central1"
-          }
-        }
-      ]
     }
   ]
 }

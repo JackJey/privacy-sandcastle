@@ -15,7 +15,7 @@
 #/usr/bin/env zsh
 
 # parameters
-project_name="gtech-privacy-sandcastle-dev";
+project_name="privacy-sandcastle"; # replace with your GCP Project ID
 
 # setup Google Cloud SDK project
 gcloud config set project ${project_name}

@@ -15,7 +15,7 @@
 #/usr/bin/env zsh
 
 # parameters
-project_name="gtech-privacy-sandcastle-dev";
+project_name="privacy-sandcastle"; # replace with your GCP Project ID
 
 services=$(cat <<EOT
   home
@@ -62,12 +62,12 @@ done
   # add "--min-instances 1" to have your service always on (cpu and memory billing will go up accordingly)
 
   #gcloud run deploy ${service} --image gcr.io/${project_name}/${service}:latest --platform managed --region us-central1 --min-instances 1
-  gcloud run deploy home --image gcr.io/${project_name}/home:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy news --image gcr.io/${project_name}/news:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy shop --image gcr.io/${project_name}/shop:latest --platform managed --region us-central1 --memory 2Gi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy travel --image gcr.io/${project_name}/travel:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy ssp --image gcr.io/${project_name}/ssp:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
-  gcloud run deploy dsp --image gcr.io/${project_name}/dsp:latest --platform managed --region us-central1 --memory 512Mi --set-env-vars "${ENV_VARS}"
+  gcloud run deploy home --image gcr.io/${project_name}/home:latest --platform managed --region us-central1 --memory 512Mi --min-instances 1 --set-env-vars "${ENV_VARS}"
+  gcloud run deploy news --image gcr.io/${project_name}/news:latest --platform managed --region us-central1 --memory 512Mi --min-instances 1 --set-env-vars "${ENV_VARS}"
+  gcloud run deploy shop --image gcr.io/${project_name}/shop:latest --platform managed --region us-central1 --memory 2Gi --min-instances 1 --set-env-vars "${ENV_VARS}"
+  gcloud run deploy travel --image gcr.io/${project_name}/travel:latest --platform managed --region us-central1 --memory 512Mi --min-instances 1 --set-env-vars "${ENV_VARS}"
+  gcloud run deploy ssp --image gcr.io/${project_name}/ssp:latest --platform managed --region us-central1 --memory 512Mi --min-instances 1 --set-env-vars "${ENV_VARS}"
+  gcloud run deploy dsp --image gcr.io/${project_name}/dsp:latest --platform managed --region us-central1 --memory 512Mi --min-instances 1 --set-env-vars "${ENV_VARS}"
 
 
 # Print Cloud Run URL
