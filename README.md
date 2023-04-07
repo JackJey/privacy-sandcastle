@@ -72,26 +72,25 @@ Each services are developed under servers, and composed by docker-compose.
 ```
 .
 |-- README.md
-|-- containers
-|   |-- .env
-|   |-- docker-compose.yml
-|   |-- nginx
-|   |   |-- cert
-|   |   `-- nginx.conf
-|   `-- servers
-|       |-- dsp
-|       |-- home
-|       |-- news
-|       |-- shop
-|       |-- ssp
-|       `-- travel
+|-- .env
+|-- docker-compose.yml
+|-- nginx
+|   |-- cert
+|   `-- nginx.conf
+|-- servers
+|    |-- dsp
+|    |-- home
+|    |-- news
+|    |-- shop
+|    |-- ssp
+|    `-- travel
 `-- package.json
 ```
 
 If you wanna add new services, follow instructions below.
 
 - add service dir under servers.
-- decide domain and append in `containers/.env`
+- decide domain and append in `.env`
 - develop it and encapsulate in Docker
 - update `docker-compose.yml` && `nginx.conf`
 
@@ -107,7 +106,7 @@ You can implement new service in any technology stack basically. But from point 
 
 ## Container
 
-Every servers has Dockerfile and `./containers/docker-compose.yml` merge every servers in container.
+Every servers has Dockerfile and `./docker-compose.yml` merge every servers in container.
 
 `.env` defines hostname/port for each services and Nginx will proxy every request based on hostname.
 

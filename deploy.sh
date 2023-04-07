@@ -25,7 +25,7 @@ EOT
 )
 
 # TODO: CloudRun doesn't support .env file, so grab values here and merge into single variable
-ENV_VARS=$(cat ./containers/.env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
+ENV_VARS=$(cat .env | grep -v "#" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
 echo ${ENV_VARS}
 
 for host in $hosts; do
@@ -49,7 +49,7 @@ for host in $hosts; do
   ## cleanup cache
   curl -X PURGE https://privacy-sandcastle-${host}.web.app/
   ## change project
-  npx --package firebase-tools firebase -c containers/servers/${host}/firebase.json use ${host}
+  npx --package firebase-tools firebase -c servers/${host}/firebase.json use ${host}
   ## deploy
-  npx --package firebase-tools firebase -c containers/servers/${host}/firebase.json deploy
+  npx --package firebase-tools firebase -c servers/${host}/firebase.json deploy
 done
