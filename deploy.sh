@@ -49,7 +49,7 @@ for host in $hosts; do
   ## cleanup cache
   curl -X PURGE https://privacy-sandcastle-${host}.web.app/
   ## change project
-  npx --package firebase-tools firebase -c servers/${host}/firebase.json use ${host}
+  npx --package firebase-tools firebase -c services/${host}/firebase.json use ${host}
   ## deploy
-  npx --package firebase-tools firebase -c servers/${host}/firebase.json deploy
+  npx --package firebase-tools firebase -c services/${host}/firebase.json deploy
 done

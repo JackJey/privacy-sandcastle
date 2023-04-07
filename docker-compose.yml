@@ -11,62 +11,62 @@ volumes:
 services:
   home:
     image: gcr.io/privacy-sandcastle-home/sandcastle_home:latest
-    build: ./servers/home
+    build: ./services/home
     container_name: "sandcastle_home"
     env_file:
       - .env
     volumes:
-      - ./servers/home:/workspace
+      - ./services/home:/workspace
       - home_node_modules:/workspace/node_modules
 
   news:
     image: gcr.io/privacy-sandcastle-news/sandcastle_news:latest
-    build: ./servers/news
+    build: ./services/news
     container_name: "sandcastle_news"
     env_file:
       - .env
     volumes:
-      - ./servers/news:/workspace
+      - ./services/news:/workspace
       - news_node_modules:/workspace/node_modules
 
   shop:
     image: gcr.io/privacy-sandcastle-shop/sandcastle_shop:latest
-    build: ./servers/shop
+    build: ./services/shop
     container_name: "sandcastle_shop"
     env_file:
       - .env
     volumes:
-      - ./servers/shop:/workspace
+      - ./services/shop:/workspace
       - shop_node_modules:/workspace/node_modules
 
   travel:
     image: gcr.io/privacy-sandcastle-travel/sandcastle_travel:latest
-    build: ./servers/travel
+    build: ./services/travel
     container_name: "sandcastle_travel"
     env_file:
       - .env
     volumes:
-      - ./servers/travel:/workspace
+      - ./services/travel:/workspace
       - travel_node_modules:/workspace/node_modules
 
   dsp:
     image: gcr.io/privacy-sandcastle-dsp/sandcastle_dsp:latest
-    build: ./servers/dsp
+    build: ./services/dsp
     container_name: "sandcastle_dsp"
     env_file:
       - .env
     volumes:
-      - ./servers/dsp:/workspace
+      - ./services/dsp:/workspace
       - dsp_node_modules:/workspace/node_modules
 
   ssp:
     image: gcr.io/privacy-sandcastle-ssp/sandcastle_ssp:latest
-    build: ./servers/ssp
+    build: ./services/ssp
     container_name: "sandcastle_ssp"
     env_file:
       - .env
     volumes:
-      - ./servers/ssp:/workspace
+      - ./services/ssp:/workspace
       - ssp_node_modules:/workspace/node_modules
 
   nginx:

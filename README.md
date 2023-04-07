@@ -67,7 +67,7 @@ $ npm start
 
 ### Structure
 
-Each services are developed under servers, and composed by docker-compose.
+Each services are developed under services, and composed by docker-compose.
 
 ```
 .
@@ -77,7 +77,7 @@ Each services are developed under servers, and composed by docker-compose.
 |-- nginx
 |   |-- cert
 |   `-- nginx.conf
-|-- servers
+|-- services
 |    |-- dsp
 |    |-- home
 |    |-- news
@@ -89,7 +89,7 @@ Each services are developed under servers, and composed by docker-compose.
 
 If you wanna add new services, follow instructions below.
 
-- add service dir under servers.
+- add service dir under services.
 - decide domain and append in `.env`
 - develop it and encapsulate in Docker
 - update `docker-compose.yml` && `nginx.conf`
@@ -106,7 +106,7 @@ You can implement new service in any technology stack basically. But from point 
 
 ## Container
 
-Every servers has Dockerfile and `./docker-compose.yml` merge every servers in container.
+Every services has Dockerfile and `./docker-compose.yml` merge every services in container.
 
 `.env` defines hostname/port for each services and Nginx will proxy every request based on hostname.
 
