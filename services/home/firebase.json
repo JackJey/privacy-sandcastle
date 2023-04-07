@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "ignore": ["**/*", "**/.*"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "sandcastle-home",
+          "region": "asia-northeast1"
+        }
+      }
+    ]
+  }
+}
