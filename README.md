@@ -97,7 +97,7 @@ sudo vi /etc/hosts
 Verifying mapping with :
 
 ```shell
-nslookup -news.web.app
+nslookup privacy-sandcastle-news.web.app
 ```
 
 If the mapping isn’t reflected in Chrome, try clearing your DNS cache
