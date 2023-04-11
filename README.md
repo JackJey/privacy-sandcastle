@@ -12,7 +12,7 @@ Adtech businesses are looking for solutions to typical use cases that they have 
 
 Privacy Sandcastle will provide cookbook recipes, sample code, and demo applications for the major adtech use cases, based on Privacy Sandbox APIs. This is intended to support adtech companies and developers in quickly adapting their businesses and applications to a web ecosystem without third-party cookies.
 
-Privacy Sandcastle is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at [https://privacy-sandcastle-home.web.app](https://privacy-sandcastle-home.web.app)  to let you start learning and experimenting quickly.
+Privacy Sandcastle is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at [https://privacy-sandcastle-home.web.app](https://privacy-sandcastle-home.web.app) to let you start learning and experimenting quickly.
 
 ## Scope of current release
 
@@ -53,12 +53,12 @@ These instructions are given for Linux environments and assume you have the foll
 
 The following packages must be installed
 
-* [Docker-ce](https://docs.docker.com/engine/install/)
-* Docker-composer
-* Npm
-* [Nodejs v18](https://nodejs.org/)
-* Git
-* [Mkcert](https://github.com/FiloSottile/mkcert)
+- [Docker-ce](https://docs.docker.com/engine/install/)
+- Docker-composer
+- Npm
+- [Nodejs v18](https://nodejs.org/)
+- Git
+- [Mkcert](https://github.com/FiloSottile/mkcert)
 
 ## Network Setup
 
@@ -66,20 +66,22 @@ The following packages must be installed
 
 Privacy Sandbox APIs use the domain name in the URL (site origin) to allow/block cross site data sharing, identify topics etc. Thus we cannot rely only on the “localhost” domain for development.
 
-We will remap domain name to loopback address (127.0.0.1)  so each service could be accessed via a URL like :
+We will remap domain name to loopback address (127.0.0.1) so each service could be accessed via a URL like :
 
-* https://privacy-sandcastle-home.web.app
-* https://privacy-sandcastle-shop.web.app
-* …
+- https://privacy-sandcastle-home.web.app
+- https://privacy-sandcastle-shop.web.app
+- …
 
 There are 2 ways to achieve that
 
 1. **Remap hosts to loopback address by editing /etc/hosts on your local machine**
 
 Edit hosts file:
+
 ```shell
 sudo vi /etc/hosts
 ```
+
 1. Press `i` to enter insert mode
 2. Make the edits, press the `Escape` key to exit insert mode
 3. Type `:x` or `:wq` to save and exit
@@ -128,7 +130,7 @@ mkcert -install
 
 1. Fork the main repository using the button near the top-right corner
 
- [https://github.com/JackJey/privacy-sandcastle](https://github.com/JackJey/privacy-sandcastle)
+[https://github.com/JackJey/privacy-sandcastle](https://github.com/JackJey/privacy-sandcastle)
 
 2. Clone your fork to work locally:
 
@@ -138,21 +140,27 @@ git clone git@github.com:{github_username}/privacy-sandcastle.git
 
 3. Test your setup
 
-    1. Download packages and dependencies :
-    ```shell
-    npm install
-    ```
-    2. Generate the SSL Certificates for Nginx proxy service  :
-    ```shell
-    npm run cert
-    ```
-    3. Build and run the docker containers (docker must be run with root permission) :
-    ```shell
-    sudo npm run start
-    ```
-    4. Open the news page: [https://privacy-sandcastle-news.web.app ](https://privacy-sandcastle-news.web.app)</code>
+   1. Download packages and dependencies :
 
-    5. You should at least see the page load with some content; if you don’t see an ad, that’s a functional problem, but at least your setup works as expected.
+   ```shell
+   npm install
+   ```
+
+   2. Generate the SSL Certificates for Nginx proxy service :
+
+   ```shell
+   npm run cert
+   ```
+
+   3. Build and run the docker containers (docker must be run with root permission) :
+
+   ```shell
+   sudo npm run start
+   ```
+
+   4. Open the news page: [https://privacy-sandcastle-news.web.app ](https://privacy-sandcastle-news.web.app)</code>
+
+   5. You should at least see the page load with some content; if you don’t see an ad, that’s a functional problem, but at least your setup works as expected.
 
 ![picture of news demo site](docs/images/news.png "News demo site")
 
@@ -265,29 +273,30 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 ## Prepare your Google Cloud Platform Project
 
 1. Create a Google Cloud Platform Project : [https://cloud.google.com/resource-manager/docs/creating-managing-projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
-    1. Note the name of the project/id. E.g.: *privacy-sandcastle*
-    2. Assign the billing account created in step above
+   1. Note the name of the project/id. E.g.: _privacy-sandcastle_
+   2. Assign the billing account created in step above
 2. Add a Firebase Project linked to your GCP Project : [https://console.firebase.google.com/](https://console.firebase.google.com/)
-    1. Click “Add Project”
-    2. Select the GCP project you previously created. E.g. : *privacy-sandcastle*
-    3. Since you enabled Billing Account on this project, it will automatically select the Firebase pay-as-you-go plan
-    4. Enable Google Analytics for the project : Select “Default Account for Firebase” unless you have specific analytics requirements
+   1. Click “Add Project”
+   2. Select the GCP project you previously created. E.g. : _privacy-sandcastle_
+   3. Since you enabled Billing Account on this project, it will automatically select the Firebase pay-as-you-go plan
+   4. Enable Google Analytics for the project : Select “Default Account for Firebase” unless you have specific analytics requirements
 
 ## Prepare your Development Environment for Firebase Hosting
 
 In this section we will configure your development environment to get ready to build and deploy resources to Firebase. The Instructions below are based on the Linux environment.
 
-
 1. Clone Privacy Sandcastle Git Repository : https://github.com/JackJey/privacy-sandcastle.git
 
 2. Install the Firebase CLI : [https://firebase.google.com/docs/cli#linux](https://firebase.google.com/docs/cli#linux)
 3. Open a terminal at the root of the project. Login and test the Firebase CLI :
+
 ```shell
   firebase login
   firebase projects:list
 ```
 
 4. Configure firebase to use your project (e.g. )
+
 ```shell
     1. firebase use --clear
     2. firebase use --unalias default
@@ -296,41 +305,42 @@ In this section we will configure your development environment to get ready to b
 
 Resources :
 
-* [https://firebase.google.com/docs/hosting](https://firebase.google.com/docs/hosting)
-* [https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets](https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets)
+- [https://firebase.google.com/docs/hosting](https://firebase.google.com/docs/hosting)
+- [https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets](https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets)
 
 ## Setup Firebase Hosting Multiple Sites
 
 Your firebase project will host 5 different sites to demonstrate the capabilities of Privacy Sandbox across the different actors of the adtech ecosystem :
 
-
-* Home : Home page with the links to the different use-cases and scenario
-* DSP : Demand Side Platform
-* Shop & Travel : The advertiser shopping or travel site = Buy side. They are buying ad space from the publisher. Site embeds the DSP tags.
-* SSP : Supply Side Platform
-* News : Publisher site where ads will be displayed = Sell side. They are selling ad space to advertisers. Site embeds SSP tags
+- Home : Home page with the links to the different use-cases and scenario
+- DSP : Demand Side Platform
+- Shop & Travel : The advertiser shopping or travel site = Buy side. They are buying ad space from the publisher. Site embeds the DSP tags.
+- SSP : Supply Side Platform
+- News : Publisher site where ads will be displayed = Sell side. They are selling ad space to advertisers. Site embeds SSP tags
 
 Each site will have a different domain name to simulate a real life adtech scenario
 
-Open Firebase Hosting : from the Firebase console click on “hosting” or follow this link by replacing “*privacy-sandcastle*” with your project name
+Open Firebase Hosting : from the Firebase console click on “hosting” or follow this link by replacing “_privacy-sandcastle_” with your project name
 
 `https://firebase.corp.google.com/project/privacy-sandcastle/hosting/sites`
 
-Click on “Add another site” and enter site-id following your naming standards. Replace *privacy-sandcastle* with the domain of your choice. E.g.
+Click on “Add another site” and enter site-id following your naming standards. Replace _privacy-sandcastle_ with the domain of your choice. E.g.
 
-- *privacy-sandcastle*-home
-- *privacy-sandcastle*-dsp
-- *privacy-sandcastle*-shop
-- *privacy-sandcastle*-travel
-- *privacy-sandcastle*-ssp
-- *privacy-sandcastle*-news
+- _privacy-sandcastle_-home
+- _privacy-sandcastle_-dsp
+- _privacy-sandcastle_-shop
+- _privacy-sandcastle_-travel
+- _privacy-sandcastle_-ssp
+- _privacy-sandcastle_-news
 
 Note, task above can be done programmatically with Firebase CLI :
 
 ```shell
 firebase hosting:sites:create SITE_ID
 ```
+
 E.g.
+
 ```shell
 firebase hosting:sites:create privacy-sandcastle-home
 firebase hosting:sites:create privacy-sandcastle-dsp
@@ -339,7 +349,6 @@ firebase hosting:sites:create privacy-sandcastle-travel
 firebase hosting:sites:create privacy-sandcastle-ssp
 firebase hosting:sites:create privacy-sandcastle-news
 ```
-
 
 Set up deploy targets for your sites (When you have multiple sites and you run Firebase CLI deploy commands, the CLI needs a way to communicate which settings should be deployed to each site).
 
@@ -350,6 +359,7 @@ firebase target:apply hosting TARGET_NAME RESOURCE_IDENTIFIER
 ```
 
 E.g. :
+
 ```shell
 firebase target:apply hosting home privacy-sandcastle-home
 firebase target:apply hosting dsp privacy-sandcastle-dsp
@@ -365,7 +375,6 @@ Adding hosting sites and deploy targets can be done using the provided script :
 scripts/firebase_setup
 ```
 
-
 Note that you will have to change the **firebase_hosting_domain** variable to match yours :
 
 ```shell
@@ -380,13 +389,13 @@ We recommend to Enable Cloud Logging for Firebase Hosting Project.
 
 By using Cloud Logging with your Firebase Hosting sites, you allow web request logs to be exported to Cloud Logging.
 
-Access the following URL (replace *privacy-sandcastle* with your project name)
+Access the following URL (replace _privacy-sandcastle_ with your project name)
 
 https://firebase.corp.google.com/project/privacy-sandcastle/settings/integrations/cloudlogging
 
 Select all the sites you want to export logs from, click Save and Finish.
 
-## Install Google Cloud SDK &  Enable the Google Cloud Run API
+## Install Google Cloud SDK & Enable the Google Cloud Run API
 
 Next we will deploy containers to Cloud Run to run the content of the demo sites.
 
@@ -412,10 +421,9 @@ gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregi
 
 # Setup the default region for deployment
 gcloud config set run/region us-central1
-  ```
+```
 
 Resources : [https://firebase.google.com/docs/hosting/cloud-run](https://firebase.google.com/docs/hosting/cloud-run)
-
 
 ## Deploy all Cloud Run services and Firebase Sites
 
@@ -461,7 +469,7 @@ SSP_TOKEN="xxxxx"
 SSP_DETAIL="Ad-Platform: SSP for publisher"
 ```
 
-Edit “**project_name**” **variable value and execute `./scripts/cloudrun_deploy.sh`  to build and deploy services with Cloud Build and deploy to Cloud Run.
+Edit “**project_name**” \*\*variable value and execute `./scripts/cloudrun_deploy.sh` to build and deploy services with Cloud Build and deploy to Cloud Run.
 
 ```shell
 # cloudrun_deploy.sh
@@ -475,7 +483,7 @@ project_name="privacy-sandcastle";
 
 ```
 
-Now edit the “**firebase_hosting_domain”** variable with your own domain and execute `./scripts/firebase_deploy.sh`  to deploy Firebase hosting sites and configuration.
+Now edit the “**firebase_hosting_domain”** variable with your own domain and execute `./scripts/firebase_deploy.sh` to deploy Firebase hosting sites and configuration.
 
 ```shell
 # firebase_deploy.sh
@@ -492,10 +500,10 @@ Look at the output, and verify you can access all the sites your created :
 
 E.g. :
 
-- https://*privacy-sandcastle*.web.app/
-- https://*privacy-sandcastle*-home.web.app/
-- https://*privacy-sandcastle*-dsp.web.app/
-- https://*privacy-sandcastle*-shop.web.app/
-- https://*privacy-sandcastle*-travel.web.app/
-- https://*privacy-sandcastle*-ssp.web.app/
-- https://*privacy-sandcastle*-news.web.app/
+- https://_privacy-sandcastle_.web.app/
+- https://_privacy-sandcastle_-home.web.app/
+- https://_privacy-sandcastle_-dsp.web.app/
+- https://_privacy-sandcastle_-shop.web.app/
+- https://_privacy-sandcastle_-travel.web.app/
+- https://_privacy-sandcastle_-ssp.web.app/
+- https://_privacy-sandcastle_-news.web.app/
