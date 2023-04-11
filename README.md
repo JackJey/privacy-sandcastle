@@ -1,6 +1,6 @@
 # Privacy Sandcastle
 
-A use case demo library for [Privacy Sandbox APIs](https://developer.chrome.com/en/docs/privacy-sandbox/).
+A use case demo for [Privacy Sandbox APIs](https://developer.chrome.com/en/docs/privacy-sandbox/).
 
 ## Motivation
 
@@ -12,38 +12,13 @@ Adtech businesses are looking for solutions to typical use cases that they have 
 
 Privacy Sandcastle will provide cookbook recipes, sample code, and demo applications for the major adtech use cases, based on Privacy Sandbox APIs. This is intended to support adtech companies and developers in quickly adapting their businesses and applications to a web ecosystem without third-party cookies.
 
-Privacy Sandcastle is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at [https://privacy-sandcastle-home.web.app](https://privacy-sandcastle-home.web.app) to let you start learning and experimenting quickly.
+Privacy Sandcastle is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at https://privacy-sandcastle-home.web.app to let you start learning and experimenting quickly.
 
 ## Scope of current release
 
-<table>
-  <tr>
-   <td><strong>Use Case</strong>
-   </td>
-   <td><strong>Description</strong>
-   </td>
-   <td><strong>APIs</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>Remarking
-   </td>
-   <td>ads retargeting after visiting an online shopping site
-   </td>
-   <td>FLEDGE
-<p>
-Fenced Frame
-   </td>
-  </tr>
-  <tr>
-   <td>Single-touch conversion Attribution
-   </td>
-   <td>track conversion after seeing and ads on a news site and buying a project on an online shopping site
-   </td>
-   <td>Attribution Reporting API
-   </td>
-  </tr>
-</table>
+| **Use Case** | **Description** | **APIs** |
+| Remarking | ads retargeting after visiting an online shopping site | FLEDGE <br> Fenced Frame |
+| Single-touch conversion Attribution | track conversion after seeing and ads on a news site and buying a project on an online shopping site | Attribution Reporting API |
 
 # Local environment deployment guide
 
@@ -53,18 +28,16 @@ These instructions are given for Linux environments and assume you have the foll
 
 The following packages must be installed
 
-- [Docker-ce](https://docs.docker.com/engine/install/)
-- Docker-composer
-- Npm
-- [Nodejs v18](https://nodejs.org/)
-- Git
-- [Mkcert](https://github.com/FiloSottile/mkcert)
+- [docker](https://docs.docker.com/engine/install/)
+- [docker-compose](https://docs.docker.com/compose/install/)
+- [nodejs v18](https://nodejs.org/)
+- [mkcert](https://github.com/FiloSottile/mkcert)
 
 ## Network Setup
 
 ### Domain Name / URL
 
-Privacy Sandbox APIs use the domain name in the URL (site origin) to allow/block cross site data sharing, identify topics etc. Thus we cannot rely only on the “localhost” domain for development.
+Privacy Sandbox APIs use the domain name in the URL (site origin) to allow/block cross site data sharing, identify topics etc. Thus we cannot rely only on the "localhost" domain for development.
 
 We will remap domain name to loopback address (127.0.0.1) so each service could be accessed via a URL like :
 
@@ -76,17 +49,10 @@ There are 2 ways to achieve that
 
 1. **Remap hosts to loopback address by editing /etc/hosts on your local machine**
 
-Edit hosts file:
-
-```shell
-sudo vi /etc/hosts
-```
-
-1. Press `i` to enter insert mode
-2. Make the edits, press the `Escape` key to exit insert mode
-3. Type `:x` or `:wq` to save and exit
+Edit `/etc/hosts` file
 
 ```
+# /etc/hosts
 127.0.0.1	privacy-sandcastle.web.app
 127.0.0.1	privacy-sandcastle-home.web.app
 127.0.0.1	privacy-sandcastle-dsp.web.app
@@ -116,7 +82,7 @@ google_chrome --host-resolver-rules="MAP privacy-sandcastle-* 127.0.0.1"
 
 ### HTTP SSL Certificate
 
-https:// protocol requires a valid certificate for your browser, this is done by using mkcert to create a local certification authority that will be trusted by your local browser. Later we will be creating a certificate for each of the privacy sandcastle service and configure nginx to serve those certificates.
+`https://` scheme requires a valid certificate for your browser, this is done by using mkcert to create a local certification authority that will be trusted by your local browser. Later we will be creating a certificate for each of the privacy sandcastle service and configure nginx to serve those certificates.
 
 Run the command below to create the development Certificate Authority:
 
@@ -126,135 +92,21 @@ mkcert -install
 
 ## Build & Run your local development environment
 
-**Clone the Privacy Sandcastle repository**
+1. Fork https://github.com/JackJey/privacy-sandcastle and clone locally
+2. Setting up with npm scripts
 
-1. Fork the main repository using the button near the top-right corner
+```shell-session
+# Download packages and dependencies :
+$ npm install
 
-[https://github.com/JackJey/privacy-sandcastle](https://github.com/JackJey/privacy-sandcastle)
+# Generate the SSL Certificates for Nginx proxy service :
+$ npm run cert
 
-2. Clone your fork to work locally:
-
-```shell
-git clone git@github.com:{github_username}/privacy-sandcastle.git
+# Build and run the docker containers (docker must be run with root permission) :
+$ sudo npm run start
 ```
 
-3. Test your setup
-
-   1. Download packages and dependencies :
-
-   ```shell
-   npm install
-   ```
-
-   2. Generate the SSL Certificates for Nginx proxy service :
-
-   ```shell
-   npm run cert
-   ```
-
-   3. Build and run the docker containers (docker must be run with root permission) :
-
-   ```shell
-   sudo npm run start
-   ```
-
-   4. Open the news page: [https://privacy-sandcastle-news.web.app ](https://privacy-sandcastle-news.web.app)</code>
-
-   5. You should at least see the page load with some content; if you don’t see an ad, that’s a functional problem, but at least your setup works as expected.
-
-![picture of news demo site](docs/images/news.png "News demo site")
-
-## Stop your local development environment
-
-To stop your development environment, you will need to stop each container
-
-Docker-compose can do that in 1 command. In a new terminal run :
-
-```shell
-sudo docker-compose stop
-```
-
-If for some reason it's not working, you can stop each container manually
-
-```shell
-# stop containers
-sudo docker container stop sandcastle_travel
-sudo docker container stop sandcastle_dsp
-sudo docker container stop sandcastle_home
-sudo docker container stop sandcastle_ssp
-sudo docker container stop sandcastle_news
-sudo docker container stop sandcastle_proxy
-sudo docker container stop sandcastle_shop
-```
-
-If you want to clean (remove) the container image in your local registry you can do so by running the command :
-
-```shell
-sudo docker-compose rm
-```
-
-If for some reason it's not working, you can remove each container image manually
-
-```shell
-# stop containers
-sudo docker container rm sandcastle_travel
-sudo docker container rm sandcastle_dsp
-sudo docker container rm sandcastle_home
-sudo docker container rm sandcastle_ssp
-sudo docker container rm sandcastle_news
-sudo docker container rm sandcastle_proxy
-sudo docker container rm sandcastle_shop
-```
-
-## Clean your docker images & containers
-
-There might be some situation where your local image registry is corrupted, inconsistent, or has accumulated too many unused images. You can take a fresh start by [cleaning your local images](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes).
-
-Remove any stopped containers and all unused images (not just dangling images) :
-
-```shell
-# Remove any stopped containers and all unused images
-sudo docker system prune -a
-```
-
-Stop running containers
-
-```shell
-# show running containers
-sudo docker ps -a
-
-# stop all running containers
-sudo docker stop $(sudo docker ps -a -q)
-```
-
-Remove one or more specific containers
-
-```shell
-# Use the docker ps command with the -a flag to locate
-# the name or ID of the containers you want to remove:
-sudo docker ps -a
-
-# remove the container
-sudo docker container ID_or_Name
-
-# Remove all exited containers
-sudo docker rm $(sudo docker ps -a -f status=exited -q)
-```
-
-Remove one or more specific images
-
-```shell
-# to locate the ID of the images you want to remove.
-# This will show you every image, including intermediate image layers
-sudo docker images -a
-
-# When you’ve located the images you want to delete,
-# you can pass their ID or tag to docker rmi:
-sudo docker image rm [image_id]
-
-# Remove all images
-sudo docker rmi $(sudo docker images -a -q)
-```
+3. Open the home page: https://privacy-sandcastle-home.web.app
 
 # Google Cloud Platform project deployment guide
 
@@ -264,35 +116,34 @@ The same instructions can be repeated to deploy a dev, staging, prod etc. enviro
 
 Project names and variables in _italic_ must be carefully chosen and updated to suit your project naming convention.
 
-Resources : [https://firebase.google.com/docs/hosting/cloud-run](https://firebase.google.com/docs/hosting/cloud-run)
+Resources : https://firebase.google.com/docs/hosting/cloud-run
 
 ## Prepare your Google Cloud Platform Billing Account
 
-If you don’t have yet a billing account, follow the documentation to Create a Google Cloud Platform Billing Account : [https://cloud.google.com/billing/docs/how-to/manage-billing-account](https://cloud.google.com/billing/docs/how-to/manage-billing-account)
+If you don’t have yet a billing account, follow the documentation to Create a Google Cloud Platform Billing Account : https://cloud.google.com/billing/docs/how-to/manage-billing-account
 
 ## Prepare your Google Cloud Platform Project
 
-1. Create a Google Cloud Platform Project : [https://cloud.google.com/resource-manager/docs/creating-managing-projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+1. Create a Google Cloud Platform Project : https://cloud.google.com/resource-manager/docs/creating-managing-projects
    1. Note the name of the project/id. E.g.: _privacy-sandcastle_
    2. Assign the billing account created in step above
-2. Add a Firebase Project linked to your GCP Project : [https://console.firebase.google.com/](https://console.firebase.google.com/)
-   1. Click “Add Project”
+2. Add a Firebase Project linked to your GCP Project : https://console.firebase.google.com/
+   1. Click "Add Project"
    2. Select the GCP project you previously created. E.g. : _privacy-sandcastle_
    3. Since you enabled Billing Account on this project, it will automatically select the Firebase pay-as-you-go plan
-   4. Enable Google Analytics for the project : Select “Default Account for Firebase” unless you have specific analytics requirements
+   4. Enable Google Analytics for the project : Select "Default Account for Firebase" unless you have specific analytics requirements
 
 ## Prepare your Development Environment for Firebase Hosting
 
 In this section we will configure your development environment to get ready to build and deploy resources to Firebase. The Instructions below are based on the Linux environment.
 
 1. Clone Privacy Sandcastle Git Repository : https://github.com/JackJey/privacy-sandcastle.git
-
-2. Install the Firebase CLI : [https://firebase.google.com/docs/cli#linux](https://firebase.google.com/docs/cli#linux)
+2. Install the Firebase CLI : https://firebase.google.com/docs/cli#linux
 3. Open a terminal at the root of the project. Login and test the Firebase CLI :
 
-```shell
-  firebase login
-  firebase projects:list
+```shell-session
+$ firebase login
+$ firebase projects:list
 ```
 
 4. Configure firebase to use your project (e.g. )
@@ -305,8 +156,8 @@ In this section we will configure your development environment to get ready to b
 
 Resources :
 
-- [https://firebase.google.com/docs/hosting](https://firebase.google.com/docs/hosting)
-- [https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets](https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets)
+- https://firebase.google.com/docs/hosting
+- https://firebase.google.com/docs/hosting/multisites?authuser=0&hl=en#set_up_deploy_targets
 
 ## Setup Firebase Hosting Multiple Sites
 
@@ -320,11 +171,11 @@ Your firebase project will host 5 different sites to demonstrate the capabilitie
 
 Each site will have a different domain name to simulate a real life adtech scenario
 
-Open Firebase Hosting : from the Firebase console click on “hosting” or follow this link by replacing “_privacy-sandcastle_” with your project name
+Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandcastle_" with your project name
 
 `https://firebase.corp.google.com/project/privacy-sandcastle/hosting/sites`
 
-Click on “Add another site” and enter site-id following your naming standards. Replace _privacy-sandcastle_ with the domain of your choice. E.g.
+Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandcastle_ with the domain of your choice. E.g.
 
 - _privacy-sandcastle_-home
 - _privacy-sandcastle_-dsp
@@ -401,9 +252,9 @@ Next we will deploy containers to Cloud Run to run the content of the demo sites
 
 We chose to deploy everything container based for portability and flexibility and we use Firebase hosting as a frontend solution for HTTPS request handling, domain name and ssl certificates.
 
-Install Google Cloud SDK : If Google Cloud SDK is not installed on the machine, follow instructions here : [https://cloud.google.com/sdk/docs/install#linux](https://cloud.google.com/sdk/docs/install#linux)
+Install Google Cloud SDK : If Google Cloud SDK is not installed on the machine, follow instructions here : https://cloud.google.com/sdk/docs/install#linux
 
-Initialize Google Cloud SDK : [https://cloud.google.com/sdk/docs/initializing](https://cloud.google.com/sdk/docs/initializing)
+Initialize Google Cloud SDK : https://cloud.google.com/sdk/docs/initializing
 
 ```shell
 # Run `gcloud init` to setup authentication and project
@@ -423,7 +274,7 @@ gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregi
 gcloud config set run/region us-central1
 ```
 
-Resources : [https://firebase.google.com/docs/hosting/cloud-run](https://firebase.google.com/docs/hosting/cloud-run)
+Resources : https://firebase.google.com/docs/hosting/cloud-run
 
 ## Deploy all Cloud Run services and Firebase Sites
 
@@ -469,7 +320,7 @@ SSP_TOKEN="xxxxx"
 SSP_DETAIL="Ad-Platform: SSP for publisher"
 ```
 
-Edit “**project_name**” \*\*variable value and execute `./scripts/cloudrun_deploy.sh` to build and deploy services with Cloud Build and deploy to Cloud Run.
+Edit "**project_name**" variable value and execute `./scripts/cloudrun_deploy.sh` to build and deploy services with Cloud Build and deploy to Cloud Run.
 
 ```shell
 # cloudrun_deploy.sh
@@ -480,10 +331,9 @@ Edit “**project_name**” \*\*variable value and execute `./scripts/cloudrun_d
 project_name="privacy-sandcastle";
 
 ...
-
 ```
 
-Now edit the “**firebase_hosting_domain”** variable with your own domain and execute `./scripts/firebase_deploy.sh` to deploy Firebase hosting sites and configuration.
+Now edit the "**firebase_hosting_domain"** variable with your own domain and execute `./scripts/firebase_deploy.sh` to deploy Firebase hosting sites and configuration.
 
 ```shell
 # firebase_deploy.sh
