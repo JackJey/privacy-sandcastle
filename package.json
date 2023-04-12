@@ -8,7 +8,7 @@
     "cert": "cd nginx/cert && ./mkcert.sh",
     "build": "docker-compose build",
     "docker": "docker-compose build && docker-compose up",
-    "deploy": "./deploy.sh",
+    "deploy": "./scripts/cloudrun_deploy.sh && ./scripts/firebase_deploy.sh",
     "fmt": "prettier --write ."
   },
   "devDependencies": {
