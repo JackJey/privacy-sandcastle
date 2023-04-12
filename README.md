@@ -16,6 +16,7 @@ Privacy Sandcastle is available as source code, container images, and scripts. W
 
 ## Scope of current release
 
-| **Use Case** | **Description** | **APIs** |
-| Remarking | ads retargeting after visiting an online shopping site | FLEDGE <br> Fenced Frame |
+| **Use Case**                        | **Description**                                                                                      | **APIs**                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------- |
+| Remarking                           | ads retargeting after visiting an online shopping site                                               | FLEDGE <br> Fenced Frame  |
 | Single-touch conversion Attribution | track conversion after seeing and ads on a news site and buying a project on an online shopping site | Attribution Reporting API |
