@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,32 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#/usr/bin/env zsh
-
-# parameters
-firebase_hosting_domain="privacy-sandcastle"; # replace with your hosting site domain
-
-services=$(cat <<EOT
-  home
-  dsp
-  shop
-  travel
-  ssp
-  news
-EOT
-)
+# evaluate .env file
+source .env
 
 # Setup Firebase Hosting Multiple Sites
-
-for service in $services; do
-  # echo https://${firebase_hosting_domain}-${service}.web.app/
-
-  firebase hosting:sites:create ${firebase_hosting_domain}-${service}
-  firebase target:apply hosting ${service} ${firebase_hosting_domain}-${service}
-
-done
-
-# print all sites
-for service in $services; do
-  echo https://${firebase_hosting_domain}-${service}.web.app/
+for service in $SERVICES; do
+  echo https://$FIREBASE_HOSTING_DOMAIN-${service}.web.app/
+  firebase hosting:sites:create $FIREBASE_HOSTING_DOMAIN-${service}
+  firebase target:apply hosting ${service} $FIREBASE_HOSTING_DOMAIN-${service}
 done

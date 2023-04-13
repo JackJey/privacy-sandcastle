@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,32 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#/usr/bin/env zsh
+# evaluate .env file
+source .env
 
-# parameters
-firebase_hosting_domain="privacy-sandcastle"; # replace with your hosting site domain
-
-services=$(cat <<EOT
-  home
-  news
-  shop
-  travel
-  dsp
-  ssp
-EOT
-)
-
-# Deploy to Firebase hosting all sites
-for service in $services; do
+# Deploy to Firebase Hosting all sites
+for service in $SERVICES; do
   firebase deploy --only hosting:${service}
 done
 
-# Firebase Hosting : check all sites
-for service in $services; do
-  printf https://${firebase_hosting_domain}-${service}.web.app/
+# Check all Firebase Hosting sites
+for service in $SERVICES; do
+  echo https://$FIREBASE_HOSTING_DOMAIN-${service}.web.app/
 
-  ## cleanup cache
-  curl -X PURGE https://${firebase_hosting_domain}-${service}.web.app/
-
-  printf "\n"
+  ## cleanup cache (-w'\n' will add line break to output)
+  curl -w'\n' -X PURGE https://$FIREBASE_HOSTING_DOMAIN-${service}.web.app/
 done

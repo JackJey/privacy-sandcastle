@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#/usr/bin/env zsh
-
-# parameters
-project_name="privacy-sandcastle"; # replace with your GCP Project ID
+# evaluate .env file
+source .env
 
 # setup Google Cloud SDK project
-gcloud config set project ${project_name}
+gcloud config set project $GCP_PROJECT_NAME
 gcloud config get-value project
 
 # Enable Cloud Run API
