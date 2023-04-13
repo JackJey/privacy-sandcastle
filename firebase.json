@@ -97,7 +97,6 @@
     },
     {
       "target": "home",
-      "public": "services/home/src/public",
       "ignore": [
         "firebase.json",
         "**/.*",
