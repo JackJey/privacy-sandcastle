@@ -1,0 +1,55 @@
+{
+  "projects": {
+    "default": "privacy-sandcastle"
+  },
+  "targets": {
+    "privacy-sandcastle": {
+      "hosting": {
+        "home": [
+          "privacy-sandcastle-home"
+        ],
+        "dsp": [
+          "privacy-sandcastle-dsp"
+        ],
+        "shop": [
+          "privacy-sandcastle-shop"
+        ],
+        "ssp": [
+          "privacy-sandcastle-ssp"
+        ],
+        "news": [
+          "privacy-sandcastle-news"
+        ],
+        "travel": [
+          "privacy-sandcastle-travel"
+        ],
+        "demo": [
+          "privacy-sandcastle"
+        ]
+      }
+    },
+    "privacy-sandcastle-stage": {
+      "hosting": {
+        "home": [
+          "privacy-sandcastle-stage-home"
+        ],
+        "dsp": [
+          "privacy-sandcastle-stage-dsp"
+        ],
+        "shop": [
+          "privacy-sandcastle-stage-shop"
+        ],
+        "travel": [
+          "privacy-sandcastle-stage-travel"
+        ],
+        "ssp": [
+          "privacy-sandcastle-stage-ssp"
+        ],
+        "news": [
+          "privacy-sandcastle-stage-news"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
