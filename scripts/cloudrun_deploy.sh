@@ -55,4 +55,3 @@ for service in $SERVICES; do
   # Print Cloud Run URL
   gcloud run services describe ${service} --format 'value(status.url)'
 done
-
