@@ -47,6 +47,11 @@ for service in $SERVICES; do
     --min-instances 1 \
     --set-env-vars "${ENV_VARS}"
 
+  # Allowing public (unauthenticated) access to Cloud Run services
+  gcloud run services add-iam-policy-binding ${service} \
+  --member="allUsers" \
+  --role="roles/run.invoker"
+
   # Print Cloud Run URL
   gcloud run services describe ${service} --format 'value(status.url)'
 done
