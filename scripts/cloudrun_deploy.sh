@@ -18,7 +18,7 @@
 source .env
 
 # CloudRun doesn't support .env file, so grab values here and merge into single variable
-ENV_VARS=$(cat .env | grep "=" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" ",")
+ENV_VARS=$(cat .env | grep "=" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" "@")
 echo ${ENV_VARS}
 
 # setup Google Cloud SDK project
@@ -45,7 +45,7 @@ for service in $SERVICES; do
     --region us-central1 \
     --memory 2Gi \
     --min-instances 1 \
-    --set-env-vars "${ENV_VARS}"
+    --set-env-vars "^@^${ENV_VARS}"
 
   # Allowing public (unauthenticated) access to Cloud Run services
   gcloud run services add-iam-policy-binding ${service} \
