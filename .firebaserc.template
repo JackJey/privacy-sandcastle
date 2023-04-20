@@ -23,30 +23,8 @@
         "travel": [
           "privacy-sandcastle-travel"
         ],
-        "demo": [
-          "privacy-sandcastle"
-        ]
-      }
-    },
-    "privacy-sandcastle-stage": {
-      "hosting": {
-        "home": [
-          "privacy-sandcastle-stage-home"
-        ],
-        "dsp": [
-          "privacy-sandcastle-stage-dsp"
-        ],
-        "shop": [
-          "privacy-sandcastle-stage-shop"
-        ],
-        "travel": [
-          "privacy-sandcastle-stage-travel"
-        ],
-        "ssp": [
-          "privacy-sandcastle-stage-ssp"
-        ],
-        "news": [
-          "privacy-sandcastle-stage-news"
+        "collector": [
+          "privacy-sandcastle-collector"
         ]
       }
     }

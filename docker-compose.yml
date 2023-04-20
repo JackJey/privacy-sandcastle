@@ -81,6 +81,17 @@ services:
     networks:
       - adnetwork
 
+  collector:
+    image: gcr.io/privacy-sandcastle/collector:latest
+    build: ./services/collector
+    container_name: "sandcastle_collector"
+    env_file:
+      - .env
+    volumes:
+      - ./services/collector:/workspace
+    networks:
+      - adnetwork
+
   nginx:
     image: nginx:1.22.1-alpine
     container_name: "proxy"
@@ -105,6 +116,7 @@ services:
       - travel
       - ssp
       - dsp
+      - collector
 
 networks:
   adnetwork:
