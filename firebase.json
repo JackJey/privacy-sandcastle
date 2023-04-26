@@ -112,6 +112,24 @@
           }
         }
       ]
+    },
+    {
+      "target": "collector",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/**",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "collector",
+            "region": "us-central1"
+          }
+        }
+      ]
     }
   ]
 }
