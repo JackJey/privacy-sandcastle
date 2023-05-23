@@ -16,6 +16,7 @@
 
 # evaluate .env file
 source .env
+source .env.deploy
 
 # CloudRun doesn't support .env file, so grab values here and merge into single variable
 ENV_VARS=$(cat .env | grep "=" | grep -v "^PORT=" | sed '/^$/d' | tr "\n" "@")

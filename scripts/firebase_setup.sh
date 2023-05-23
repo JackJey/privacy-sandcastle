@@ -16,6 +16,7 @@
 
 # evaluate .env file
 source .env
+source .env.deploy
 
 # Setup Firebase Hosting Multiple Sites
 for service in $SERVICES; do

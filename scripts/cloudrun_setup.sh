@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # evaluate .env file
-source .env
+source .env.deploy
 
 # setup Google Cloud SDK project
 gcloud config set project $GCP_PROJECT_NAME
