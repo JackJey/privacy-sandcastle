@@ -4,4 +4,4 @@ build
 *pem
 .firebase
 .firebaserc
-.env
+.env.deploy
