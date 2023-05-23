@@ -9,6 +9,7 @@
     "build": "docker-compose build",
     "docker": "docker-compose build && docker-compose up",
     "deploy": "./scripts/cloudrun_deploy.sh && ./scripts/firebase_deploy.sh",
+    "clean": "docker-compose rm -a && docker volume prune && docker image prune && docker rmi $(docker images -q)",
     "fmt": "prettier --write ."
   },
   "devDependencies": {
