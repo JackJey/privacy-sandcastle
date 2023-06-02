@@ -17,7 +17,8 @@ import TabItem from '@theme/TabItem';
 # Use Case : Retargeting / Remarketing
 
 <Tabs>
-  <TabItem value="overview" label="Overview" default>
+
+<TabItem value="overview" label="Overview" default>
 
 ## Overview
 
@@ -27,16 +28,17 @@ Remarketing is a type of online advertising that allows you to show ads to peopl
 
 ### Privacy Sandbox APIs
 
-- Protected Audience API
+- [Protected Audience API](https://developer.chrome.com/en/docs/privacy-sandbox/fledge/)
 
-### Web ecosystem parties
+### Related parties
 
 - Publisher
 - SSP
 - Advertiser
 - DSP
 
-</TabItem><TabItem value="scope" label="Scope">
+</TabItem>
+<TabItem value="scope" label="Scope">
 
 ## Scope
 
@@ -99,10 +101,10 @@ Note right of B: debug reports \nare sent immediately
 B->>SSP:sends aggregatable report (Debug Report)
 
 Note over SSP:Scenario 1 stops here\nwhere we visualize\ndebug reports
-
 ```
 
-</TabItem><TabItem value="demo" label="Demo">
+</TabItem>
+<TabItem value="demo" label="Demo">
 
 ## Demo
 
@@ -153,31 +155,16 @@ This [dsp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/servi
 The iframe calls a third-party script [join-ad-interest-group.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js) to join interest group using Protected Audience API
 
 ```javascript title="https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js"
-// Protected Audience
-async function getInterestGroup(advertiser, id) {
-  const url = new URL(location.origin)
-  url.pathname = "/interest-group.json"
-  url.searchParams.append("id", id)
-  url.searchParams.append("advertiser", advertiser)
-  const res = await fetch(url)
-  return res.json()
-}
-
 document.addEventListener("DOMContentLoaded", async (e) => {
   // Protected Audience
   const url = new URL(location.href)
   const advertiser = url.searchParams.get("advertiser")
   const id = url.searchParams.get("id")
-
   const interestGroup = await getInterestGroup(advertiser, id)
-  console.log({ interestGroup })
-
   const kSecsPerDay = 3600 * 24 * 30
-  console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay))
 
-  // Call Topics API for opt-in
-  const topics = await document.browsingTopics?.()
-  console.log({ topics })
+  // Join user into an interest group
+  await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay)
 })
 ```
 
@@ -208,40 +195,19 @@ This [ssp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/servi
 The iframe calls a third-party script [run-ad-auction.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js) to run an ondevice ad auction using Protected Audience API
 
 ```javascript title=”https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js”
-// ssp
-async function getAuctionConfig() {
-  const url = new URL(location.origin)
-  url.pathname = "/auction-config.json"
-  const res = await fetch(url)
-  return res.json()
-}
-
 document.addEventListener("DOMContentLoaded", async (e) => {
-  // TODO: Call Topics API for select ads
-  const topics = await document.browsingTopics?.()
-  console.log({
-    topics
-  })
-
   const auctionConfig = await getAuctionConfig()
 
+  // Running Ad Auction
   const adAuctionResult = await navigator.runAdAuction(auctionConfig)
 
-  console.log({
-    auctionConfig,
-    adAuctionResult
-  })
-
+  // Display selected Ads
   const $fencedframe = document.createElement("fencedframe")
   $fencedframe.src = adAuctionResult
   $fencedframe.setAttribute("mode", "opaque-ads")
   $fencedframe.setAttribute("scrolling", "no")
-  // $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
   $fencedframe.width = 300
   $fencedframe.height = 250
-
-  console.log(`display ads in ${$fencedframe}`)
-
   document.body.appendChild($fencedframe)
 })
 ```
@@ -260,33 +226,21 @@ Fenced Frame size (width and height) only allow pre-defined values, please refer
 The request to the `src` urn[ returns the ad creative](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#LL87C1-L87C1) to be displayed
 
 ```html
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your special ads from privacy-sandcastle-prod-shop.web.app</title>
-    <link rel="icon" href="" />
-  </head>
-
-  <body>
-    <a
-      width="300"
-      height="250"
-      target="_blank"
-      attributionsrc=""
-      href="https://privacy-sandcastle-prod-ssp.web.app/move?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
-    >
-      <!-- smaller for avoid scrollbar -->
-      <img
-        width="294"
-        height="245"
-        loading="lazy"
-        attributionsrc=""
-        src="https://privacy-sandcastle-prod-ssp.web.app/creative?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
-      />
-    </a>
-  </body>
-</html>
+<a
+  width="300"
+  height="250"
+  target="_blank"
+  attributionsrc=""
+  href="https://privacy-sandcastle-prod-ssp.web.app/move?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+>
+  <img
+    width="294"
+    height="245"
+    loading="lazy"
+    attributionsrc=""
+    src="https://privacy-sandcastle-prod-ssp.web.app/creative?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+  />
+</a>
 ```
 
 This code contains the `img` tag with `src` attribute specifying the product the user might be interested in and a link to the product.
@@ -296,4 +250,5 @@ This code contains the `img` tag with `src` attribute specifying the product the
 - [Protected Audience API - Chrome Developers](https://developer.chrome.com/docs/privacy-sandbox/fledge/)
 - [Protected Audience API: developer guide](https://developer.chrome.com/docs/privacy-sandbox/fledge-api/)
 
-</TabItem></Tabs>
+</TabItem>
+</Tabs>
