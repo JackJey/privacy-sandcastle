@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula")
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Privacy Sandcastle",
+  title: "Privacy Sandbox Demos",
   tagline: "DEMO for Privacy Sandbox API Families",
   favicon: "img/favicon.ico",
 
@@ -19,7 +19,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "Google", // Usually your GitHub org/user name.
-  projectName: "privacy-sandcastle", // Usually your repo name.
+  projectName: "privacy-sandbox-demos", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -60,11 +60,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: "img/privacy-sandcastle.png",
+      image: "img/privacy-sandbox-demos.png",
       navbar: {
-        title: "Privacy Sandcastle",
+        title: "Privacy Sandbox Demos",
         logo: {
-          alt: "Privacy Sandcastle Logo",
+          alt: "Privacy Sandbox Demos Logo",
           src: "img/logo.svg"
         },
         items: [
@@ -76,7 +76,7 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/GoogleChromeLabs/privacy-sandcastle",
+            href: "https://github.com/GoogleChromeLabs/privacy-sandbox-demos",
             label: "GitHub",
             position: "right"
           }
@@ -120,7 +120,7 @@ const config = {
               },
               {
                 label: "GitHub",
-                href: "https://github.com/GoogleChromeLabs/privacy-sandcastle"
+                href: "https://github.com/GoogleChromeLabs/privacy-sandbox-demos"
               }
             ]
           }
