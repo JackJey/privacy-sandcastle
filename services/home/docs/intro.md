@@ -11,11 +11,10 @@ Check the [deployment guide](https://github.com/JackJey/privacy-sandcastle/blob/
 
 :::
 
-
-**Category**|**Use Case**|**Privacy Sandbox APIs**|**Relevant for**
-:-----:|:-----:|:-----:|:-----:
-Show Relevant Content and Ads|[Retargeting / Remarketing](demos/retargeting-remarketing)|Protected Audience API|Publisher, SSP, Advertiser, DSP
-Measure Digital Ads|[Single-touch conversion Attribution](demos/single-touch-conversion-attribution)| Attribution Reporting  API, Aggregation Service|Publisher, SSP, Advertiser, DSP
+|         **Category**          |                                   **Use Case**                                   |            **Privacy Sandbox APIs**            |        **Relevant for**         |
+| :---------------------------: | :------------------------------------------------------------------------------: | :--------------------------------------------: | :-----------------------------: |
+| Show Relevant Content and Ads |            [Retargeting / Remarketing](demos/retargeting-remarketing)            |             Protected Audience API             | Publisher, SSP, Advertiser, DSP |
+|      Measure Digital Ads      | [Single-touch conversion Attribution](demos/single-touch-conversion-attribution) | Attribution Reporting API, Aggregation Service | Publisher, SSP, Advertiser, DSP |
 
 :::info
 
