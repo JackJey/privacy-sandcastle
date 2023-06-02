@@ -4,19 +4,19 @@ import styles from "./styles.module.css"
 
 const FeatureList = [
   {
-    title: "DEMO of Privacy Sandbox API Families",
+    title: "Demonstrations of Privacy Sandbox APIs",
     Svg: require("@site/static/img/home-hero-user.svg").default,
-    description: <>Privacy Sandcastle is the DEMO project for covering every Privacy Sandbox API in single demo.</>
+    description: <>Examples of applications using combinations of Privacy Sandbox APIs across multiple services.</>
   },
   {
-    title: "Covering real world use-cases",
+    title: "Walkthrough business use cases",
     Svg: require("@site/static/img/padlock-information.svg").default,
-    description: <>Privacy Sandcastle focuses on not only each API usage But align with real world use-cases for combination of APIs</>
+    description: <>Showcase the major business use cases from adtech industry and more. Quickly adapt to a web ecosystem without 3rd party cookies.</>
   },
   {
-    title: "Locally Runnable",
+    title: "Deploy & Run anywhere",
     Svg: require("@site/static/img/shield-information.svg").default,
-    description: <>Privacy Sandcastle make local development easy by pre configured Valid domain/certificates and Origin Trials token embedding.</>
+    description: <>Makes local development easy by pre configured Valid domain/certificates and Origin Trials token embedding.</>
   }
 ]
 

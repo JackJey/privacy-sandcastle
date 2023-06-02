@@ -6,8 +6,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula")
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Privacy Sandcastle",
-  tagline: "DEMO for Privacy Sandbox API Families",
+  title: "Privacy Sandbox Demos",
+  tagline: "A use cases demos library for Privacy Sandbox APIs.",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -19,7 +19,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "Google", // Usually your GitHub org/user name.
-  projectName: "privacy-sandcastle", // Usually your repo name.
+  projectName: "privacy-sandbox-demos", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -60,11 +60,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: "img/privacy-sandcastle.png",
+      image: "img/privacy-sandbox-demos.png",
       navbar: {
-        title: "Privacy Sandcastle",
+        title: "Privacy Sandbox Demos",
         logo: {
-          alt: "Privacy Sandcastle Logo",
+          alt: "Privacy Sandbox Demos Logo",
           src: "img/logo.svg"
         },
         items: [
@@ -72,11 +72,10 @@ const config = {
             type: "docSidebar",
             sidebarId: "docsSidebar",
             position: "left",
-            label: "Docs"
+            label: "Explore"
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/GoogleChromeLabs/privacy-sandcastle",
+            href: "https://github.com/privacysandbox/privacysandbox-demos",
             label: "GitHub",
             position: "right"
           }
@@ -86,41 +85,28 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
-            items: [
-              {
-                label: "Docs",
-                to: "/docs/intro"
-              }
-            ]
-          },
-          {
             title: "Community",
             items: [
               {
-                label: "Privacy Sandbox Initiative",
+                label: "Privacy Sandbox",
                 href: "https://privacysandbox.com/"
               },
               {
-                label: "Privacy Sandbox Documentation",
+                label: "Privacy Sandbox Developers Documentation",
                 href: "https://developer.chrome.com/docs/privacy-sandbox/"
               },
               {
-                label: "Chromium Blog: privacy sandbox",
+                label: "Chromium Blog",
                 href: "https://blog.chromium.org/search/label/privacy%20sandbox"
               }
             ]
           },
           {
-            title: "More",
+            title: "Contribute",
             items: [
               {
-                label: "Blog",
-                to: "/blog"
-              },
-              {
                 label: "GitHub",
-                href: "https://github.com/GoogleChromeLabs/privacy-sandcastle"
+                href: "https://github.com/privacysandbox/privacysandbox-demos"
               }
             ]
           }
