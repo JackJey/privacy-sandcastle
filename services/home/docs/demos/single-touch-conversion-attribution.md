@@ -68,39 +68,31 @@ Below is a general introduction of Single-Touch conversion Attribution using Pri
 
 #### User Journey #1
 
+<!--
 ![Remarketing User Journey 1](./img/attribution-reporting-journey-1-seq.png)
+-->
 
 ```mermaid
 sequenceDiagram
-Title: Single-touch conversion Attribution - User Journey 1  [fontcolor="white", fillcolor="blue", color="red"]
+  Title: Single-touch conversion Attribution - User Journey 1
 
-participant Browser as B [color="red"]
+  participant Browser
+  participant Publisher
+  participant SSP
+  participant Advertiser
 
-participant Publisher as P
-participant SSP as SSP
-participant Advertiser as A
-participant DSP as DSP
-
-
-B->>P:visits a publisher site and sees an ad
-B->SSP:Load ad creative
-SSP-->B:Attribution-Reporting-Register-Source:{...} json config
-
-B->B:Register Attribution Source
-
-
-B->>A:visits the advertiser site and check out
-B->SSP: Load attribution pixel
-SSP-->B:Attribution-Reporting-Register-Trigger:{...} json config
-
-B->B:Register Attribution Trigger
-
-B->B:Attribution logic & create report
-
-Note right of B: debug reports \nare sent immediately
-B->>SSP:sends aggregatable report (Debug Report)
-
-Note over SSP:Scenario 1 stops here\nwhere we visualize\ndebug reports
+  Browser->>Publisher: Visits a publisher site and sees an ad
+  Browser->>SSP: Load ad creative
+  SSP-->>Browser: Attribution-Reporting-Register-Source:{...} json config
+  Browser->>Browser: Register Attribution Source
+  Browser->>Advertiser: Visits the advertiser site and check out
+  Browser->>SSP: Load attribution pixel
+  SSP-->>Browser: Attribution-Reporting-Register-Trigger:{...} json config
+  Browser->>Browser: Register Attribution Trigger
+  Browser->>Browser: Attribution logic & create report
+  Note right of Browser: Debug reports are sent immediately
+  Browser->>SSP: Sends aggregatable report (Debug Report)
+  Note over SSP: Scenario 1 stops here where we visualize debug reports
 ```
 
 </TabItem>
