@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-// Fledge
+// Protected Audience API
 async function getInterestGroup(advertiser, id) {
   const url = new URL(location.origin)
   url.pathname = "/interest-group.json"
@@ -25,7 +25,7 @@ async function getInterestGroup(advertiser, id) {
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {
-  // Fledge
+  // Protected Audience API
   const url = new URL(location.href)
   const advertiser = url.searchParams.get("advertiser")
   const id = url.searchParams.get("id")
