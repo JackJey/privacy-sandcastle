@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula")
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Privacy Sandbox Demos",
-  tagline: "DEMO for Privacy Sandbox API Families",
+  tagline: "A use cases demos library for Privacy Sandbox APIs.",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -72,11 +72,10 @@ const config = {
             type: "docSidebar",
             sidebarId: "docsSidebar",
             position: "left",
-            label: "Docs"
+            label: "Explore"
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/GoogleChromeLabs/privacy-sandbox-demos",
+            href: "https://github.com/privacysandbox/privacysandbox-demos",
             label: "GitHub",
             position: "right"
           }
@@ -86,41 +85,28 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
-            items: [
-              {
-                label: "Docs",
-                to: "/docs/intro"
-              }
-            ]
-          },
-          {
             title: "Community",
             items: [
               {
-                label: "Privacy Sandbox Initiative",
+                label: "Privacy Sandbox",
                 href: "https://privacysandbox.com/"
               },
               {
-                label: "Privacy Sandbox Documentation",
+                label: "Privacy Sandbox Developers Documentation",
                 href: "https://developer.chrome.com/docs/privacy-sandbox/"
               },
               {
-                label: "Chromium Blog: privacy sandbox",
+                label: "Chromium Blog",
                 href: "https://blog.chromium.org/search/label/privacy%20sandbox"
               }
             ]
           },
           {
-            title: "More",
+            title: "Contribute",
             items: [
               {
-                label: "Blog",
-                to: "/blog"
-              },
-              {
                 label: "GitHub",
-                href: "https://github.com/GoogleChromeLabs/privacy-sandbox-demos"
+                href: "https://github.com/privacysandbox/privacysandbox-demos"
               }
             ]
           }
