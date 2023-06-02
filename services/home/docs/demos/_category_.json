@@ -5,8 +5,8 @@
   "collapsed": true,
   "className": "red",
   "link": {
-    "type": "generated-index",
-    "title": "Use Cases Demos"
+    "type": "doc",
+    "id": "demos/index"
   },
   "customProps": {
     "description": "Contains the documentation for each use case demo"
