@@ -4,6 +4,8 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github")
 const darkCodeTheme = require("prism-react-renderer/themes/dracula")
 
+const host = process.env.HOME_HOST
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Privacy Sandbox Demos",
@@ -11,14 +13,14 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://privacy-sandcastle-home.web.app/",
+  url: `https://${host}`,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Google", // Usually your GitHub org/user name.
+  organizationName: "privacysandbox/privacysandbox-demos", // Usually your GitHub org/user name.
   projectName: "privacy-sandbox-demos", // Usually your repo name.
 
   onBrokenLinks: "throw",
@@ -133,7 +135,8 @@ const config = {
         contextualSearch: true,
 
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        externalUrlRegex: "privacy-sandcastle-home\\.dev",
+        // @ts-ignore for using replaceAll
+        externalUrlRegex: host?.replaceAll('.', '\\.'),
 
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         replaceSearchResultPathname: {
