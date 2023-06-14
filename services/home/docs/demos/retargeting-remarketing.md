@@ -3,13 +3,14 @@ title: Retargeting / Remarketing
 sidebar_position: 6
 more_data:
   - apis:
-    - Protected Audience API
+      - Protected Audience API
   - parties:
-    - Publisher
-    - SSP
-    - Advertiser
-    - DSP
+      - Publisher
+      - SSP
+      - Advertiser
+      - DSP
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -19,12 +20,17 @@ import TabItem from '@theme/TabItem';
 <TabItem value="overview" label="Overview" default>
 
 ## Overview
+
 ### Description
+
 Remarketing is a type of online advertising that allows you to show ads to people who have already visited your website. You can create custom audiences based on different criteria, such as pages visited or products added to the cart. Remarketing can help you increase brand awareness, drive traffic back to your website, and boost sales.
+
 ### Privacy Sandbox APIs
+
 - [Protected Audience API](https://developer.chrome.com/en/docs/privacy-sandbox/fledge/)
 
 ### Related parties
+
 - Publisher
 - SSP
 - Advertiser
@@ -38,18 +44,27 @@ Remarketing is a type of online advertising that allows you to show ads to peopl
 ### Goals
 
 In this demo, we assume an advertiser would like to drive traffic back to their website. Remarketing can help an advertiser to get people who have already visited their website to come back for more or to complete a purchase. This can be done by showing them ads about the product they have previously looked at, on other websites.
+
 ### Assumptions
+
 This use case assumes the advertiser (shop site) can bid on the publisher (news site) inventory through an agreement between their respective DSP and SSP platforms.
+
 ### Key Exclusions
+
 The demo does not integrate existing auction mechanisms (prebid or header bidding…). it is only scoped to on-device auction with Protected Audience API.
 The ad selection is very straightforward (only 1 bidder).
 The bidding logic does not include real-time signals from Key/Value service.
+
 ### System Design
+
 Using Protected Audience API, the user visits a shopping site, and gets added to an interest group. Later the same user visits a news site. There the browser runs an on-device Auction, bidding logic will select the winning interest group, and relevant ads will be dynamically rendered on the publisher page.
+
 #### Protected Audience Flow
+
 Below is a general introduction of Remarketing using Privacy Sandbox Protected Audience API. For further information see [Protected Audience API - Chrome Developers](https://developer.chrome.com/docs/privacy-sandbox/fledge/).
 
 ![Protected Audience Flow](./img/retargeting-remarketing-flow.png)
+
 #### User Journey #1
 
 <!--
@@ -98,6 +113,7 @@ Note right of Browser:Scenario 1 stops here
 <TabItem value="demo" label="Demo">
 
 ## Demo
+
 ### Prerequisites
 
 - Chrome > v107
@@ -105,17 +121,20 @@ Note right of Browser:Scenario 1 stops here
 - Clear your browsing history before you run one of the demo scenario below
 
 ### User Journey #1
+
 1. [Navigate to shop site](https://privacy-sandcastle-shop.dev/) (advertiser)
 2. Click on a “shoe” product item on the shop site.
-    - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
+   - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
 3. [Navigate to the news site](https://privacy-sandcastle-news.dev/) (publisher)
 4. Observe the ad served on the news site
-    - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
-    - When the page was loaded, Protected Audience API allowed the SSP to run an ad auction on the publisher site.
-    - The winning advertiser of this ad auction gets their ad creative to be displayed on the publisher site. In this case you have cleared the browser history and only browsed 1 advertiser site page so you are only seeing 1 ad creative from the same advertiser.
+   - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
+   - When the page was loaded, Protected Audience API allowed the SSP to run an ad auction on the publisher site.
+   - The winning advertiser of this ad auction gets their ad creative to be displayed on the publisher site. In this case you have cleared the browser history and only browsed 1 advertiser site page so you are only seeing 1 ad creative from the same advertiser.
 
 ### Implementation details
+
 #### In (2) How is the user added to an Interest Group based on his browsing behavior ?
+
 The shop product page [includes dsp-tag.js ](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/shop/app/items/%5Bid%5D/page.tsx#LL58C13-L58C13)from the DSP service. This is a third-party tag from the DSP service.
 
 ```html
