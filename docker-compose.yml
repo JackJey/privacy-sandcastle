@@ -15,9 +15,6 @@ services:
     container_name: "sandcastle_home"
     env_file:
       - .env
-    volumes:
-      - ./services/home:/workspace
-      - home_node_modules:/workspace/node_modules
     networks:
       - adnetwork
 

@@ -12,12 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM node:18-alpine3.17
+FROM nginx:1.25-alpine3.17
 
-WORKDIR /workspace
+COPY ./nginx.conf /etc/nginx/templates/default.conf.template
+COPY ./build /usr/share/nginx/html
 
-COPY package*.json ./
-RUN npm install
-COPY . .
-
-CMD [ "npm", "start" ]
+CMD [ "nginx", "-g", "daemon off;" ]
