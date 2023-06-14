@@ -2,7 +2,9 @@
 /node_modules
 
 # Production
-/build
+# /build
+# commit build for easy to deploy
+!/build
 
 # Generated files
 .docusaurus
