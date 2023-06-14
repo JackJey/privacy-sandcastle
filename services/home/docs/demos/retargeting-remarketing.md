@@ -1,6 +1,6 @@
 ---
 title: Retargeting / Remarketing
-sidebar_position: 1
+sidebar_position: 6
 more_data:
   - apis:
       - Protected Audience API
@@ -14,10 +14,9 @@ more_data:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Use Case : Retargeting / Remarketing
+# Retargeting / Remarketing
 
 <Tabs>
-
 <TabItem value="overview" label="Overview" default>
 
 ## Overview
@@ -58,7 +57,7 @@ The bidding logic does not include real-time signals from Key/Value service.
 
 ### System Design
 
-Using Protected Audience API, the user visits a shopping site, got added to an interest group. Later the same user visits a news site. There the browser runs an on-device Auction, bidding logic will select the winning interest group, and relevant ads will be dynamically rendered on the publisher page.
+Using Protected Audience API, the user visits a shopping site, and gets added to an interest group. Later the same user visits a news site. There the browser runs an on-device Auction, bidding logic will select the winning interest group, and relevant ads will be dynamically rendered on the publisher page.
 
 #### Protected Audience Flow
 
@@ -74,26 +73,40 @@ Below is a general introduction of Remarketing using Privacy Sandbox Protected A
 
 ```mermaid
 sequenceDiagram
-  Title Retargeting / Remarketing - User Journey 1
+Title: Retargeting / Remarketing - User Journey 1
 
-  participant Browser
-  participant Publisher
-  participant SSP
-  participant Advertiser
-  participant DSP
+participant Browser
+participant Publisher
+participant SSP
+participant Advertiser
+participant DSP
 
-  Browser->>Publisher: Visits a publisher site and sees an ad
-  Browser->>SSP: Load ad creative
-  SSP-->>Browser: Attribution-Reporting-Register-Source:{...} json config
-  Browser->>Browser: Register Attribution Source
-  Browser->>Advertiser: Visits the advertiser site and check out
-  Browser->>SSP: Load attribution pixel
-  SSP-->>Browser: Attribution-Reporting-Register-Trigger:{...} json config
-  Browser->>Browser: Register Attribution Trigger
-  Browser->>Browser: Attribution logic & create report
-  Note right of Browser: Debug reports are sent immediately
-  Browser->>SSP: Sends aggregatable report (Debug Report)
-  Note over SSP:Scenario 1 stops here where we visualize\ndebug reports
+Browser->>Advertiser:visits a shop site and reviews products
+Advertiser-->>Browser:return DSP tags
+Browser->>DSP:browser loads scripts from DSP
+DSP-->>Browser:returns interest group configuration
+
+Browser-->>Browser:navigator.joinAdInterestGroup(...)
+
+Browser-)Publisher:visits a news  site
+Publisher-->>Browser:return SSP tags
+Browser->>SSP:browser loads scripts from SSP
+SSP-->>Browser:returns auction configuration
+
+Browser-)Browser:navigator.runAdAuction(auctionConfig)
+
+note right of Browser:each interest group's bidding function will run
+Browser-)Browser:generateBid(...)
+
+note right of Browser:for each candidate ad in the auction
+Browser-)Browser:scoreAd(...)
+
+note right of Browser:Winning ad is displayed in a fenced-frame
+Browser->>SSP:Request ad creative
+SSP-->>Browser:Return ad creative
+
+Note right of Browser:Scenario 1 stops here
+
 ```
 
 </TabItem>
@@ -147,7 +160,7 @@ This [dsp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/servi
 
 The iframe calls a third-party script [join-ad-interest-group.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js) to join interest group using Protected Audience API
 
-```javascript title="https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js"
+```js title="https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js"
 document.addEventListener("DOMContentLoaded", async (e) => {
   // Protected Audience
   const url = new URL(location.href)
@@ -169,7 +182,7 @@ Finally the code requests the browser to [join the interest group](https://githu
 The news page [includes ad-tag.js ](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/news/src/views/index.ejs#L29)from the SSP service. This is a third-party tag from the SSP service.
 
 ```html
-<script defer="" class="ssp_tag" src="https://privacy-sandcastle-prod-ssp.web.app:443/ad-tag.js"></script>
+<script defer="" class="ssp_tag" src="https://privacy-sandcastle-prod-ssp.web.app/ad-tag.js"></script>
 ```
 
 This [ssp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/ad-tag.js) dynamically embeds an iframe.
@@ -187,7 +200,7 @@ This [ssp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/servi
 
 The iframe calls a third-party script [run-ad-auction.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js) to run an ondevice ad auction using Protected Audience API
 
-```javascript title=”https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js”
+```js title=”https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js”
 document.addEventListener("DOMContentLoaded", async (e) => {
   const auctionConfig = await getAuctionConfig()
 

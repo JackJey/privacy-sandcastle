@@ -17,7 +17,6 @@ import TabItem from '@theme/TabItem';
 # Single-touch conversion Attribution
 
 <Tabs>
-
 <TabItem value="overview" label="Overview" default>
 
 ## Overview
@@ -74,25 +73,33 @@ Below is a general introduction of Single-Touch conversion Attribution using Pri
 
 ```mermaid
 sequenceDiagram
-  Title: Single-touch conversion Attribution - User Journey 1
+Title: Single-touch conversion Attribution - User Journey 1
 
-  participant Browser
-  participant Publisher
-  participant SSP
-  participant Advertiser
+participant Browser
+participant Publisher
+participant SSP
+participant Advertiser
+participant DSP
 
-  Browser->>Publisher: Visits a publisher site and sees an ad
-  Browser->>SSP: Load ad creative
-  SSP-->>Browser: Attribution-Reporting-Register-Source:{...} json config
-  Browser->>Browser: Register Attribution Source
-  Browser->>Advertiser: Visits the advertiser site and check out
-  Browser->>SSP: Load attribution pixel
-  SSP-->>Browser: Attribution-Reporting-Register-Trigger:{...} json config
-  Browser->>Browser: Register Attribution Trigger
-  Browser->>Browser: Attribution logic & create report
-  Note right of Browser: Debug reports are sent immediately
-  Browser->>SSP: Sends aggregatable report (Debug Report)
-  Note over SSP: Scenario 1 stops here where we visualize debug reports
+Browser-)Publisher:visits a publisher site and sees an ad
+Browser->>SSP:Load ad creative
+SSP-->>Browser:Attribution-Reporting-Register-Source:{...} json config
+
+Browser-->>Browser:Register Attribution Source
+
+
+Browser-)Advertiser:visits the advertiser site and check out
+Browser->>SSP: Load attribution pixel
+SSP-->>Browser:Attribution-Reporting-Register-Trigger:{...} json config
+
+Browser-->>Browser:Register Attribution Trigger
+
+Browser-->>Browser:Attribution logic & create report
+
+Note right of Browser: debug reports <br/>are sent immediately
+Browser-)SSP:sends aggregatable report (Debug Report)
+
+Note over SSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 ```
 
 </TabItem>
@@ -111,25 +118,38 @@ sequenceDiagram
 
 1. [Navigate to shop site](https://privacy-sandcastle-shop.dev/) (advertiser)
 2. Click on a “shoe” product item on the shop site.
-   - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
+
+- The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
+
 3. [Navigate to the news site](https://privacy-sandcastle-news.dev/) (publisher)
 4. Observe the ad served on the news site
-   - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
-   - Displaying the ad will also register a view-through conversion **source** event into your browser using the **Attribution Reporting API**.
+
+- If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
+- Displaying the ad will also register a view-through conversion **source** event into your browser using the **Attribution Reporting API**.
+
 5. Click on the ad served on the news site
-   - your browser will open a new window with the product page
-   - Clicking the ad will also register a click-through conversion **source** event into your browser using the **Attribution Reporting API**.
+
+- your browser will open a new window with the product page
+- Clicking the ad will also register a click-through conversion **source** event into your browser using the **Attribution Reporting API**.
+
 6. Navigate to chrome://attribution-internals/ and click the `Active Sources` tab
-   - At the bottom of the page, you will see 2 **sources** with the status `Attributable`, the `source origin` is the **news** site, the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. One of the `source type` is **event** (for view-through) and the other one is **navigation** (for click-through) This reference will be used later to attribute (match) the conversion (here the. purchase of an item on the **shop** site) to a previous event (here. The user saw/clicked an ad on the **news** site)
+
+- At the bottom of the page, you will see 2 **sources** with the status `Attributable`, the `source origin` is the **news** site, the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. One of the `source type` is **event** (for view-through) and the other one is **navigation** (for click-through) This reference will be used later to attribute (match) the conversion (here the. purchase of an item on the **shop** site) to a previous event (here. The user saw/clicked an ad on the **news** site)
+
 7. On the product page, click “Add to cart”
 8. On the cart page, click “Checkout”
-   - In this scenario the “checkout” event is the conversion event the advertiser wants to measure to evaluate the performance of their ad campaign,
-   - The checkout page registers a conversion attribution **trigger** event in the browser. The **Attribution Reporting API** logic will then process the event.
+
+- In this scenario the “checkout” event is the conversion event the advertiser wants to measure to evaluate the performance of their ad campaign,
+- The checkout page registers a conversion attribution **trigger** event in the browser. The **Attribution Reporting API** logic will then process the event.
+
 9. Navigate to chrome://attribution-internals/ and click the `Trigger Registration` tab
-   - At the bottom of the page, you will see 1 **trigger** . the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. The `Registration JSON` contains information about the conversion event. In this scenario the advertiser chose to report the gross price and the quantity of the product item purchased. the `Aggregatable Status` indicates **Success: Report stored**, it means Attribution Reporting API has now stored this report in the browser. It will then be scheduled for sending to the `reporting origin` at a later time.
+
+- At the bottom of the page, you will see 1 **trigger** . the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. The `Registration JSON` contains information about the conversion event. In this scenario the advertiser chose to report the gross price and the quantity of the product item purchased. the `Aggregatable Status` indicates **Success: Report stored**, it means Attribution Reporting API has now stored this report in the browser. It will then be scheduled for sending to the `reporting origin` at a later time.
+
 10. Navigate to [SSP service report visualization page](https://privacy-sandcastle-prod-ssp.web.app/reports)
-    - on this page you can see the aggregatable report sent by the browser to the SSP. In a production environment, the aggregatable report is encrypted by the browser and sent to the SSP. There, they will be batched and sent to the Aggregation Service where they will be aggregated and noised to preserve privacy. However for development and testing purposes, you can also send an unencrypted version called **debug report**. This is what you are seeing now.
-    - The report shows aggregation data on 2 dimensions : gross with a value of 180 and quantity with a value of 1.
+
+- on this page you can see the aggregatable report sent by the browser to the SSP. In a production environment, the aggregatable report is encrypted by the browser and sent to the SSP. There, they will be batched and sent to the Aggregation Service where they will be aggregated and noised to preserve privacy. However for development and testing purposes, you can also send an unencrypted version called **debug report**. This is what you are seeing now.
+- The report shows aggregation data on 2 dimensions : gross with a value of 180 and quantity with a value of 1.
 
 ### Implementation details
 
