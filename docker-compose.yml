@@ -7,6 +7,8 @@ volumes:
   travel_node_modules:
   dsp_node_modules:
   ssp_node_modules:
+  idp_node_modules:
+  tmp_node_modules:
 
 services:
   home:
@@ -89,6 +91,30 @@ services:
     networks:
       - adnetwork
 
+  idp:
+    image: gcr.io/privacy-sandcastle/idp:latest
+    build: ./services/idp
+    container_name: "sandcastle_idp"
+    env_file:
+      - .env
+    volumes:
+      - ./services/idp:/workspace
+      - idp_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
+
+  tmp:
+    image: gcr.io/privacy-sandcastle/tmp:latest
+    build: ./services/tmp
+    container_name: "sandcastle_tmp"
+    env_file:
+      - .env
+    volumes:
+      - ./services/tmp:/workspace
+      - tmp_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
+
   nginx:
     image: nginx:1.22.1-alpine
     container_name: "proxy"
@@ -108,6 +134,8 @@ services:
       - .env
     depends_on:
       - home
+      - idp
+      - tmp
       - news
       - shop
       - travel

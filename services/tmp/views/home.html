@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>babel/standalone/1</title>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <style>
+    strong {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel" data-presets="react">
+    const base64url = {
+      encode: function (buffer) {
+        const base64 = window.btoa(String.fromCharCode(...new Uint8Array(buffer)))
+        return base64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_")
+      },
+      decode: function (base64url) {
+        const base64 = base64url.replace(/-/g, "+").replace(/_/g, "/")
+        const binStr = window.atob(base64)
+        const bin = new Uint8Array(binStr.length)
+        for (let i = 0; i < binStr.length; i++) {
+          bin[i] = binStr.charCodeAt(i)
+        }
+        return bin.buffer
+      }
+    }
+
+
+    const {useState, useEffect} = React
+
+    const UserInfo = () => {
+      const [user, setUser] = useState({});
+
+      useEffect(() => {
+        (async () => {
+          const res = await fetch("/auth/userinfo", {
+            method: "post"
+          })
+          const json = await res.json()
+          console.dir(json)
+          setUser(json)
+        })()
+      }, []);
+
+      return(
+        <>
+          <dl>
+            <dt>id</dt>
+            <dd>{user.id}</dd>
+            <dt>displayName</dt>
+            <dd>{user.displayName}</dd>
+            <dt>username</dt>
+            <dd>{user.username}</dd>
+          </dl>
+          <ChangeDisplayName setUser={setUser} />
+        </>
+      );
+    }
+
+    const ChangeDisplayName = ({setUser}) => {
+      async function onSubmit(e) {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const newName = formData.get('displayName')
+        console.log(newName)
+        const res = await fetch("/auth/userinfo", {
+          method: "put",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({newName})
+        })
+        const json = await res.json()
+        console.dir(json)
+        setUser(json)
+      }
+      return (
+        <form method="post" onSubmit={onSubmit}>
+          <label>Change Display Name</label>
+          <input type="text" name="displayName" required/>
+          <button type="submit">change</button>
+        </form>
+      )
+    }
+
+    const RenameCredential = ({setKeys, id}) => {
+      async function onSubmit(e) {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const newName = formData.get('credentialName')
+        console.log(newName)
+        const res = await fetch("/auth/key", {
+          method: "put",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({
+            id,
+            newName
+          })
+        })
+        const json = await res.json()
+        console.dir(json)
+        setKeys([json]) // TODO: replace one in list
+      }
+      return (
+        <form method="post" onSubmit={onSubmit}>
+          <label>Change Credential Name</label>
+          <input type="text" name="credentialName" required/>
+          <button type="submit">change</button>
+        </form>
+      )
+    }
+
+    const DeleteCredential = ({setKeys, id}) => {
+      async function onSubmit(e) {
+        e.preventDefault()
+
+        const url = new URL("/auth/key", location.origin)
+        url.searchParams.append("id", id)
+        const res = await fetch(url, {
+          method: "delete"
+        })
+        console.log(res.status)
+        setKeys([]) // TODO: replace one in list
+      }
+      return (
+        <form method="post" onSubmit={onSubmit}>
+          <label>Remove Credential</label>
+          <button type="submit">remove</button>
+        </form>
+      )
+    }
+
+    const CredentialSupported = () => {
+      const {useState, useEffect} = React
+      const [support, setSupport] = useState({verifiable: false, conditional: false })
+
+      useEffect(() => {
+        (async () => {
+          const [verifiable, conditional] = await Promise.all([
+            // Is platform authenticator available in this browser?
+            PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),
+            // Is conditional UI available in this browser?
+            PublicKeyCredential.isConditionalMediationAvailable()
+          ])
+          setSupport({verifiable, conditional})
+        })()
+      }, [])
+      return (
+        <dl>
+          <dt><strong>Passkey support</strong></dt>
+          <dd><strong>Passkey is {(support.verifiable && support.conditional) ? "supported" : "not supported"}</strong></dd>
+          <dt>PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable</dt>
+          <dd>{support.verifiable.toString()}</dd>
+          <dt>PublicKeyCredential.isConditionalMediationAvailable</dt>
+          <dd>{support.conditional.toString()}</dd>
+        </dl>
+      )
+    }
+
+    async function registerCredential() {
+      const res = await fetch("/auth/registerRequest", {
+          method: "post",
+          headers: {
+            "content-type": "application/json"
+          }
+        })
+        const options = await res.json()
+        console.dir(options)
+
+        // Base64URL decode some values.
+        options.user.id = base64url.decode(options.user.id)
+        options.challenge = base64url.decode(options.challenge)
+
+        if (options.excludeCredentials) {
+          for (let cred of options.excludeCredentials) {
+            cred.id = base64url.decode(cred.id)
+          }
+        }
+
+        // Use platform authenticator and discoverable credential.
+        options.authenticatorSelection = {
+          authenticatorAttachment: "platform",
+          requireResidentKey: true
+        }
+
+        console.log({ options })
+
+        // Invoke the WebAuthn create() method.
+        const cred = await navigator.credentials.create({
+          publicKey: options
+        })
+
+        const credential = {}
+        credential.id = cred.id
+        credential.rawId = cred.id // Pass a Base64URL encoded ID string.
+        credential.type = cred.type
+
+        // The authenticatorAttachment string in the PublicKeyCredential object is a new addition in WebAuthn L3.
+        if (cred.authenticatorAttachment) {
+          credential.authenticatorAttachment = cred.authenticatorAttachment
+        }
+
+        // Base64URL encode some values.
+        const clientDataJSON = base64url.encode(cred.response.clientDataJSON)
+        const attestationObject = base64url.encode(cred.response.attestationObject)
+
+        // Obtain transports.
+        const transports = cred.response.getTransports ? cred.response.getTransports() : []
+
+        credential.response = {
+          clientDataJSON,
+          attestationObject,
+          transports
+        }
+
+        const res2 = await fetch("/auth/registerResponse", {
+          method: "post",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(credential)
+        })
+        console.log(await res2.json())
+    }
+
+    const RegisterCredential = () => {
+      // const {useState, useEffect} = React
+
+      async function onSubmit(e) {
+        e.preventDefault()
+        try {
+          await registerCredential()
+        } catch (error) {
+          console.error(error)
+          if (error.name === "InvalidStateError") {
+            alert("A passkey already exists for this device.")
+          }
+        }
+      }
+      return (
+        <form method="post" onSubmit={onSubmit}>
+          <label>register</label>
+          <button type="submit">register</button>
+        </form>
+      )
+    }
+
+    const Credentials = () => {
+      const [credentials, setCredentials] = useState([]);
+
+      useEffect(() => {
+        (async () => {
+          const res = await fetch("/auth/keys")
+          const json = await res.json()
+          console.dir(json)
+          setCredentials(json)
+        })()
+      }, []);
+
+      return (
+        <>
+          <h1>Credentials</h1>
+          <CredentialSupported />
+          <RegisterCredential />
+          <ul>
+            {
+              credentials.map((credential) => {
+                console.log(credential)
+                return (
+                  <li key={credential.id}>
+                    <dl>
+                      <dt>name</dt><dd>{credential.name}</dd>
+                      <dt>id</dt><dd>{credential.id}</dd>
+                      <dt>publicKey</dt><dd>{credential.publicKey}</dd>
+                      <dt>user_id</dt><dd>{credential.user_id}</dd>
+                      <dt>transports</dt><dd>{credential.transports.join(",")}</dd>
+                    </dl>
+                    <RenameCredential setKeys={setCredentials} id={credential.id} />
+                    <DeleteCredential setKeys={setCredentials} id={credential.id} />
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </>
+      )
+    }
+
+
+
+    const Root = () => {
+      return (
+        <>
+          <UserInfo />
+          <Credentials />
+          <a href="/auth/signout">SIGN OUT</a>
+        </>
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('app'));
+    root.render(<Root />);
+  </script>
+</body>
+
+</html>

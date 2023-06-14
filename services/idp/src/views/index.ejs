@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Provider</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/img/spy.svg">
+    <script type="module" src="/js/index.mjs"></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>Identity Provider</h1>
+      <ul>
+        <li><a href="/login/account">Login Page</a></li>
+        <li><a href="/signup">Signup</a></li>
+      </ul>
+      <section>
+        <h2>User</h2>
+        <dl>
+          <dt>username</dt>
+          <dd><%= user?.username %></dd>
+        </dl>
+        <h2>Passkey</h2>
+        <dl>
+          <dt>User verifying platform authenticator</dt>
+          <dd id="verifiable"></dd>
+          <dt>Conditional mediation</dt>
+          <dd id="conditional"></dd>
+        </dl>
+        <h3>Register</h3>
+        <form id="registerCredential">
+          <label>register</label>
+          <button type="submit">register</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

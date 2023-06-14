@@ -1,0 +1,10 @@
+dist
+./dist
+node_modules
+*.swp
+*.log
+.DS_Store
+.Thumbs.db
+.env
+.lesshst
+shrinkwrap.yaml

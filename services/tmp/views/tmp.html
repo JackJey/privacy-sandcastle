@@ -1,0 +1,216 @@
+<!--
+ Copyright 2023 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/bundle.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+    <script src="components-bundle.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <mwc-top-app-bar-fixed>
+      <span slot="title">{{title}}</span>
+      <mwc-icon-button id="code" icon="code" slot="actionItems"></mwc-icon-button>
+    </mwc-top-app-bar-fixed>
+    <mwc-linear-progress id="progress"></mwc-linear-progress>
+    <main class="content center">
+      <h2>Welcome, {{displayName}}!</h2>
+      <section>
+        <h3>Your name:</h3>
+        <div id="display-name"></div>
+      </section>
+      ​​<!-- TODO: Add an ability to create a passkey: Add placeholder HTML. -->
+      <section>
+        <h3 class="mdc-typography mdc-typography--headline6">Your registered passkeys:</h3>
+        <div id="list"></div>
+      </section>
+      <p id="message" class="instructions"></p>
+      <mwc-button id="create-passkey" class="hidden" icon="fingerprint" raised>Create a passkey</mwc-button>
+      <mwc-button><a href="/auth/signout">Sign out</a></mwc-button>
+    </main>
+    <script src="https://unpkg.com/material-components-web@13.0.0/dist/material-components-web.min.js"></script>
+    <script type="module">
+      // TODO: Add an ability to create a passkey: Create and register a passkey.
+      import { $, _fetch, loading, registerCredential, updateCredential, unregisterCredential } from "/client.js"
+      import { html, render } from "https://unpkg.com/lit-html@2.6.1/lit-html.js?module"
+
+      async function changeDisplayName(e) {
+        const newName = prompt("Enter a new display name", e.target.dataset.displayName)
+        if (newName) {
+          const res = await fetch("/auth/userinfo", {
+            method: "put",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify({newName})
+          })
+          renderDisplayName()
+        }
+      }
+
+      async function renderDisplayName() {
+        const res = await _fetch("/auth/userinfo")
+        render(
+          html` <mwc-list>
+            <mwc-list-item>
+              <div class="list-item">
+                <div class="entity-name">
+                  <span>${res.displayName || res.username}</span>
+                </div>
+                <div class="buttons">
+                  <mwc-icon-button
+                    data-display-name="${res.displayName || res.username}"
+                    @click="${changeDisplayName}"
+                    title="Edit your display name"
+                    icon="edit"
+                  ></mwc-icon-button>
+                </div>
+              </div>
+            </mwc-list-item>
+            <mwc-list></mwc-list
+          ></mwc-list>`,
+          $("#display-name")
+        )
+      }
+
+      renderDisplayName()
+
+      async function rename(e) {
+        const { credId, name } = e.target.dataset
+        const newName = prompt("Enter a new credential name.", name)
+        if (newName.length === 0) return
+        try {
+          await updateCredential(credId, newName)
+          renderCredentials()
+        } catch (e) {
+          console.error(e)
+          alert(e.message)
+        }
+      }
+
+      async function remove(e) {
+        if (!confirm("Do you really want to remove this credential?")) return
+        try {
+          await unregisterCredential(e.target.dataset.credId)
+          renderCredentials()
+        } catch (e) {
+          console.error(e)
+          alert(e.message)
+        }
+      }
+
+      // TODO: Add an ability to create a passkey: Check for passkey support.
+
+      const createPasskey = $("#create-passkey")
+
+      // Feature detections
+      if (
+        window.PublicKeyCredential &&
+        PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable &&
+        PublicKeyCredential.isConditionalMediationAvailable
+      ) {
+        try {
+          const results = await Promise.all([
+            // Is platform authenticator available in this browser?
+            PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),
+            // Is conditional UI available in this browser?
+            PublicKeyCredential.isConditionalMediationAvailable()
+          ])
+          if (results.every((r) => r === true)) {
+            // If conditional UI is available, reveal the Create a passkey button.
+            createPasskey.classList.remove("hidden")
+          } else {
+            // If conditional UI isn't available, show a message.
+            $("#message").innerText = "This device does not support passkeys."
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      } else {
+        // If WebAuthn isn't available, show a message.
+        $("#message").innerText = "This device does not support passkeys."
+      }
+
+      // TODO: Add an ability to create a passkey: Render registered passkeys in a list.
+
+      async function renderCredentials() {
+        const res = await (await fetch("/auth/keys")).json()
+        const list = $("#list")
+        const creds = html`${res.length > 0
+          ? html` <mwc-list>
+              ${res.map(
+                (cred) => html` <mwc-list-item>
+                  <div class="list-item">
+                    <div class="entity-name">
+                      <span>${cred.name || "Unnamed"}</span>
+                    </div>
+                    <div class="buttons">
+                      <mwc-icon-button
+                        data-cred-id="${cred.id}"
+                        data-name="${cred.name || "Unnamed"}"
+                        @click="${rename}"
+                        icon="edit"
+                      ></mwc-icon-button>
+                      <mwc-icon-button data-cred-id="${cred.id}" @click="${remove}" icon="delete"></mwc-icon-button>
+                    </div>
+                  </div>
+                </mwc-list-item>`
+              )}
+            </mwc-list>`
+          : html` <mwc-list>
+              <mwc-list-item>No credentials found.</mwc-list-item>
+            </mwc-list>`}`
+        render(creds, list)
+      }
+
+      renderCredentials()
+
+      // TODO: Add an ability to create a passkey: Create and register a passkey.
+
+      async function register() {
+        try {
+          // Start the loading UI.
+
+          // Start creating a passkey.
+          await registerCredential()
+          // Stop the loading UI.
+
+          // Render the updated passkey list.
+          renderCredentials()
+        } catch (e) {
+          // Stop the loading UI.
+
+          // An InvalidStateError indicates that a passkey already exists on the device.
+          if (e.name === "InvalidStateError") {
+            alert("A passkey already exists for this device.")
+            // A NotAllowedError indicates the user canceled the operation.
+          } else if (e.name === "NotAllowedError") {
+            return
+            // Show other errors in an alert.
+          } else {
+            alert(e.message)
+            console.error(e)
+          }
+        }
+      }
+
+      createPasskey.addEventListener("click", register)
+    </script>
+  </body>
+</html>

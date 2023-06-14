@@ -1,0 +1,70 @@
+<!--
+ Copyright 2023 Google Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <main>
+      <form id="form" method="post" action="/auth/password">
+        <fieldset>
+          <legend>Enter a Password</legend>
+          <section>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="{{username}}"
+              />
+          </section>
+          <section>
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value="xxxxxxxxxxxxxxxx"
+              autocomplete="current-password"
+              autofocus
+            />
+            <strong>password will be ignored in this demo.</strong>
+          </section>
+          <button type="submit">Sign In</button>
+        </fieldset>
+      </form>
+    </main>
+    <script type="module">
+      import { _fetch } from "/client.js"
+
+      const $ = document.querySelector.bind(document)
+      const form = $("#form")
+      form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const form = new FormData(e.target)
+        const cred = {}
+        form.forEach((v, k) => (cred[k] = v))
+        _fetch(e.target.action, cred)
+          .then((user) => {
+            location.href = "/home"
+          })
+          .catch((e) => alert(e))
+      })
+    </script>
+  </body>
+</html>

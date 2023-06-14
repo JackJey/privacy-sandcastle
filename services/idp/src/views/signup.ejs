@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width="device-width," initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/img/spy.svg">
+  </head>
+  <body>
+    <main>
+      <h1>Signup</h1>
+      <form id="signup" action="/signup" method="post">
+        <fieldset form="signup">
+          <legend><h2>Signup</h2></legend>
+          <div>
+            <label for="username">Username<abbr title="required">*</abbr>:</label>
+            <input type="email"
+                  id="username"
+                  name="username"
+                  autocomplete="username"
+                  required
+                  autofocus>
+          </div>
+          <div>
+            <label for="password">New Password<abbr title="required">*</abbr>:</label>
+            <input type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="new-password"
+                  required>
+          </div>
+          <div>
+            <label for="password-confirmation">Password Confirmation<abbr title="required">*</abbr>:</label>
+            <input type="password"
+                  id="password-confirmation"
+                  name="password-confirmation"
+                  autocomplete="new-password"
+                  required>
+          </div>
+          <button type="submit">Signup</button>
+        </fieldset>
+      </form>
+      <p><a href="/">Login</a></p>
+    </main>
+  </body>
+</html>

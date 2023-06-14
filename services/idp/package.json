@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "license": "apache-2.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^7.3.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-useragent": "^1.0.15"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}

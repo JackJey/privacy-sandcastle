@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width="device-width," initial-scale=1.0">
+    <title>Identity Provider</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/img/spy.svg">
+    <script type="module" src="/js/account.mjs"></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>Identity Provider</h1>
+      <form id="login" action="/login/account" method="post">
+        <fieldset form="login">
+          <legend><h2>Login</h2></legend>
+          <div>
+            <label for="username">Username<abbr title="required">*</abbr>:</label>
+            <input type="text"
+                  id="username"
+                  name="username"
+                  value="alice"
+                  autocomplete="username webauthn"
+                  required
+                  autofocus>
+          </div>
+          <div class="hidden">
+            <label for="password">Password<abbr title="required">*</abbr>:</label>
+            <input type="password"
+                  id="password"
+                  name="password"
+                  value="xxxxxxxx"
+                  autocomplete="current-password"
+                  required>
+          </div>
+          <button type="submit">Next</button>
+        </fieldset>
+      </form>
+      <p><a href="/signup">Signup</a></p>
+    </main>
+  </body>
+</html>
