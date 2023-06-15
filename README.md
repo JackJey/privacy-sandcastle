@@ -1,4 +1,4 @@
-# Privacy Sandcastle
+# Privacy Sandbox Demos
 
 A use case demo for [Privacy Sandbox APIs](https://developer.chrome.com/en/docs/privacy-sandbox/).
 
@@ -10,9 +10,9 @@ Adtech businesses are looking for solutions to typical use cases that they have 
 
 ## Goals
 
-Privacy Sandcastle will provide cookbook recipes, sample code, and demo applications for the major adtech use cases, based on Privacy Sandbox APIs. This is intended to support adtech companies and developers in quickly adapting their businesses and applications to a web ecosystem without third-party cookies.
+Privacy Sandbox Demos will provide cookbook recipes, sample code, and demo applications for the major adtech use cases, based on Privacy Sandbox APIs. This is intended to support adtech companies and developers in quickly adapting their businesses and applications to a web ecosystem without third-party cookies.
 
-Privacy Sandcastle is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at https://privacy-sandbox-demos-home.dev to let you start learning and experimenting quickly.
+Privacy Sandbox Demos is available as source code, container images, and scripts. We provide instructions for deploying and running it in your local environment using Docker runtime, as well as instructions for deploying it on Google Cloud Platform. We are also providing hosted instances at https://privacy-sandbox-demos-home.dev to let you start learning and experimenting quickly.
 
 ## Scope of current release
 

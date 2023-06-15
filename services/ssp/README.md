@@ -1,10 +1,10 @@
-# SSP (Supply Side Platform) in Privacy Sandcastle
+# SSP (Supply Side Platform) in Privacy Sandbox Demos
 
 ## Intro
 
-This app is a demo of "SSP" party in Privacy Sandcastle world.
+This app is a demo of "SSP" party in Privacy Sandbox Demos world.
 
-Provides 3rd Party Tag for publisher who intends to display ads in their own site (`news` in Privacy Sandcastle).
+Provides 3rd Party Tag for publisher who intends to display ads in their own site (`news` in Privacy Sandbox Demos).
 
 ## How to use 3rd Party Tag
 

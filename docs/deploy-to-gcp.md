@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Google Cloud Platform project deployment guide
 
-The instructions below allow you to deploy Privacy Sandcastle on a new Google Cloud Platform project.
+The instructions below allow you to deploy Privacy Sandbox Demos on a new Google Cloud Platform project.
 
 The same instructions can be repeated to deploy a dev, staging, prod etc. environment to additional projects.
 
@@ -31,7 +31,7 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 
 In this section we will configure your development environment to get ready to build and deploy resources to Firebase. The Instructions below are based on the Linux environment.
 
-1. Clone Privacy Sandcastle Git Repository : https://github.com/privacysandbox/privacy-sandbox-demos.git
+1. Clone Privacy Sandbox Demos Git Repository : https://github.com/privacysandbox/privacy-sandbox-demos.git
 2. Install the Firebase CLI : https://firebase.google.com/docs/cli#linux
 3. Open a terminal at the root of the project. Login and test the Firebase CLI :
 
@@ -188,7 +188,7 @@ PORT=8080
 # home
 HOME_HOST=privacy-sandbox-demos-home.dev
 HOME_TOKEN=""
-HOME_DETAIL="Home page of Privacy Sandcastle"
+HOME_DETAIL="Home page of Privacy Sandbox Demos"
 
 # Publisher
 ## news

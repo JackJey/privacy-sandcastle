@@ -64,7 +64,7 @@ google_chrome --host-resolver-rules="MAP privacy-sandbox-demos-* 127.0.0.1"
 
 ### HTTP SSL Certificate
 
-`https://` scheme requires a valid certificate for your browser, this is done by using mkcert to create a local certification authority that will be trusted by your local browser. Later we will be creating a certificate for each of the privacy sandcastle service and configure nginx to serve those certificates.
+`https://` scheme requires a valid certificate for your browser, this is done by using mkcert to create a local certification authority that will be trusted by your local browser. Later we will be creating a certificate for each of the privacy sandbox demos service and configure nginx to serve those certificates.
 
 Run the command below to create the development Certificate Authority:
 

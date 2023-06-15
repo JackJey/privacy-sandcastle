@@ -2,7 +2,7 @@
   "name": "privacy-sandbox-demos",
   "version": "0.0.0",
   "license": "apache-2.0",
-  "description": "Privacy Sandcastle: Mixed demo of Privacy Sandbox APIs",
+  "description": "Privacy Sandbox Demos: Mixed demo of Privacy Sandbox APIs",
   "scripts": {
     "start": "npm run docker",
     "cert": "cd nginx/cert && ./mkcert.sh",

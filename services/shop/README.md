@@ -1,8 +1,8 @@
-# Shopping Site in Privacy Sandcastle
+# Shopping Site in Privacy Sandbox Demos
 
 ## Intro
 
-This app is shopping site demo one of "advertiser" party in Privacy Sandcastle world.
+This app is shopping site demo one of "advertiser" party in Privacy Sandbox Demos world.
 
 ## How to Run
 
