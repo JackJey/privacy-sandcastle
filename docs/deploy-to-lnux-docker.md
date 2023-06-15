@@ -74,7 +74,7 @@ mkcert -install
 
 ## Build & Run your local development environment
 
-1. Fork https://github.com/JackJey/privacy-sandcastle and clone locally
+1. Fork https://github.com/privacysandbox/privacy-sandbox-demos and clone locally
 2. Setting up with npm scripts
 
 ```shell-session

@@ -6,7 +6,7 @@ sidebar_position: 1
 
 :::note
 Looking for running these demos on your local environment ?
-Check the [deployment guide](https://github.com/JackJey/privacy-sandcastle/blob/main/README.md) on the GitHub.
+Check the [deployment guide](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/README.md) on the GitHub.
 :::
 
 |         **Category**          |                                   **Use Case**                                   |            **Privacy Sandbox APIs**            |        **Relevant for**         |
@@ -16,5 +16,5 @@ Check the [deployment guide](https://github.com/JackJey/privacy-sandcastle/blob/
 
 :::info
 Looking for a use case not listed here ?
-Help us growing this repository by [contributing](https://github.com/JackJey/privacy-sandcastle/tree/main/docs/contribute) or [sharing feedback](https://github.com/JackJey/privacy-sandcastle/issues).
+Help us growing this repository by [contributing](https://github.com/privacysandbox/privacy-sandbox-demos/tree/main/docs/contribute) or [sharing feedback](https://github.com/privacysandbox/privacy-sandbox-demos/issues).
 :::

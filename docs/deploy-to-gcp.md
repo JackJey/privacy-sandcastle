@@ -31,7 +31,7 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 
 In this section we will configure your development environment to get ready to build and deploy resources to Firebase. The Instructions below are based on the Linux environment.
 
-1. Clone Privacy Sandcastle Git Repository : https://github.com/JackJey/privacy-sandcastle.git
+1. Clone Privacy Sandcastle Git Repository : https://github.com/privacysandbox/privacy-sandbox-demos.git
 2. Install the Firebase CLI : https://firebase.google.com/docs/cli#linux
 3. Open a terminal at the root of the project. Login and test the Firebase CLI :
 
