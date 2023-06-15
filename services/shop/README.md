@@ -9,7 +9,7 @@ This app is shopping site demo one of "advertiser" party in Privacy Sandcastle w
 You can run this app standalone via.
 
 ```sh
-$ cd path-to-shop-dir-under-privacy-sandcastle
+$ cd path-to-shop-dir-under-privacy-sandbox-demos
 $ npm install
 $ npm run dev
 ```

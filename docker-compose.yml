@@ -10,7 +10,7 @@ volumes:
 
 services:
   home:
-    image: gcr.io/privacy-sandcastle/home:latest
+    image: gcr.io/privacy-sandbox-demos/home:latest
     build: ./services/home
     container_name: "sandcastle_home"
     env_file:
@@ -19,7 +19,7 @@ services:
       - adnetwork
 
   news:
-    image: gcr.io/privacy-sandcastle/news:latest
+    image: gcr.io/privacy-sandbox-demos/news:latest
     build: ./services/news
     container_name: "sandcastle_news"
     env_file:
@@ -31,7 +31,7 @@ services:
       - adnetwork
 
   shop:
-    image: gcr.io/privacy-sandcastle/shop:latest
+    image: gcr.io/privacy-sandbox-demos/shop:latest
     build: ./services/shop
     container_name: "sandcastle_shop"
     env_file:
@@ -43,7 +43,7 @@ services:
       - adnetwork
 
   travel:
-    image: gcr.io/privacy-sandcastle/travel:latest
+    image: gcr.io/privacy-sandbox-demos/travel:latest
     build: ./services/travel
     container_name: "sandcastle_travel"
     env_file:
@@ -55,7 +55,7 @@ services:
       - adnetwork
 
   dsp:
-    image: gcr.io/privacy-sandcastle/dsp:latest
+    image: gcr.io/privacy-sandbox-demos/dsp:latest
     build: ./services/dsp
     container_name: "sandcastle_dsp"
     env_file:
@@ -67,7 +67,7 @@ services:
       - adnetwork
 
   ssp:
-    image: gcr.io/privacy-sandcastle/ssp:latest
+    image: gcr.io/privacy-sandbox-demos/ssp:latest
     build: ./services/ssp
     container_name: "sandcastle_ssp"
     env_file:
@@ -79,7 +79,7 @@ services:
       - adnetwork
 
   collector:
-    image: gcr.io/privacy-sandcastle/collector:latest
+    image: gcr.io/privacy-sandbox-demos/collector:latest
     build: ./services/collector
     container_name: "sandcastle_collector"
     env_file:

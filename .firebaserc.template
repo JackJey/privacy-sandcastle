@@ -1,9 +1,9 @@
 {
   "projects": {
-    "default": "privacy-sandcastle"
+    "default": "privacy-sandbox-demos"
   },
   "targets": {
-    "privacy-sandcastle": {
+    "privacy-sandbox-demos": {
       "hosting": {
         "home": [
           "privacy-sandbox-demos-home"

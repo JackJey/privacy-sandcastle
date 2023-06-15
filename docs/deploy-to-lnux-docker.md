@@ -35,7 +35,7 @@ Edit `/etc/hosts` file
 
 ```
 # /etc/hosts
-127.0.0.1	privacy-sandcastle.web.app
+127.0.0.1	privacy-sandbox-demos.dev
 127.0.0.1	privacy-sandbox-demos-home.dev
 127.0.0.1	privacy-sandbox-demos-dsp.dev
 127.0.0.1	privacy-sandbox-demos-shop.dev

@@ -19,11 +19,11 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 ## Prepare your Google Cloud Platform Project
 
 1. Create a Google Cloud Platform Project : https://cloud.google.com/resource-manager/docs/creating-managing-projects
-   1. Note the name of the project/id. E.g.: _privacy-sandcastle_
+   1. Note the name of the project/id. E.g.: _privacy-sandbox-demos_
    2. Assign the billing account created in step above
 2. Add a Firebase Project linked to your GCP Project : https://console.firebase.google.com/
    1. Click "Add Project"
-   2. Select the GCP project you previously created. E.g. : _privacy-sandcastle_
+   2. Select the GCP project you previously created. E.g. : _privacy-sandbox-demos_
    3. Since you enabled Billing Account on this project, it will automatically select the Firebase pay-as-you-go plan
    4. Enable Google Analytics for the project : Select "Default Account for Firebase" unless you have specific analytics requirements
 
@@ -65,18 +65,18 @@ Your firebase project will host 5 different sites to demonstrate the capabilitie
 
 Each site will have a different domain name to simulate a real life adtech scenario
 
-Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandcastle_" with your project name
+Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandbox-demos_" with your project name
 
-`https://firebase.corp.google.com/project/privacy-sandcastle/hosting/sites`
+`https://firebase.corp.google.com/project/privacy-sandbox-demos/hosting/sites`
 
-Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandcastle_ with the domain of your choice. E.g.
+Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandbox-demos_ with the domain of your choice. E.g.
 
-- _privacy-sandcastle_-home
-- _privacy-sandcastle_-dsp
-- _privacy-sandcastle_-shop
-- _privacy-sandcastle_-travel
-- _privacy-sandcastle_-ssp
-- _privacy-sandcastle_-news
+- _privacy-sandbox-demos_-home
+- _privacy-sandbox-demos_-dsp
+- _privacy-sandbox-demos_-shop
+- _privacy-sandbox-demos_-travel
+- _privacy-sandbox-demos_-ssp
+- _privacy-sandbox-demos_-news
 
 Note, task above can be done programmatically with Firebase CLI :
 
@@ -123,7 +123,7 @@ scripts/firebase_setup
 Note that you will have to change the **firebase_hosting_domain** variable to match yours :
 
 ```shell
-firebase_hosting_domain="privacy-sandcastle";
+firebase_hosting_domain="privacy-sandbox-demos";
 ```
 
 The firebase hosting configuration for each site is already defined for you in the `firebase.json` file.
@@ -134,9 +134,9 @@ We recommend to Enable Cloud Logging for Firebase Hosting Project.
 
 By using Cloud Logging with your Firebase Hosting sites, you allow web request logs to be exported to Cloud Logging.
 
-Access the following URL (replace _privacy-sandcastle_ with your project name)
+Access the following URL (replace _privacy-sandbox-demos_ with your project name)
 
-https://firebase.corp.google.com/project/privacy-sandcastle/settings/integrations/cloudlogging
+https://firebase.corp.google.com/project/privacy-sandbox-demos/settings/integrations/cloudlogging
 
 Select all the sites you want to export logs from, click Save and Finish.
 
@@ -222,7 +222,7 @@ Edit "**project_name**" variable value and execute `./scripts/cloudrun_deploy.sh
 #/usr/bin/env zsh
 
 # parameters
-project_name="privacy-sandcastle";
+project_name="privacy-sandbox-demos";
 
 ...
 ```
@@ -235,7 +235,7 @@ Now edit the "**firebase_hosting_domain"** variable with your own domain and exe
 #/usr/bin/env zsh
 
 # parameters
-firebase_hosting_domain="privacy-sandcastle";
+firebase_hosting_domain="privacy-sandbox-demos";
 
 ...
 ```
@@ -244,10 +244,10 @@ Look at the output, and verify you can access all the sites your created :
 
 E.g. :
 
-- https://_privacy-sandcastle_.web.app/
-- https://_privacy-sandcastle_-home.web.app/
-- https://_privacy-sandcastle_-dsp.web.app/
-- https://_privacy-sandcastle_-shop.web.app/
-- https://_privacy-sandcastle_-travel.web.app/
-- https://_privacy-sandcastle_-ssp.web.app/
-- https://_privacy-sandcastle_-news.web.app/
+- https://_privacy-sandbox-demos_.web.app/
+- https://_privacy-sandbox-demos_-home.web.app/
+- https://_privacy-sandbox-demos_-dsp.web.app/
+- https://_privacy-sandbox-demos_-shop.web.app/
+- https://_privacy-sandbox-demos_-travel.web.app/
+- https://_privacy-sandbox-demos_-ssp.web.app/
+- https://_privacy-sandbox-demos_-news.web.app/
