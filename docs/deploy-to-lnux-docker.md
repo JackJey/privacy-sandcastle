@@ -23,8 +23,8 @@ Privacy Sandbox APIs use the domain name in the URL (site origin) to allow/block
 
 We will remap domain name to loopback address (127.0.0.1) so each service could be accessed via a URL like :
 
-- https://privacy-sandcastle-home.web.app
-- https://privacy-sandcastle-shop.web.app
+- https://privacy-sandbox-demos-home.dev
+- https://privacy-sandbox-demos-shop.dev
 - …
 
 There are 2 ways to achieve that
@@ -36,18 +36,18 @@ Edit `/etc/hosts` file
 ```
 # /etc/hosts
 127.0.0.1	privacy-sandcastle.web.app
-127.0.0.1	privacy-sandcastle-home.web.app
-127.0.0.1	privacy-sandcastle-dsp.web.app
-127.0.0.1	privacy-sandcastle-shop.web.app
-127.0.0.1	privacy-sandcastle-travel.web.app
-127.0.0.1	privacy-sandcastle-ssp.web.app
-127.0.0.1	privacy-sandcastle-news.web.app
+127.0.0.1	privacy-sandbox-demos-home.dev
+127.0.0.1	privacy-sandbox-demos-dsp.dev
+127.0.0.1	privacy-sandbox-demos-shop.dev
+127.0.0.1	privacy-sandbox-demos-travel.dev
+127.0.0.1	privacy-sandbox-demos-ssp.dev
+127.0.0.1	privacy-sandbox-demos-news.dev
 ```
 
 Verifying mapping with :
 
 ```shell
-nslookup privacy-sandcastle-news.web.app
+nslookup privacy-sandbox-demos-news.dev
 ```
 
 If the mapping isn’t reflected in Chrome, try clearing your DNS cache
@@ -59,7 +59,7 @@ If the mapping isn’t reflected in Chrome, try clearing your DNS cache
 Start Google chrome with the following argument
 
 ```shell
-google_chrome --host-resolver-rules="MAP privacy-sandcastle-* 127.0.0.1"
+google_chrome --host-resolver-rules="MAP privacy-sandbox-demos-* 127.0.0.1"
 ```
 
 ### HTTP SSL Certificate
@@ -88,4 +88,4 @@ $ npm run cert
 $ sudo npm run start
 ```
 
-3. Open the home page: https://privacy-sandcastle-home.web.app
+3. Open the home page: https://privacy-sandbox-demos-home.dev

@@ -87,12 +87,12 @@ firebase hosting:sites:create SITE_ID
 E.g.
 
 ```shell
-firebase hosting:sites:create privacy-sandcastle-home
-firebase hosting:sites:create privacy-sandcastle-dsp
-firebase hosting:sites:create privacy-sandcastle-shop
-firebase hosting:sites:create privacy-sandcastle-travel
-firebase hosting:sites:create privacy-sandcastle-ssp
-firebase hosting:sites:create privacy-sandcastle-news
+firebase hosting:sites:create privacy-sandbox-demos-home
+firebase hosting:sites:create privacy-sandbox-demos-dsp
+firebase hosting:sites:create privacy-sandbox-demos-shop
+firebase hosting:sites:create privacy-sandbox-demos-travel
+firebase hosting:sites:create privacy-sandbox-demos-ssp
+firebase hosting:sites:create privacy-sandbox-demos-news
 ```
 
 Set up deploy targets for your sites (When you have multiple sites and you run Firebase CLI deploy commands, the CLI needs a way to communicate which settings should be deployed to each site).
@@ -106,12 +106,12 @@ firebase target:apply hosting TARGET_NAME RESOURCE_IDENTIFIER
 E.g. :
 
 ```shell
-firebase target:apply hosting home privacy-sandcastle-home
-firebase target:apply hosting dsp privacy-sandcastle-dsp
-firebase target:apply hosting shop privacy-sandcastle-shop
-firebase target:apply hosting ssp privacy-sandcastle-ssp
-firebase target:apply hosting news privacy-sandcastle-news
-firebase target:apply hosting travel privacy-sandcastle-travel
+firebase target:apply hosting home privacy-sandbox-demos-home
+firebase target:apply hosting dsp privacy-sandbox-demos-dsp
+firebase target:apply hosting shop privacy-sandbox-demos-shop
+firebase target:apply hosting ssp privacy-sandbox-demos-ssp
+firebase target:apply hosting news privacy-sandbox-demos-news
+firebase target:apply hosting travel privacy-sandbox-demos-travel
 ```
 
 Adding hosting sites and deploy targets can be done using the provided script :
@@ -174,7 +174,7 @@ Resources : https://firebase.google.com/docs/hosting/cloud-run
 
 Once you have confirmed you can deploy a sample demo application on Cloud Run and access it from Firebase hosting site, you are ready to deploy all the services and hosting sites.
 
-Edit `services/.env` file to match the `${SERVICE}_HOST` parameter to your firebase hosting domain e.g. : `privacy-sandcastle-${SERVICE}.web.app`
+Edit `services/.env` file to match the `${SERVICE}_HOST` parameter to your firebase hosting domain e.g. : `privacy-sandbox-demos-${SERVICE}.dev`
 
 ```shell
 # services/.env
@@ -186,13 +186,13 @@ EXTERNAL_PORT=443
 PORT=8080
 
 # home
-HOME_HOST=privacy-sandcastle-home.web.app
+HOME_HOST=privacy-sandbox-demos-home.dev
 HOME_TOKEN=""
 HOME_DETAIL="Home page of Privacy Sandcastle"
 
 # Publisher
 ## news
-NEWS_HOST=privacy-sandcastle-news.web.app
+NEWS_HOST=privacy-sandbox-demos-news.dev
 NEWS_TOKEN=""
 NEWS_DETAIL="Publisher: News media site"
 
@@ -204,12 +204,12 @@ On the same file `services/.env` update the Origin Trial token on dsp and ssp se
 ```shell
 # Adtech
 ## dsp
-DSP_HOST=privacy-sandcastle-dsp.web.app
+DSP_HOST=privacy-sandbox-demos-dsp.dev
 DSP_TOKEN="xxxxx"
 DSP_DETAIL="Ad-Platform: DSP for advertiser"
 
 ## ssp
-SSP_HOST=privacy-sandcastle-ssp.web.app
+SSP_HOST=privacy-sandbox-demos-ssp.dev
 SSP_TOKEN="xxxxx"
 SSP_DETAIL="Ad-Platform: SSP for publisher"
 ```

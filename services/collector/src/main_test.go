@@ -35,14 +35,14 @@ func TestHandler(t *testing.T) {
 		},
 		{
 			label:  "overrideHost",
-			want:   "Hello from privacy-sandcastle-collector.dev !\n",
-			host:   "privacy-sandcastle-collector.dev",
+			want:   "Hello from privacy-sandbox-demos-collector.dev !\n",
+			host:   "privacy-sandbox-demos-collector.dev",
 			detail: "",
 		},
 		{
 			label:  "overrideDetail",
-			want:   "Hello from privacy-sandcastle-collector.dev !\nMy job is to protect your privacy\nLooking forward to working with you !\n",
-			host:   "privacy-sandcastle-collector.dev",
+			want:   "Hello from privacy-sandbox-demos-collector.dev !\nMy job is to protect your privacy\nLooking forward to working with you !\n",
+			host:   "privacy-sandbox-demos-collector.dev",
 			detail: "protect your privacy",
 		},
 	}

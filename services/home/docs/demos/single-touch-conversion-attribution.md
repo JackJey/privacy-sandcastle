@@ -116,12 +116,12 @@ Note over SSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 
 ### User Journey #1
 
-1. [Navigate to shop site](https://privacy-sandcastle-shop.dev/) (advertiser)
+1. [Navigate to shop site](https://privacy-sandbox-demos-shop.dev/) (advertiser)
 2. Click on a “shoe” product item on the shop site.
 
 - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
 
-3. [Navigate to the news site](https://privacy-sandcastle-news.dev/) (publisher)
+3. [Navigate to the news site](https://privacy-sandbox-demos-news.dev/) (publisher)
 4. Observe the ad served on the news site
 
 - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
@@ -146,7 +146,7 @@ Note over SSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 
 - At the bottom of the page, you will see 1 **trigger** . the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. The `Registration JSON` contains information about the conversion event. In this scenario the advertiser chose to report the gross price and the quantity of the product item purchased. the `Aggregatable Status` indicates **Success: Report stored**, it means Attribution Reporting API has now stored this report in the browser. It will then be scheduled for sending to the `reporting origin` at a later time.
 
-10. Navigate to [SSP service report visualization page](https://privacy-sandcastle-prod-ssp.web.app/reports)
+10. Navigate to [SSP service report visualization page](https://privacy-sandbox-demos-prod-ssp.dev/reports)
 
 - on this page you can see the aggregatable report sent by the browser to the SSP. In a production environment, the aggregatable report is encrypted by the browser and sent to the SSP. There, they will be batched and sent to the Aggregation Service where they will be aggregated and noised to preserve privacy. However for development and testing purposes, you can also send an unencrypted version called **debug report**. This is what you are seeing now.
 - The report shows aggregation data on 2 dimensions : gross with a value of 180 and quantity with a value of 1.
@@ -164,14 +164,14 @@ Look at the [code](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540
   height="250"
   target="_blank"
   attributionsrc=""
-  href="https://privacy-sandcastle-prod-ssp.web.app/move?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+  href="https://privacy-sandbox-demos-prod-ssp.dev/move?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
 >
   <img
     width="294"
     height="245"
     loading="lazy"
     attributionsrc=""
-    src="https://privacy-sandcastle-prod-ssp.web.app/creative?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+    src="https://privacy-sandbox-demos-prod-ssp.dev/creative?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
   />
 </a>
 ```
@@ -182,7 +182,7 @@ In the HTTP response to the `/creative` request, you will see a new header `Attr
 
 ```json
 {
-  "destination": "https://privacy-sandcastle-prod-shop.web.app",
+  "destination": "https://privacy-sandbox-demos-prod-shop.dev",
   "source_event_id": "18446744073709551615",
   "debug_key": "18446744073709551614",
   "aggregation_keys": { "quantity": "0xc001f45e000000000000000000000000", "gross": "0xc101f45e000000000000000000000000" }
@@ -199,7 +199,7 @@ The checkout page contains a 1 pixel image loaded from the code
   alt=""
   width="1"
   height="1"
-  src="https://privacy-sandcastle-prod-ssp.web.app/register-trigger?id=1f45e&amp;category=1&amp;quantity=2&amp;size=50&amp;gross=180"
+  src="https://privacy-sandbox-demos-prod-ssp.dev/register-trigger?id=1f45e&amp;category=1&amp;quantity=2&amp;size=50&amp;gross=180"
 />
 ```
 
