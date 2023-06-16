@@ -1,15 +1,15 @@
-# Shopping Site in Privacy Sandcastle
+# Shopping Site in Privacy Sandbox Demos
 
 ## Intro
 
-This app is shopping site demo one of "advertiser" party in Privacy Sandcastle world.
+This app is shopping site demo one of "advertiser" party in Privacy Sandbox Demos world.
 
 ## How to Run
 
 You can run this app standalone via.
 
 ```sh
-$ cd path-to-shop-dir-under-privacy-sandcastle
+$ cd path-to-shop-dir-under-privacy-sandbox-demos
 $ npm install
 $ npm run dev
 ```

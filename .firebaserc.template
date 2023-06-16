@@ -1,30 +1,30 @@
 {
   "projects": {
-    "default": "privacy-sandcastle"
+    "default": "privacy-sandbox-demos"
   },
   "targets": {
-    "privacy-sandcastle": {
+    "privacy-sandbox-demos": {
       "hosting": {
         "home": [
-          "privacy-sandcastle-home"
+          "privacy-sandbox-demos-home"
         ],
         "dsp": [
-          "privacy-sandcastle-dsp"
+          "privacy-sandbox-demos-dsp"
         ],
         "shop": [
-          "privacy-sandcastle-shop"
+          "privacy-sandbox-demos-shop"
         ],
         "ssp": [
-          "privacy-sandcastle-ssp"
+          "privacy-sandbox-demos-ssp"
         ],
         "news": [
-          "privacy-sandcastle-news"
+          "privacy-sandbox-demos-news"
         ],
         "travel": [
-          "privacy-sandcastle-travel"
+          "privacy-sandbox-demos-travel"
         ],
         "collector": [
-          "privacy-sandcastle-collector"
+          "privacy-sandbox-demos-collector"
         ]
       }
     }

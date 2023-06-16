@@ -122,10 +122,10 @@ Note right of Browser:Scenario 1 stops here
 
 ### User Journey #1
 
-1. [Navigate to shop site](https://privacy-sandcastle-shop.dev/) (advertiser)
+1. [Navigate to shop site](https://privacy-sandbox-demos-shop.dev/) (advertiser)
 2. Click on a “shoe” product item on the shop site.
    - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser to join an ad interest group for this product or this specific product category.
-3. [Navigate to the news site](https://privacy-sandcastle-news.dev/) (publisher)
+3. [Navigate to the news site](https://privacy-sandbox-demos-news.dev/) (publisher)
 4. Observe the ad served on the news site
    - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
    - When the page was loaded, Protected Audience API allowed the SSP to run an ad auction on the publisher site.
@@ -135,32 +135,32 @@ Note right of Browser:Scenario 1 stops here
 
 #### In (2) How is the user added to an Interest Group based on his browsing behavior ?
 
-The shop product page [includes dsp-tag.js ](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/shop/app/items/%5Bid%5D/page.tsx#LL58C13-L58C13)from the DSP service. This is a third-party tag from the DSP service.
+The shop product page [includes dsp-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/shop/app/items/%5Bid%5D/page.tsx#LL58C13-L58C13)from the DSP service. This is a third-party tag from the DSP service.
 
 ```html
 <script
-  src="https://privacy-sandcastle-prod-dsp.web.app/dsp-tag.js"
+  src="https://privacy-sandbox-demos-prod-dsp.dev/dsp-tag.js"
   class="dsp_tag"
-  data-advertiser="privacy-sandcastle-prod-shop.web.app"
+  data-advertiser="privacy-sandbox-demos-prod-shop.dev"
   data-id="1f45e"
   data-nscript="afterInteractive"
 ></script>
 ```
 
-This [dsp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/dsp-tag.js) dynamically embeds an iframe
+This [dsp-tags.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/dsp/src/public/dsp-tag.js) dynamically embeds an iframe
 
 ```html
 <iframe
   width="1"
   height="1"
-  src="https://privacy-sandcastle-prod-dsp.web.app/join-ad-interest-group.html?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+  src="https://privacy-sandbox-demos-prod-dsp.dev/join-ad-interest-group.html?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
   allow="join-ad-interest-group"
 ></iframe>
 ```
 
-The iframe calls a third-party script [join-ad-interest-group.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js) to join interest group using Protected Audience API
+The iframe calls a third-party script [join-ad-interest-group.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/dsp/src/public/js/join-ad-interest-group.js) to join interest group using Protected Audience API
 
-```js title="https://github.com/JackJey/privacy-sandcastle/blob/main/services/dsp/src/public/js/join-ad-interest-group.js"
+```js title="https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/dsp/src/public/js/join-ad-interest-group.js"
 document.addEventListener("DOMContentLoaded", async (e) => {
   // Protected Audience
   const url = new URL(location.href)
@@ -174,33 +174,33 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 })
 ```
 
-This code sets up the interest groups options. Those options are fetched dynamically from [interest-group.json](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/index.ts#L50).
-Finally the code requests the browser to [join the interest group](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/public/js/join-ad-interest-group.js#L37)
+This code sets up the interest groups options. Those options are fetched dynamically from [interest-group.json](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/index.ts#L50).
+Finally the code requests the browser to [join the interest group](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/public/js/join-ad-interest-group.js#L37)
 
 #### In (4) how do we serve an ad relevant to the user’s interest ?
 
-The news page [includes ad-tag.js ](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/news/src/views/index.ejs#L29)from the SSP service. This is a third-party tag from the SSP service.
+The news page [includes ad-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/news/src/views/index.ejs#L29)from the SSP service. This is a third-party tag from the SSP service.
 
 ```html
-<script defer="" class="ssp_tag" src="https://privacy-sandcastle-prod-ssp.web.app/ad-tag.js"></script>
+<script defer="" class="ssp_tag" src="https://privacy-sandbox-demos-prod-ssp.dev/ad-tag.js"></script>
 ```
 
-This [ssp-tags.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/ad-tag.js) dynamically embeds an iframe.
+This [ssp-tags.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/ssp/src/public/ad-tag.js) dynamically embeds an iframe.
 
 ```html
 <iframe
   width="300"
   height="250"
-  src="https://privacy-sandcastle-prod-ssp.web.app/ad-tag.html"
+  src="https://privacy-sandbox-demos-prod-ssp.dev/ad-tag.html"
   scrolling="no"
   style="border: none"
   allow="attribution-reporting; run-ad-auction"
 ></iframe>
 ```
 
-The iframe calls a third-party script [run-ad-auction.js](https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js) to run an ondevice ad auction using Protected Audience API
+The iframe calls a third-party script [run-ad-auction.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/ssp/src/public/js/run-ad-auction.js) to run an ondevice ad auction using Protected Audience API
 
-```js title=”https://github.com/JackJey/privacy-sandcastle/blob/main/services/ssp/src/public/js/run-ad-auction.js”
+```js title=”https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/ssp/src/public/js/run-ad-auction.js”
 document.addEventListener("DOMContentLoaded", async (e) => {
   const auctionConfig = await getAuctionConfig()
 
@@ -229,7 +229,7 @@ The result of the auction is displayed within a Fenced Frame by specifying the u
 
 note that Fenced Frame attribute `mode` must be set to “opaque-ads” to display ads using urn.
 Fenced Frame size (width and height) only allow pre-defined values, please refer to the allow-list from the documentation.
-The request to the `src` urn[ returns the ad creative](https://github.com/JackJey/privacy-sandcastle/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#LL87C1-L87C1) to be displayed
+The request to the `src` urn[ returns the ad creative](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#LL87C1-L87C1) to be displayed
 
 ```html
 <a
@@ -237,14 +237,14 @@ The request to the `src` urn[ returns the ad creative](https://github.com/JackJe
   height="250"
   target="_blank"
   attributionsrc=""
-  href="https://privacy-sandcastle-prod-ssp.web.app/move?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+  href="https://privacy-sandbox-demos-prod-ssp.dev/move?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
 >
   <img
     width="294"
     height="245"
     loading="lazy"
     attributionsrc=""
-    src="https://privacy-sandcastle-prod-ssp.web.app/creative?advertiser=privacy-sandcastle-prod-shop.web.app&amp;id=1f45e"
+    src="https://privacy-sandbox-demos-prod-ssp.dev/creative?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
   />
 </a>
 ```

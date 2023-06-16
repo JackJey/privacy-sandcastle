@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Google Cloud Platform project deployment guide
 
-The instructions below allow you to deploy Privacy Sandcastle on a new Google Cloud Platform project.
+The instructions below allow you to deploy Privacy Sandbox Demos on a new Google Cloud Platform project.
 
 The same instructions can be repeated to deploy a dev, staging, prod etc. environment to additional projects.
 
@@ -19,11 +19,11 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 ## Prepare your Google Cloud Platform Project
 
 1. Create a Google Cloud Platform Project : https://cloud.google.com/resource-manager/docs/creating-managing-projects
-   1. Note the name of the project/id. E.g.: _privacy-sandcastle_
+   1. Note the name of the project/id. E.g.: _privacy-sandbox-demos_
    2. Assign the billing account created in step above
 2. Add a Firebase Project linked to your GCP Project : https://console.firebase.google.com/
    1. Click "Add Project"
-   2. Select the GCP project you previously created. E.g. : _privacy-sandcastle_
+   2. Select the GCP project you previously created. E.g. : _privacy-sandbox-demos_
    3. Since you enabled Billing Account on this project, it will automatically select the Firebase pay-as-you-go plan
    4. Enable Google Analytics for the project : Select "Default Account for Firebase" unless you have specific analytics requirements
 
@@ -31,7 +31,7 @@ If you don’t have yet a billing account, follow the documentation to Create a 
 
 In this section we will configure your development environment to get ready to build and deploy resources to Firebase. The Instructions below are based on the Linux environment.
 
-1. Clone Privacy Sandcastle Git Repository : https://github.com/JackJey/privacy-sandcastle.git
+1. Clone Privacy Sandbox Demos Git Repository : https://github.com/privacysandbox/privacy-sandbox-demos.git
 2. Install the Firebase CLI : https://firebase.google.com/docs/cli#linux
 3. Open a terminal at the root of the project. Login and test the Firebase CLI :
 
@@ -65,18 +65,18 @@ Your firebase project will host 5 different sites to demonstrate the capabilitie
 
 Each site will have a different domain name to simulate a real life adtech scenario
 
-Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandcastle_" with your project name
+Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandbox-demos_" with your project name
 
-`https://firebase.corp.google.com/project/privacy-sandcastle/hosting/sites`
+`https://firebase.corp.google.com/project/privacy-sandbox-demos/hosting/sites`
 
-Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandcastle_ with the domain of your choice. E.g.
+Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandbox-demos_ with the domain of your choice. E.g.
 
-- _privacy-sandcastle_-home
-- _privacy-sandcastle_-dsp
-- _privacy-sandcastle_-shop
-- _privacy-sandcastle_-travel
-- _privacy-sandcastle_-ssp
-- _privacy-sandcastle_-news
+- _privacy-sandbox-demos_-home
+- _privacy-sandbox-demos_-dsp
+- _privacy-sandbox-demos_-shop
+- _privacy-sandbox-demos_-travel
+- _privacy-sandbox-demos_-ssp
+- _privacy-sandbox-demos_-news
 
 Note, task above can be done programmatically with Firebase CLI :
 
@@ -87,12 +87,12 @@ firebase hosting:sites:create SITE_ID
 E.g.
 
 ```shell
-firebase hosting:sites:create privacy-sandcastle-home
-firebase hosting:sites:create privacy-sandcastle-dsp
-firebase hosting:sites:create privacy-sandcastle-shop
-firebase hosting:sites:create privacy-sandcastle-travel
-firebase hosting:sites:create privacy-sandcastle-ssp
-firebase hosting:sites:create privacy-sandcastle-news
+firebase hosting:sites:create privacy-sandbox-demos-home
+firebase hosting:sites:create privacy-sandbox-demos-dsp
+firebase hosting:sites:create privacy-sandbox-demos-shop
+firebase hosting:sites:create privacy-sandbox-demos-travel
+firebase hosting:sites:create privacy-sandbox-demos-ssp
+firebase hosting:sites:create privacy-sandbox-demos-news
 ```
 
 Set up deploy targets for your sites (When you have multiple sites and you run Firebase CLI deploy commands, the CLI needs a way to communicate which settings should be deployed to each site).
@@ -106,12 +106,12 @@ firebase target:apply hosting TARGET_NAME RESOURCE_IDENTIFIER
 E.g. :
 
 ```shell
-firebase target:apply hosting home privacy-sandcastle-home
-firebase target:apply hosting dsp privacy-sandcastle-dsp
-firebase target:apply hosting shop privacy-sandcastle-shop
-firebase target:apply hosting ssp privacy-sandcastle-ssp
-firebase target:apply hosting news privacy-sandcastle-news
-firebase target:apply hosting travel privacy-sandcastle-travel
+firebase target:apply hosting home privacy-sandbox-demos-home
+firebase target:apply hosting dsp privacy-sandbox-demos-dsp
+firebase target:apply hosting shop privacy-sandbox-demos-shop
+firebase target:apply hosting ssp privacy-sandbox-demos-ssp
+firebase target:apply hosting news privacy-sandbox-demos-news
+firebase target:apply hosting travel privacy-sandbox-demos-travel
 ```
 
 Adding hosting sites and deploy targets can be done using the provided script :
@@ -123,7 +123,7 @@ scripts/firebase_setup
 Note that you will have to change the **firebase_hosting_domain** variable to match yours :
 
 ```shell
-firebase_hosting_domain="privacy-sandcastle";
+firebase_hosting_domain="privacy-sandbox-demos";
 ```
 
 The firebase hosting configuration for each site is already defined for you in the `firebase.json` file.
@@ -134,9 +134,9 @@ We recommend to Enable Cloud Logging for Firebase Hosting Project.
 
 By using Cloud Logging with your Firebase Hosting sites, you allow web request logs to be exported to Cloud Logging.
 
-Access the following URL (replace _privacy-sandcastle_ with your project name)
+Access the following URL (replace _privacy-sandbox-demos_ with your project name)
 
-https://firebase.corp.google.com/project/privacy-sandcastle/settings/integrations/cloudlogging
+https://firebase.corp.google.com/project/privacy-sandbox-demos/settings/integrations/cloudlogging
 
 Select all the sites you want to export logs from, click Save and Finish.
 
@@ -174,7 +174,7 @@ Resources : https://firebase.google.com/docs/hosting/cloud-run
 
 Once you have confirmed you can deploy a sample demo application on Cloud Run and access it from Firebase hosting site, you are ready to deploy all the services and hosting sites.
 
-Edit `services/.env` file to match the `${SERVICE}_HOST` parameter to your firebase hosting domain e.g. : `privacy-sandcastle-${SERVICE}.web.app`
+Edit `services/.env` file to match the `${SERVICE}_HOST` parameter to your firebase hosting domain e.g. : `privacy-sandbox-demos-${SERVICE}.dev`
 
 ```shell
 # services/.env
@@ -186,13 +186,13 @@ EXTERNAL_PORT=443
 PORT=8080
 
 # home
-HOME_HOST=privacy-sandcastle-home.web.app
+HOME_HOST=privacy-sandbox-demos-home.dev
 HOME_TOKEN=""
-HOME_DETAIL="Home page of Privacy Sandcastle"
+HOME_DETAIL="Home page of Privacy Sandbox Demos"
 
 # Publisher
 ## news
-NEWS_HOST=privacy-sandcastle-news.web.app
+NEWS_HOST=privacy-sandbox-demos-news.dev
 NEWS_TOKEN=""
 NEWS_DETAIL="Publisher: News media site"
 
@@ -204,12 +204,12 @@ On the same file `services/.env` update the Origin Trial token on dsp and ssp se
 ```shell
 # Adtech
 ## dsp
-DSP_HOST=privacy-sandcastle-dsp.web.app
+DSP_HOST=privacy-sandbox-demos-dsp.dev
 DSP_TOKEN="xxxxx"
 DSP_DETAIL="Ad-Platform: DSP for advertiser"
 
 ## ssp
-SSP_HOST=privacy-sandcastle-ssp.web.app
+SSP_HOST=privacy-sandbox-demos-ssp.dev
 SSP_TOKEN="xxxxx"
 SSP_DETAIL="Ad-Platform: SSP for publisher"
 ```
@@ -222,7 +222,7 @@ Edit "**project_name**" variable value and execute `./scripts/cloudrun_deploy.sh
 #/usr/bin/env zsh
 
 # parameters
-project_name="privacy-sandcastle";
+project_name="privacy-sandbox-demos";
 
 ...
 ```
@@ -235,7 +235,7 @@ Now edit the "**firebase_hosting_domain"** variable with your own domain and exe
 #/usr/bin/env zsh
 
 # parameters
-firebase_hosting_domain="privacy-sandcastle";
+firebase_hosting_domain="privacy-sandbox-demos";
 
 ...
 ```
@@ -244,10 +244,10 @@ Look at the output, and verify you can access all the sites your created :
 
 E.g. :
 
-- https://_privacy-sandcastle_.web.app/
-- https://_privacy-sandcastle_-home.web.app/
-- https://_privacy-sandcastle_-dsp.web.app/
-- https://_privacy-sandcastle_-shop.web.app/
-- https://_privacy-sandcastle_-travel.web.app/
-- https://_privacy-sandcastle_-ssp.web.app/
-- https://_privacy-sandcastle_-news.web.app/
+- https://_privacy-sandbox-demos_.web.app/
+- https://_privacy-sandbox-demos_-home.web.app/
+- https://_privacy-sandbox-demos_-dsp.web.app/
+- https://_privacy-sandbox-demos_-shop.web.app/
+- https://_privacy-sandbox-demos_-travel.web.app/
+- https://_privacy-sandbox-demos_-ssp.web.app/
+- https://_privacy-sandbox-demos_-news.web.app/

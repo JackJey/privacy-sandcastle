@@ -129,7 +129,7 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: "fab13a7b22e907ce81ed9ef0904f4122",
 
-        indexName: "privacy-sandcastle",
+        indexName: "privacy-sandbox-demos",
 
         // Optional: see doc section below
         contextualSearch: true,
