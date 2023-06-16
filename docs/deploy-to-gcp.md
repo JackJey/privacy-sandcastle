@@ -67,7 +67,7 @@ Each site will have a different domain name to simulate a real life adtech scena
 
 Open Firebase Hosting : from the Firebase console click on "hosting" or follow this link by replacing "_privacy-sandbox-demos_" with your project name
 
-`https://firebase.corp.google.com/project/privacy-sandbox-demos/hosting/sites`
+`https://console.firebase.google.com/project/privacy-sandbox-demos/hosting/sites`
 
 Click on "Add another site" and enter site-id following your naming standards. Replace _privacy-sandbox-demos_ with the domain of your choice. E.g.
 
