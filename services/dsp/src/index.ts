@@ -74,7 +74,7 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
     trustedBiddingSignalsUrl,
     trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
 
-    dailyUpdateUrl, // not implemented yet
+    // dailyUpdateUrl, // not implemented yet
     userBiddingSignals: {
       user_bidding_signals: "user_bidding_signals"
     },
@@ -107,6 +107,10 @@ app.get("/bidding_signal.json", async (req: Request, res: Response) => {
     }
   })
 })
+
+// TODO: Implement
+// app.get("/daily_update_url", async (req: Request, res: Response) => {
+// })
 
 app.get("/", async (req: Request, res: Response) => {
   const title = DSP_DETAIL
