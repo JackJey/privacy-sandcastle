@@ -91,9 +91,20 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
 
 app.get("/bidding_signal.json", async (req: Request, res: Response) => {
   res.setHeader("X-Allow-FLEDGE", "true")
+  res.setHeader("X-fledge-bidding-signals-format-version", "2")
   res.json({
-    key1: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    key2: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+    keys: {
+      key1: "xxxxxxxx",
+      key2: "yyyyyyyy"
+    },
+    perInterestGroupData: {
+      name1: {
+        priorityVector: {
+          signal1: 100,
+          signal2: 200
+        }
+      }
+    }
   })
 })
 
