@@ -14,9 +14,9 @@
  limitations under the License.
  */
 import type { NextApiRequest, NextApiResponse } from "next"
-import { fileURLToPath } from "url";
-import { readFile } from "fs/promises";
- 
+import { fileURLToPath } from "url"
+import { readFile } from "fs/promises"
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = req.query.id as string
   const img = `../../../public/image/svg/emoji_u${id}.svg`
@@ -25,5 +25,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader("Content-Type", "image/svg+xml")
   res.send(blob)
 }
-
-
