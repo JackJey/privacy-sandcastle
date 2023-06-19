@@ -257,7 +257,10 @@ app.get("/auction-config.json", async (req, res) => {
       [DSP]: {
         per_buyer_signals: "per_buyer_signals"
       }
-    }
+    },
+
+    // use with fencedframe
+    resolveToConfig: true
   }
   console.log({ auctionConfig })
   res.json(auctionConfig)

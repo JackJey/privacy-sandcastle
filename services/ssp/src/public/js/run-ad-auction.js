@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   })
 
   const $fencedframe = document.createElement("fencedframe")
-  $fencedframe.src = adAuctionResult
+  $fencedframe.config = adAuctionResult
   $fencedframe.setAttribute("mode", "opaque-ads")
   $fencedframe.setAttribute("scrolling", "no")
   // $fencedframe.setAttribute("allow", "attribution-reporting; run-ad-auction")
