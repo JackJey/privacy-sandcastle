@@ -74,7 +74,7 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
     trustedBiddingSignalsUrl,
     trustedBiddingSignalsKeys: ["trustedBiddingSignalsKeys-1", "trustedBiddingSignalsKeys-2"],
 
-    dailyUpdateUrl, // not implemented yet
+    // dailyUpdateUrl, // not implemented yet
     userBiddingSignals: {
       user_bidding_signals: "user_bidding_signals"
     },
@@ -91,11 +91,26 @@ app.get("/interest-group.json", async (req: Request, res: Response) => {
 
 app.get("/bidding_signal.json", async (req: Request, res: Response) => {
   res.setHeader("X-Allow-FLEDGE", "true")
+  res.setHeader("X-fledge-bidding-signals-format-version", "2")
   res.json({
-    key1: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    key2: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+    keys: {
+      key1: "xxxxxxxx",
+      key2: "yyyyyyyy"
+    },
+    perInterestGroupData: {
+      name1: {
+        priorityVector: {
+          signal1: 100,
+          signal2: 200
+        }
+      }
+    }
   })
 })
+
+// TODO: Implement
+// app.get("/daily_update_url", async (req: Request, res: Response) => {
+// })
 
 app.get("/", async (req: Request, res: Response) => {
   const title = DSP_DETAIL

@@ -177,9 +177,9 @@ app.get("/creative", async (req, res) => {
       res.setHeader("Attribution-Reporting-Register-Source", JSON.stringify(AttributionReportingRegisterSource))
     }
   }
-  const img = `public/img/${advertiser}/emoji_u${id}.svg`
-  const path = url.fileURLToPath(new URL(img, import.meta.url))
-  res.status(200).sendFile(path)
+
+  // redirect to advertisers Ads endpoint
+  res.redirect(`https://${advertiser}/api/ads/${id}`)
 })
 
 app.get("/register-trigger", async (req, res) => {
@@ -257,7 +257,10 @@ app.get("/auction-config.json", async (req, res) => {
       [DSP]: {
         per_buyer_signals: "per_buyer_signals"
       }
-    }
+    },
+
+    // use with fencedframe
+    resolveToConfig: true
   }
   console.log({ auctionConfig })
   res.json(auctionConfig)
