@@ -135,13 +135,13 @@ Note right of Browser:Scenario 1 stops here
 
 #### In (2) How is the user added to an Interest Group based on his browsing behavior ?
 
-The shop product page [includes dsp-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/shop/app/items/%5Bid%5D/page.tsx#LL58C13-L58C13)from the DSP service. This is a third-party tag from the DSP service.
+The shop product page [includes dsp-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/shop/app/items/%5Bid%5D/page.tsx#L58) from the DSP service. This is a third-party tag from the DSP service.
 
 ```html
 <script
-  src="https://privacy-sandbox-demos-prod-dsp.dev/dsp-tag.js"
+  src="https://privacy-sandbox-demos-dsp.dev/dsp-tag.js"
   class="dsp_tag"
-  data-advertiser="privacy-sandbox-demos-prod-shop.dev"
+  data-advertiser="privacy-sandbox-demos-shop.dev"
   data-id="1f45e"
   data-nscript="afterInteractive"
 ></script>
@@ -153,7 +153,7 @@ This [dsp-tags.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/
 <iframe
   width="1"
   height="1"
-  src="https://privacy-sandbox-demos-prod-dsp.dev/join-ad-interest-group.html?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
+  src="https://privacy-sandbox-demos-dsp.dev/join-ad-interest-group.html?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1f45e"
   allow="join-ad-interest-group"
 ></iframe>
 ```
@@ -174,15 +174,15 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 })
 ```
 
-This code sets up the interest groups options. Those options are fetched dynamically from [interest-group.json](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/index.ts#L50).
-Finally the code requests the browser to [join the interest group](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/dsp/src/public/js/join-ad-interest-group.js#L37)
+This code sets up the interest groups options. Those options are fetched dynamically from [interest-group.json](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/dsp/src/index.ts#L50).
+Finally the code requests the browser to [join the interest group](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/dsp/src/public/js/join-ad-interest-group.js#L37)
 
 #### In (4) how do we serve an ad relevant to the user’s interest ?
 
-The news page [includes ad-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/news/src/views/index.ejs#L29)from the SSP service. This is a third-party tag from the SSP service.
+The news page [includes ad-tag.js ](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/news/src/views/index.ejs#L29)from the SSP service. This is a third-party tag from the SSP service.
 
 ```html
-<script defer="" class="ssp_tag" src="https://privacy-sandbox-demos-prod-ssp.dev/ad-tag.js"></script>
+<script defer="" class="ssp_tag" src="https://privacy-sandbox-demos-ssp.dev/ad-tag.js"></script>
 ```
 
 This [ssp-tags.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/ssp/src/public/ad-tag.js) dynamically embeds an iframe.
@@ -191,7 +191,7 @@ This [ssp-tags.js](https://github.com/privacysandbox/privacy-sandbox-demos/blob/
 <iframe
   width="300"
   height="250"
-  src="https://privacy-sandbox-demos-prod-ssp.dev/ad-tag.html"
+  src="https://privacy-sandbox-demos-ssp.dev/ad-tag.html"
   scrolling="no"
   style="border: none"
   allow="attribution-reporting; run-ad-auction"
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
   // Display selected Ads
   const $fencedframe = document.createElement("fencedframe")
-  $fencedframe.src = adAuctionResult
+  $fencedframe.config = adAuctionResult
   $fencedframe.setAttribute("mode", "opaque-ads")
   $fencedframe.setAttribute("scrolling", "no")
   $fencedframe.width = 300
@@ -219,17 +219,19 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 ```
 
 The `runAdAuction` code is executed by the browser and will decide which ad will be served to the user.
-The result of the auction is displayed within a Fenced Frame by specifying the urn to the ad creative. Developers would traditionally use https urls however Protected Audience API is hiding the creative url from the parent page by using a unique urn that is only recognized by the browser and mapped to a real url where the creative is fetched. This is a privacy protected mechanism to not reveal the user's interest to the parent page and the ssp.
+The result of the auction is displayed within a Fenced Frame by specifying the adAuctionResult object to the fenced frame configuration. Developers would traditionally use https urls to load creative in an iframe, however Protected Audience API is hiding the creative url from the parent page. This is a privacy protection mechanism to not reveal the user's interest to the parent page.
 
 ```html
-<body>
-  <fencedframe src="urn:uuid:f20265ee-fcd4-4e79-8e70-61756b6c0ea9" mode="opaque-ads" scrolling="no" width="300" height="250"></fencedframe>
-</body>
+<fencedframe mode="opaque-ads" scrolling="no" width="300" height="250">
+  <html lang="en">
+    …
+  </html>
+</fencedframe>
 ```
 
-note that Fenced Frame attribute `mode` must be set to “opaque-ads” to display ads using urn.
+note that Fenced Frame attribute `mode` must be set to “[opaque-ads](https://github.com/WICG/fenced-frame/blob/master/explainer/use_cases.md#opaque-ads)” to make the url opaque to the embedding context.
 Fenced Frame size (width and height) only allow pre-defined values, please refer to the allow-list from the documentation.
-The request to the `src` urn[ returns the ad creative](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#LL87C1-L87C1) to be displayed
+The request to the `src` url[ returns the ad creative](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/ssp/src/index.js#L87) to be displayed
 
 ```html
 <a
@@ -237,19 +239,19 @@ The request to the `src` urn[ returns the ad creative](https://github.com/privac
   height="250"
   target="_blank"
   attributionsrc=""
-  href="https://privacy-sandbox-demos-prod-ssp.dev/move?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
+  href="https://privacy-sandbox-demos-ssp.dev/move?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1f45f"
 >
   <img
     width="294"
     height="245"
     loading="lazy"
     attributionsrc=""
-    src="https://privacy-sandbox-demos-prod-ssp.dev/creative?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
+    src="https://privacy-sandbox-demos-ssp.dev/creative?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1f45f"
   />
 </a>
 ```
 
-This code contains the `img` tag with `src` attribute specifying the product the user might be interested in and a link to the product.
+This code contains the `img` tag with `src` attribute specifying the product the user might be interested in. The `advertiser` and `id` are resolved by the SSP which returns the product image and product url to the shopping site.
 
 ### Related API documentation
 
