@@ -20,7 +20,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "privacysandbox/privacysandbox-demos", // Usually your GitHub org/user name.
+  organizationName: "privacysandbox/privacy-sandbox-demos", // Usually your GitHub org/user name.
   projectName: "privacy-sandbox-demos", // Usually your repo name.
 
   onBrokenLinks: "throw",
@@ -80,7 +80,7 @@ const config = {
             label: "Explore"
           },
           {
-            href: "https://github.com/privacysandbox/privacysandbox-demos",
+            href: "https://github.com/privacysandbox/privacy-sandbox-demos",
             label: "GitHub",
             position: "right"
           }
@@ -111,7 +111,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/privacysandbox/privacysandbox-demos"
+                href: "https://github.com/privacysandbox/privacy-sandbox-demos"
               }
             ]
           }

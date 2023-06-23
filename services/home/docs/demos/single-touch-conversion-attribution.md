@@ -146,7 +146,7 @@ Note over SSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 
 - At the bottom of the page, you will see 1 **trigger** . the `destination` is the **shop** site and the `reporting origin` is the **SSP** service. The `Registration JSON` contains information about the conversion event. In this scenario the advertiser chose to report the gross price and the quantity of the product item purchased. the `Aggregatable Status` indicates **Success: Report stored**, it means Attribution Reporting API has now stored this report in the browser. It will then be scheduled for sending to the `reporting origin` at a later time.
 
-10. Navigate to [SSP service report visualization page](https://privacy-sandbox-demos-prod-ssp.dev/reports)
+10. Navigate to [SSP service report visualization page](https://privacy-sandbox-demos-ssp.dev/reports)
 
 - on this page you can see the aggregatable report sent by the browser to the SSP. In a production environment, the aggregatable report is encrypted by the browser and sent to the SSP. There, they will be batched and sent to the Aggregation Service where they will be aggregated and noised to preserve privacy. However for development and testing purposes, you can also send an unencrypted version called **debug report**. This is what you are seeing now.
 - The report shows aggregation data on 2 dimensions : gross with a value of 180 and quantity with a value of 1.
@@ -156,7 +156,7 @@ Note over SSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 #### In (5) how do we attribute the conversion to seeing an ad ?
 
 First on the Attribution Source registration side.
-Look at the [code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/views/ads.html.ejs) displaying the ad creative
+Look at the [code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/main/services/ssp/src/views/ads.html.ejs) displaying the ad creative
 
 ```html
 <a
@@ -164,14 +164,14 @@ Look at the [code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/
   height="250"
   target="_blank"
   attributionsrc=""
-  href="https://privacy-sandbox-demos-prod-ssp.dev/move?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
+  href="https://privacy-sandbox-demos-ssp.dev/move?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1f45e"
 >
   <img
     width="294"
     height="245"
     loading="lazy"
     attributionsrc=""
-    src="https://privacy-sandbox-demos-prod-ssp.dev/creative?advertiser=privacy-sandbox-demos-prod-shop.dev&amp;id=1f45e"
+    src="https://privacy-sandbox-demos-ssp.dev/creative?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1f45e"
   />
 </a>
 ```
@@ -182,14 +182,14 @@ In the HTTP response to the `/creative` request, you will see a new header `Attr
 
 ```json
 {
-  "destination": "https://privacy-sandbox-demos-prod-shop.dev",
+  "destination": "https://privacy-sandbox-demos-shop.dev",
   "source_event_id": "18446744073709551615",
   "debug_key": "18446744073709551614",
   "aggregation_keys": { "quantity": "0xc001f45e000000000000000000000000", "gross": "0xc101f45e000000000000000000000000" }
 }
 ```
 
-You can also refer to the [source code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#L154) to see how the response header `Attribution-Reporting-Register-Source` was formed.
+You can also refer to the [source code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/ssp/src/index.js#L177) to see how the response header `Attribution-Reporting-Register-Source` was formed.
 
 Second, on the Attribution Trigger side (=Conversion)
 The checkout page contains a 1 pixel image loaded from the code
@@ -199,7 +199,7 @@ The checkout page contains a 1 pixel image loaded from the code
   alt=""
   width="1"
   height="1"
-  src="https://privacy-sandbox-demos-prod-ssp.dev/register-trigger?id=1f45e&amp;category=1&amp;quantity=2&amp;size=50&amp;gross=180"
+  src="https://privacy-sandbox-demos-ssp.dev/register-trigger?id=1f45e&amp;category=1&amp;quantity=2&amp;size=50&amp;gross=180"
 />
 ```
 
@@ -216,7 +216,7 @@ Now using the Developers Tools, look at the HTTP response to the `/register-trig
 }
 ```
 
-You can also refer to the [source code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/1d55a6d540b3b1949a36337dfe5e5221454d311b/services/ssp/src/index.js#L185) to see how the response header `aggregatable_trigger_data` was formed.
+You can also refer to the [source code](https://github.com/privacysandbox/privacy-sandbox-demos/blob/8a33afb7433ed70e639047316c5bff30d61be58b/services/ssp/src/index.js#L185) to see how the response header `aggregatable_trigger_data` was formed.
 
 ### Related API documentation
 
